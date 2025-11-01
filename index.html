@@ -1,0 +1,968 @@
+<!DOCTYPE html>
+<html lang="ru_RU">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Блог братьев</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700;800&family=Playfair+Display:wght@700&display=swap"
+        rel="stylesheet">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.11.4/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.11.4/ScrollTrigger.min.js"></script>
+    <style>
+        :root {
+            --primary: #ffffff;
+            --secondary: #f8f9fa;
+            --accent1: #4a6cf7;
+            --accent2: #6a11cb;
+            --text: #333333;
+            --text-secondary: #666666;
+            --card-bg: rgba(255, 255, 255, 0.9);
+            --gradient: linear-gradient(135deg, var(--accent1), var(--accent2));
+            --shadow: 0 5px 15px rgba(0, 0, 0, 0.08);
+            --border: 1px solid rgba(0, 0, 0, 0.05);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background-color: var(--primary);
+            color: var(--text);
+            font-family: 'Montserrat', sans-serif;
+            overflow-x: hidden;
+            line-height: 1.6;
+        }
+
+        h1,
+        h2,
+        h3,
+        h4 {
+            font-family: 'Playfair Display', serif;
+            font-weight: 700;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* Parallax Background */
+        .parallax-bg {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 120%;
+            z-index: -2;
+            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+            transform: translateZ(-1px) scale(2);
+        }
+
+        /* Header Styles */
+        header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            z-index: 1000;
+            padding: 20px 0;
+            transition: all 0.4s ease;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+        }
+
+        header.scrolled {
+            padding: 15px 0;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.08);
+        }
+
+        .header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .logo h1 {
+            font-size: 1.8rem;
+            background: var(--gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .logo-icon {
+            font-size: 2rem;
+            color: var(--accent1);
+        }
+
+        nav ul {
+            display: flex;
+            list-style: none;
+            gap: 30px;
+        }
+
+        nav a {
+            color: var(--text);
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            padding: 8px 15px;
+            border-radius: 30px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        nav a:before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: var(--gradient);
+            transition: all 0.4s ease;
+            z-index: -1;
+            border-radius: 30px;
+        }
+
+        nav a:hover {
+            color: white;
+        }
+
+        nav a:hover:before {
+            left: 0;
+        }
+
+        .mobile-menu-btn {
+            display: none;
+            background: none;
+            border: none;
+            color: var(--text);
+            font-size: 1.5rem;
+            cursor: pointer;
+        }
+
+        /* Hero Section */
+        .hero {
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero-content {
+            max-width: 800px;
+            z-index: 2;
+        }
+
+        .hero h2 {
+            font-size: 4rem;
+            margin-bottom: 20px;
+            line-height: 1.2;
+            opacity: 0;
+            transform: translateY(30px);
+        }
+
+        .hero p {
+            font-size: 1.3rem;
+            margin-bottom: 30px;
+            color: var(--text-secondary);
+            opacity: 0;
+            transform: translateY(30px);
+        }
+
+        .btn {
+            display: inline-block;
+            background: var(--gradient);
+            color: white;
+            padding: 15px 35px;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            border: none;
+            cursor: pointer;
+            position: relative;
+            overflow: hidden;
+            box-shadow: var(--shadow);
+            opacity: 0;
+            transform: translateY(30px);
+        }
+
+        .btn:before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+            transition: all 0.6s ease;
+        }
+
+        .btn:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 30px rgba(74, 108, 247, 0.3);
+        }
+
+        .btn:hover:before {
+            left: 100%;
+        }
+
+        /* Section Styles */
+        section {
+            padding: 100px 0;
+            position: relative;
+        }
+
+        .section-title {
+            text-align: center;
+            margin-bottom: 70px;
+            position: relative;
+        }
+
+        .section-title h2 {
+            font-size: 3rem;
+            display: inline-block;
+            position: relative;
+            padding-bottom: 15px;
+        }
+
+        .section-title h2:after {
+            content: '';
+            position: absolute;
+            width: 100px;
+            height: 4px;
+            background: var(--gradient);
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            border-radius: 2px;
+        }
+
+        /* Video Section */
+        .video-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(450px, 1fr));
+            gap: 40px;
+        }
+
+        .video-card {
+            background: var(--card-bg);
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: var(--shadow);
+            backdrop-filter: blur(10px);
+            border: var(--border);
+            transform-style: preserve-3d;
+            transform: perspective(1000px);
+            opacity: 0;
+            transition: all 0.4s ease;
+        }
+
+        .video-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
+        }
+
+        .video-wrapper {
+            position: relative;
+            padding-bottom: 56.25%;
+            /* 16:9 Aspect Ratio */
+            height: 0;
+            overflow: hidden;
+        }
+
+        .video-wrapper iframe {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            border: 0;
+        }
+
+        .video-card-content {
+            padding: 25px;
+        }
+
+        .video-card h3 {
+            margin-bottom: 15px;
+            font-size: 1.4rem;
+        }
+
+        /* Footer */
+        footer {
+            background: var(--secondary);
+            padding: 80px 0 30px;
+            position: relative;
+            border-top: var(--border);
+        }
+
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 50px;
+            margin-bottom: 50px;
+        }
+
+        .footer-column h3 {
+            font-size: 1.4rem;
+            margin-bottom: 25px;
+            position: relative;
+            padding-bottom: 10px;
+        }
+
+        .footer-column h3:after {
+            content: '';
+            position: absolute;
+            width: 40px;
+            height: 3px;
+            background: var(--gradient);
+            bottom: 0;
+            left: 0;
+            border-radius: 2px;
+        }
+
+        .footer-column ul {
+            list-style: none;
+        }
+
+        .footer-column ul li {
+            margin-bottom: 12px;
+        }
+
+        .footer-column a {
+            color: var(--text-secondary);
+            text-decoration: none;
+            transition: all 0.3s ease;
+        }
+
+        .footer-column a:hover {
+            color: var(--accent1);
+            padding-left: 5px;
+        }
+
+        .social-links {
+            display: flex;
+            gap: 15px;
+            margin-top: 20px;
+        }
+
+        .social-links a {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 45px;
+            height: 45px;
+            background: rgba(0, 0, 0, 0.05);
+            border-radius: 50%;
+            transition: all 0.3s ease;
+            font-size: 1.2rem;
+            color: var(--text);
+        }
+
+        .social-links a:hover {
+            background: var(--gradient);
+            color: white;
+            transform: translateY(-5px);
+        }
+
+        .copyright {
+            text-align: center;
+            padding-top: 30px;
+            border-top: var(--border);
+            font-size: 0.9rem;
+            color: var(--text-secondary);
+        }
+
+        /* Responsive Styles */
+        @media (max-width: 1100px) {
+            .video-container {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .header-content {
+                flex-direction: column;
+                gap: 20px;
+            }
+
+            nav ul {
+                flex-wrap: wrap;
+                justify-content: center;
+            }
+
+            .hero h2 {
+                font-size: 2.8rem;
+            }
+
+            .section-title h2 {
+                font-size: 2.5rem;
+            }
+
+            .mobile-menu-btn {
+                display: block;
+            }
+
+            nav ul {
+                display: none;
+                flex-direction: column;
+                width: 100%;
+                text-align: center;
+                margin-top: 20px;
+            }
+
+            nav ul.show {
+                display: flex;
+            }
+
+            .hero {
+                padding-top: 120px;
+                height: auto;
+                min-height: 100vh;
+            }
+        }
+
+        @media (max-width: 576px) {
+            .hero h2 {
+                font-size: 2.2rem;
+            }
+            
+            .video-card {
+                margin: 0 10px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Parallax Background -->
+    <div class="parallax-bg"></div>
+
+    <!-- Header -->
+    <header id="header">
+        <div class="container">
+            <div class="header-content">
+                <div class="logo">
+                    <i class="fas fa-users logo-icon"></i>
+                    <h1>Братья</h1>
+                </div>
+                <button class="mobile-menu-btn">
+                    <i class="fas fa-bars"></i>
+                </button>
+                <nav>
+                    <ul>
+                        <li><a href="#videos">Видео</a></li>
+                        <li><a href="#footer">Контакты</a></li>
+                    </ul>
+                </nav>
+            </div>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="container">
+            <div class="hero-content">
+                <h2>Два брата. Три долбабоба. Одна любовь.</h2>
+                <p>Самые лучшие и любимые братья.</p>
+                <p>Последнее редактирование: 29.10.2025 | 21:00</p>
+                <a href="#videos" class="btn">Смотреть видео</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Video Section -->
+    <section id="videos">
+        <div class="container">
+            <div class="section-title">
+                <h2><img src="images/stream.png" alt="stream" width="32"> Видео и трансляции</h2>
+            </div>
+            <div class="video-container">
+
+                <div class="video-card">
+                    <div class="video-wrapper">
+                        <iframe src="https://www.youtube.com/embed/R292HOs1kGs"
+                            title="YouTube video player"
+                            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                            allowfullscreen></iframe>
+                    </div>
+                    <div class="video-card-content">
+                        <h3>🌍 МАЙНСРУФТ + СРУМОГУС</h3>
+                        <p>🔴 Прямой эфир / 01 ноября</p>
+                    </div>
+                </div> 
+                
+                <div class="video-card">
+                    <div class="video-wrapper">
+                        <iframe src="https://www.youtube.com/embed/o-hrzNuy4-Y?si=ic0UFJHLh2UB7vVs"
+                            title="YouTube video player"
+                            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                            allowfullscreen></iframe>
+                    </div>
+                    <div class="video-card-content">
+                        <h3>🤥 АМАНАЛ АС</h3>
+                        <p>🔴 Прямой эфир / 29 октября.</p>
+                    </div>
+                </div> 
+                
+                <div class="video-card">
+                    <div class="video-wrapper">
+                        <iframe src="https://www.youtube.com/embed/avLUYnuH4ko"
+                            title="YouTube video player"
+                            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                            allowfullscreen></iframe>
+                    </div>
+                    <div class="video-card-content">
+                        <h3>🌿ВСЁ КРОМЕ MINECRAFT</h3>
+                        <p>🔴 Прямой эфир / 28 октября.</p>
+                    </div>
+                </div> 
+                
+                <div class="video-card">
+                    <div class="video-wrapper">
+                        <iframe src="https://www.youtube.com/embed/lnnLftsmHCw"
+                            title="YouTube video player"
+                            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                            allowfullscreen></iframe>
+                    </div>
+                    <div class="video-card-content">
+                        <h3>🥷 ARIZONA GAMES + AMONG US</h3>
+                        <p>🔴 Прямой эфир №2 / 26 октября.</p>
+                    </div>
+                </div> 
+                
+                <div class="video-card">
+                    <div class="video-wrapper">
+                        <iframe src="https://www.youtube.com/embed/dE8om75g0EE"
+                            title="YouTube video player"
+                            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                            allowfullscreen></iframe>
+                    </div>
+                    <div class="video-card-content">
+                        <h3>🏡 ДОМАШНИЕ И УЛИЧНЫЕ ПРИКЛЮЧЕНИЯ</h3>
+                        <p>🔴 Прямой эфир / 26 октября.</p>
+                    </div>
+                </div> 
+                
+                <div class="video-card">
+                    <div class="video-wrapper">
+                        <iframe src="https://www.youtube.com/embed/7Y2na4Bf-Xc"
+                            title="YouTube video player"
+                            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                            allowfullscreen></iframe>
+                    </div>
+                    <div class="video-card-content">
+                        <h3>🐺 НОЧНЫЕ ПРИКЛЮЧЕНИЯ 9 | ФИНАЛ?</h3>
+                        <p>🔴 Прямой эфир / 25-26 октября.</p>
+                    </div>
+                </div> 
+                
+                <div class="video-card">
+                    <div class="video-wrapper">
+                        <iframe src="https://www.youtube.com/embed/4LxNZsgnpbg"
+                            title="YouTube video player"
+                            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                            allowfullscreen></iframe>
+                    </div>
+                    <div class="video-card-content">
+                        <h3>🫨 ПИЗ*EЦ в ПРЯМОМ ЭФИРЕ</h3>
+                        <p>🔴 Прямой эфир / 25 октября.</p>
+                    </div>
+                </div> 
+                
+                <div class="video-card">
+                    <div class="video-wrapper">
+                        <iframe src="https://www.youtube.com/embed/YKO9QgoJB-A"
+                            title="YouTube video player"
+                            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                            allowfullscreen></iframe>
+                    </div>
+                    <div class="video-card-content">
+                        <h3>🌙 НОЧНЫЕ ПРИКЛЮЧЕНИЯ 8</h3>
+                        <p>🔴 Прямой эфир / 24-25 октября.</p>
+                    </div>
+                </div> 
+                
+                <div class="video-card">
+                    <div class="video-wrapper">
+                        <iframe src="https://www.youtube.com/embed/9z7zo0KFOv8"
+                            title="YouTube video player"
+                            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                            allowfullscreen></iframe>
+                    </div>
+                    <div class="video-card-content">
+                        <h3>🥳 АМОГУС и ТОЧКА</h3>
+                        <p>🔴 Прямой эфир / 24 октября.</p>
+                    </div>
+                </div>  
+
+               <div class="video-card">
+                    <div class="video-wrapper">
+                        <iframe src="https://www.youtube.com/embed/VMopJ3YB5DA?feature=share"
+                            title="YouTube video player"
+                            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                            allowfullscreen></iframe>
+                    </div>
+                    <div class="video-card-content">
+                        <h3>😎 СУЭТА НА СУЭТЭ и ВСЁ на ARIZONA</h3>
+                        <p>🔴 Прямой эфир / 23 октября.</p>
+                    </div>
+                </div>    
+               
+                <div class="video-card">
+                    <div class="video-wrapper">
+                        <iframe src="https://www.youtube.com/embed/qeRpk1kOTYU"
+                            title="YouTube video player"
+                            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                            allowfullscreen></iframe>
+                    </div>
+                    <div class="video-card-content">
+                        <h3>🌳 СУЕТА В MINECRAFT + ☠️ АМОГУС</h3>
+                        <p>🔴 Прямой эфир / 22 октября.</p>
+                    </div>
+                </div>    
+                
+                <div class="video-card">
+                    <div class="video-wrapper">
+                        <iframe src="https://www.youtube.com/embed/8yPT2taF5xg"
+                            title="YouTube video player"
+                            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                            allowfullscreen></iframe>
+                    </div>
+                    <div class="video-card-content">
+                        <h3>💥АМОГУС В ЭФИРЕ</h3>
+                        <p>🔴 Прямой эфир / 21 октября.</p>
+                    </div>
+                </div>
+
+                <div class="video-card">
+                    <div class="video-wrapper">
+                        <iframe src="https://www.youtube.com/embed/33RHdlsNgw8"
+                            title="YouTube video player"
+                            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                            allowfullscreen></iframe>
+                    </div>
+                    <div class="video-card-content">
+                        <h3>НОЧНЫЕ ПРИКЛЮЧЕНИЯ 7</h3>
+                        <p>🔴 Прямой эфир №2 / 18 октября.</p>
+                    </div>
+                </div>
+                
+                <div class="video-card">
+                    <div class="video-wrapper">
+                        <iframe src="https://www.youtube.com/embed/hiTdPkmw4L0"
+                            title="YouTube video player"
+                            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                            allowfullscreen></iframe>
+                    </div>
+                    <div class="video-card-content">
+                        <h3>СУЕТАЛОГИЯ В ГОРОДЕ</h3>
+                        <p>18 октября прошла масштабная трансляция в парке и других местах 🔥.</p>
+                    </div>
+                </div>
+                
+                <div class="video-card">
+                    <div class="video-wrapper">
+                        <iframe src="https://www.youtube.com/embed/f28EpJgVHSg?feature=share"
+                            title="YouTube video player"
+                            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                            allowfullscreen></iframe>
+                    </div>
+                    <div class="video-card-content">
+                        <h3>НОЧНЫЕ ПРИКЛЮЧЕНИЯ 6</h3>
+                        <p>17 октября прошла шестая трансляция моего сна в эфире 😎.</p>
+                    </div>
+                </div>
+
+                <div class="video-card">
+                    <div class="video-wrapper">
+                        <iframe src="https://www.youtube.com/embed/yulH8RUATuo?feature=share"
+                            title="YouTube video player"
+                            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                            allowfullscreen></iframe>
+                    </div>
+                    <div class="video-card-content">
+                        <h3>НАВОДИМ СУЕТУ НА ВОКЗАЛЕ</h3>
+                        <p>17 октября прошёл эфир на вокзале и в маршрутке.</p>
+                    </div>
+                </div>
+
+                <div class="video-card">
+                    <div class="video-wrapper">
+                        <iframe src="https://www.youtube.com/embed/4Tc_YYMKZvM?feature=share"
+                            title="YouTube video player"
+                            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                            allowfullscreen></iframe>
+                    </div>
+                    <div class="video-card-content">
+                        <h3>НАВОДИМ СУЕТУ НА РАЙОНЕ</h3>
+                        <p>🔴 Прямая трансляция №3 которая прошла 12 октября 2025, была самой смешной/прикольной за всё
+                            время.</p>
+                    </div>
+                </div>
+
+                <div class="video-card">
+                    <div class="video-wrapper">
+                        <iframe src="https://www.youtube.com/embed/QTLXGKIeWTE?si=wFN99cdwBjsA47vY"
+                            title="YouTube video player"
+                            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                            allowfullscreen></iframe>
+                    </div>
+                    <div class="video-card-content">
+                        <h3>НАВОДИМ СУЕТУ НА РАЙОНЕ</h3>
+                        <p>🔴 Прямая трансляция №2 которая прошла 12 октября 2025, была самой смешной/прикольной за всё
+                            время.</p>
+                    </div>
+                </div>
+
+                <div class="video-card">
+                    <div class="video-wrapper">
+                        <iframe src="https://www.youtube.com/embed/ogIYZkc2IbE?feature=share"
+                            title="YouTube video player"
+                            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                            allowfullscreen></iframe>
+                    </div>
+                    <div class="video-card-content">
+                        <h3>НОЧНЫЕ ПРИКЛЮЧЕНИЯ 5</h3>
+                        <p>🔴 Прямая трансляция №1 / 12 октября 2025.</p>
+                    </div>
+                </div>
+
+                <div class="video-card">
+                    <div class="video-wrapper">
+                        <iframe src="https://www.youtube.com/embed/ZYGvd2DPi7k?si=7pnueagjDzRvKMSG"
+                            title="YouTube video player"
+                            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                            allowfullscreen></iframe>
+                    </div>
+                    <div class="video-card-content">
+                        <h3>НАВОДИМ СУЕТОЛОГИЮ</h3>
+                        <p>🔴 Прямая трансляция №2 / 11 октября 2025.</p>
+                    </div>
+                </div>
+
+                <div class="video-card">
+                    <div class="video-wrapper">
+                        <iframe src="https://www.youtube.com/embed/fWMkiAlPJNE?si=LxqQpL_Oc463NLOW"
+                            title="YouTube video player"
+                            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                            allowfullscreen></iframe>
+                    </div>
+                    <div class="video-card-content">
+                        <h3>СУЕТА УЖЕ СЕЙЧАС</h3>
+                        <p>🔴 Прямая трансляция №1 / 11 октября 2025.</p>
+                    </div>
+                </div>
+
+                <div class="video-card">
+                    <div class="video-wrapper">
+                        <iframe src="https://www.youtube.com/embed/HW0nLvyGQpQ" title="YouTube video player"
+                            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                            allowfullscreen></iframe>
+                    </div>
+                    <div class="video-card-content">
+                        <h3>НАВОДИМ СУЕТУ + НОЧНЫЕ ПРИКЛЮЧЕНИЯ 4</h3>
+                        <p>🔴 Прямая трансляция / 09 октября 2025.</p>
+                    </div>
+                </div>
+
+                <div class="video-card">
+                    <div class="video-wrapper">
+                        <iframe src="https://www.youtube.com/embed/DEOTRqq8AOU" title="YouTube video player"
+                            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                            allowfullscreen></iframe>
+                    </div>
+                    <div class="video-card-content">
+                        <h3>НАВОДИМ СУЕТУ + НОЧНЫЕ ПРИКЛЮЧЕНИЯ 3</h3>
+                        <p>🔴 Прямая трансляция / 08 октября 2025.</p>
+                    </div>
+                </div>
+
+                <div class="video-card">
+                    <div class="video-wrapper">
+                        <iframe src="https://www.youtube.com/embed/5kfIrnccag8?feature=share"
+                            title="YouTube video player"
+                            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                            allowfullscreen></iframe>
+                    </div>
+                    <div class="video-card-content">
+                        <h3>СОН УВАЖАЕМОГО</h3>
+                        <p>🔴 Прямая трансляция / 07 октября 2025.</p>
+                    </div>
+                </div>
+
+                <div class="video-card">
+                    <div class="video-wrapper">
+                        <iframe src="https://www.youtube.com/embed/c2X1Y_doIz8" title="YouTube video player"
+                            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                            allowfullscreen></iframe>
+                    </div>
+                    <div class="video-card-content">
+                        <h3>СОН НИКИТОСИКА 👋</h3>
+                        <p>🔴 Прямая трансляция / 06 октября 2025.</p>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer id="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-column">
+                    <h3>Блог братьев</h3>
+                    <p>Два брата и одна девочка</p>
+                    <div class="social-links">
+                        <a href="https://www.youtube.com/@n1kolayrasetovich" target="_blank"><i class="fab fa-youtube"></i></a>
+                        <a href="https://t.me/nesoqiton" target="_blank"><i class="fab fa-telegram"></i></a>
+                    </div>
+                </div>
+                <div class="footer-column">
+                    <h3>Разделы</h3>
+                    <ul>
+                        <li><a href="#videos">Видео</a></li>
+                        <li><a href="#footer">Контакты</a></li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h3>Популярные темы</h3>
+                    <ul>
+                        <li><a href="https://t.me/nesoqiton">Telegram [Никита]</a></li>
+                        <li><a href="https://t.me/Legendary_7681">Telegram [Евгений]</a></li>
+                        <li><a href="https://t.me/thanoslegenda1239">Telegram [Ольга]</a></li>
+                        <li><a href="https://t.me/+LqoFaAvLl9hmOTdi">TG Channel [Кружки далбаебов]</a></li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h3>Контакты</h3>
+                    <ul>
+                        <li><i class="fas fa-phone"></i> +375 (29) 959-00-97 | Никита</li>
+                        <li><i class="fas fa-phone"></i> +375 (29) 870-23-67 | Жека</li>
+                        <li><i class="fas fa-phone"></i> +375 (25) 729-54-17 | Оля</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="copyright">
+                <p>&copy; 2025 Блог братьев. Все права защищены.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Initialize GSAP and ScrollTrigger
+        gsap.registerPlugin(ScrollTrigger);
+
+        // Mobile menu toggle
+        document.querySelector('.mobile-menu-btn').addEventListener('click', function () {
+            document.querySelector('nav ul').classList.toggle('show');
+        });
+
+        // Header scroll effect
+        window.addEventListener('scroll', function () {
+            const header = document.getElementById('header');
+            if (window.scrollY > 100) {
+                header.classList.add('scrolled');
+            } else {
+                header.classList.remove('scrolled');
+            }
+        });
+
+        // Hero animation
+        gsap.to('.hero h2', {
+            opacity: 1,
+            y: 0,
+            duration: 1,
+            delay: 0.5
+        });
+
+        gsap.to('.hero p', {
+            opacity: 1,
+            y: 0,
+            duration: 1,
+            delay: 0.8
+        });
+
+        gsap.to('.btn', {
+            opacity: 1,
+            y: 0,
+            duration: 1,
+            delay: 1.1
+        });
+
+        // Animate elements on scroll
+        gsap.utils.toArray('.video-card').forEach(element => {
+            gsap.fromTo(element, {
+                opacity: 0,
+                y: 50
+            }, {
+                opacity: 1,
+                y: 0,
+                duration: 1,
+                scrollTrigger: {
+                    trigger: element,
+                    start: "top 80%",
+                    end: "bottom 20%",
+                    toggleActions: "play none none reverse"
+                }
+            });
+        });
+
+        // Parallax effect
+        gsap.to('.parallax-bg', {
+            yPercent: -20,
+            ease: "none",
+            scrollTrigger: {
+                trigger: "body",
+                start: "top bottom",
+                end: "bottom top",
+                scrub: true
+            }
+        });
+
+        // Initialize functions when page loads
+        window.addEventListener('DOMContentLoaded', function() {
+            // All initialization is done above
+        });
+
+        // Smooth scrolling for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+
+                const targetId = this.getAttribute('href');
+                if (targetId === '#') return;
+
+                const targetElement = document.querySelector(targetId);
+                if (targetElement) {
+                    window.scrollTo({
+                        top: targetElement.offsetTop - 100,
+                        behavior: 'smooth'
+                    });
+
+                    // Close mobile menu after clicking a link
+                    document.querySelector('nav ul').classList.remove('show');
+                }
+            });
+        });
+    </script>
+</body>
+</html>
