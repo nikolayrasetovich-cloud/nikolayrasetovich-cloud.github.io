@@ -1,373 +1,30 @@
 <!DOCTYPE html>
 <html lang="ru_RU">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Блог братьев</title>
+    <title>Блог братьев. Новогоднее обновление</title>
+    <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <link
-        href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700;800&family=Playfair+Display:wght@700&display=swap"
-        rel="stylesheet">
-    <style>
-        :root {
-            --primary: #ffffff;
-            --secondary: #f8f9fa;
-            --accent1: #4a6cf7;
-            --accent2: #6a11cb;
-            --text: #333333;
-            --text-secondary: #666666;
-            --shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-            --border: 1px solid rgba(0, 0, 0, 0.1);
-        }
-
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
-        body {
-            background-color: var(--primary);
-            color: var(--text);
-            font-family: 'Montserrat', sans-serif;
-            line-height: 1.6;
-        }
-
-        h1,
-        h2,
-        h3,
-        h4 {
-            font-family: 'Playfair Display', serif;
-            font-weight: 700;
-        }
-
-        .container {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 0 20px;
-        }
-
-        /* Header Styles */
-        header {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            z-index: 1000;
-            padding: 15px 0;
-            background: rgba(255, 255, 255, 0.95);
-            box-shadow: var(--shadow);
-        }
-
-        .header-content {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-
-        .logo {
-            display: flex;
-            align-items: center;
-            gap: 10px;
-        }
-
-        .logo h1 {
-            font-size: 1.8rem;
-            background: linear-gradient(135deg, var(--accent1), var(--accent2));
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-        }
-
-        .logo-icon {
-            font-size: 2rem;
-            color: var(--accent1);
-        }
-
-        nav ul {
-            display: flex;
-            list-style: none;
-            gap: 20px;
-        }
-
-        nav a {
-            color: var(--text);
-            text-decoration: none;
-            font-weight: 600;
-            transition: all 0.3s ease;
-            padding: 8px 15px;
-            border-radius: 30px;
-        }
-
-        nav a:hover {
-            background: linear-gradient(135deg, var(--accent1), var(--accent2));
-            color: white;
-        }
-
-        .mobile-menu-btn {
-            display: none;
-            background: none;
-            border: none;
-            color: var(--text);
-            font-size: 1.5rem;
-            cursor: pointer;
-        }
-
-        /* Hero Section */
-        .hero {
-            padding: 150px 0 80px;
-            text-align: center;
-        }
-
-        .hero h2 {
-            font-size: 2.5rem;
-            margin-bottom: 20px;
-            line-height: 1.2;
-        }
-
-        .hero p {
-            font-size: 1.1rem;
-            margin-bottom: 20px;
-            color: var(--text-secondary);
-        }
-
-        .btn {
-            display: inline-block;
-            background: linear-gradient(135deg, var(--accent1), var(--accent2));
-            color: white;
-            padding: 12px 30px;
-            border-radius: 50px;
-            text-decoration: none;
-            font-weight: 600;
-            transition: all 0.3s ease;
-            margin-top: 10px;
-        }
-
-        .btn:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 5px 15px rgba(74, 108, 247, 0.3);
-        }
-
-        /* Section Styles */
-        section {
-            padding: 80px 0;
-        }
-
-        .section-title {
-            text-align: center;
-            margin-bottom: 50px;
-        }
-
-        .section-title h2 {
-            font-size: 2.2rem;
-            display: inline-block;
-            position: relative;
-            padding-bottom: 15px;
-        }
-
-        .section-title h2:after {
-            content: '';
-            position: absolute;
-            width: 80px;
-            height: 3px;
-            background: linear-gradient(135deg, var(--accent1), var(--accent2));
-            bottom: 0;
-            left: 50%;
-            transform: translateX(-50%);
-            border-radius: 2px;
-        }
-
-        /* Video Section */
-        .video-container {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
-            gap: 30px;
-        }
-
-        .video-card {
-            background: white;
-            border-radius: 10px;
-            overflow: hidden;
-            box-shadow: var(--shadow);
-            transition: all 0.3s ease;
-        }
-
-        .video-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
-        }
-
-        .video-wrapper {
-            position: relative;
-            padding-bottom: 56.25%;
-            height: 0;
-            overflow: hidden;
-        }
-
-        .video-wrapper iframe {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            border: 0;
-        }
-
-        .video-card-content {
-            padding: 20px;
-        }
-
-        .video-card h3 {
-            margin-bottom: 10px;
-            font-size: 1.2rem;
-        }
-
-        /* Footer */
-        footer {
-            background: var(--secondary);
-            padding: 60px 0 20px;
-            border-top: var(--border);
-        }
-
-        .footer-content {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            gap: 40px;
-            margin-bottom: 40px;
-        }
-
-        .footer-column h3 {
-            font-size: 1.2rem;
-            margin-bottom: 20px;
-            position: relative;
-            padding-bottom: 10px;
-        }
-
-        .footer-column h3:after {
-            content: '';
-            position: absolute;
-            width: 40px;
-            height: 2px;
-            background: linear-gradient(135deg, var(--accent1), var(--accent2));
-            bottom: 0;
-            left: 0;
-            border-radius: 2px;
-        }
-
-        .footer-column ul {
-            list-style: none;
-        }
-
-        .footer-column ul li {
-            margin-bottom: 10px;
-        }
-
-        .footer-column a {
-            color: var(--text-secondary);
-            text-decoration: none;
-            transition: all 0.3s ease;
-        }
-
-        .footer-column a:hover {
-            color: var(--accent1);
-        }
-
-        .social-links {
-            display: flex;
-            gap: 15px;
-            margin-top: 15px;
-        }
-
-        .social-links a {
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-            width: 40px;
-            height: 40px;
-            background: rgba(0, 0, 0, 0.05);
-            border-radius: 50%;
-            transition: all 0.3s ease;
-            font-size: 1.1rem;
-            color: var(--text);
-        }
-
-        .social-links a:hover {
-            background: linear-gradient(135deg, var(--accent1), var(--accent2));
-            color: white;
-        }
-
-        .copyright {
-            text-align: center;
-            padding-top: 20px;
-            border-top: var(--border);
-            font-size: 0.9rem;
-            color: var(--text-secondary);
-        }
-
-        /* Responsive Styles */
-        @media (max-width: 900px) {
-            .video-container {
-                grid-template-columns: 1fr;
-            }
-        }
-
-        @media (max-width: 768px) {
-            .header-content {
-                flex-direction: column;
-                gap: 15px;
-            }
-
-            nav ul {
-                flex-wrap: wrap;
-                justify-content: center;
-            }
-
-            .hero h2 {
-                font-size: 2rem;
-            }
-
-            .section-title h2 {
-                font-size: 1.8rem;
-            }
-
-            .mobile-menu-btn {
-                display: block;
-            }
-
-            nav ul {
-                display: none;
-                flex-direction: column;
-                width: 100%;
-                text-align: center;
-                margin-top: 15px;
-            }
-
-            nav ul.show {
-                display: flex;
-            }
-
-            .hero {
-                padding-top: 180px;
-            }
-        }
-
-        @media (max-width: 576px) {
-            .hero h2 {
-                font-size: 1.8rem;
-            }
-            
-            .video-card {
-                margin: 0 10px;
-            }
-            
-            .footer-content {
-                grid-template-columns: 1fr;
-            }
-        }
-    </style>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700;800&family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
 </head>
-
 <body>
+    <!-- Новогодние элементы -->
+    <div class="snowflakes" id="snowflakes"></div>
+    <div class="garland" id="garland"></div>
+    <div class="snowdrifts"></div>
+    <div class="christmas-tree">
+        <div class="tree-star">★</div>
+        <div class="tree-body">
+            <div class="tree-decoration"></div>
+            <div class="tree-decoration"></div>
+            <div class="tree-decoration"></div>
+            <div class="tree-decoration"></div>
+            <div class="tree-decoration"></div>
+        </div>
+        <div class="tree-trunk"></div>
+    </div>
+
     <!-- Header -->
     <header id="header">
         <div class="container">
@@ -381,6 +38,7 @@
                 </button>
                 <nav>
                     <ul>
+                        <li><a href="#updates">Обновления</a></li>
                         <li><a href="#videos">Видео</a></li>
                         <li><a href="#footer">Контакты</a></li>
                     </ul>
@@ -395,8 +53,34 @@
             <div class="hero-content">
                 <h2>Два брата. Три долбабоба. Одна любовь.</h2>
                 <p>Самые лучшие и любимые братья.</p>
-                <p>Последнее редактирование: 25.11.2025 | 19:00</p>
+                <p>Последнее редактирование: 26.11.2025 | 20:00</p>
                 <a href="#videos" class="btn">Смотреть видео</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Updates Section -->
+    <section id="updates" class="updates">
+        <div class="container">
+            <div class="section-title">
+                <h2><i class="fa-solid fa-arrow-up-from-bracket"></i>Обновления</h2>
+            </div>
+            <div class="updates-container">
+                
+                <div class="update-card new">
+                    <div class="update-header">
+                        <span class="update-date">26.11.2025</span>
+                        <span class="update-type">Обновление сайта</span>
+                    </div>
+                    <h3>Новогоднее обновление</h3>
+                    <p>Был изменен интерфейс сайта на новогоднюю тематику.</p>
+                    <ul class="update-features">
+                        <li>Обновленный интерфейс сайта</li>
+                        <li>Добавлен блок с обновлениями</li>
+                        <li>Для блока с видео были добавлены страницы</li>
+                    </ul>
+                </div>
+
             </div>
         </div>
     </section>
@@ -405,425 +89,15 @@
     <section id="videos">
         <div class="container">
             <div class="section-title">
-                <h2><img src="images/stream.png" alt="stream" width="32"> Видео и трансляции</h2>
+                <h2><i class="fa-solid fa-clapperboard"></i>Видео и трансляции</h2>
             </div>
-            <div class="video-container">
-
-                <div class="video-card">
-                    <div class="video-wrapper">
-                        <iframe src="https://www.youtube.com/embed/ElbvvTuTJ9k"
-                            title="YouTube video player"
-                            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                            allowfullscreen></iframe>
-                    </div>
-                    <div class="video-card-content">
-                        <h3>💦 ЧТО ТУТ ПРОИСХОДИТ?</h3>
-                        <p>🔴 Прямой эфир / 25 ноября</p>
-                    </div>
-                </div>
-                
-                <div class="video-card">
-                    <div class="video-wrapper">
-                        <iframe src="https://www.youtube.com/embed/PboKwiqDOww"
-                            title="YouTube video player"
-                            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                            allowfullscreen></iframe>
-                    </div>
-                    <div class="video-card-content">
-                        <h3>🏚️ ДОМАШНИЙ АРЕСТ</h3>
-                        <p>🔴 Прямой эфир / 23 ноября</p>
-                    </div>
-                </div>
-                
-                <div class="video-card">
-                    <div class="video-wrapper">
-                        <iframe src="https://www.youtube.com/embed/kFOmLrHup2Y"
-                            title="YouTube video player"
-                            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                            allowfullscreen></iframe>
-                    </div>
-                    <div class="video-card-content">
-                        <h3>НАВОДИМ СУЕТУ в МАЙНКРАФТЕ</h3>
-                        <p>🔴 Прямой эфир / 11 ноября</p>
-                    </div>
-                </div> 
-                
-                <div class="video-card">
-                    <div class="video-wrapper">
-                        <iframe src="https://www.youtube.com/embed/6d-OCpKGNaE"
-                            title="YouTube video player"
-                            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                            allowfullscreen></iframe>
-                    </div>
-                    <div class="video-card-content">
-                        <h3>🔫 КООПЕРАТИВ на МАКСИМАЛКАХ</h3>
-                        <p>🔴 Прямой эфир / 08 ноября</p>
-                    </div>
-                </div> 
-                
-                <div class="video-card">
-                    <div class="video-wrapper">
-                        <iframe src="https://www.youtube.com/embed/-NFFd2d17Y8"
-                            title="YouTube video player"
-                            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                            allowfullscreen></iframe>
-                    </div>
-                    <div class="video-card-content">
-                        <h3>АМОНГУС ++</h3>
-                        <p>🔴 Прямой эфир / 06 ноября</p>
-                    </div>
-                </div> 
-                
-                <div class="video-card">
-                    <div class="video-wrapper">
-                        <iframe src="https://www.youtube.com/embed/jNA4AcHjL4E"
-                            title="YouTube video player"
-                            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                            allowfullscreen></iframe>
-                    </div>
-                    <div class="video-card-content">
-                        <h3>🪱 МАЙНПУКТ И ДРУГОЕ...</h3>
-                        <p>🔴 Прямой эфир / 06 ноября</p>
-                    </div>
-                </div> 
-                
-                <div class="video-card">
-                    <div class="video-wrapper">
-                        <iframe src="https://www.youtube.com/embed/sohcPSnrv24"
-                            title="YouTube video player"
-                            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                            allowfullscreen></iframe>
-                    </div>
-                    <div class="video-card-content">
-                        <h3>MINECRAT OLYA</h3>
-                        <p>🔴 Прямой эфир / 02 ноября</p>
-                    </div>
-                </div> 
-                
-                <div class="video-card">
-                    <div class="video-wrapper">
-                        <iframe src="https://www.youtube.com/embed/R292HOs1kGs"
-                            title="YouTube video player"
-                            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                            allowfullscreen></iframe>
-                    </div>
-                    <div class="video-card-content">
-                        <h3>🌍 МАЙНСРУФТ + СРУМОГУС</h3>
-                        <p>🔴 Прямой эфир / 01 ноября</p>
-                    </div>
-                </div> 
-                
-                <div class="video-card">
-                    <div class="video-wrapper">
-                        <iframe src="https://www.youtube.com/embed/o-hrzNuy4-Y?si=ic0UFJHLh2UB7vVs"
-                            title="YouTube video player"
-                            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                            allowfullscreen></iframe>
-                    </div>
-                    <div class="video-card-content">
-                        <h3>🤥 АМАНАЛ АС</h3>
-                        <p>🔴 Прямой эфир / 29 октября.</p>
-                    </div>
-                </div> 
-                
-                <div class="video-card">
-                    <div class="video-wrapper">
-                        <iframe src="https://www.youtube.com/embed/avLUYnuH4ko"
-                            title="YouTube video player"
-                            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                            allowfullscreen></iframe>
-                    </div>
-                    <div class="video-card-content">
-                        <h3>🌿ВСЁ КРОМЕ MINECRAFT</h3>
-                        <p>🔴 Прямой эфир / 28 октября.</p>
-                    </div>
-                </div> 
-                
-                <div class="video-card">
-                    <div class="video-wrapper">
-                        <iframe src="https://www.youtube.com/embed/lnnLftsmHCw"
-                            title="YouTube video player"
-                            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                            allowfullscreen></iframe>
-                    </div>
-                    <div class="video-card-content">
-                        <h3>🥷 ARIZONA GAMES + AMONG US</h3>
-                        <p>🔴 Прямой эфир №2 / 26 октября.</p>
-                    </div>
-                </div> 
-                
-                <div class="video-card">
-                    <div class="video-wrapper">
-                        <iframe src="https://www.youtube.com/embed/dE8om75g0EE"
-                            title="YouTube video player"
-                            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                            allowfullscreen></iframe>
-                    </div>
-                    <div class="video-card-content">
-                        <h3>🏡 ДОМАШНИЕ И УЛИЧНЫЕ ПРИКЛЮЧЕНИЯ</h3>
-                        <p>🔴 Прямой эфир / 26 октября.</p>
-                    </div>
-                </div> 
-                
-                <div class="video-card">
-                    <div class="video-wrapper">
-                        <iframe src="https://www.youtube.com/embed/7Y2na4Bf-Xc"
-                            title="YouTube video player"
-                            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                            allowfullscreen></iframe>
-                    </div>
-                    <div class="video-card-content">
-                        <h3>🐺 НОЧНЫЕ ПРИКЛЮЧЕНИЯ 9 | ФИНАЛ?</h3>
-                        <p>🔴 Прямой эфир / 25-26 октября.</p>
-                    </div>
-                </div> 
-                
-                <div class="video-card">
-                    <div class="video-wrapper">
-                        <iframe src="https://www.youtube.com/embed/4LxNZsgnpbg"
-                            title="YouTube video player"
-                            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                            allowfullscreen></iframe>
-                    </div>
-                    <div class="video-card-content">
-                        <h3>🫨 ПИЗ*EЦ в ПРЯМОМ ЭФИРЕ</h3>
-                        <p>🔴 Прямой эфир / 25 октября.</p>
-                    </div>
-                </div> 
-                
-                <div class="video-card">
-                    <div class="video-wrapper">
-                        <iframe src="https://www.youtube.com/embed/YKO9QgoJB-A"
-                            title="YouTube video player"
-                            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                            allowfullscreen></iframe>
-                    </div>
-                    <div class="video-card-content">
-                        <h3>🌙 НОЧНЫЕ ПРИКЛЮЧЕНИЯ 8</h3>
-                        <p>🔴 Прямой эфир / 24-25 октября.</p>
-                    </div>
-                </div> 
-                
-                <div class="video-card">
-                    <div class="video-wrapper">
-                        <iframe src="https://www.youtube.com/embed/9z7zo0KFOv8"
-                            title="YouTube video player"
-                            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                            allowfullscreen></iframe>
-                    </div>
-                    <div class="video-card-content">
-                        <h3>🥳 АМОГУС и ТОЧКА</h3>
-                        <p>🔴 Прямой эфир / 24 октября.</p>
-                    </div>
-                </div>  
-
-               <div class="video-card">
-                    <div class="video-wrapper">
-                        <iframe src="https://www.youtube.com/embed/VMopJ3YB5DA?feature=share"
-                            title="YouTube video player"
-                            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                            allowfullscreen></iframe>
-                    </div>
-                    <div class="video-card-content">
-                        <h3>😎 СУЭТА НА СУЭТЭ и ВСЁ на ARIZONA</h3>
-                        <p>🔴 Прямой эфир / 23 октября.</p>
-                    </div>
-                </div>    
-               
-                <div class="video-card">
-                    <div class="video-wrapper">
-                        <iframe src="https://www.youtube.com/embed/qeRpk1kOTYU"
-                            title="YouTube video player"
-                            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                            allowfullscreen></iframe>
-                    </div>
-                    <div class="video-card-content">
-                        <h3>🌳 СУЕТА В MINECRAFT + ☠️ АМОГУС</h3>
-                        <p>🔴 Прямой эфир / 22 октября.</p>
-                    </div>
-                </div>    
-                
-                <div class="video-card">
-                    <div class="video-wrapper">
-                        <iframe src="https://www.youtube.com/embed/8yPT2taF5xg"
-                            title="YouTube video player"
-                            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                            allowfullscreen></iframe>
-                    </div>
-                    <div class="video-card-content">
-                        <h3>💥АМОГУС В ЭФИРЕ</h3>
-                        <p>🔴 Прямой эфир / 21 октября.</p>
-                    </div>
-                </div>
-
-                <div class="video-card">
-                    <div class="video-wrapper">
-                        <iframe src="https://www.youtube.com/embed/33RHdlsNgw8"
-                            title="YouTube video player"
-                            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                            allowfullscreen></iframe>
-                    </div>
-                    <div class="video-card-content">
-                        <h3>НОЧНЫЕ ПРИКЛЮЧЕНИЯ 7</h3>
-                        <p>🔴 Прямой эфир №2 / 18 октября.</p>
-                    </div>
-                </div>
-                
-                <div class="video-card">
-                    <div class="video-wrapper">
-                        <iframe src="https://www.youtube.com/embed/hiTdPkmw4L0"
-                            title="YouTube video player"
-                            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                            allowfullscreen></iframe>
-                    </div>
-                    <div class="video-card-content">
-                        <h3>СУЕТАЛОГИЯ В ГОРОДЕ</h3>
-                        <p>18 октября прошла масштабная трансляция в парке и других местах 🔥.</p>
-                    </div>
-                </div>
-                
-                <div class="video-card">
-                    <div class="video-wrapper">
-                        <iframe src="https://www.youtube.com/embed/f28EpJgVHSg?feature=share"
-                            title="YouTube video player"
-                            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                            allowfullscreen></iframe>
-                    </div>
-                    <div class="video-card-content">
-                        <h3>НОЧНЫЕ ПРИКЛЮЧЕНИЯ 6</h3>
-                        <p>17 октября прошла шестая трансляция моего сна в эфире 😎.</p>
-                    </div>
-                </div>
-
-                <div class="video-card">
-                    <div class="video-wrapper">
-                        <iframe src="https://www.youtube.com/embed/yulH8RUATuo?feature=share"
-                            title="YouTube video player"
-                            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                            allowfullscreen></iframe>
-                    </div>
-                    <div class="video-card-content">
-                        <h3>НАВОДИМ СУЕТУ НА ВОКЗАЛЕ</h3>
-                        <p>17 октября прошёл эфир на вокзале и в маршрутке.</p>
-                    </div>
-                </div>
-
-                <div class="video-card">
-                    <div class="video-wrapper">
-                        <iframe src="https://www.youtube.com/embed/4Tc_YYMKZvM?feature=share"
-                            title="YouTube video player"
-                            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                            allowfullscreen></iframe>
-                    </div>
-                    <div class="video-card-content">
-                        <h3>НАВОДИМ СУЕТУ НА РАЙОНЕ</h3>
-                        <p>🔴 Прямая трансляция №3 которая прошла 12 октября 2025, была самой смешной/прикольной за всё
-                            время.</p>
-                    </div>
-                </div>
-
-                <div class="video-card">
-                    <div class="video-wrapper">
-                        <iframe src="https://www.youtube.com/embed/QTLXGKIeWTE?si=wFN99cdwBjsA47vY"
-                            title="YouTube video player"
-                            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                            allowfullscreen></iframe>
-                    </div>
-                    <div class="video-card-content">
-                        <h3>НАВОДИМ СУЕТУ НА РАЙОНЕ</h3>
-                        <p>🔴 Прямая трансляция №2 которая прошла 12 октября 2025, была самой смешной/прикольной за всё
-                            время.</p>
-                    </div>
-                </div>
-
-                <div class="video-card">
-                    <div class="video-wrapper">
-                        <iframe src="https://www.youtube.com/embed/ogIYZkc2IbE?feature=share"
-                            title="YouTube video player"
-                            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                            allowfullscreen></iframe>
-                    </div>
-                    <div class="video-card-content">
-                        <h3>НОЧНЫЕ ПРИКЛЮЧЕНИЯ 5</h3>
-                        <p>🔴 Прямая трансляция №1 / 12 октября 2025.</p>
-                    </div>
-                </div>
-
-                <div class="video-card">
-                    <div class="video-wrapper">
-                        <iframe src="https://www.youtube.com/embed/ZYGvd2DPi7k?si=7pnueagjDzRvKMSG"
-                            title="YouTube video player"
-                            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                            allowfullscreen></iframe>
-                    </div>
-                    <div class="video-card-content">
-                        <h3>НАВОДИМ СУЕТОЛОГИЮ</h3>
-                        <p>🔴 Прямая трансляция №2 / 11 октября 2025.</p>
-                    </div>
-                </div>
-
-                <div class="video-card">
-                    <div class="video-wrapper">
-                        <iframe src="https://www.youtube.com/embed/fWMkiAlPJNE?si=LxqQpL_Oc463NLOW"
-                            title="YouTube video player"
-                            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                            allowfullscreen></iframe>
-                    </div>
-                    <div class="video-card-content">
-                        <h3>СУЕТА УЖЕ СЕЙЧАС</h3>
-                        <p>🔴 Прямая трансляция №1 / 11 октября 2025.</p>
-                    </div>
-                </div>
-
-                <div class="video-card">
-                    <div class="video-wrapper">
-                        <iframe src="https://www.youtube.com/embed/HW0nLvyGQpQ" title="YouTube video player"
-                            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                            allowfullscreen></iframe>
-                    </div>
-                    <div class="video-card-content">
-                        <h3>НАВОДИМ СУЕТУ + НОЧНЫЕ ПРИКЛЮЧЕНИЯ 4</h3>
-                        <p>🔴 Прямая трансляция / 09 октября 2025.</p>
-                    </div>
-                </div>
-
-                <div class="video-card">
-                    <div class="video-wrapper">
-                        <iframe src="https://www.youtube.com/embed/DEOTRqq8AOU" title="YouTube video player"
-                            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                            allowfullscreen></iframe>
-                    </div>
-                    <div class="video-card-content">
-                        <h3>НАВОДИМ СУЕТУ + НОЧНЫЕ ПРИКЛЮЧЕНИЯ 3</h3>
-                        <p>🔴 Прямая трансляция / 08 октября 2025.</p>
-                    </div>
-                </div>
-
-                <div class="video-card">
-                    <div class="video-wrapper">
-                        <iframe src="https://www.youtube.com/embed/5kfIrnccag8?feature=share"
-                            title="YouTube video player"
-                            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                            allowfullscreen></iframe>
-                    </div>
-                    <div class="video-card-content">
-                        <h3>СОН УВАЖАЕМОГО</h3>
-                        <p>🔴 Прямая трансляция / 07 октября 2025.</p>
-                    </div>
-                </div>
-
-                <div class="video-card">
-                    <div class="video-wrapper">
-                        <iframe src="https://www.youtube.com/embed/c2X1Y_doIz8" title="YouTube video player"
-                            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                            allowfullscreen></iframe>
-                    </div>
-                    <div class="video-card-content">
-                        <h3>СОН НИКИТОСИКА 👋</h3>
-                        <p>🔴 Прямая трансляция / 06 октября 2025.</p>
-                    </div>
-                </div>
-
+            <div class="video-container" id="video-container">
+                <!-- Видео будут вставляться с помощью JavaScript -->
+            </div>
+            
+            <!-- Пагинация -->
+            <div class="pagination" id="pagination">
+                <!-- Кнопки пагинации будут вставляться с помощью JavaScript -->
             </div>
         </div>
     </section>
@@ -843,6 +117,7 @@
                 <div class="footer-column">
                     <h3>Разделы</h3>
                     <ul>
+                        <li><a href="#updates">Обновления</a></li>
                         <li><a href="#videos">Видео</a></li>
                         <li><a href="#footer">Контакты</a></li>
                     </ul>
@@ -872,6 +147,324 @@
     </footer>
 
     <script>
+        // Данные видео
+        const videos = [
+            {
+                id: "ElbvvTuTJ9k",
+                title: "💦 ЧТО ТУТ ПРОИСХОДИТ?",
+                description: "🔴 Прямой эфир / 25 ноября"
+            },
+            {
+                id: "PboKwiqDOww",
+                title: "🏚️ ДОМАШНИЙ АРЕСТ",
+                description: "🔴 Прямой эфир / 23 ноября"
+            },
+            {
+                id: "kFOmLrHup2Y",
+                title: "НАВОДИМ СУЕТУ в МАЙНКРАФТЕ",
+                description: "🔴 Прямой эфир / 11 ноября"
+            },
+            {
+                id: "6d-OCpKGNaE",
+                title: "🔫 КООПЕРАТИВ на МАКСИМАЛКАХ",
+                description: "🔴 Прямой эфир / 08 ноября"
+            },
+            {
+                id: "-NFFd2d17Y8",
+                title: "АМОНГУС ++",
+                description: "🔴 Прямой эфир / 06 ноября"
+            },
+            {
+                id: "jNA4AcHjL4E",
+                title: "🪱 МАЙНПУКТ И ДРУГОЕ...",
+                description: "🔴 Прямой эфир / 06 ноября"
+            },
+            {
+                id: "sohcPSnrv24",
+                title: "MINECRAT OLYA",
+                description: "🔴 Прямой эфир / 02 ноября"
+            },
+            {
+                id: "R292HOs1kGs",
+                title: "🌍 МАЙНСРУФТ + СРУМОГУС",
+                description: "🔴 Прямой эфир / 01 ноября"
+            },
+            {
+                id: "o-hrzNuy4-Y",
+                title: "🤥 АМАНАЛ АС",
+                description: "🔴 Прямой эфир / 29 октября"
+            },
+            {
+                id: "avLUYnuH4ko",
+                title: "🌿ВСЁ КРОМЕ MINECRAFT",
+                description: "🔴 Прямой эфир / 28 октября"
+            },
+            {
+                id: "lnnLftsmHCw",
+                title: "🥷 ARIZONA GAMES + AMONG US",
+                description: "🔴 Прямой эфир №2 / 26 октября"
+            },
+            {
+                id: "dE8om75g0EE",
+                title: "🏡 ДОМАШНИЕ И УЛИЧНЫЕ ПРИКЛЮЧЕНИЯ",
+                description: "🔴 Прямой эфир / 26 октября"
+            },
+            {
+                id: "7Y2na4Bf-Xc",
+                title: "🐺 НОЧНЫЕ ПРИКЛЮЧЕНИЯ 9 | ФИНАЛ?",
+                description: "🔴 Прямой эфир / 25-26 октября"
+            },
+            {
+                id: "4LxNZsgnpbg",
+                title: "🫨 ПИЗ*EЦ в ПРЯМОМ ЭФИРЕ",
+                description: "🔴 Прямой эфир / 25 октября"
+            },
+            {
+                id: "YKO9QgoJB-A",
+                title: "🌙 НОЧНЫЕ ПРИКЛЮЧЕНИЯ 8",
+                description: "🔴 Прямой эфир / 24-25 октября"
+            },
+            {
+                id: "9z7zo0KFOv8",
+                title: "🥳 АМОГУС и ТОЧКА",
+                description: "🔴 Прямой эфир / 24 октября"
+            },
+            {
+                id: "VMopJ3YB5DA",
+                title: "😎 СУЭТА НА СУЭТЭ и ВСЁ на ARIZONA",
+                description: "🔴 Прямой эфир / 23 октября"
+            },
+            {
+                id: "qeRpk1kOTYU",
+                title: "🌳 СУЕТА В MINECRAFT + ☠️ АМОГУС",
+                description: "🔴 Прямой эфир / 22 октября"
+            },
+            {
+                id: "8yPT2taF5xg",
+                title: "💥АМОГУС В ЭФИРЕ",
+                description: "🔴 Прямой эфир / 21 октября"
+            },
+            {
+                id: "33RHdlsNgw8",
+                title: "НОЧНЫЕ ПРИКЛЮЧЕНИЯ 7",
+                description: "🔴 Прямой эфир №2 / 18 октября"
+            },
+            {
+                id: "hiTdPkmw4L0",
+                title: "СУЕТАЛОГИЯ В ГОРОДЕ",
+                description: "18 октября прошла масштабная трансляция в парке и других местах 🔥"
+            },
+            {
+                id: "f28EpJgVHSg",
+                title: "НОЧНЫЕ ПРИКЛЮЧЕНИЯ 6",
+                description: "17 октября прошла шестая трансляция моего сна в эфире 😎"
+            },
+            {
+                id: "yulH8RUATuo",
+                title: "НАВОДИМ СУЕТУ НА ВОКЗАЛЕ",
+                description: "17 октября прошёл эфир на вокзале и в маршрутке"
+            },
+            {
+                id: "4Tc_YYMKZvM",
+                title: "НАВОДИМ СУЕТУ НА РАЙОНЕ",
+                description: "🔴 Прямая трансляция №3 которая прошла 12 октября 2025, была самой смешной/прикольной за всё время"
+            },
+            {
+                id: "QTLXGKIeWTE",
+                title: "НАВОДИМ СУЕТУ НА РАЙОНЕ",
+                description: "🔴 Прямая трансляция №2 которая прошла 12 октября 2025, была самой смешной/прикольной за всё время"
+            },
+            {
+                id: "ogIYZkc2IbE",
+                title: "НОЧНЫЕ ПРИКЛЮЧЕНИЯ 5",
+                description: "🔴 Прямая трансляция №1 / 12 октября 2025"
+            },
+            {
+                id: "ZYGvd2DPi7k",
+                title: "НАВОДИМ СУЕТОЛОГИЮ",
+                description: "🔴 Прямая трансляция №2 / 11 октября 2025"
+            },
+            {
+                id: "fWMkiAlPJNE",
+                title: "СУЕТА УЖЕ СЕЙЧАС",
+                description: "🔴 Прямая трансляция №1 / 11 октября 2025"
+            },
+            {
+                id: "HW0nLvyGQpQ",
+                title: "НАВОДИМ СУЕТУ + НОЧНЫЕ ПРИКЛЮЧЕНИЯ 4",
+                description: "🔴 Прямая трансляция / 09 октября 2025"
+            },
+            {
+                id: "DEOTRqq8AOU",
+                title: "НАВОДИМ СУЕТУ + НОЧНЫЕ ПРИКЛЮЧЕНИЯ 3",
+                description: "🔴 Прямая трансляция / 08 октября 2025"
+            },
+            {
+                id: "5kfIrnccag8",
+                title: "СОН УВАЖАЕМОГО",
+                description: "🔴 Прямая трансляция / 07 октября 2025"
+            },
+            {
+                id: "c2X1Y_doIz8",
+                title: "СОН НИКИТОСИКА 👋",
+                description: "🔴 Прямая трансляция / 06 октября 2025"
+            }
+        ];
+
+        // Настройки пагинации
+        const videosPerPage = 6;
+        let currentPage = 1;
+
+        // Функция для отображения видео на текущей странице
+        function displayVideos(page) {
+            const videoContainer = document.getElementById('video-container');
+            videoContainer.innerHTML = '';
+            
+            const startIndex = (page - 1) * videosPerPage;
+            const endIndex = startIndex + videosPerPage;
+            const videosToShow = videos.slice(startIndex, endIndex);
+            
+            videosToShow.forEach(video => {
+                const videoCard = document.createElement('div');
+                videoCard.className = 'video-card';
+                
+                videoCard.innerHTML = `
+                    <div class="video-wrapper">
+                        <iframe src="https://www.youtube.com/embed/${video.id}"
+                            title="YouTube video player"
+                            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                            allowfullscreen></iframe>
+                    </div>
+                    <div class="video-card-content">
+                        <h3>${video.title}</h3>
+                        <p>${video.description}</p>
+                    </div>
+                `;
+                
+                videoContainer.appendChild(videoCard);
+            });
+        }
+
+        // Функция для создания пагинации
+        function createPagination() {
+            const paginationContainer = document.getElementById('pagination');
+            paginationContainer.innerHTML = '';
+            
+            const totalPages = Math.ceil(videos.length / videosPerPage);
+            
+            // Кнопка "Назад"
+            const prevButton = document.createElement('a');
+            prevButton.className = `pagination-btn ${currentPage === 1 ? 'disabled' : ''}`;
+            prevButton.innerHTML = '<i class="fas fa-chevron-left"></i>';
+            prevButton.href = '#videos';
+            if (currentPage > 1) {
+                prevButton.addEventListener('click', (e) => {
+                    e.preventDefault();
+                    currentPage--;
+                    displayVideos(currentPage);
+                    createPagination();
+                    window.scrollTo({
+                        top: document.getElementById('videos').offsetTop - 80,
+                        behavior: 'smooth'
+                    });
+                });
+            }
+            paginationContainer.appendChild(prevButton);
+            
+            // Номера страниц
+            const maxVisiblePages = 5;
+            let startPage = Math.max(1, currentPage - Math.floor(maxVisiblePages / 2));
+            let endPage = Math.min(totalPages, startPage + maxVisiblePages - 1);
+            
+            if (endPage - startPage + 1 < maxVisiblePages) {
+                startPage = Math.max(1, endPage - maxVisiblePages + 1);
+            }
+            
+            for (let i = startPage; i <= endPage; i++) {
+                const pageButton = document.createElement('a');
+                pageButton.className = `pagination-btn ${i === currentPage ? 'active' : ''}`;
+                pageButton.textContent = i;
+                pageButton.href = '#videos';
+                pageButton.addEventListener('click', (e) => {
+                    e.preventDefault();
+                    currentPage = i;
+                    displayVideos(currentPage);
+                    createPagination();
+                    window.scrollTo({
+                        top: document.getElementById('videos').offsetTop - 80,
+                        behavior: 'smooth'
+                    });
+                });
+                paginationContainer.appendChild(pageButton);
+            }
+            
+            // Кнопка "Вперед"
+            const nextButton = document.createElement('a');
+            nextButton.className = `pagination-btn ${currentPage === totalPages ? 'disabled' : ''}`;
+            nextButton.innerHTML = '<i class="fas fa-chevron-right"></i>';
+            nextButton.href = '#videos';
+            if (currentPage < totalPages) {
+                nextButton.addEventListener('click', (e) => {
+                    e.preventDefault();
+                    currentPage++;
+                    displayVideos(currentPage);
+                    createPagination();
+                    window.scrollTo({
+                        top: document.getElementById('videos').offsetTop - 80,
+                        behavior: 'smooth'
+                    });
+                });
+            }
+            paginationContainer.appendChild(nextButton);
+        }
+
+        // Создание снежинок
+        function createSnowflakes() {
+            const snowflakesContainer = document.getElementById('snowflakes');
+            const snowflakeCount = 100;
+            
+            for (let i = 0; i < snowflakeCount; i++) {
+                const snowflake = document.createElement('div');
+                snowflake.classList.add('snowflake');
+                snowflake.innerHTML = '❄';
+                
+                // Случайные параметры для снежинки
+                const size = Math.random() * 1.5 + 0.5;
+                const left = Math.random() * 100;
+                const animationDuration = Math.random() * 10 + 5;
+                const animationDelay = Math.random() * 5;
+                
+                snowflake.style.fontSize = `${size}em`;
+                snowflake.style.left = `${left}%`;
+                snowflake.style.animationDuration = `${animationDuration}s`;
+                snowflake.style.animationDelay = `${animationDelay}s`;
+                
+                snowflakesContainer.appendChild(snowflake);
+            }
+        }
+        
+        // Создание гирлянды
+        function createGarland() {
+            const garlandContainer = document.getElementById('garland');
+            const lightCount = 30;
+            const colors = ['#ff0000', '#00ff00', '#ffff00', '#0000ff', '#ff00ff'];
+            
+            for (let i = 0; i < lightCount; i++) {
+                const light = document.createElement('div');
+                light.classList.add('light');
+                
+                const left = (i / lightCount) * 100;
+                const color = colors[Math.floor(Math.random() * colors.length)];
+                const animationDelay = Math.random() * 2;
+                
+                light.style.left = `${left}%`;
+                light.style.backgroundColor = color;
+                light.style.animationDelay = `${animationDelay}s`;
+                
+                garlandContainer.appendChild(light);
+            }
+        }
+        
         // Mobile menu toggle
         document.querySelector('.mobile-menu-btn').addEventListener('click', function () {
             document.querySelector('nav ul').classList.toggle('show');
@@ -906,6 +499,14 @@
                     document.querySelector('nav ul').classList.remove('show');
                 }
             });
+        });
+        
+        // Инициализация новогодних элементов и пагинации
+        document.addEventListener('DOMContentLoaded', function() {
+            createSnowflakes();
+            createGarland();
+            displayVideos(currentPage);
+            createPagination();
         });
     </script>
 </body>
