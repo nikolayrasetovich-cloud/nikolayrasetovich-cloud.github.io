@@ -200,7 +200,7 @@ header {
     left: 0;
     width: 100%;
     z-index: 1000;
-    padding: 15px 0;
+    padding: 10px 0; /* Уменьшено padding для мобильных устройств */
     background: rgba(255, 255, 255, 0.95);
     box-shadow: var(--shadow);
 }
@@ -735,12 +735,13 @@ footer {
 @media (max-width: 768px) {
     .header-content {
         flex-direction: column;
-        gap: 15px;
+        gap: 10px; /* Уменьшено расстояние между элементами */
     }
 
     nav ul {
         flex-wrap: wrap;
         justify-content: center;
+        gap: 10px; /* Уменьшено расстояние между пунктами меню */
     }
 
     .hero h2 {
@@ -760,7 +761,7 @@ footer {
         flex-direction: column;
         width: 100%;
         text-align: center;
-        margin-top: 15px;
+        margin-top: 10px; /* Уменьшено отступ сверху */
     }
 
     nav ul.show {
@@ -768,11 +769,29 @@ footer {
     }
 
     .hero {
-        padding-top: 180px;
+        padding-top: 160px; /* Уменьшено для компенсации меньшего хедера */
     }
     
     .hero h2:before, .hero h2:after {
         display: none;
+    }
+    
+    /* Уменьшение высоты хедера для мобильных устройств */
+    header {
+        padding: 8px 0; /* Еще больше уменьшено padding */
+    }
+    
+    .logo h1 {
+        font-size: 1.5rem; /* Уменьшен размер логотипа */
+    }
+    
+    .logo-icon {
+        font-size: 1.5rem; /* Уменьшен размер иконки */
+    }
+    
+    nav a {
+        padding: 6px 12px; /* Уменьшены отступы в ссылках */
+        font-size: 0.9rem; /* Уменьшен размер шрифта */
     }
 }
 
@@ -792,5 +811,23 @@ footer {
     .pagination {
         flex-wrap: wrap;
         gap: 10px;
+    }
+    
+    /* Дополнительные стили для мобильных устройств */
+    header {
+        padding: 6px 0; /* Минимальный padding для мобильных */
+    }
+    
+    .logo h1 {
+        font-size: 1.3rem; /* Еще меньше для мобильных */
+    }
+    
+    nav ul {
+        gap: 5px; /* Минимальное расстояние между пунктами меню */
+    }
+    
+    nav a {
+        padding: 5px 10px; /* Минимальные отступы */
+        font-size: 0.85rem; /* Минимальный размер шрифта */
     }
 }
