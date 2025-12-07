@@ -293,8 +293,11 @@
         </div>
     </footer>
 
+    <!-- Уведомление о копировании -->
+    <div class="copy-notification" style="display: none;"></div>
+
     <script>
-        // Данные видео (остаются те же)
+        // Данные видео
         const videos = [
             {
                 id: "c3H3r-eo6K4",
@@ -528,24 +531,36 @@
                 
                 videoCard.innerHTML = `
                     <div class="video-card-header">
-                        <div class="video-type">${getTypeIcon(video.type)} ${getTypeLabel(video.type)}</div>
-                        <div class="video-duration">Прямой эфир</div>
+                        <div class="video-type-badge">
+                            <span class="type-icon">${getTypeIcon(video.type)}</span>
+                            <span class="type-label">${getTypeLabel(video.type)}</span>
+                        </div>
+                        <div class="video-live-badge">
+                            <span class="live-dot"></span>
+                            <span>Прямой эфир</span>
+                        </div>
                     </div>
                     <div class="video-wrapper">
                         <iframe src="https://www.youtube.com/embed/${video.id}"
                             title="YouTube video player"
                             allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
                             allowfullscreen></iframe>
+                        <div class="video-overlay">
+                            <button class="video-play-btn" data-video-id="${video.id}">
+                                <i class="fas fa-play"></i>
+                            </button>
+                        </div>
                     </div>
                     <div class="video-card-content">
                         <h3>${video.title}</h3>
                         <p>${video.description}</p>
                         <div class="video-actions">
-                            <button class="watch-btn">
+                            <button class="watch-btn" data-video-id="${video.id}">
                                 <i class="fas fa-play"></i> Смотреть
                             </button>
-                            <button class="share-btn">
+                            <button class="share-btn" data-video-url="https://www.youtube.com/watch?v=${video.id}">
                                 <i class="fas fa-share-alt"></i>
+                                <span class="share-tooltip">Копировать ссылку</span>
                             </button>
                         </div>
                     </div>
@@ -553,6 +568,122 @@
                 
                 videoContainer.appendChild(videoCard);
             });
+            
+            // Добавляем обработчики событий после создания карточек
+            attachVideoEventHandlers();
+        }
+
+        // Функция для привязки обработчиков событий
+        function attachVideoEventHandlers() {
+            // Обработчики для кнопки "Смотреть"
+            document.querySelectorAll('.watch-btn').forEach(btn => {
+                btn.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    const videoId = this.getAttribute('data-video-id');
+                    openYouTubeVideo(videoId);
+                });
+            });
+            
+            // Обработчики для кнопки воспроизведения на превью
+            document.querySelectorAll('.video-play-btn').forEach(btn => {
+                btn.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    const videoId = this.getAttribute('data-video-id');
+                    openYouTubeVideo(videoId);
+                });
+            });
+            
+            // Обработчики для кнопки "Поделиться" (Копировать ссылку)
+            document.querySelectorAll('.share-btn').forEach(btn => {
+                btn.addEventListener('click', async function(e) {
+                    e.preventDefault();
+                    e.stopPropagation();
+                    const videoUrl = this.getAttribute('data-video-url');
+                    
+                    try {
+                        await navigator.clipboard.writeText(videoUrl);
+                        
+                        // Показываем уведомление об успешном копировании
+                        showCopyNotification('Ссылка скопирована в буфер обмена!');
+                        
+                        // Визуальная обратная связь
+                        this.classList.add('copied');
+                        setTimeout(() => {
+                            this.classList.remove('copied');
+                        }, 2000);
+                        
+                    } catch (err) {
+                        console.error('Ошибка при копировании:', err);
+                        // Fallback для старых браузеров
+                        copyToClipboardFallback(videoUrl);
+                    }
+                });
+                
+                // Показываем тултип при наведении
+                btn.addEventListener('mouseenter', function() {
+                    const tooltip = this.querySelector('.share-tooltip');
+                    if (tooltip) {
+                        tooltip.style.opacity = '1';
+                        tooltip.style.visibility = 'visible';
+                    }
+                });
+                
+                btn.addEventListener('mouseleave', function() {
+                    const tooltip = this.querySelector('.share-tooltip');
+                    if (tooltip) {
+                        tooltip.style.opacity = '0';
+                        tooltip.style.visibility = 'hidden';
+                    }
+                });
+            });
+        }
+
+        // Функция для открытия видео на YouTube
+        function openYouTubeVideo(videoId) {
+            const url = `https://www.youtube.com/watch?v=${videoId}`;
+            window.open(url, '_blank');
+        }
+
+        // Функция для показа уведомления
+        function showCopyNotification(message) {
+            // Проверяем, не существует ли уже уведомление
+            let notification = document.querySelector('.copy-notification');
+            
+            if (!notification) {
+                notification = document.createElement('div');
+                notification.className = 'copy-notification';
+                document.body.appendChild(notification);
+            }
+            
+            notification.textContent = message;
+            notification.style.display = 'block';
+            
+            // Прячем уведомление через 2 секунды
+            setTimeout(() => {
+                notification.style.display = 'none';
+            }, 2000);
+        }
+
+        // Fallback для копирования в буфер обмена (для старых браузеров)
+        function copyToClipboardFallback(text) {
+            const textArea = document.createElement('textarea');
+            textArea.value = text;
+            textArea.style.position = 'fixed';
+            textArea.style.left = '-999999px';
+            textArea.style.top = '-999999px';
+            document.body.appendChild(textArea);
+            textArea.focus();
+            textArea.select();
+            
+            try {
+                document.execCommand('copy');
+                showCopyNotification('Ссылка скопирована!');
+            } catch (err) {
+                console.error('Не удалось скопировать текст: ', err);
+                showCopyNotification('Не удалось скопировать ссылку');
+            }
+            
+            document.body.removeChild(textArea);
         }
 
         function getTypeIcon(type) {
@@ -569,11 +700,11 @@
 
         function getTypeLabel(type) {
             switch(type) {
-                case 'irl': return 'Real Life';
+                case 'irl': return 'IRL';
                 case 'minecraft': return 'Minecraft';
-                case 'amongus': return 'Among US';
+                case 'amongus': return 'Among Us';
                 case 'gta': return 'GTA';
-                case 'rdr2': return 'Red Dead Redemption 2';
+                case 'rdr2': return 'RDR2';
                 case 'hide&seek': return 'Прятки';
                 default: return 'Видео';
             }
@@ -746,8 +877,12 @@
                     });
 
                     // Close mobile menu after clicking a link
-                    document.querySelector('nav ul').classList.remove('show');
-                    document.querySelector('.mobile-menu-btn').classList.remove('active');
+                    const mobileMenu = document.querySelector('nav ul');
+                    const menuBtn = document.querySelector('.mobile-menu-btn');
+                    if (mobileMenu && menuBtn) {
+                        mobileMenu.classList.remove('show');
+                        menuBtn.classList.remove('active');
+                    }
                 }
             });
         });
