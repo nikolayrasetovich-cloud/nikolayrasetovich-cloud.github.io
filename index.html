@@ -3,12 +3,15 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Блог братьев. Новогоднее обновление</title>
+    <title>Блог братьев | Новогоднее обновление</title>
     <link rel="icon" href="images/logo.png" type="images/logo.png">
-    <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700;800&family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        /* CSS переменные */
+
+    </style>
 </head>
 <body>
     <!-- Анимированный фон -->
@@ -20,6 +23,192 @@
     <!-- Новогодние элементы -->
     <div class="snowflakes" id="snowflakes"></div>
     <div class="snowdrifts"></div>
+
+    <!-- Медиаплеер -->
+    <div class="media-player-overlay" id="media-player">
+        <div class="media-player-container">
+            <div class="player-header">
+                <div class="player-title">
+                    <i class="fas fa-play-circle"></i>
+                    <span id="player-current-title">Медиаплеер</span>
+                </div>
+                <button class="player-close" id="player-close" aria-label="Закрыть плеер">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+
+            <div class="player-main">
+                <div class="video-container" id="video-container">
+                    <!-- Здесь будет iframe YouTube или video элемент -->
+                    <div class="player-placeholder" id="player-placeholder">
+                        <i class="fas fa-film"></i>
+                        <p>Выберите видео для воспроизведения</p>
+                    </div>
+
+                    <button class="fullscreen-btn" id="fullscreen-btn" aria-label="Полноэкранный режим">
+                        <i class="fas fa-expand"></i>
+                    </button>
+
+                    <div class="player-controls-overlay">
+                        <div class="progress-container" id="progress-container" role="slider" aria-label="Прогресс видео">
+                            <div class="progress-bar" id="progress-bar"></div>
+                            <div class="progress-time" id="progress-time">0:00</div>
+                        </div>
+                        
+                        <div class="controls-container">
+                            <div class="control-left">
+                                <button class="control-btn play-pause" id="play-pause" aria-label="Воспроизвести/Пауза">
+                                    <i class="fas fa-play"></i>
+                                </button>
+                                <button class="control-btn" id="rewind-10" aria-label="Назад 10 секунд">
+                                    <i class="fas fa-backward"></i>
+                                </button>
+                                <button class="control-btn" id="forward-10" aria-label="Вперед 10 секунд">
+                                    <i class="fas fa-forward"></i>
+                                </button>
+                                <div class="time-display">
+                                    <span id="current-time">0:00</span> / <span id="duration">0:00</span>
+                                </div>
+                            </div>
+                            
+                            <div class="control-right">
+                                <button class="control-btn" id="volume-btn" aria-label="Включить/Выключить звук">
+                                    <i class="fas fa-volume-up"></i>
+                                </button>
+                                <div class="volume-container">
+                                    <div class="volume-slider" id="volume-slider" role="slider" aria-label="Громкость">
+                                        <div class="volume-level" id="volume-level"></div>
+                                    </div>
+                                </div>
+                                <button class="control-btn" id="settings-btn" aria-label="Настройки">
+                                    <i class="fas fa-cog"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="player-loading" id="player-loading">
+                        <div class="loading-spinner"></div>
+                    </div>
+
+                    <div class="player-error" id="player-error">
+                        <i class="fas fa-exclamation-triangle"></i>
+                        <p id="error-message">Ошибка загрузки видео</p>
+                    </div>
+                </div>
+
+                <div class="player-sidebar">
+                    <div class="sidebar-tabs">
+                        <button class="sidebar-tab active" data-tab="playlist" aria-label="Плейлист">
+                            <i class="fas fa-list"></i>
+                            <span class="tab-text">Плейлист</span>
+                        </button>
+                        <button class="sidebar-tab" data-tab="upload" aria-label="Мои файлы">
+                            <i class="fas fa-folder"></i>
+                            <span class="tab-text">Файлы</span>
+                        </button>
+                        <button class="sidebar-tab" data-tab="url" aria-label="Вставить ссылку">
+                            <i class="fas fa-link"></i>
+                            <span class="tab-text">Ссылка</span>
+                        </button>
+                    </div>
+                    
+                    <div class="sidebar-content">
+                        <div class="tab-content active" id="playlist-tab">
+                            <div class="playlist-container" id="playlist-container">
+                                <!-- Плейлист будет заполнен динамически -->
+                            </div>
+                        </div>
+                        
+                        <div class="tab-content" id="upload-tab">
+                            <div class="upload-container">
+                                <div class="upload-area" id="upload-area">
+                                    <i class="fas fa-cloud-upload-alt"></i>
+                                    <p>Перетащите файлы сюда</p>
+                                    <span>или нажмите для выбора</span>
+                                    <input type="file" id="file-input" accept="video/*,audio/*,.mp4,.webm,.ogg,.mov,.avi,.mkv,.mp3,.wav" multiple style="display: none;">
+                                </div>
+                                <div class="file-list" id="file-list">
+                                    <!-- Список локальных файлов -->
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="tab-content" id="url-tab">
+                            <div class="url-container">
+                                <div class="url-input-group">
+                                    <input type="text" 
+                                           id="url-input" 
+                                           placeholder="Введите ссылку на видео (YouTube, Vimeo, MP4)">
+                                    <button class="url-submit-btn" id="url-submit-btn">
+                                        <i class="fas fa-play"></i>
+                                    </button>
+                                </div>
+                                <div class="url-examples">
+                                    <p>Примеры поддерживаемых ссылок:</p>
+                                    <ul>
+                                        <li>YouTube: https://youtube.com/watch?v=...</li>
+                                        <li>Vimeo: https://vimeo.com/...</li>
+                                        <li>Прямые ссылки на видео (.mp4, .webm)</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="player-bottom">
+                <div class="quality-controls">
+                    <span>Качество:</span>
+                    <select class="quality-select" id="quality-select" aria-label="Выбор качества видео">
+                        <option value="auto">Авто</option>
+                        <option value="144">144p</option>
+                        <option value="240">240p</option>
+                        <option value="360">360p</option>
+                        <option value="480">480p</option>
+                        <option value="720">720p</option>
+                        <option value="1080">1080p</option>
+                        <option value="2160">4K</option>
+                    </select>
+                </div>
+                
+                <div class="speed-controls">
+                    <span>Скорость:</span>
+                    <button class="speed-btn" data-speed="0.25">0.25x</button>
+                    <button class="speed-btn" data-speed="0.5">0.5x</button>
+                    <button class="speed-btn active" data-speed="1">1x</button>
+                    <button class="speed-btn" data-speed="1.25">1.25x</button>
+                    <button class="speed-btn" data-speed="1.5">1.5x</button>
+                    <button class="speed-btn" data-speed="2">2x</button>
+                </div>
+                
+                <div class="repeat-controls">
+                    <button class="repeat-btn" id="repeat-btn" aria-label="Повтор">
+                        <i class="fas fa-redo"></i>
+                    </button>
+                    <button class="shuffle-btn" id="shuffle-btn" aria-label="Перемешать">
+                        <i class="fas fa-random"></i>
+                    </button>
+                </div>
+            </div>
+
+            <div class="mobile-controls">
+                <button class="control-btn" id="mobile-rewind" aria-label="Назад 10 секунд">
+                    <i class="fas fa-backward"></i>
+                </button>
+                <button class="control-btn play-pause" id="mobile-play-pause" aria-label="Воспроизвести/Пауза">
+                    <i class="fas fa-play"></i>
+                </button>
+                <button class="control-btn" id="mobile-forward" aria-label="Вперед 10 секунд">
+                    <i class="fas fa-forward"></i>
+                </button>
+                <button class="control-btn" id="mobile-volume" aria-label="Громкость">
+                    <i class="fas fa-volume-up"></i>
+                </button>
+            </div>
+        </div>
+    </div>
 
     <!-- Header -->
     <header id="header">
@@ -34,7 +223,7 @@
                         <p class="logo-subtitle">блог</p>
                     </div>
                 </div>
-                <button class="mobile-menu-btn">
+                <button class="mobile-menu-btn" aria-label="Меню">
                     <span></span>
                     <span></span>
                     <span></span>
@@ -45,7 +234,7 @@
                         <li><a href="#videos" class="nav-link"><span>Видео</span></a></li>
                         <li><a href="#footer" class="nav-link"><span>Контакты</span></a></li>
                     </ul>
-                    <div class="theme-toggle">
+                    <div class="theme-toggle" aria-label="Сменить тему">
                         <i class="fas fa-moon"></i>
                     </div>
                 </nav>
@@ -69,11 +258,11 @@
                 <div class="hero-meta">
                     <div class="meta-item">
                         <i class="fas fa-calendar-alt"></i>
-                        <span>Последнее редактирование: 07.12.2025</span>
+                        <span>Последнее редактирование: 09.12.2025</span>
                     </div>
                     <div class="meta-item">
                         <i class="fas fa-clock"></i>
-                        <span>21:30</span>
+                        <span>22:00</span>
                     </div>
                 </div>
                 <div class="hero-actions">
@@ -86,28 +275,21 @@
                     </a>
                 </div>
             </div>
-            <div class="hero-visual">
-                <div class="visual-element">
-                    <div class="pulse-circle"></div>
-                    <div class="visual-icon">
-                        <i class="fas fa-play"></i>
-                    </div>
-                </div>
-            </div>
         </div>
     </section>
-
+        
     <!-- Updates Section -->
     <section id="updates" class="updates">
         <div class="container">
             <div class="section-header">
                 <div class="section-title">
                     <h2>Новости</h2>
+                    <p class="section-subtitle">Последние обновления и события</p>
                 </div>
             </div>
             <div class="updates-grid">
                 <!-- Основная новость -->
-                <a href="newswire/christmas-update.html" class="update-card featured">
+               <a href="/newswire/christmas-update.html" class="other-news-button"> <div class="update-card featured">
                     <div class="card-badge">
                         <span>Главная новость</span>
                     </div>
@@ -128,18 +310,19 @@
                         <ul class="update-features">
                             <li><i class="fas fa-check"></i> Обновленный интерфейс сайта</li>
                             <li><i class="fas fa-check"></i> Добавлен блок с новостями</li>
-                            <li><i class="fas fa-check"></i> Для блока с видео были добавлены страницы</li> 
+                            <li><i class="fas fa-check"></i> Для блока с видео были добавлены страницы</li>
+                            <li><i class="fas fa-check"></i> Новый медиаплеер с поддержкой YouTube</li>
                         </ul>
                         <div class="update-footer">
-                            <span class="read-more">Подробнее <i class="fas fa-arrow-right"></i></span>
-                        </div>
+                    <span class="read-more">Подробнее <i class="fas fa-arrow-right"></i></span>
+                        </div> 
                     </div>
-                </a>
+                </div> </a> 
 
                 <!-- Другие новости -->
                 <div class="other-news">
                     <!-- Новость 1 -->
-                    <a href="#" class="news-card small">
+                    <div class="news-card small">
                         <div class="news-image">
                             <img src="/images/ЭКШЕН УЖЕ СЕГОДНЯ.png" alt="ЭКШЕН УЖЕ СЕГОДНЯ">
                         </div>
@@ -151,10 +334,10 @@
                             <h4>🔫 КООПЕРАТИВ на МАКСИМАЛКАХ</h4>
                             <p>Прошел самый лучший стрим в мире.</p>
                         </div>
-                    </a>
+                    </div>
 
                     <!-- Новость 2 -->
-                    <a href="#" class="news-card small">
+                    <div class="news-card small">
                         <div class="news-image">
                             <img src="/images/ДОМАШНИЙ АРЕСТ.png" alt="Трансляция">
                         </div>
@@ -166,10 +349,10 @@
                             <h4>🏚️ ДОМАШНИЙ АРЕСТ</h4>
                             <p>Чисто домашние посиделки.</p>
                         </div>
-                    </a>
+                    </div>
 
                     <!-- Новость 3 -->
-                    <a href="#" class="news-card small">
+                    <div class="news-card small">
                         <div class="news-image">
                             <img src="/images/ДОМАШНИЕ И УЛИЧНЫЕ ПРИКЛЮЧЕНИЯ.png" alt="Игры">
                         </div>
@@ -181,22 +364,22 @@
                             <h4>🏡 ДОМАШНИЕ И УЛИЧНЫЕ ПРИКЛЮЧЕНИЯ</h4>
                             <p>Сначала дом потом улица, короче экшен.</p>
                         </div>
-                    </a>
+                    </div>
 
                     <!-- Новость 4 -->
-                    <a href="#" class="news-card small">
+                    <div class="news-card small">
                         <div class="news-image">
-                            <img src="/images/НАВОДИМ СУЕТУ НА РАЙОНЕ.png" alt="Событие">
+                            <img src="/images/НАВОДИМ СУЕТУ НА РАЙОНЕ.png" alt="Трансляция">
                         </div>
                         <div class="news-content">
                             <div class="news-meta">
                                 <span class="news-date">12.10.2025</span>
-                                <span class="news-category">Событие</span>
+                                <span class="news-category">Прямой эфир</span>
                             </div>
                             <h4>НАВОДИМ СУЕТУ НА РАЙОНЕ</h4>
                             <p>Полный трэш в нашей любимой деревне.</p>
                         </div>
-                    </a>
+                    </div>
                 </div>
             </div>
         </div>
@@ -218,9 +401,10 @@
                     <button class="filter-btn" data-filter="rdr2">RDR 2</button>
                     <button class="filter-btn" data-filter="hide&seek">Прятки</button>
                     <button class="filter-btn" data-filter="gta">GTA</button>
+                    <button class="filter-btn" data-filter="other">Прочее</button>
                 </div>
             </div>
-            <div class="video-grid" id="video-container">
+            <div class="video-grid" id="video-grid">
                 <!-- Видео будут вставляться с помощью JavaScript -->
             </div>
             
@@ -244,13 +428,13 @@
                         </div>
                     </div>
                     <div class="footer-social">
-                        <a href="https://www.youtube.com/@n1kolayrasetovich" target="_blank" class="social-link youtube">
+                        <a href="https://www.youtube.com/@n1kolayrasetovich" target="_blank" class="social-link youtube" aria-label="YouTube">
                             <i class="fab fa-youtube"></i>
                         </a>
-                        <a href="https://t.me/nesoqiton" target="_blank" class="social-link telegram">
+                        <a href="https://t.me/nesoqiton" target="_blank" class="social-link telegram" aria-label="Telegram">
                             <i class="fab fa-telegram"></i>
                         </a>
-                        <a href="#" class="social-link instagram">
+                        <a href="#" class="social-link instagram" aria-label="Instagram">
                             <i class="fab fa-instagram"></i>
                         </a>
                     </div>
@@ -262,7 +446,7 @@
                             <li><a href="#updates">Новости</a></li>
                             <li><a href="#videos">Видео</a></li>
                             <li><a href="#footer">Контакты</a></li>
-                            <li><a href="#">Архив</a></li>
+                            <li><a href="#" id="open-player-link">Медиаплеер</a></li>
                         </ul>
                     </div>
                     <div class="footer-column">
@@ -294,16 +478,32 @@
     </footer>
 
     <!-- Уведомление о копировании -->
-    <div class="copy-notification" style="display: none;"></div>
+    <div class="copy-notification" id="copy-notification" style="display: none;"></div>
 
+    <!-- Загружаем YouTube API -->
+    <script src="https://www.youtube.com/iframe_api"></script>
+    
     <script>
+        // JavaScript код
         // Данные видео
         const videos = [
+            {
+                id: "fB-CkOhtxy8",
+                title: "❄️ ТРЭШ УЖЕ ТУТ 😱",
+                description: "🔴 Прямой эфир / 09 декабря 2025",
+                type: "other"
+            },
+            {
+                id: "Ahn5xz1vTBM",
+                title: "❄️ НЕЖНАЯ ЗИМА | ТРЭШ УЖЕ ТУТ 😱",
+                description: "🔴 Прямой эфир / 08 декабря 2025",
+                type: "other"
+            },
             {
                 id: "c3H3r-eo6K4",
                 title: "❄️ ЗИМА БЕЗ СНЕГА | ТРЭШ УЖЕ ТУТ 😱",
                 description: "🔴 Прямой эфир / 07 декабря 2025",
-                type: "irl"
+                type: "other"
             },    
             {
                 id: "xFYtOOevaFE",
@@ -369,7 +569,7 @@
                 id: "avLUYnuH4ko",
                 title: "🌿ВСЁ КРОМЕ MINECRAFT",
                 description: "🔴 Прямой эфир / 28 октября 2025",
-                type: "minecraft"
+                type: "other"
             },
             {
                 id: "lnnLftsmHCw",
@@ -500,7 +700,7 @@
             {
                 id: "c2X1Y_doIz8",
                 title: "СОН НИКИТОСИКА 👋",
-                description: "🔴 Прямая трансляция / 06 октября 2025",
+                description: "🔴 Прямой эфир / 06 октября 2025",
                 type: "irl"
             }
         ];
@@ -510,9 +710,1817 @@
         let currentPage = 1;
         let currentFilter = 'all';
 
-        // Функция для отображения видео на текущей странице
+        // Класс медиаплеера
+        class MediaPlayer {
+            constructor() {
+                this.youtubePlayer = null;
+                this.videoPlayer = document.createElement('video');
+                this.videoPlayer.id = 'player-video';
+                this.videoPlayer.crossOrigin = 'anonymous';
+                
+                this.playlist = [];
+                this.currentIndex = -1;
+                this.isPlaying = false;
+                this.volume = 0.8;
+                this.playbackRate = 1;
+                this.isFullscreen = false;
+                this.isMuted = false;
+                this.repeatMode = 'none';
+                this.shuffleMode = false;
+                this.localFiles = [];
+                
+                this.initializeElements();
+                this.initializeEventListeners();
+                this.initializeYouTubePlaylist();
+                this.initializeLocalStorage();
+                
+                document.getElementById('video-container').appendChild(this.videoPlayer);
+            }
+
+            initializeElements() {
+                this.elements = {
+                    playerOverlay: document.getElementById('media-player'),
+                    playerClose: document.getElementById('player-close'),
+                    playPause: document.getElementById('play-pause'),
+                    mobilePlayPause: document.getElementById('mobile-play-pause'),
+                    rewind10: document.getElementById('rewind-10'),
+                    forward10: document.getElementById('forward-10'),
+                    mobileRewind: document.getElementById('mobile-rewind'),
+                    mobileForward: document.getElementById('mobile-forward'),
+                    volumeBtn: document.getElementById('volume-btn'),
+                    mobileVolume: document.getElementById('mobile-volume'),
+                    volumeSlider: document.getElementById('volume-slider'),
+                    volumeLevel: document.getElementById('volume-level'),
+                    progressContainer: document.getElementById('progress-container'),
+                    progressBar: document.getElementById('progress-bar'),
+                    progressTime: document.getElementById('progress-time'),
+                    currentTime: document.getElementById('current-time'),
+                    duration: document.getElementById('duration'),
+                    playerPlaceholder: document.getElementById('player-placeholder'),
+                    playerLoading: document.getElementById('player-loading'),
+                    playerError: document.getElementById('player-error'),
+                    errorMessage: document.getElementById('error-message'),
+                    fullscreenBtn: document.getElementById('fullscreen-btn'),
+                    qualitySelect: document.getElementById('quality-select'),
+                    speedBtns: document.querySelectorAll('.speed-btn'),
+                    repeatBtn: document.getElementById('repeat-btn'),
+                    shuffleBtn: document.getElementById('shuffle-btn'),
+                    playlistContainer: document.getElementById('playlist-container'),
+                    fileList: document.getElementById('file-list'),
+                    uploadArea: document.getElementById('upload-area'),
+                    fileInput: document.getElementById('file-input'),
+                    sidebarTabs: document.querySelectorAll('.sidebar-tab'),
+                    tabContents: document.querySelectorAll('.tab-content'),
+                    playerCurrentTitle: document.getElementById('player-current-title'),
+                    urlInput: document.getElementById('url-input'),
+                    urlSubmitBtn: document.getElementById('url-submit-btn'),
+                    settingsBtn: document.getElementById('settings-btn')
+                };
+            }
+
+            initializeEventListeners() {
+                this.elements.playerClose.addEventListener('click', () => this.closePlayer());
+                this.elements.playPause.addEventListener('click', () => this.togglePlayPause());
+                this.elements.mobilePlayPause.addEventListener('click', () => this.togglePlayPause());
+                this.elements.rewind10.addEventListener('click', () => this.rewind(10));
+                this.elements.forward10.addEventListener('click', () => this.forward(10));
+                this.elements.mobileRewind.addEventListener('click', () => this.rewind(10));
+                this.elements.mobileForward.addEventListener('click', () => this.forward(10));
+
+                this.elements.volumeBtn.addEventListener('click', () => this.toggleMute());
+                this.elements.mobileVolume.addEventListener('click', () => this.toggleMute());
+                this.elements.volumeSlider.addEventListener('click', (e) => this.setVolumeFromClick(e));
+                this.elements.volumeSlider.addEventListener('mousedown', () => {
+                    document.addEventListener('mousemove', this.handleVolumeDrag.bind(this));
+                    document.addEventListener('mouseup', () => {
+                        document.removeEventListener('mousemove', this.handleVolumeDrag.bind(this));
+                    });
+                });
+
+                this.elements.progressContainer.addEventListener('click', (e) => this.seekToClick(e));
+                this.elements.progressContainer.addEventListener('mousedown', () => {
+                    document.addEventListener('mousemove', this.handleProgressDrag.bind(this));
+                    document.addEventListener('mouseup', () => {
+                        document.removeEventListener('mousemove', this.handleProgressDrag.bind(this));
+                    });
+                });
+
+                this.elements.fullscreenBtn.addEventListener('click', () => this.toggleFullscreen());
+                document.addEventListener('fullscreenchange', () => this.handleFullscreenChange());
+                document.addEventListener('webkitfullscreenchange', () => this.handleFullscreenChange());
+                document.addEventListener('mozfullscreenchange', () => this.handleFullscreenChange());
+
+                this.elements.qualitySelect.addEventListener('change', (e) => this.changeQuality(e.target.value));
+                this.elements.speedBtns.forEach(btn => {
+                    btn.addEventListener('click', (e) => this.changeSpeed(e.target.dataset.speed));
+                });
+                this.elements.repeatBtn.addEventListener('click', () => this.toggleRepeatMode());
+                this.elements.shuffleBtn.addEventListener('click', () => this.toggleShuffleMode());
+
+                this.elements.uploadArea.addEventListener('click', () => this.elements.fileInput.click());
+                this.elements.uploadArea.addEventListener('dragover', (e) => {
+                    e.preventDefault();
+                    this.elements.uploadArea.style.background = 'rgba(67, 97, 238, 0.15)';
+                });
+                this.elements.uploadArea.addEventListener('dragleave', () => {
+                    this.elements.uploadArea.style.background = '';
+                });
+                this.elements.uploadArea.addEventListener('drop', (e) => {
+                    e.preventDefault();
+                    this.elements.uploadArea.style.background = '';
+                    this.handleFileDrop(e.dataTransfer.files);
+                });
+                this.elements.fileInput.addEventListener('change', (e) => this.handleFileSelect(e.target.files));
+
+                this.elements.sidebarTabs.forEach(tab => {
+                    tab.addEventListener('click', () => this.switchTab(tab.dataset.tab));
+                });
+
+                this.elements.urlSubmitBtn.addEventListener('click', () => this.handleUrlInput());
+                this.elements.urlInput.addEventListener('keypress', (e) => {
+                    if (e.key === 'Enter') this.handleUrlInput();
+                });
+
+                this.elements.settingsBtn.addEventListener('click', () => this.showSettings());
+
+                document.addEventListener('keydown', (e) => this.handleKeyDown(e));
+
+                this.videoPlayer.addEventListener('timeupdate', () => this.updateProgress());
+                this.videoPlayer.addEventListener('loadedmetadata', () => this.updateDuration());
+                this.videoPlayer.addEventListener('ended', () => this.handleVideoEnded());
+                this.videoPlayer.addEventListener('waiting', () => this.showLoading());
+                this.videoPlayer.addEventListener('canplay', () => this.hideLoading());
+                this.videoPlayer.addEventListener('error', (e) => this.handleVideoError(e));
+                this.videoPlayer.addEventListener('volumechange', () => {
+                    this.volume = this.videoPlayer.volume;
+                    this.isMuted = this.videoPlayer.muted;
+                    this.updateVolumeDisplay();
+                    this.saveToLocalStorage('player-volume', this.volume);
+                    this.saveToLocalStorage('player-muted', this.isMuted);
+                });
+
+                this.videoPlayer.addEventListener('timeupdate', () => {
+                    if (this.currentIndex !== -1 && this.videoPlayer.duration) {
+                        const item = this.playlist[this.currentIndex];
+                        if (item && item.source !== 'youtube') {
+                            item.lastPosition = this.videoPlayer.currentTime;
+                            this.savePlaylist();
+                        }
+                    }
+                });
+
+                document.getElementById('video-container').addEventListener('click', (e) => {
+                    if (e.target === this.videoPlayer || e.target.id === 'video-container') {
+                        this.togglePlayPause();
+                    }
+                });
+            }
+
+            initializeYouTubePlaylist() {
+                videos.forEach(video => {
+                    this.addToPlaylist({
+                        id: video.id,
+                        title: video.title,
+                        description: video.description,
+                        type: video.type,
+                        source: 'youtube',
+                        url: `https://www.youtube.com/watch?v=${video.id}`,
+                        embedUrl: `https://www.youtube.com/embed/${video.id}`,
+                        thumbnail: `https://img.youtube.com/vi/${video.id}/hqdefault.jpg`,
+                        duration: 'Прямой эфир',
+                        lastPosition: 0
+                    });
+                });
+                
+                this.renderPlaylist();
+            }
+
+            initializeLocalStorage() {
+                const savedVolume = localStorage.getItem('player-volume');
+                if (savedVolume) {
+                    this.volume = parseFloat(savedVolume);
+                    this.videoPlayer.volume = this.volume;
+                }
+
+                const savedMuted = localStorage.getItem('player-muted');
+                if (savedMuted) {
+                    this.isMuted = savedMuted === 'true';
+                    this.videoPlayer.muted = this.isMuted;
+                }
+
+                const savedPlaylist = localStorage.getItem('player-playlist');
+                if (savedPlaylist) {
+                    try {
+                        const parsed = JSON.parse(savedPlaylist);
+                        if (Array.isArray(parsed)) {
+                            this.localFiles = parsed;
+                            this.localFiles.forEach(file => {
+                                this.addToPlaylist(file);
+                            });
+                        }
+                    } catch (e) {
+                        console.error('Ошибка загрузки плейлиста:', e);
+                    }
+                }
+
+                const savedPlaybackRate = localStorage.getItem('player-playbackRate');
+                if (savedPlaybackRate) {
+                    this.playbackRate = parseFloat(savedPlaybackRate);
+                    this.videoPlayer.playbackRate = this.playbackRate;
+                    this.updateSpeedButtons();
+                }
+
+                const savedRepeatMode = localStorage.getItem('player-repeatMode');
+                if (savedRepeatMode) {
+                    this.repeatMode = savedRepeatMode;
+                    this.updateRepeatButton();
+                }
+
+                const savedShuffleMode = localStorage.getItem('player-shuffleMode');
+                if (savedShuffleMode) {
+                    this.shuffleMode = savedShuffleMode === 'true';
+                    this.updateShuffleButton();
+                }
+            }
+
+            showLoading() {
+                this.elements.playerLoading.style.display = 'block';
+            }
+
+            hideLoading() {
+                this.elements.playerLoading.style.display = 'none';
+                this.elements.playerError.style.display = 'none';
+            }
+
+            showError(message = 'Ошибка загрузки видео') {
+                this.elements.playerError.style.display = 'block';
+                this.elements.errorMessage.textContent = message;
+                this.elements.playerLoading.style.display = 'none';
+            }
+
+            openPlayer(videoItem = null) {
+                this.elements.playerOverlay.style.display = 'flex';
+                document.body.style.overflow = 'hidden';
+
+                if (videoItem) {
+                    this.loadVideo(videoItem);
+                } else if (this.playlist.length > 0) {
+                    this.loadVideo(this.playlist[0]);
+                }
+            }
+
+            closePlayer() {
+                this.elements.playerOverlay.style.display = 'none';
+                document.body.style.overflow = '';
+                this.pause();
+                
+                if (this.youtubePlayer) {
+                    this.youtubePlayer.stopVideo();
+                    this.youtubePlayer.destroy();
+                    this.youtubePlayer = null;
+                }
+                
+                this.videoPlayer.src = '';
+                this.videoPlayer.load();
+                
+                const container = document.getElementById('video-container');
+                container.innerHTML = '';
+                container.appendChild(this.videoPlayer);
+                container.appendChild(this.elements.playerPlaceholder);
+                container.appendChild(this.elements.fullscreenBtn);
+                container.appendChild(this.elements.playerLoading);
+                container.appendChild(this.elements.playerError);
+                
+                this.elements.playerPlaceholder.style.display = 'block';
+                this.elements.playerCurrentTitle.textContent = 'Медиаплеер';
+                this.currentIndex = -1;
+                this.isPlaying = false;
+                this.updatePlayPauseButton();
+            }
+
+            loadVideo(videoItem) {
+                this.showLoading();
+                this.elements.playerPlaceholder.style.display = 'none';
+                this.elements.playerCurrentTitle.textContent = videoItem.title;
+
+                this.currentIndex = this.playlist.findIndex(item => 
+                    item.id === videoItem.id && item.source === videoItem.source
+                );
+
+                if (this.youtubePlayer) {
+                    this.youtubePlayer.stopVideo();
+                    this.youtubePlayer.destroy();
+                    this.youtubePlayer = null;
+                }
+
+                this.videoPlayer.src = '';
+                this.videoPlayer.load();
+
+                const container = document.getElementById('video-container');
+                
+                if (videoItem.source === 'youtube') {
+                    this.loadYouTubeVideo(videoItem, container);
+                } else {
+                    this.loadDirectVideo(videoItem, container);
+                }
+
+                this.updateActivePlaylistItem();
+                
+                setTimeout(() => {
+                    if (videoItem.lastPosition && videoItem.lastPosition > 0) {
+                        this.seekTo(videoItem.lastPosition);
+                    }
+                }, 1000);
+            }
+
+            loadYouTubeVideo(videoItem, container) {
+                const oldIframe = container.querySelector('iframe');
+                if (oldIframe) oldIframe.remove();
+                
+                const iframe = document.createElement('iframe');
+                iframe.id = 'youtube-iframe';
+                iframe.src = `https://www.youtube.com/embed/${videoItem.id}?enablejsapi=1&origin=${window.location.origin}&autoplay=1&rel=0&modestbranding=1`;
+                iframe.allow = 'accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture';
+                iframe.allowFullscreen = true;
+                iframe.style.width = '100%';
+                iframe.style.height = '100%';
+                iframe.style.border = 'none';
+                
+                container.insertBefore(iframe, this.videoPlayer);
+                this.videoPlayer.style.display = 'none';
+                
+                this.initializeYouTubePlayer(iframe, videoItem);
+            }
+
+            initializeYouTubePlayer(iframe, videoItem) {
+                if (window.YT && YT.Player) {
+                    this.createYouTubePlayer(iframe, videoItem);
+                } else {
+                    const checkInterval = setInterval(() => {
+                        if (window.YT && YT.Player) {
+                            clearInterval(checkInterval);
+                            this.createYouTubePlayer(iframe, videoItem);
+                        }
+                    }, 100);
+                }
+            }
+
+            createYouTubePlayer(iframe, videoItem) {
+                try {
+                    this.youtubePlayer = new YT.Player(iframe, {
+                        events: {
+                            'onReady': (event) => {
+                                this.hideLoading();
+                                this.isPlaying = true;
+                                this.updatePlayPauseButton();
+                                
+                                const quality = this.elements.qualitySelect.value;
+                                if (quality !== 'auto') {
+                                    event.target.setPlaybackQuality(quality + 'p');
+                                }
+                            },
+                            'onStateChange': (event) => {
+                                switch(event.data) {
+                                    case YT.PlayerState.PLAYING:
+                                        this.isPlaying = true;
+                                        this.hideLoading();
+                                        break;
+                                    case YT.PlayerState.PAUSED:
+                                        this.isPlaying = false;
+                                        break;
+                                    case YT.PlayerState.ENDED:
+                                        this.isPlaying = false;
+                                        this.handleVideoEnded();
+                                        break;
+                                    case YT.PlayerState.BUFFERING:
+                                        this.showLoading();
+                                        break;
+                                }
+                                this.updatePlayPauseButton();
+                                this.updateProgress();
+                            },
+                            'onPlaybackQualityChange': (event) => {
+                                console.log('Качество изменено:', event.data);
+                            },
+                            'onError': (event) => {
+                                console.error('YouTube ошибка:', event.data);
+                                this.showError('Ошибка загрузки YouTube видео. Код: ' + event.data);
+                            }
+                        }
+                    });
+                } catch (error) {
+                    console.error('Ошибка создания YouTube плеера:', error);
+                    this.showError('Ошибка инициализации YouTube плеера');
+                }
+            }
+
+            loadDirectVideo(videoItem, container) {
+                const iframe = container.querySelector('iframe');
+                if (iframe) iframe.style.display = 'none';
+                this.videoPlayer.style.display = 'block';
+                
+                this.videoPlayer.src = videoItem.url;
+                this.videoPlayer.load();
+                
+                const playPromise = this.videoPlayer.play();
+                
+                if (playPromise !== undefined) {
+                    playPromise.then(() => {
+                        this.isPlaying = true;
+                        this.updatePlayPauseButton();
+                        this.hideLoading();
+                    }).catch(error => {
+                        console.error('Ошибка воспроизведения:', error);
+                        this.isPlaying = false;
+                        this.updatePlayPauseButton();
+                        this.hideLoading();
+                    });
+                }
+            }
+
+            togglePlayPause() {
+                if (this.youtubePlayer) {
+                    if (this.isPlaying) {
+                        this.youtubePlayer.pauseVideo();
+                    } else {
+                        this.youtubePlayer.playVideo();
+                    }
+                } else {
+                    if (this.videoPlayer.paused) {
+                        this.videoPlayer.play();
+                        this.isPlaying = true;
+                    } else {
+                        this.videoPlayer.pause();
+                        this.isPlaying = false;
+                    }
+                }
+                this.updatePlayPauseButton();
+            }
+
+            updatePlayPauseButton() {
+                const icon = this.isPlaying ? 'fa-pause' : 'fa-play';
+                this.elements.playPause.innerHTML = `<i class="fas ${icon}"></i>`;
+                this.elements.mobilePlayPause.innerHTML = `<i class="fas ${icon}"></i>`;
+            }
+
+            play() {
+                this.togglePlayPause();
+            }
+
+            pause() {
+                if (this.isPlaying) {
+                    this.togglePlayPause();
+                }
+            }
+
+            rewind(seconds) {
+                if (this.youtubePlayer) {
+                    const currentTime = this.youtubePlayer.getCurrentTime();
+                    this.youtubePlayer.seekTo(currentTime - seconds, true);
+                } else {
+                    this.videoPlayer.currentTime -= seconds;
+                }
+            }
+
+            forward(seconds) {
+                if (this.youtubePlayer) {
+                    const currentTime = this.youtubePlayer.getCurrentTime();
+                    this.youtubePlayer.seekTo(currentTime + seconds, true);
+                } else {
+                    this.videoPlayer.currentTime += seconds;
+                }
+            }
+
+            seekTo(time) {
+                if (this.youtubePlayer) {
+                    this.youtubePlayer.seekTo(time, true);
+                } else {
+                    this.videoPlayer.currentTime = time;
+                }
+            }
+
+            seekToClick(e) {
+                const rect = this.elements.progressContainer.getBoundingClientRect();
+                const x = e.clientX - rect.left;
+                const percentage = x / rect.width;
+                
+                if (this.youtubePlayer) {
+                    const duration = this.youtubePlayer.getDuration();
+                    this.youtubePlayer.seekTo(duration * percentage, true);
+                } else {
+                    this.videoPlayer.currentTime = this.videoPlayer.duration * percentage;
+                }
+            }
+
+            handleProgressDrag(e) {
+                this.seekToClick(e);
+            }
+
+            toggleMute() {
+                if (this.youtubePlayer) {
+                    if (this.youtubePlayer.isMuted()) {
+                        this.youtubePlayer.unMute();
+                    } else {
+                        this.youtubePlayer.mute();
+                    }
+                    this.isMuted = this.youtubePlayer.isMuted();
+                } else {
+                    this.videoPlayer.muted = !this.videoPlayer.muted;
+                    this.isMuted = this.videoPlayer.muted;
+                }
+                this.updateVolumeDisplay();
+            }
+
+            setVolume(volume) {
+                this.volume = Math.max(0, Math.min(1, volume));
+                
+                if (this.youtubePlayer) {
+                    this.youtubePlayer.setVolume(this.volume * 100);
+                    this.youtubePlayer.unMute();
+                    this.isMuted = false;
+                } else {
+                    this.videoPlayer.volume = this.volume;
+                    this.videoPlayer.muted = false;
+                    this.isMuted = false;
+                }
+                
+                this.updateVolumeDisplay();
+                this.saveToLocalStorage('player-volume', this.volume);
+                this.saveToLocalStorage('player-muted', this.isMuted);
+            }
+
+            setVolumeFromClick(e) {
+                const rect = this.elements.volumeSlider.getBoundingClientRect();
+                const x = e.clientX - rect.left;
+                const percentage = x / rect.width;
+                this.setVolume(percentage);
+            }
+
+            handleVolumeDrag(e) {
+                this.setVolumeFromClick(e);
+            }
+
+            updateVolumeDisplay() {
+                const volumePercent = this.volume * 100;
+                this.elements.volumeLevel.style.width = `${volumePercent}%`;
+                
+                let volumeIcon = 'fa-volume-up';
+                if (this.isMuted || volumePercent === 0) {
+                    volumeIcon = 'fa-volume-mute';
+                } else if (volumePercent < 50) {
+                    volumeIcon = 'fa-volume-down';
+                }
+                
+                this.elements.volumeBtn.innerHTML = `<i class="fas ${volumeIcon}"></i>`;
+                this.elements.mobileVolume.innerHTML = `<i class="fas ${volumeIcon}"></i>`;
+            }
+
+            updateProgress() {
+                let currentTime, duration;
+                
+                if (this.youtubePlayer) {
+                    try {
+                        currentTime = this.youtubePlayer.getCurrentTime();
+                        duration = this.youtubePlayer.getDuration();
+                    } catch (e) {
+                        return;
+                    }
+                } else {
+                    currentTime = this.videoPlayer.currentTime;
+                    duration = this.videoPlayer.duration;
+                }
+                
+                if (duration && currentTime) {
+                    const progress = (currentTime / duration) * 100;
+                    this.elements.progressBar.style.width = `${progress}%`;
+                    
+                    this.elements.currentTime.textContent = this.formatTime(currentTime);
+                    this.elements.duration.textContent = this.formatTime(duration);
+                    
+                    this.elements.progressTime.textContent = this.formatTime(currentTime);
+                    this.elements.progressTime.style.left = `${progress}%`;
+                }
+            }
+
+            updateDuration() {
+                if (!this.youtubePlayer && this.videoPlayer.duration) {
+                    this.elements.duration.textContent = this.formatTime(this.videoPlayer.duration);
+                }
+            }
+
+            formatTime(seconds) {
+                if (!isFinite(seconds)) return '0:00';
+                
+                const hours = Math.floor(seconds / 3600);
+                const mins = Math.floor((seconds % 3600) / 60);
+                const secs = Math.floor(seconds % 60);
+                
+                if (hours > 0) {
+                    return `${hours}:${mins.toString().padStart(2, '0')}:${secs.toString().padStart(2, '0')}`;
+                } else {
+                    return `${mins}:${secs.toString().padStart(2, '0')}`;
+                }
+            }
+
+            handleVideoEnded() {
+                switch (this.repeatMode) {
+                    case 'one':
+                        this.seekTo(0);
+                        this.play();
+                        break;
+                    case 'all':
+                        this.playNext();
+                        break;
+                    default:
+                        this.isPlaying = false;
+                        this.updatePlayPauseButton();
+                        break;
+                }
+            }
+
+            playNext() {
+                if (this.shuffleMode && this.playlist.length > 1) {
+                    this.playRandom();
+                    return;
+                }
+                
+                if (this.currentIndex < this.playlist.length - 1) {
+                    this.currentIndex++;
+                    this.loadVideo(this.playlist[this.currentIndex]);
+                } else if (this.repeatMode === 'all') {
+                    this.currentIndex = 0;
+                    this.loadVideo(this.playlist[0]);
+                }
+            }
+
+            playPrevious() {
+                if (this.currentIndex > 0) {
+                    this.currentIndex--;
+                    this.loadVideo(this.playlist[this.currentIndex]);
+                }
+            }
+
+            playRandom() {
+                if (this.playlist.length <= 1) return;
+                
+                let randomIndex;
+                do {
+                    randomIndex = Math.floor(Math.random() * this.playlist.length);
+                } while (randomIndex === this.currentIndex && this.playlist.length > 1);
+                
+                this.currentIndex = randomIndex;
+                this.loadVideo(this.playlist[randomIndex]);
+            }
+
+            toggleFullscreen() {
+                const container = document.querySelector('.media-player-container');
+                
+                if (!this.isFullscreen) {
+                    container.classList.add('fullscreen');
+                    if (container.requestFullscreen) {
+                        container.requestFullscreen();
+                    } else if (container.webkitRequestFullscreen) {
+                        container.webkitRequestFullscreen();
+                    } else if (container.mozRequestFullScreen) {
+                        container.mozRequestFullScreen();
+                    }
+                } else {
+                    container.classList.remove('fullscreen');
+                    if (document.exitFullscreen) {
+                        document.exitFullscreen();
+                    } else if (document.webkitExitFullscreen) {
+                        document.webkitExitFullscreen();
+                    } else if (document.mozCancelFullScreen) {
+                        document.mozCancelFullScreen();
+                    }
+                }
+            }
+
+            handleFullscreenChange() {
+                this.isFullscreen = !!(
+                    document.fullscreenElement ||
+                    document.webkitFullscreenElement ||
+                    document.mozFullScreenElement
+                );
+                
+                const container = document.querySelector('.media-player-container');
+                if (this.isFullscreen) {
+                    container.classList.add('fullscreen');
+                } else {
+                    container.classList.remove('fullscreen');
+                }
+                
+                const icon = this.isFullscreen ? 'fa-compress' : 'fa-expand';
+                this.elements.fullscreenBtn.innerHTML = `<i class="fas ${icon}"></i>`;
+            }
+
+            changeQuality(quality) {
+                if (this.youtubePlayer && quality !== 'auto') {
+                    try {
+                        this.youtubePlayer.setPlaybackQuality(quality + 'p');
+                    } catch (e) {
+                        console.error('Ошибка изменения качества:', e);
+                    }
+                }
+                this.saveToLocalStorage('player-quality', quality);
+            }
+
+            changeSpeed(speed) {
+                this.playbackRate = parseFloat(speed);
+                
+                if (this.youtubePlayer) {
+                    this.youtubePlayer.setPlaybackRate(this.playbackRate);
+                } else {
+                    this.videoPlayer.playbackRate = this.playbackRate;
+                }
+                
+                this.updateSpeedButtons();
+                this.saveToLocalStorage('player-playbackRate', this.playbackRate);
+            }
+
+            updateSpeedButtons() {
+                this.elements.speedBtns.forEach(btn => {
+                    if (parseFloat(btn.dataset.speed) === this.playbackRate) {
+                        btn.classList.add('active');
+                    } else {
+                        btn.classList.remove('active');
+                    }
+                });
+            }
+
+            toggleRepeatMode() {
+                const modes = ['none', 'one', 'all'];
+                const currentIndex = modes.indexOf(this.repeatMode);
+                this.repeatMode = modes[(currentIndex + 1) % modes.length];
+                this.updateRepeatButton();
+                this.saveToLocalStorage('player-repeatMode', this.repeatMode);
+            }
+
+            updateRepeatButton() {
+                const icons = {
+                    'none': 'fa-redo',
+                    'one': 'fa-redo',
+                    'all': 'fa-infinity'
+                };
+                
+                const colors = {
+                    'none': 'var(--text)',
+                    'one': 'var(--accent)',
+                    'all': 'var(--accent)'
+                };
+                
+                this.elements.repeatBtn.innerHTML = `<i class="fas ${icons[this.repeatMode]}"></i>`;
+                this.elements.repeatBtn.style.color = colors[this.repeatMode];
+                this.elements.repeatBtn.classList.toggle('active', this.repeatMode !== 'none');
+            }
+
+            toggleShuffleMode() {
+                this.shuffleMode = !this.shuffleMode;
+                this.updateShuffleButton();
+                this.saveToLocalStorage('player-shuffleMode', this.shuffleMode);
+            }
+
+            updateShuffleButton() {
+                this.elements.shuffleBtn.classList.toggle('active', this.shuffleMode);
+            }
+
+            handleFileSelect(files) {
+                this.handleFiles(files);
+            }
+
+            handleFileDrop(files) {
+                this.handleFiles(files);
+            }
+
+            async handleFiles(files) {
+                const fileArray = Array.from(files);
+                const videoFiles = fileArray.filter(file => 
+                    file.type.startsWith('video/') || 
+                    file.type.startsWith('audio/') ||
+                    ['.mp4', '.webm', '.ogg', '.mov', '.avi', '.mkv', '.mp3', '.wav', '.flac', '.aac']
+                        .some(ext => file.name.toLowerCase().endsWith(ext))
+                );
+                
+                for (const file of videoFiles) {
+                    await this.addLocalFile(file);
+                }
+                
+                this.renderFileList();
+                this.renderPlaylist();
+                this.savePlaylist();
+            }
+
+            async addLocalFile(file) {
+                return new Promise((resolve) => {
+                    const url = URL.createObjectURL(file);
+                    const videoItem = {
+                        id: `local-${Date.now()}-${Math.random().toString(36).substr(2, 9)}`,
+                        title: file.name,
+                        description: `Локальный файл · ${this.formatFileSize(file.size)}`,
+                        type: 'local',
+                        source: 'local',
+                        url: url,
+                        file: file,
+                        duration: '...',
+                        lastPosition: 0,
+                        fileSize: file.size,
+                        fileType: file.type
+                    };
+                    
+                    this.localFiles.push(videoItem);
+                    this.addToPlaylist(videoItem);
+                    
+                    this.getVideoDuration(url).then(duration => {
+                        videoItem.duration = this.formatTime(duration);
+                        this.renderFileList();
+                        this.renderPlaylist();
+                        resolve();
+                    }).catch(() => {
+                        videoItem.duration = 'Неизвестно';
+                        this.renderFileList();
+                        this.renderPlaylist();
+                        resolve();
+                    });
+                });
+            }
+
+            getVideoDuration(url) {
+                return new Promise((resolve, reject) => {
+                    const video = document.createElement('video');
+                    video.src = url;
+                    
+                    const onLoaded = () => {
+                        resolve(video.duration);
+                        cleanup();
+                    };
+                    
+                    const onError = () => {
+                        reject(new Error('Не удалось получить длительность'));
+                        cleanup();
+                    };
+                    
+                    const cleanup = () => {
+                        video.removeEventListener('loadedmetadata', onLoaded);
+                        video.removeEventListener('error', onError);
+                        URL.revokeObjectURL(url);
+                    };
+                    
+                    video.addEventListener('loadedmetadata', onLoaded);
+                    video.addEventListener('error', onError);
+                    
+                    setTimeout(() => {
+                        cleanup();
+                        reject(new Error('Таймаут загрузки'));
+                    }, 10000);
+                });
+            }
+
+            formatFileSize(bytes) {
+                if (bytes === 0) return '0 Б';
+                const k = 1024;
+                const sizes = ['Б', 'КБ', 'МБ', 'ГБ'];
+                const i = Math.floor(Math.log(bytes) / Math.log(k));
+                return parseFloat((bytes / Math.pow(k, i)).toFixed(2)) + ' ' + sizes[i];
+            }
+
+            handleUrlInput() {
+                const url = this.elements.urlInput.value.trim();
+                if (!url) return;
+                
+                this.elements.urlInput.value = '';
+                
+                if (this.isValidVideoUrl(url)) {
+                    this.addVideoFromUrl(url);
+                } else {
+                    this.showNotification('Неверный URL видео', 'error');
+                }
+            }
+
+            isValidVideoUrl(url) {
+                const patterns = [
+                    /^(https?:\/\/)?(www\.)?(youtube\.com|youtu\.be)\/.+$/,
+                    /^(https?:\/\/)?(www\.)?vimeo\.com\/.+$/,
+                    /\.(mp4|webm|ogg|mov|avi|mkv|mp3|wav|flac|aac)(\?.*)?$/i,
+                    /^blob:.+$/,
+                    /^data:(video|audio)\/.+;base64,.+$/
+                ];
+                
+                return patterns.some(pattern => pattern.test(url));
+            }
+
+            addVideoFromUrl(url) {
+                let source = 'direct';
+                let title = 'Видео по ссылке';
+                let id = `url-${Date.now()}`;
+                
+                if (url.includes('youtube.com') || url.includes('youtu.be')) {
+                    source = 'youtube';
+                    const videoId = this.extractYouTubeId(url);
+                    if (videoId) {
+                        id = videoId;
+                        title = `YouTube видео (${videoId})`;
+                    }
+                } else if (url.includes('vimeo.com')) {
+                    source = 'vimeo';
+                    const videoId = url.match(/\d+/)?.[0];
+                    if (videoId) {
+                        id = videoId;
+                        title = `Vimeo видео (${videoId})`;
+                    }
+                }
+                
+                const videoItem = {
+                    id: id,
+                    title: title,
+                    description: `Внешнее видео · ${new URL(url).hostname}`,
+                    type: 'external',
+                    source: source,
+                    url: url,
+                    duration: '...',
+                    lastPosition: 0
+                };
+                
+                this.addToPlaylist(videoItem);
+                this.showNotification('Видео добавлено в плейлист', 'success');
+                
+                if (this.currentIndex === -1) {
+                    this.loadVideo(videoItem);
+                }
+            }
+
+            extractYouTubeId(url) {
+                const patterns = [
+                    /(?:youtube\.com\/(?:[^\/]+\/.+\/|(?:v|e(?:mbed)?)\/|.*[?&]v=)|youtu\.be\/)([^"&?\/\s]{11})/,
+                    /^([^"&?\/\s]{11})$/
+                ];
+                
+                for (const pattern of patterns) {
+                    const match = url.match(pattern);
+                    if (match && match[1]) {
+                        return match[1];
+                    }
+                }
+                return null;
+            }
+
+            addToPlaylist(videoItem) {
+                const exists = this.playlist.some(item => 
+                    item.id === videoItem.id && item.source === videoItem.source
+                );
+                
+                if (!exists) {
+                    this.playlist.push(videoItem);
+                    this.renderPlaylist();
+                }
+            }
+
+            renderPlaylist() {
+                const container = this.elements.playlistContainer;
+                container.innerHTML = '';
+                
+                if (this.playlist.length === 0) {
+                    container.innerHTML = `
+                        <div class="playlist-empty">
+                            <i class="fas fa-music"></i>
+                            <p>Плейлист пуст</p>
+                        </div>
+                    `;
+                    return;
+                }
+                
+                this.playlist.forEach((item, index) => {
+                    const element = document.createElement('div');
+                    element.className = `playlist-item ${index === this.currentIndex ? 'active' : ''}`;
+                    element.dataset.index = index;
+                    
+                    element.innerHTML = `
+                        <div class="playlist-item-number">${index + 1}</div>
+                        <div class="playlist-item-title">${this.escapeHtml(item.title)}</div>
+                        <div class="playlist-item-duration">${item.duration || '...'}</div>
+                    `;
+                    
+                    element.addEventListener('click', () => {
+                        this.loadVideo(item);
+                    });
+                    
+                    element.addEventListener('contextmenu', (e) => {
+                        e.preventDefault();
+                        this.showPlaylistContextMenu(e, index, item);
+                    });
+                    
+                    container.appendChild(element);
+                });
+            }
+
+            showPlaylistContextMenu(e, index, item) {
+                const menu = document.createElement('div');
+                menu.className = 'context-menu';
+                menu.style.position = 'fixed';
+                menu.style.left = e.clientX + 'px';
+                menu.style.top = e.clientY + 'px';
+                menu.style.background = 'var(--primary)';
+                menu.style.border = '1px solid var(--secondary)';
+                menu.style.borderRadius = 'var(--radius)';
+                menu.style.boxShadow = 'var(--shadow-lg)';
+                menu.style.zIndex = '10000';
+                menu.style.padding = '5px 0';
+                menu.style.minWidth = '150px';
+                
+                const menuItems = [
+                    {
+                        text: 'Удалить из плейлиста',
+                        icon: 'fa-trash',
+                        action: () => this.removeFromPlaylist(index)
+                    },
+                    {
+                        text: 'Удалить файл',
+                        icon: 'fa-trash-alt',
+                        action: () => this.removeLocalFile(item),
+                        show: item.source === 'local'
+                    },
+                    {
+                        text: 'Открыть в новой вкладке',
+                        icon: 'fa-external-link-alt',
+                        action: () => window.open(item.url, '_blank')
+                    }
+                ];
+                
+                menuItems.forEach(menuItem => {
+                    if (menuItem.show === false) return;
+                    
+                    const itemElement = document.createElement('div');
+                    itemElement.className = 'context-menu-item';
+                    itemElement.style.padding = '10px 15px';
+                    itemElement.style.cursor = 'pointer';
+                    itemElement.style.display = 'flex';
+                    itemElement.style.alignItems = 'center';
+                    itemElement.style.gap = '10px';
+                    itemElement.style.transition = 'var(--transition)';
+                    
+                    itemElement.innerHTML = `
+                        <i class="fas ${menuItem.icon}" style="width: 16px; text-align: center;"></i>
+                        <span>${menuItem.text}</span>
+                    `;
+                    
+                    itemElement.addEventListener('mouseenter', () => {
+                        itemElement.style.background = 'var(--accent)';
+                        itemElement.style.color = 'white';
+                    });
+                    
+                    itemElement.addEventListener('mouseleave', () => {
+                        itemElement.style.background = '';
+                        itemElement.style.color = '';
+                    });
+                    
+                    itemElement.addEventListener('click', () => {
+                        menuItem.action();
+                        document.body.removeChild(menu);
+                    });
+                    
+                    menu.appendChild(itemElement);
+                });
+                
+                document.body.appendChild(menu);
+                
+                const removeMenu = () => {
+                    if (document.body.contains(menu)) {
+                        document.body.removeChild(menu);
+                    }
+                    document.removeEventListener('click', removeMenu);
+                };
+                
+                setTimeout(() => {
+                    document.addEventListener('click', removeMenu);
+                }, 100);
+            }
+
+            removeFromPlaylist(index) {
+                const item = this.playlist[index];
+                
+                if (index === this.currentIndex) {
+                    this.pause();
+                    this.currentIndex = -1;
+                }
+                
+                this.playlist.splice(index, 1);
+                
+                if (item.source === 'local') {
+                    const fileIndex = this.localFiles.findIndex(f => f.id === item.id);
+                    if (fileIndex !== -1) {
+                        if (item.url.startsWith('blob:')) {
+                            URL.revokeObjectURL(item.url);
+                        }
+                        this.localFiles.splice(fileIndex, 1);
+                    }
+                }
+                
+                this.renderPlaylist();
+                this.renderFileList();
+                this.savePlaylist();
+                
+                this.showNotification('Видео удалено из плейлиста', 'success');
+            }
+
+            removeLocalFile(item) {
+                const fileIndex = this.localFiles.findIndex(f => f.id === item.id);
+                if (fileIndex !== -1) {
+                    if (this.localFiles[fileIndex].url.startsWith('blob:')) {
+                        URL.revokeObjectURL(this.localFiles[fileIndex].url);
+                    }
+                    this.localFiles.splice(fileIndex, 1);
+                }
+                
+                const playlistIndex = this.playlist.findIndex(p => p.id === item.id && p.source === 'local');
+                if (playlistIndex !== -1) {
+                    if (playlistIndex === this.currentIndex) {
+                        this.pause();
+                        this.currentIndex = -1;
+                    }
+                    this.playlist.splice(playlistIndex, 1);
+                }
+                
+                this.renderPlaylist();
+                this.renderFileList();
+                this.savePlaylist();
+                
+                this.showNotification('Файл удалён', 'success');
+            }
+
+            renderFileList() {
+                const container = this.elements.fileList;
+                container.innerHTML = '';
+                
+                if (this.localFiles.length === 0) {
+                    container.innerHTML = `
+                        <div class="file-list-empty">
+                            <i class="fas fa-folder-open"></i>
+                            <p>Нет загруженных файлов</p>
+                        </div>
+                    `;
+                    return;
+                }
+                
+                this.localFiles.forEach((item, index) => {
+                    const element = document.createElement('div');
+                    element.className = 'file-item';
+                    element.dataset.index = index;
+                    
+                    const fileIcon = item.fileType?.startsWith('audio/') ? 'fa-music' : 'fa-video';
+                    
+                    element.innerHTML = `
+                        <i class="fas ${fileIcon}"></i>
+                        <div class="file-name">${this.escapeHtml(item.title)}</div>
+                        <div class="file-size">${item.description.split('·')[1]?.trim() || ''}</div>
+                    `;
+                    
+                    element.addEventListener('click', () => {
+                        this.loadVideo(item);
+                        this.switchTab('playlist');
+                    });
+                    
+                    element.addEventListener('contextmenu', (e) => {
+                        e.preventDefault();
+                        this.showFileContextMenu(e, index, item);
+                    });
+                    
+                    container.appendChild(element);
+                });
+            }
+
+            showFileContextMenu(e, index, item) {
+                const menu = document.createElement('div');
+                menu.className = 'context-menu';
+                menu.style.position = 'fixed';
+                menu.style.left = e.clientX + 'px';
+                menu.style.top = e.clientY + 'px';
+                menu.style.background = 'var(--primary)';
+                menu.style.border = '1px solid var(--secondary)';
+                menu.style.borderRadius = 'var(--radius)';
+                menu.style.boxShadow = 'var(--shadow-lg)';
+                menu.style.zIndex = '10000';
+                menu.style.padding = '5px 0';
+                menu.style.minWidth = '150px';
+                
+                const menuItems = [
+                    {
+                        text: 'Воспроизвести',
+                        icon: 'fa-play',
+                        action: () => {
+                            this.loadVideo(item);
+                            this.switchTab('playlist');
+                        }
+                    },
+                    {
+                        text: 'Удалить файл',
+                        icon: 'fa-trash-alt',
+                        action: () => this.removeLocalFile(item)
+                    }
+                ];
+                
+                menuItems.forEach(menuItem => {
+                    const itemElement = document.createElement('div');
+                    itemElement.className = 'context-menu-item';
+                    itemElement.style.padding = '10px 15px';
+                    itemElement.style.cursor = 'pointer';
+                    itemElement.style.display = 'flex';
+                    itemElement.style.alignItems = 'center';
+                    itemElement.style.gap = '10px';
+                    itemElement.style.transition = 'var(--transition)';
+                    
+                    itemElement.innerHTML = `
+                        <i class="fas ${menuItem.icon}" style="width: 16px; text-align: center;"></i>
+                        <span>${menuItem.text}</span>
+                    `;
+                    
+                    itemElement.addEventListener('mouseenter', () => {
+                        itemElement.style.background = 'var(--accent)';
+                        itemElement.style.color = 'white';
+                    });
+                    
+                    itemElement.addEventListener('mouseleave', () => {
+                        itemElement.style.background = '';
+                        itemElement.style.color = '';
+                    });
+                    
+                    itemElement.addEventListener('click', () => {
+                        menuItem.action();
+                        document.body.removeChild(menu);
+                    });
+                    
+                    menu.appendChild(itemElement);
+                });
+                
+                document.body.appendChild(menu);
+                
+                const removeMenu = () => {
+                    if (document.body.contains(menu)) {
+                        document.body.removeChild(menu);
+                    }
+                    document.removeEventListener('click', removeMenu);
+                };
+                
+                setTimeout(() => {
+                    document.addEventListener('click', removeMenu);
+                }, 100);
+            }
+
+            updateActivePlaylistItem() {
+                document.querySelectorAll('.playlist-item').forEach((item, index) => {
+                    if (index === this.currentIndex) {
+                        item.classList.add('active');
+                    } else {
+                        item.classList.remove('active');
+                    }
+                });
+            }
+
+            switchTab(tabName) {
+                this.elements.sidebarTabs.forEach(tab => {
+                    if (tab.dataset.tab === tabName) {
+                        tab.classList.add('active');
+                    } else {
+                        tab.classList.remove('active');
+                    }
+                });
+                
+                this.elements.tabContents.forEach(content => {
+                    if (content.id === `${tabName}-tab`) {
+                        content.classList.add('active');
+                    } else {
+                        content.classList.remove('active');
+                    }
+                });
+            }
+
+            showSettings() {
+                const settingsModal = document.createElement('div');
+                settingsModal.className = 'settings-modal';
+                settingsModal.style.position = 'fixed';
+                settingsModal.style.top = '50%';
+                settingsModal.style.left = '50%';
+                settingsModal.style.transform = 'translate(-50%, -50%)';
+                settingsModal.style.background = 'var(--primary)';
+                settingsModal.style.borderRadius = 'var(--radius-xl)';
+                settingsModal.style.padding = '30px';
+                settingsModal.style.boxShadow = 'var(--shadow-xl)';
+                settingsModal.style.zIndex = '10001';
+                settingsModal.style.minWidth = '400px';
+                settingsModal.style.maxWidth = '90%';
+                settingsModal.style.maxHeight = '90vh';
+                settingsModal.style.overflowY = 'auto';
+                
+                settingsModal.innerHTML = `
+                    <div class="settings-header">
+                        <h3 style="margin: 0 0 20px 0; color: var(--text);">Настройки плеера</h3>
+                        <button class="settings-close" style="position: absolute; top: 20px; right: 20px; background: none; border: none; color: var(--text); cursor: pointer; font-size: 1.2rem;">
+                            <i class="fas fa-times"></i>
+                        </button>
+                    </div>
+                    <div class="settings-content">
+                        <div class="setting-group">
+                            <h4 style="margin: 0 0 15px 0; color: var(--text);">Качество видео</h4>
+                            <select id="settings-quality" style="width: 100%; padding: 10px; border-radius: var(--radius); border: 1px solid var(--secondary); background: var(--primary); color: var(--text);">
+                                <option value="auto">Автоматически</option>
+                                <option value="144">144p</option>
+                                <option value="240">240p</option>
+                                <option value="360">360p</option>
+                                <option value="480">480p</option>
+                                <option value="720">720p (HD)</option>
+                                <option value="1080">1080p (Full HD)</option>
+                                <option value="2160">4K (Ultra HD)</option>
+                            </select>
+                        </div>
+                        <div class="setting-group" style="margin-top: 20px;">
+                            <h4 style="margin: 0 0 15px 0; color: var(--text);">Скорость воспроизведения</h4>
+                            <div style="display: flex; gap: 10px; flex-wrap: wrap;">
+                                ${[0.25, 0.5, 0.75, 1, 1.25, 1.5, 1.75, 2].map(speed => `
+                                    <button class="speed-setting-btn ${speed === this.playbackRate ? 'active' : ''}" 
+                                            data-speed="${speed}"
+                                            style="padding: 8px 15px; border-radius: var(--radius); border: 1px solid var(--secondary); background: var(--primary); color: var(--text); cursor: pointer; transition: var(--transition);">
+                                        ${speed}x
+                                    </button>
+                                `).join('')}
+                            </div>
+                        </div>
+                        <div class="setting-group" style="margin-top: 20px;">
+                            <h4 style="margin: 0 0 15px 0; color: var(--text);">Повтор</h4>
+                            <div style="display: flex; gap: 10px;">
+                                <button id="settings-repeat-none" class="${this.repeatMode === 'none' ? 'active' : ''}" 
+                                        style="padding: 8px 15px; border-radius: var(--radius); border: 1px solid var(--secondary); background: var(--primary); color: var(--text); cursor: pointer; transition: var(--transition);">
+                                    Нет
+                                </button>
+                                <button id="settings-repeat-one" class="${this.repeatMode === 'one' ? 'active' : ''}" 
+                                        style="padding: 8px 15px; border-radius: var(--radius); border: 1px solid var(--secondary); background: var(--primary); color: var(--text); cursor: pointer; transition: var(--transition);">
+                                    Один
+                                </button>
+                                <button id="settings-repeat-all" class="${this.repeatMode === 'all' ? 'active' : ''}" 
+                                        style="padding: 8px 15px; border-radius: var(--radius); border: 1px solid var(--secondary); background: var(--primary); color: var(--text); cursor: pointer; transition: var(--transition);">
+                                    Все
+                                </button>
+                            </div>
+                        </div>
+                        <div class="setting-group" style="margin-top: 20px;">
+                            <h4 style="margin: 0 0 15px 0; color: var(--text);">Громкость</h4>
+                            <input type="range" id="settings-volume" min="0" max="100" value="${this.volume * 100}" 
+                                   style="width: 100%; height: 6px; border-radius: 3px; background: var(--secondary); outline: none;">
+                            <div style="display: flex; justify-content: space-between; margin-top: 5px;">
+                                <span style="font-size: 0.8rem; color: var(--text-secondary);">0%</span>
+                                <span style="font-size: 0.8rem; color: var(--text-secondary);">${Math.round(this.volume * 100)}%</span>
+                                <span style="font-size: 0.8rem; color: var(--text-secondary);">100%</span>
+                            </div>
+                        </div>
+                        <div class="setting-group" style="margin-top: 20px;">
+                            <button id="settings-reset" style="width: 100%; padding: 12px; background: var(--warning); color: white; border: none; border-radius: var(--radius); cursor: pointer; font-weight: 600; transition: var(--transition);">
+                                Сбросить настройки
+                            </button>
+                        </div>
+                    </div>
+                `;
+                
+                document.body.appendChild(settingsModal);
+                
+                const qualitySelect = settingsModal.querySelector('#settings-quality');
+                qualitySelect.value = this.elements.qualitySelect.value;
+                qualitySelect.addEventListener('change', (e) => {
+                    this.changeQuality(e.target.value);
+                    this.elements.qualitySelect.value = e.target.value;
+                });
+                
+                const speedBtns = settingsModal.querySelectorAll('.speed-setting-btn');
+                speedBtns.forEach(btn => {
+                    btn.addEventListener('click', () => {
+                        const speed = parseFloat(btn.dataset.speed);
+                        this.changeSpeed(speed);
+                        speedBtns.forEach(b => b.classList.remove('active'));
+                        btn.classList.add('active');
+                    });
+                });
+                
+                const repeatBtns = {
+                    none: settingsModal.querySelector('#settings-repeat-none'),
+                    one: settingsModal.querySelector('#settings-repeat-one'),
+                    all: settingsModal.querySelector('#settings-repeat-all')
+                };
+                
+                Object.entries(repeatBtns).forEach(([mode, btn]) => {
+                    btn.addEventListener('click', () => {
+                        this.repeatMode = mode;
+                        this.updateRepeatButton();
+                        Object.values(repeatBtns).forEach(b => b.classList.remove('active'));
+                        btn.classList.add('active');
+                        this.saveToLocalStorage('player-repeatMode', mode);
+                    });
+                });
+                
+                const volumeSlider = settingsModal.querySelector('#settings-volume');
+                volumeSlider.addEventListener('input', (e) => {
+                    const volume = e.target.value / 100;
+                    this.setVolume(volume);
+                    settingsModal.querySelector('span:nth-child(3)').textContent = `${e.target.value}%`;
+                });
+                
+                const resetBtn = settingsModal.querySelector('#settings-reset');
+                resetBtn.addEventListener('click', () => {
+                    if (confirm('Вы уверены, что хотите сбросить все настройки?')) {
+                        this.resetSettings();
+                        document.body.removeChild(settingsModal);
+                        this.showNotification('Настройки сброшены', 'success');
+                    }
+                });
+                
+                const closeBtn = settingsModal.querySelector('.settings-close');
+                closeBtn.addEventListener('click', () => {
+                    document.body.removeChild(settingsModal);
+                });
+                
+                settingsModal.addEventListener('click', (e) => {
+                    if (e.target === settingsModal) {
+                        document.body.removeChild(settingsModal);
+                    }
+                });
+            }
+
+            resetSettings() {
+                this.volume = 0.8;
+                this.playbackRate = 1;
+                this.repeatMode = 'none';
+                this.shuffleMode = false;
+                
+                this.setVolume(this.volume);
+                this.changeSpeed(this.playbackRate);
+                this.updateRepeatButton();
+                this.updateShuffleButton();
+                
+                localStorage.removeItem('player-volume');
+                localStorage.removeItem('player-muted');
+                localStorage.removeItem('player-playbackRate');
+                localStorage.removeItem('player-repeatMode');
+                localStorage.removeItem('player-shuffleMode');
+                localStorage.removeItem('player-quality');
+                
+                this.elements.qualitySelect.value = 'auto';
+            }
+
+            handleKeyDown(e) {
+                if (!this.elements.playerOverlay.style.display || this.elements.playerOverlay.style.display === 'none') {
+                    return;
+                }
+                
+                if (document.activeElement.tagName === 'INPUT' || document.activeElement.tagName === 'TEXTAREA') {
+                    return;
+                }
+                
+                switch(e.key) {
+                    case ' ':
+                    case 'Spacebar':
+                        e.preventDefault();
+                        this.togglePlayPause();
+                        break;
+                    case 'ArrowLeft':
+                        e.preventDefault();
+                        this.rewind(5);
+                        break;
+                    case 'ArrowRight':
+                        e.preventDefault();
+                        this.forward(5);
+                        break;
+                    case 'ArrowUp':
+                        e.preventDefault();
+                        this.setVolume(Math.min(1, this.volume + 0.1));
+                        break;
+                    case 'ArrowDown':
+                        e.preventDefault();
+                        this.setVolume(Math.max(0, this.volume - 0.1));
+                        break;
+                    case 'f':
+                    case 'F':
+                        e.preventDefault();
+                        this.toggleFullscreen();
+                        break;
+                    case 'Escape':
+                        if (this.isFullscreen) {
+                            this.toggleFullscreen();
+                        } else {
+                            this.closePlayer();
+                        }
+                        break;
+                    case 'm':
+                    case 'M':
+                        e.preventDefault();
+                        this.toggleMute();
+                        break;
+                    case 'n':
+                    case 'N':
+                        e.preventDefault();
+                        this.playNext();
+                        break;
+                    case 'p':
+                    case 'P':
+                        e.preventDefault();
+                        this.playPrevious();
+                        break;
+                    case 'r':
+                    case 'R':
+                        e.preventDefault();
+                        this.toggleRepeatMode();
+                        break;
+                    case 's':
+                    case 'S':
+                        e.preventDefault();
+                        this.toggleShuffleMode();
+                        break;
+                    case '0':
+                    case '1':
+                    case '2':
+                    case '3':
+                    case '4':
+                    case '5':
+                    case '6':
+                    case '7':
+                    case '8':
+                    case '9':
+                        e.preventDefault();
+                        const percentage = parseInt(e.key) / 10;
+                        if (this.youtubePlayer) {
+                            const duration = this.youtubePlayer.getDuration();
+                            this.youtubePlayer.seekTo(duration * percentage, true);
+                        } else {
+                            this.videoPlayer.currentTime = this.videoPlayer.duration * percentage;
+                        }
+                        break;
+                }
+            }
+
+            handleVideoError(e) {
+                console.error('Ошибка видео:', e);
+                let message = 'Ошибка загрузки видео';
+                
+                switch (this.videoPlayer.error?.code) {
+                    case 1:
+                        message = 'Запрос прерван';
+                        break;
+                    case 2:
+                        message = 'Ошибка сети';
+                        break;
+                    case 3:
+                        message = 'Ошибка декодирования';
+                        break;
+                    case 4:
+                        message = 'Формат не поддерживается';
+                        break;
+                }
+                
+                this.showError(message);
+            }
+
+            savePlaylist() {
+                const saveData = this.localFiles.map(item => ({
+                    id: item.id,
+                    title: item.title,
+                    description: item.description,
+                    type: item.type,
+                    source: item.source,
+                    url: item.url,
+                    duration: item.duration,
+                    lastPosition: item.lastPosition,
+                    fileSize: item.fileSize,
+                    fileType: item.fileType
+                }));
+                
+                this.saveToLocalStorage('player-playlist', saveData);
+            }
+
+            saveToLocalStorage(key, value) {
+                try {
+                    localStorage.setItem(key, JSON.stringify(value));
+                } catch (e) {
+                    console.error('Ошибка сохранения в localStorage:', e);
+                    if (e.name === 'QuotaExceededError') {
+                        localStorage.clear();
+                        try {
+                            localStorage.setItem(key, JSON.stringify(value));
+                        } catch (e2) {
+                            console.error('Не удалось сохранить после очистки:', e2);
+                        }
+                    }
+                }
+            }
+
+            showNotification(message, type = 'info') {
+                const notification = document.createElement('div');
+                notification.className = 'player-notification';
+                notification.style.position = 'fixed';
+                notification.style.top = '20px';
+                notification.style.right = '20px';
+                notification.style.padding = '15px 20px';
+                notification.style.borderRadius = 'var(--radius)';
+                notification.style.boxShadow = 'var(--shadow-lg)';
+                notification.style.zIndex = '10002';
+                notification.style.display = 'flex';
+                notification.style.alignItems = 'center';
+                notification.style.gap = '10px';
+                notification.style.animation = 'slideIn 0.3s ease';
+                
+                let backgroundColor, icon;
+                switch (type) {
+                    case 'success':
+                        backgroundColor = 'var(--success)';
+                        icon = 'fa-check-circle';
+                        break;
+                    case 'error':
+                        backgroundColor = 'var(--warning)';
+                        icon = 'fa-exclamation-circle';
+                        break;
+                    case 'warning':
+                        backgroundColor = '#ff9800';
+                        icon = 'fa-exclamation-triangle';
+                        break;
+                    default:
+                        backgroundColor = 'var(--accent)';
+                        icon = 'fa-info-circle';
+                }
+                
+                notification.style.background = backgroundColor;
+                notification.style.color = 'white';
+                
+                notification.innerHTML = `
+                    <i class="fas ${icon}"></i>
+                    <span>${message}</span>
+                `;
+                
+                document.body.appendChild(notification);
+                
+                setTimeout(() => {
+                    if (document.body.contains(notification)) {
+                        notification.style.animation = 'slideOut 0.3s ease';
+                        setTimeout(() => {
+                            if (document.body.contains(notification)) {
+                                document.body.removeChild(notification);
+                            }
+                        }, 300);
+                    }
+                }, 3000);
+                
+                if (!document.querySelector('#notification-styles')) {
+                    const style = document.createElement('style');
+                    style.id = 'notification-styles';
+                    style.textContent = `
+                        @keyframes slideIn {
+                            from {
+                                transform: translateX(100%);
+                                opacity: 0;
+                            }
+                            to {
+                                transform: translateX(0);
+                                opacity: 1;
+                            }
+                        }
+                        @keyframes slideOut {
+                            from {
+                                transform: translateX(0);
+                                opacity: 1;
+                            }
+                            to {
+                                transform: translateX(100%);
+                                opacity: 0;
+                            }
+                        }
+                    `;
+                    document.head.appendChild(style);
+                }
+            }
+
+            escapeHtml(text) {
+                const div = document.createElement('div');
+                div.textContent = text;
+                return div.innerHTML;
+            }
+
+            playVideoById(videoId) {
+                const videoItem = this.playlist.find(item => item.id === videoId);
+                if (videoItem) {
+                    this.openPlayer(videoItem);
+                } else {
+                    console.error('Видео не найдено в плейлисте:', videoId);
+                }
+            }
+
+            addVideo(videoData) {
+                const videoItem = {
+                    id: videoData.id || `video-${Date.now()}`,
+                    title: videoData.title || 'Без названия',
+                    description: videoData.description || '',
+                    type: videoData.type || 'external',
+                    source: videoData.source || 'direct',
+                    url: videoData.url,
+                    duration: videoData.duration || '...',
+                    lastPosition: 0
+                };
+                
+                this.addToPlaylist(videoItem);
+                return videoItem;
+            }
+
+            getCurrentVideo() {
+                if (this.currentIndex !== -1) {
+                    return this.playlist[this.currentIndex];
+                }
+                return null;
+            }
+
+            getPlaylist() {
+                return [...this.playlist];
+            }
+
+            clearPlaylist() {
+                this.localFiles.forEach(file => {
+                    if (file.url.startsWith('blob:')) {
+                        URL.revokeObjectURL(file.url);
+                    }
+                });
+                
+                this.playlist = [];
+                this.localFiles = [];
+                this.currentIndex = -1;
+                this.renderPlaylist();
+                this.renderFileList();
+                localStorage.removeItem('player-playlist');
+                
+                this.videoPlayer.src = '';
+                this.videoPlayer.load();
+                this.elements.playerPlaceholder.style.display = 'block';
+                this.elements.playerCurrentTitle.textContent = 'Медиаплеер';
+                this.isPlaying = false;
+                this.updatePlayPauseButton();
+            }
+        }
+
+        // Глобальные переменные
+        let mediaPlayerInstance = null;
+
+        // Функции для отображения видео на сайте
+        function generateAdaptiveTags(type) {
+            const icons = {
+                'irl': '🏡',
+                'minecraft': '⛏️',
+                'amongus': '👨‍🚀',
+                'gta': '🚗',
+                'rdr2': '🐎',
+                'hide&seek': '🙈',
+                'other': '🧩'
+            };
+            
+            const labels = {
+                'irl': 'IRL',
+                'minecraft': 'Minecraft',
+                'amongus': 'Among Us',
+                'gta': 'GTA',
+                'rdr2': 'RDR2',
+                'hide&seek': 'Прятки',
+                'other': 'Прочее'
+            };
+            
+            const isMobile = window.innerWidth <= 768;
+            const isSmallMobile = window.innerWidth <= 480;
+            
+            if (isSmallMobile) {
+                return `
+                    <div class="video-type-badge compact">
+                        <span class="type-icon-only">${icons[type] || '🎬'}</span>
+                    </div>
+                `;
+            } else if (isMobile) {
+                return `
+                    <div class="video-type-badge mobile">
+                        <span class="type-icon">${icons[type] || '🎬'}</span>
+                        <span class="type-label-short">${getShortLabel(type)}</span>
+                    </div>
+                `;
+            } else {
+                return `
+                    <div class="video-type-badge">
+                        <span class="type-icon">${icons[type] || '🎬'}</span>
+                        <span class="type-label">${labels[type] || 'Видео'}</span>
+                    </div>
+                `;
+            }
+        }
+
+        function getShortLabel(type) {
+            const shortLabels = {
+                'irl': 'IRL',
+                'minecraft': 'MC',
+                'amongus': 'AU',
+                'gta': 'GTA',
+                'rdr2': 'RDR2',
+                'hide&seek': 'Прятки',
+                'other': 'Прочее'
+            };
+            return shortLabels[type] || type;
+        }
+
         function displayVideos(page, filter = 'all') {
-            const videoContainer = document.getElementById('video-container');
+            const videoContainer = document.getElementById('video-grid');
             videoContainer.innerHTML = '';
             
             let filteredVideos = videos;
@@ -529,22 +2537,20 @@
                 videoCard.className = 'video-card';
                 videoCard.setAttribute('data-type', video.type);
                 
+                const typeTags = generateAdaptiveTags(video.type);
+                
                 videoCard.innerHTML = `
                     <div class="video-card-header">
-                        <div class="video-type-badge">
-                            <span class="type-icon">${getTypeIcon(video.type)}</span>
-                            <span class="type-label">${getTypeLabel(video.type)}</span>
-                        </div>
+                        ${typeTags}
                         <div class="video-live-badge">
                             <span class="live-dot"></span>
-                            <span>Прямой эфир</span>
+                            <span class="live-text">Прямой эфир</span>
                         </div>
                     </div>
                     <div class="video-wrapper">
-                        <iframe src="https://www.youtube.com/embed/${video.id}"
-                            title="YouTube video player"
-                            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                            allowfullscreen></iframe>
+                        <img src="https://img.youtube.com/vi/${video.id}/hqdefault.jpg" 
+                             alt="${video.title}"
+                             class="video-thumbnail">
                         <div class="video-overlay">
                             <button class="video-play-btn" data-video-id="${video.id}">
                                 <i class="fas fa-play"></i>
@@ -556,7 +2562,7 @@
                         <p>${video.description}</p>
                         <div class="video-actions">
                             <button class="watch-btn" data-video-id="${video.id}">
-                                <i class="fas fa-play"></i> Смотреть
+                                <i class="fas fa-play"></i> <span class="btn-text">Смотреть</span>
                             </button>
                             <button class="share-btn" data-video-url="https://www.youtube.com/watch?v=${video.id}">
                                 <i class="fas fa-share-alt"></i>
@@ -569,31 +2575,32 @@
                 videoContainer.appendChild(videoCard);
             });
             
-            // Добавляем обработчики событий после создания карточек
             attachVideoEventHandlers();
         }
 
-        // Функция для привязки обработчиков событий
         function attachVideoEventHandlers() {
-            // Обработчики для кнопки "Смотреть"
             document.querySelectorAll('.watch-btn').forEach(btn => {
                 btn.addEventListener('click', function(e) {
                     e.preventDefault();
                     const videoId = this.getAttribute('data-video-id');
-                    openYouTubeVideo(videoId);
+                    const mediaPlayer = window.getMediaPlayer();
+                    if (mediaPlayer) {
+                        mediaPlayer.playVideoById(videoId);
+                    }
                 });
             });
             
-            // Обработчики для кнопки воспроизведения на превью
             document.querySelectorAll('.video-play-btn').forEach(btn => {
                 btn.addEventListener('click', function(e) {
                     e.preventDefault();
                     const videoId = this.getAttribute('data-video-id');
-                    openYouTubeVideo(videoId);
+                    const mediaPlayer = window.getMediaPlayer();
+                    if (mediaPlayer) {
+                        mediaPlayer.playVideoById(videoId);
+                    }
                 });
             });
             
-            // Обработчики для кнопки "Поделиться" (Копировать ссылку)
             document.querySelectorAll('.share-btn').forEach(btn => {
                 btn.addEventListener('click', async function(e) {
                     e.preventDefault();
@@ -601,25 +2608,18 @@
                     const videoUrl = this.getAttribute('data-video-url');
                     
                     try {
-                        await navigator.clipboard.writeText(videoUrl);
-                        
-                        // Показываем уведомление об успешном копировании
+                        await navigatorClipboard.writeText(videoUrl);
                         showCopyNotification('Ссылка скопирована в буфер обмена!');
-                        
-                        // Визуальная обратная связь
                         this.classList.add('copied');
                         setTimeout(() => {
                             this.classList.remove('copied');
                         }, 2000);
-                        
                     } catch (err) {
                         console.error('Ошибка при копировании:', err);
-                        // Fallback для старых браузеров
                         copyToClipboardFallback(videoUrl);
                     }
                 });
                 
-                // Показываем тултип при наведении
                 btn.addEventListener('mouseenter', function() {
                     const tooltip = this.querySelector('.share-tooltip');
                     if (tooltip) {
@@ -638,33 +2638,19 @@
             });
         }
 
-        // Функция для открытия видео на YouTube
-        function openYouTubeVideo(videoId) {
-            const url = `https://www.youtube.com/watch?v=${videoId}`;
-            window.open(url, '_blank');
-        }
-
-        // Функция для показа уведомления
         function showCopyNotification(message) {
-            // Проверяем, не существует ли уже уведомление
-            let notification = document.querySelector('.copy-notification');
+            const notification = document.getElementById('copy-notification');
             
-            if (!notification) {
-                notification = document.createElement('div');
-                notification.className = 'copy-notification';
-                document.body.appendChild(notification);
+            if (notification) {
+                notification.textContent = message;
+                notification.style.display = 'block';
+                
+                setTimeout(() => {
+                    notification.style.display = 'none';
+                }, 2000);
             }
-            
-            notification.textContent = message;
-            notification.style.display = 'block';
-            
-            // Прячем уведомление через 2 секунды
-            setTimeout(() => {
-                notification.style.display = 'none';
-            }, 2000);
         }
 
-        // Fallback для копирования в буфер обмена (для старых браузеров)
         function copyToClipboardFallback(text) {
             const textArea = document.createElement('textarea');
             textArea.value = text;
@@ -686,31 +2672,6 @@
             document.body.removeChild(textArea);
         }
 
-        function getTypeIcon(type) {
-            switch(type) {
-                case 'irl': return '🏡';
-                case 'minecraft': return '⛏️';
-                case 'amongus': return '👨‍🚀';
-                case 'gta': return '🚗';
-                case 'rdr2': return '🐎';
-                case 'hide&seek': return '🙈';
-                default: return '🎬';
-            }
-        }
-
-        function getTypeLabel(type) {
-            switch(type) {
-                case 'irl': return 'IRL';
-                case 'minecraft': return 'Minecraft';
-                case 'amongus': return 'Among Us';
-                case 'gta': return 'GTA';
-                case 'rdr2': return 'RDR2';
-                case 'hide&seek': return 'Прятки';
-                default: return 'Видео';
-            }
-        }
-
-        // Функция для создания пагинации
         function createPagination(filter = 'all') {
             const paginationContainer = document.getElementById('pagination');
             paginationContainer.innerHTML = '';
@@ -724,7 +2685,6 @@
             
             if (totalPages <= 1) return;
             
-            // Кнопка "Назад"
             const prevButton = document.createElement('button');
             prevButton.className = `pagination-btn ${currentPage === 1 ? 'disabled' : ''}`;
             prevButton.innerHTML = '<i class="fas fa-chevron-left"></i>';
@@ -742,7 +2702,6 @@
             }
             paginationContainer.appendChild(prevButton);
             
-            // Номера страниц
             const maxVisiblePages = 5;
             let startPage = Math.max(1, currentPage - Math.floor(maxVisiblePages / 2));
             let endPage = Math.min(totalPages, startPage + maxVisiblePages - 1);
@@ -768,7 +2727,6 @@
                 paginationContainer.appendChild(pageButton);
             }
             
-            // Кнопка "Вперед"
             const nextButton = document.createElement('button');
             nextButton.className = `pagination-btn ${currentPage === totalPages ? 'disabled' : ''}`;
             nextButton.innerHTML = '<i class="fas fa-chevron-right"></i>';
@@ -787,7 +2745,6 @@
             paginationContainer.appendChild(nextButton);
         }
 
-        // Создание снежинок
         function createSnowflakes() {
             const snowflakesContainer = document.getElementById('snowflakes');
             const snowflakeCount = 50;
@@ -815,8 +2772,7 @@
                 snowflakesContainer.appendChild(snowflake);
             }
         }
-        
-        // Создание частиц для фона
+
         function createParticles() {
             const particlesContainer = document.getElementById('particles');
             const particleCount = 20;
@@ -843,96 +2799,155 @@
             }
         }
 
-        // Mobile menu toggle
-        document.querySelector('.mobile-menu-btn').addEventListener('click', function () {
-            this.classList.toggle('active');
-            document.querySelector('nav ul').classList.toggle('show');
-        });
-
-        // Header scroll effect
-        window.addEventListener('scroll', function () {
-            const header = document.getElementById('header');
-            if (window.scrollY > 50) {
-                header.style.backdropFilter = 'blur(10px)';
-                header.style.backgroundColor = 'rgba(255, 255, 255, 0.95)';
-            } else {
-                header.style.backdropFilter = 'none';
-                header.style.backgroundColor = 'rgba(255, 255, 255, 0.98)';
-            }
-        });
-
-        // Smooth scrolling for anchor links
-        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-            anchor.addEventListener('click', function (e) {
-                e.preventDefault();
-
-                const targetId = this.getAttribute('href');
-                if (targetId === '#') return;
-
-                const targetElement = document.querySelector(targetId);
-                if (targetElement) {
-                    window.scrollTo({
-                        top: targetElement.offsetTop - 100,
-                        behavior: 'smooth'
-                    });
-
-                    // Close mobile menu after clicking a link
-                    const mobileMenu = document.querySelector('nav ul');
-                    const menuBtn = document.querySelector('.mobile-menu-btn');
-                    if (mobileMenu && menuBtn) {
-                        mobileMenu.classList.remove('show');
-                        menuBtn.classList.remove('active');
-                    }
-                }
-            });
-        });
-
-        // Filter buttons
-        document.querySelectorAll('.filter-btn').forEach(btn => {
-            btn.addEventListener('click', function() {
-                document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
-                this.classList.add('active');
-                currentFilter = this.dataset.filter;
-                currentPage = 1;
-                displayVideos(currentPage, currentFilter);
-                createPagination(currentFilter);
-            });
-        });
-
-        // Theme toggle
-        document.querySelector('.theme-toggle').addEventListener('click', function() {
-            document.body.classList.toggle('dark-mode');
-            this.querySelector('i').classList.toggle('fa-moon');
-            this.querySelector('i').classList.toggle('fa-sun');
-        });
-
-        // News navigation
-        document.querySelector('.next-news')?.addEventListener('click', function() {
-            const newsCards = document.querySelectorAll('.news-card.small');
-            const container = document.querySelector('.other-news');
-            const firstCard = newsCards[0];
-            container.appendChild(firstCard);
-        });
-
-        document.querySelector('.prev-news')?.addEventListener('click', function() {
-            const newsCards = document.querySelectorAll('.news-card.small');
-            const container = document.querySelector('.other-news');
-            const lastCard = newsCards[newsCards.length - 1];
-            container.insertBefore(lastCard, newsCards[0]);
-        });
-        
-        // Инициализация
+        // Инициализация при загрузке страницы
         document.addEventListener('DOMContentLoaded', function() {
+            // Инициализация медиаплеера
+            mediaPlayerInstance = new MediaPlayer();
+            
+            // Ссылка на открытие плеера в футере
+            const openPlayerLink = document.getElementById('open-player-link');
+            if (openPlayerLink) {
+                openPlayerLink.addEventListener('click', (e) => {
+                    e.preventDefault();
+                    mediaPlayerInstance.openPlayer();
+                });
+            }
+            
+            // Создание снежинок и частиц
             createSnowflakes();
             createParticles();
+            
+            // Отображение видео
             displayVideos(currentPage);
             createPagination();
             
+            // Mobile menu toggle
+            document.querySelector('.mobile-menu-btn').addEventListener('click', function () {
+                this.classList.toggle('active');
+                document.querySelector('nav ul').classList.toggle('show');
+            });
+
+            // Header scroll effect
+            window.addEventListener('scroll', function () {
+                const header = document.getElementById('header');
+                if (window.scrollY > 50) {
+                    header.style.backdropFilter = 'blur(10px)';
+                    header.style.backgroundColor = 'rgba(255, 255, 255, 0.95)';
+                } else {
+                    header.style.backdropFilter = 'none';
+                    header.style.backgroundColor = 'rgba(255, 255, 255, 0.98)';
+                }
+            });
+
+            // Smooth scrolling for anchor links
+            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+                anchor.addEventListener('click', function (e) {
+                    e.preventDefault();
+
+                    const targetId = this.getAttribute('href');
+                    if (targetId === '#') return;
+
+                    const targetElement = document.querySelector(targetId);
+                    if (targetElement) {
+                        window.scrollTo({
+                            top: targetElement.offsetTop - 100,
+                            behavior: 'smooth'
+                        });
+
+                        const mobileMenu = document.querySelector('nav ul');
+                        const menuBtn = document.querySelector('.mobile-menu-btn');
+                        if (mobileMenu && menuBtn) {
+                            mobileMenu.classList.remove('show');
+                            menuBtn.classList.remove('active');
+                        }
+                    }
+                });
+            });
+
+            // Filter buttons
+            document.querySelectorAll('.filter-btn').forEach(btn => {
+                btn.addEventListener('click', function() {
+                    document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+                    this.classList.add('active');
+                    currentFilter = this.dataset.filter;
+                    currentPage = 1;
+                    displayVideos(currentPage, currentFilter);
+                    createPagination(currentFilter);
+                });
+            });
+
+            // Theme toggle
+            document.querySelector('.theme-toggle').addEventListener('click', function() {
+                document.body.classList.toggle('dark-mode');
+                this.querySelector('i').classList.toggle('fa-moon');
+                this.querySelector('i').classList.toggle('fa-sun');
+            });
+
             // Анимация при загрузке
             setTimeout(() => {
                 document.body.classList.add('loaded');
             }, 100);
+            
+            // Обновление адаптивных тегов при изменении размера окна
+            let resizeTimeout;
+            window.addEventListener('resize', function() {
+                clearTimeout(resizeTimeout);
+                resizeTimeout = setTimeout(function() {
+                    displayVideos(currentPage, currentFilter);
+                }, 250);
+            });
         });
+
+        // Глобальные методы для использования из других скриптов
+        window.openMediaPlayer = function(videoItem) {
+            if (mediaPlayerInstance) {
+                mediaPlayerInstance.openPlayer(videoItem);
+            }
+        };
+
+        window.addVideoToPlayer = function(videoData) {
+            if (mediaPlayerInstance) {
+                return mediaPlayerInstance.addVideo(videoData);
+            }
+            return null;
+        };
+
+        window.getMediaPlayer = function() {
+            return mediaPlayerInstance;
+        };
+
+        // Fallback для navigator.clipboard
+        const navigatorClipboard = {
+            writeText: async function(text) {
+                if (navigator.clipboard && navigator.clipboard.writeText) {
+                    return navigator.clipboard.writeText(text);
+                } else {
+                    return new Promise((resolve, reject) => {
+                        const textArea = document.createElement('textarea');
+                        textArea.value = text;
+                        textArea.style.position = 'fixed';
+                        textArea.style.left = '-999999px';
+                        textArea.style.top = '-999999px';
+                        document.body.appendChild(textArea);
+                        textArea.focus();
+                        textArea.select();
+                        
+                        try {
+                            const successful = document.execCommand('copy');
+                            document.body.removeChild(textArea);
+                            if (successful) {
+                                resolve();
+                            } else {
+                                reject(new Error('Не удалось скопировать текст'));
+                            }
+                        } catch (err) {
+                            document.body.removeChild(textArea);
+                            reject(err);
+                        }
+                    });
+                }
+            }
+        };
     </script>
 </body>
 </html>

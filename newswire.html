@@ -1,0 +1,565 @@
+<!DOCTYPE html>
+<html lang="ru_RU">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Новости | Блог братьев</title>
+    <link rel="icon" href="images/logo.png" type="images/logo.png">
+    <link rel="stylesheet" href="/style.css">
+    <link rel="stylesheet" href="/newswire/newswire.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700;800&family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+       
+    </style>
+</head>
+<body class="news-page">
+    <!-- Анимированный фон -->
+    <div class="animated-background">
+        <div class="gradient-bg"></div>
+        <div class="particles" id="particles"></div>
+    </div>
+
+    <!-- Новогодние элементы -->
+    <div class="snowflakes" id="snowflakes"></div>
+    <div class="snowdrifts"></div>
+
+    <!-- Header -->
+    <header id="header">
+        <div class="container">
+            <div class="header-content">
+                <div class="logo">
+                    <a href="/index.html"><div class="logo-icon-container">
+                        <i class="fas fa-users logo-icon"></i>
+                    </div></a>
+                    <div class="logo-text">
+                        <h1>Братья</h1>
+                        <p class="logo-subtitle">блог</p>
+                    </div>
+                </div>
+                <button class="mobile-menu-btn">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </button>
+                <nav>
+                    <ul>
+                        <li><a href="/newswire/newswire.html" class="nav-link"><span>Новости</span></a></li>
+                        <li><a href="/index.html#videos" class="nav-link"><span>Видео</span></a></li>
+                        <li><a href="/index.html#footer" class="nav-link"><span>Контакты</span></a></li>
+                    </ul>
+                </nav>
+            </div>
+        </div>
+    </header>
+
+    <!-- Hero Section для новостей -->
+    <section class="news-hero">
+        <div class="container">
+            <div class="news-hero-content">
+                <div class="news-hero-badge">
+                    <i class="fas fa-star"></i>
+                    <span>Все новости</span>
+                </div>
+                <h1>Новости и обновления</h1>
+                <p class="news-hero-description">Следите за всеми событиями, обновлениями и приключениями братьев</p>
+                
+                <!-- Фильтры новостей -->
+                <div class="news-filter">
+                    <button class="news-filter-btn active" data-filter="all">Все</button>
+                    <button class="news-filter-btn" data-filter="update">Обновления</button>
+                    <button class="news-filter-btn" data-filter="live">Прямые эфиры</button>
+                    <button class="news-filter-btn" data-filter="event">События</button>
+                    <button class="news-filter-btn" data-filter="announcement">Анонсы</button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Сетка новостей -->
+    <section class="updates">
+        <div class="container">
+            <div id="news-container" class="news-grid">
+                <!-- Новости будут загружены через JavaScript -->
+            </div>
+            
+            <!-- Пагинация -->
+            <div class="news-pagination" id="news-pagination">
+                <!-- Кнопки пагинации будут загружены через JavaScript -->
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer id="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-main">
+                    <div class="footer-logo">
+                        <i class="fas fa-users logo-icon"></i>
+                        <div>
+                            <h3>Блог братьев</h3>
+                            <p>Два брата и одна девочка в увлекательных приключениях</p>
+                        </div>
+                    </div>
+                    <div class="footer-social">
+                        <a href="https://www.youtube.com/@n1kolayrasetovich" target="_blank" class="social-link youtube">
+                            <i class="fab fa-youtube"></i>
+                        </a>
+                        <a href="https://t.me/nesoqiton" target="_blank" class="social-link telegram">
+                            <i class="fab fa-telegram"></i>
+                        </a>
+                        <a href="#" class="social-link instagram">
+                            <i class="fab fa-instagram"></i>
+                        </a>
+                    </div>
+                </div>
+                <div class="footer-links">
+                    <div class="footer-column">
+                        <h4>Разделы</h4>
+                        <ul>
+                            <li><a href="/newswire/newswire.html">Новости</a></li>
+                            <li><a href="/index.html#videos">Видео</a></li>
+                            <li><a href="/index.html#footer">Контакты</a></li>
+                            <li><a href="#">Архив</a></li>
+                        </ul>
+                    </div>
+                    <div class="footer-column">
+                        <h4>Контакты</h4>
+                        <ul>
+                            <li><i class="fas fa-user"></i> Никита: +375 (29) 959-00-97</li>
+                            <li><i class="fas fa-user"></i> Евгений: +375 (29) 870-23-67</li>
+                            <li><i class="fas fa-user"></i> Ольга: +375 (25) 729-54-17</li>
+                        </ul>
+                    </div>
+                    <div class="footer-column">
+                        <h4>Telegram</h4>
+                        <ul>
+                            <li><a href="https://t.me/nesoqiton" target="_blank">@nesoqiton (Никита)</a></li>
+                            <li><a href="https://t.me/Legendary_7681" target="_blank">@Legendary_7681 (Евгений)</a></li>
+                            <li><a href="https://t.me/thanoslegenda1239" target="_blank">@thanoslegenda1239 (Ольга)</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2025 Блог братьев. Все права защищены.</p>
+                <div class="footer-links-bottom">
+                    <a href="#">Политика конфиденциальности</a>
+                    <a href="#">Условия использования</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Данные новостей
+        const newsData = [
+            {
+                id: 1,
+                title: "Новогоднее обновление дизайна",
+                excerpt: "Был полностью изменен интерфейс сайта на новогоднюю тематику с добавлением современных элементов и анимаций.",
+                date: "26.11.2025",
+                category: "Обновление сайта",
+                type: "update",
+                image: "/images/НОВОГОДНЕЕ ОБНОВЛЕНИЕ.png",
+                author: "TTFBB COMPANY",
+                url: "/newswire/christmas-update.html"
+            },
+            {
+                id: 2,
+                title: "🔫 КООПЕРАТИВ на МАКСИМАЛКАХ",
+                excerpt: "Прошел самый лучший стрим в мире. Полный экшен и безумие в прямом эфире!",
+                date: "08.11.2025",
+                category: "Прямой эфир",
+                type: "live",
+                image: "/images/ЭКШЕН УЖЕ СЕГОДНЯ.png",
+                author: "TTFBB COMPANY",
+                url: "#"
+            },
+            {
+                id: 3,
+                title: "🏚️ ДОМАШНИЙ АРЕСТ",
+                excerpt: "Чисто домашние посиделки с атмосферой уюта и веселья.",
+                date: "23.11.2025",
+                category: "Прямой эфир",
+                type: "live",
+                image: "/images/ДОМАШНИЙ АРЕСТ.png",
+                author: "TTFBB COMPANY",
+                url: "#"
+            },
+            {
+                id: 4,
+                title: "🏡 ДОМАШНИЕ И УЛИЧНЫЕ ПРИКЛЮЧЕНИЯ",
+                excerpt: "Сначала дом потом улица, короче экшен и приключения на весь день.",
+                date: "26.10.2025",
+                category: "Прямой эфир",
+                type: "live",
+                image: "/images/ДОМАШНИЕ И УЛИЧНЫЕ ПРИКЛЮЧЕНИЯ.png",
+                author: "TTFBB COMPANY",
+                url: "#"
+            },
+            {
+                id: 5,
+                title: "НАВОДИМ СУЕТУ НА РАЙОНЕ",
+                excerpt: "Полный трэш в нашей любимой деревне. Невероятные события и смешные ситуации.",
+                date: "12.10.2025",
+                category: "Событие",
+                type: "live",
+                image: "/images/НАВОДИМ СУЕТУ НА РАЙОНЕ.png",
+                author: "TTFBB COMPANY",
+                url: "#"
+            }
+        ];
+
+        // Настройки пагинации
+        const newsPerPage = 24;
+        let currentNewsPage = 1;
+        let currentNewsFilter = 'all';
+
+        // Функция для отображения новостей
+        function displayNews(page, filter = 'all') {
+            const newsContainer = document.getElementById('news-container');
+            newsContainer.innerHTML = '';
+            
+            let filteredNews = newsData;
+            if (filter !== 'all') {
+                filteredNews = newsData.filter(news => news.type === filter);
+            }
+            
+            const startIndex = (page - 1) * newsPerPage;
+            const endIndex = startIndex + newsPerPage;
+            const newsToShow = filteredNews.slice(startIndex, endIndex);
+            
+            if (newsToShow.length === 0) {
+                newsContainer.innerHTML = `
+                    <div class="news-empty">
+                        <i class="fas fa-newspaper"></i>
+                        <h3>Новостей пока нет</h3>
+                        <p>Следите за обновлениями, скоро здесь появятся новые публикации!</p>
+                    </div>
+                `;
+                return;
+            }
+            
+            newsToShow.forEach(news => {
+                const newsCard = document.createElement('a');
+                newsCard.className = 'news-card';
+                newsCard.href = news.url;
+                newsCard.setAttribute('data-type', news.type);
+                
+                // Получаем класс для бейджа в зависимости от типа
+                const badgeClass = getBadgeClass(news.type);
+                
+                newsCard.innerHTML = `
+                    <div class="news-card-image">
+                        <img src="${news.image}" alt="${news.title}">
+                        <div class="news-card-badge ${badgeClass}">
+                            ${getBadgeText(news.type)}
+                        </div>
+                    </div>
+                    <div class="news-card-content">
+                        <div class="news-card-meta">
+                            <span class="news-card-date">
+                                <i class="far fa-calendar"></i>
+                                ${news.date}
+                            </span>
+                            <span class="news-card-category">${news.category}</span>
+                        </div>
+                        <h3 class="news-card-title">${news.title}</h3>
+                        <p class="news-card-excerpt">${news.excerpt}</p>
+                        <div class="news-card-footer">
+                            <div class="news-card-author">
+                                <i class="fas fa-user"></i>
+                                <span>${news.author}</span>
+                            </div>
+                            <div class="news-read-more">
+                                <span>Читать</span>
+                                <i class="fas fa-arrow-right"></i>
+                            </div>
+                        </div>
+                    </div>
+                `;
+                
+                newsContainer.appendChild(newsCard);
+            });
+        }
+
+        // Функция для получения класса бейджа
+        function getBadgeClass(type) {
+            switch(type) {
+                case 'update': return 'update';
+                case 'live': return 'live';
+                case 'event': return 'event';
+                case 'announcement': return 'update';
+                default: return 'update';
+            }
+        }
+
+        // Функция для получения текста бейджа
+        function getBadgeText(type) {
+            switch(type) {
+                case 'update': return 'Обновление';
+                case 'live': return 'Прямой эфир';
+                case 'event': return 'Событие';
+                case 'announcement': return 'Анонс';
+                default: return 'Новость';
+            }
+        }
+
+        // Функция для создания пагинации новостей
+        function createNewsPagination(filter = 'all') {
+            const paginationContainer = document.getElementById('news-pagination');
+            paginationContainer.innerHTML = '';
+            
+            let filteredNews = newsData;
+            if (filter !== 'all') {
+                filteredNews = newsData.filter(news => news.type === filter);
+            }
+            
+            const totalPages = Math.ceil(filteredNews.length / newsPerPage);
+            
+            if (totalPages <= 1) return;
+            
+            // Кнопка "Назад"
+            const prevButton = document.createElement('button');
+            prevButton.className = `news-pagination-btn ${currentNewsPage === 1 ? 'disabled' : ''}`;
+            prevButton.innerHTML = '<i class="fas fa-chevron-left"></i>';
+            if (currentNewsPage > 1) {
+                prevButton.addEventListener('click', (e) => {
+                    e.preventDefault();
+                    currentNewsPage--;
+                    displayNews(currentNewsPage, currentNewsFilter);
+                    createNewsPagination(currentNewsFilter);
+                    window.scrollTo({
+                        top: document.querySelector('.news-hero').offsetHeight + 100,
+                        behavior: 'smooth'
+                    });
+                });
+            }
+            paginationContainer.appendChild(prevButton);
+            
+            // Номера страниц
+            const maxVisiblePages = 5;
+            let startPage = Math.max(1, currentNewsPage - Math.floor(maxVisiblePages / 2));
+            let endPage = Math.min(totalPages, startPage + maxVisiblePages - 1);
+            
+            if (endPage - startPage + 1 < maxVisiblePages) {
+                startPage = Math.max(1, endPage - maxVisiblePages + 1);
+            }
+            
+            // Первая страница
+            if (startPage > 1) {
+                const firstPageButton = document.createElement('button');
+                firstPageButton.className = 'news-pagination-btn';
+                firstPageButton.textContent = '1';
+                firstPageButton.addEventListener('click', (e) => {
+                    e.preventDefault();
+                    currentNewsPage = 1;
+                    displayNews(currentNewsPage, currentNewsFilter);
+                    createNewsPagination(currentNewsFilter);
+                    window.scrollTo({
+                        top: document.querySelector('.news-hero').offsetHeight + 100,
+                        behavior: 'smooth'
+                    });
+                });
+                paginationContainer.appendChild(firstPageButton);
+                
+                if (startPage > 2) {
+                    const dots = document.createElement('span');
+                    dots.className = 'news-pagination-dots';
+                    dots.textContent = '...';
+                    paginationContainer.appendChild(dots);
+                }
+            }
+            
+            // Основные страницы
+            for (let i = startPage; i <= endPage; i++) {
+                const pageButton = document.createElement('button');
+                pageButton.className = `news-pagination-btn ${i === currentNewsPage ? 'active' : ''}`;
+                pageButton.textContent = i;
+                pageButton.addEventListener('click', (e) => {
+                    e.preventDefault();
+                    currentNewsPage = i;
+                    displayNews(currentNewsPage, currentNewsFilter);
+                    createNewsPagination(currentNewsFilter);
+                    window.scrollTo({
+                        top: document.querySelector('.news-hero').offsetHeight + 100,
+                        behavior: 'smooth'
+                    });
+                });
+                paginationContainer.appendChild(pageButton);
+            }
+            
+            // Последняя страница
+            if (endPage < totalPages) {
+                if (endPage < totalPages - 1) {
+                    const dots = document.createElement('span');
+                    dots.className = 'news-pagination-dots';
+                    dots.textContent = '...';
+                    paginationContainer.appendChild(dots);
+                }
+                
+                const lastPageButton = document.createElement('button');
+                lastPageButton.className = 'news-pagination-btn';
+                lastPageButton.textContent = totalPages;
+                lastPageButton.addEventListener('click', (e) => {
+                    e.preventDefault();
+                    currentNewsPage = totalPages;
+                    displayNews(currentNewsPage, currentNewsFilter);
+                    createNewsPagination(currentNewsFilter);
+                    window.scrollTo({
+                        top: document.querySelector('.news-hero').offsetHeight + 100,
+                        behavior: 'smooth'
+                    });
+                });
+                paginationContainer.appendChild(lastPageButton);
+            }
+            
+            // Кнопка "Вперед"
+            const nextButton = document.createElement('button');
+            nextButton.className = `news-pagination-btn ${currentNewsPage === totalPages ? 'disabled' : ''}`;
+            nextButton.innerHTML = '<i class="fas fa-chevron-right"></i>';
+            if (currentNewsPage < totalPages) {
+                nextButton.addEventListener('click', (e) => {
+                    e.preventDefault();
+                    currentNewsPage++;
+                    displayNews(currentNewsPage, currentNewsFilter);
+                    createNewsPagination(currentNewsFilter);
+                    window.scrollTo({
+                        top: document.querySelector('.news-hero').offsetHeight + 100,
+                        behavior: 'smooth'
+                    });
+                });
+            }
+            paginationContainer.appendChild(nextButton);
+        }
+
+        // Создание частиц для фона
+        function createParticles() {
+            const particlesContainer = document.getElementById('particles');
+            const particleCount = 15;
+            
+            for (let i = 0; i < particleCount; i++) {
+                const particle = document.createElement('div');
+                particle.classList.add('particle');
+                
+                const size = Math.random() * 80 + 40;
+                const left = Math.random() * 100;
+                const top = Math.random() * 100;
+                const animationDuration = Math.random() * 20 + 20;
+                const animationDelay = Math.random() * 5;
+                
+                particle.style.width = `${size}px`;
+                particle.style.height = `${size}px`;
+                particle.style.left = `${left}%`;
+                particle.style.top = `${top}%`;
+                particle.style.animationDuration = `${animationDuration}s`;
+                particle.style.animationDelay = `${animationDelay}s`;
+                particle.style.background = `radial-gradient(circle, rgba(255,255,255,0.1) 0%, rgba(255,255,255,0) 70%)`;
+                
+                particlesContainer.appendChild(particle);
+            }
+        }
+
+        // Создание снежинок
+        function createSnowflakes() {
+            const snowflakesContainer = document.getElementById('snowflakes');
+            const snowflakeCount = 30;
+            
+            for (let i = 0; i < snowflakeCount; i++) {
+                const snowflake = document.createElement('div');
+                snowflake.classList.add('snowflake');
+                
+                const size = Math.random() * 6 + 4;
+                const left = Math.random() * 100;
+                const animationDuration = Math.random() * 10 + 10;
+                const animationDelay = Math.random() * 5;
+                const opacity = Math.random() * 0.6 + 0.4;
+                
+                snowflake.style.width = `${size}px`;
+                snowflake.style.height = `${size}px`;
+                snowflake.style.left = `${left}%`;
+                snowflake.style.animationDuration = `${animationDuration}s`;
+                snowflake.style.animationDelay = `${animationDelay}s`;
+                snowflake.style.opacity = opacity;
+                snowflake.style.background = 'white';
+                snowflake.style.borderRadius = '50%';
+                snowflake.style.boxShadow = '0 0 5px white';
+                
+                snowflakesContainer.appendChild(snowflake);
+            }
+        }
+
+        // Mobile menu toggle
+        document.querySelector('.mobile-menu-btn').addEventListener('click', function () {
+            this.classList.toggle('active');
+            document.querySelector('nav ul').classList.toggle('show');
+        });
+
+        // Header scroll effect
+        window.addEventListener('scroll', function () {
+            const header = document.getElementById('header');
+            if (window.scrollY > 50) {
+                header.style.backdropFilter = 'blur(10px)';
+                header.style.backgroundColor = 'rgba(255, 255, 255, 0.95)';
+            } else {
+                header.style.backdropFilter = 'none';
+                header.style.backgroundColor = 'rgba(255, 255, 255, 0.98)';
+            }
+        });
+
+        // Smooth scrolling for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+
+                const targetId = this.getAttribute('href');
+                if (targetId === '#') return;
+
+                const targetElement = document.querySelector(targetId);
+                if (targetElement) {
+                    window.scrollTo({
+                        top: targetElement.offsetTop - 100,
+                        behavior: 'smooth'
+                    });
+
+                    // Close mobile menu after clicking a link
+                    const mobileMenu = document.querySelector('nav ul');
+                    const menuBtn = document.querySelector('.mobile-menu-btn');
+                    if (mobileMenu && menuBtn) {
+                        mobileMenu.classList.remove('show');
+                        menuBtn.classList.remove('active');
+                    }
+                }
+            });
+        });
+
+        // Фильтры новостей
+        document.querySelectorAll('.news-filter-btn').forEach(btn => {
+            btn.addEventListener('click', function() {
+                document.querySelectorAll('.news-filter-btn').forEach(b => b.classList.remove('active'));
+                this.classList.add('active');
+                currentNewsFilter = this.dataset.filter;
+                currentNewsPage = 1;
+                displayNews(currentNewsPage, currentNewsFilter);
+                createNewsPagination(currentNewsFilter);
+            });
+        });
+
+        // Инициализация
+        document.addEventListener('DOMContentLoaded', function() {
+            createSnowflakes();
+            createParticles();
+            displayNews(currentNewsPage);
+            createNewsPagination();
+            
+            // Анимация при загрузке
+            setTimeout(() => {
+                document.body.classList.add('loaded');
+            }, 100);
+        });
+    </script>
+</body>
+</html>
