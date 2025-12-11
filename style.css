@@ -2563,3 +2563,69 @@
         .file-list-empty p {
             font-size: 0.9rem;
         }
+
+        .other-news-small {
+            text-decoration: none;
+            color: #2b2d42
+        }
+        /* Контейнер для кнопки "Все видеоролики" */
+.all-videos-btn-container {
+    display: flex;
+    justify-content: center;
+    margin: 40px 0;
+}
+
+/* Широкая кнопка */
+.btn-wide {
+    min-width: 220px;
+    justify-content: center;
+    gap: 10px;
+    font-weight: 600;
+    padding: 14px 35px;
+    transition: all var(--transition);
+    border: 2px solid var(--accent);
+    background: transparent;
+    color: var(--accent);
+    font-size: 1.1rem;
+    border-radius: var(--radius);
+}
+
+.btn-wide:hover {
+    background: var(--accent);
+    color: white;
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-md);
+}
+
+.btn-wide i {
+    transition: transform var(--transition);
+}
+
+.btn-wide:hover i {
+    transform: translateX(5px);
+}
+
+/* Адаптивность */
+@media (max-width: 768px) {
+    .all-videos-btn-container {
+        margin: 30px 0;
+    }
+    
+    .btn-wide {
+        min-width: 200px;
+        padding: 12px 30px;
+        font-size: 1rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .all-videos-btn-container {
+        margin: 25px 0;
+    }
+    
+    .btn-wide {
+        min-width: 180px;
+        padding: 10px 25px;
+        font-size: 0.95rem;
+    }
+}

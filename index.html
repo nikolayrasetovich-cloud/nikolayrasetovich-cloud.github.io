@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="ru_RU">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -7,10 +8,14 @@
     <link rel="icon" href="images/logo.png" type="images/logo.png">
     <link rel="stylesheet" href="/style.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700;800&family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">    
-    
+    <link
+        href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700;800&family=Playfair+Display:wght@700&display=swap"
+        rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+
 </head>
+
 <body>
     <!-- Анимированный фон -->
     <div class="animated-background">
@@ -48,11 +53,12 @@
                     </button>
 
                     <div class="player-controls-overlay">
-                        <div class="progress-container" id="progress-container" role="slider" aria-label="Прогресс видео">
+                        <div class="progress-container" id="progress-container" role="slider"
+                            aria-label="Прогресс видео">
                             <div class="progress-bar" id="progress-bar"></div>
                             <div class="progress-time" id="progress-time">0:00</div>
                         </div>
-                        
+
                         <div class="controls-container">
                             <div class="control-left">
                                 <button class="control-btn play-pause" id="play-pause" aria-label="Воспроизвести/Пауза">
@@ -68,7 +74,7 @@
                                     <span id="current-time">0:00</span> / <span id="duration">0:00</span>
                                 </div>
                             </div>
-                            
+
                             <div class="control-right">
                                 <button class="control-btn" id="volume-btn" aria-label="Включить/Выключить звук">
                                     <i class="fas fa-volume-up"></i>
@@ -110,34 +116,35 @@
                             <span class="tab-text">Ссылка</span>
                         </button>
                     </div>
-                    
+
                     <div class="sidebar-content">
                         <div class="tab-content active" id="playlist-tab">
                             <div class="playlist-container" id="playlist-container">
                                 <!-- Плейлист будет заполнен динамически -->
                             </div>
                         </div>
-                        
+
                         <div class="tab-content" id="upload-tab">
                             <div class="upload-container">
                                 <div class="upload-area" id="upload-area">
                                     <i class="fas fa-cloud-upload-alt"></i>
                                     <p>Перетащите файлы сюда</p>
                                     <span>или нажмите для выбора</span>
-                                    <input type="file" id="file-input" accept="video/*,audio/*,.mp4,.webm,.ogg,.mov,.avi,.mkv,.mp3,.wav" multiple style="display: none;">
+                                    <input type="file" id="file-input"
+                                        accept="video/*,audio/*,.mp4,.webm,.ogg,.mov,.avi,.mkv,.mp3,.wav" multiple
+                                        style="display: none;">
                                 </div>
                                 <div class="file-list" id="file-list">
                                     <!-- Список локальных файлов -->
                                 </div>
                             </div>
                         </div>
-                        
+
                         <div class="tab-content" id="url-tab">
                             <div class="url-container">
                                 <div class="url-input-group">
-                                    <input type="text" 
-                                           id="url-input" 
-                                           placeholder="Введите ссылку на видео (YouTube, Vimeo, MP4)">
+                                    <input type="text" id="url-input"
+                                        placeholder="Введите ссылку на видео (YouTube, Vimeo, MP4)">
                                     <button class="url-submit-btn" id="url-submit-btn">
                                         <i class="fas fa-play"></i>
                                     </button>
@@ -170,7 +177,7 @@
                         <option value="2160">4K</option>
                     </select>
                 </div>
-                
+
                 <div class="speed-controls">
                     <span>Скорость:</span>
                     <button class="speed-btn" data-speed="0.25">0.25x</button>
@@ -180,7 +187,7 @@
                     <button class="speed-btn" data-speed="1.5">1.5x</button>
                     <button class="speed-btn" data-speed="2">2x</button>
                 </div>
-                
+
                 <div class="repeat-controls">
                     <button class="repeat-btn" id="repeat-btn" aria-label="Повтор">
                         <i class="fas fa-redo"></i>
@@ -212,31 +219,32 @@
     <header id="header">
         <div class="container">
             <div class="header-content">
-                <div class="logo">
-                    <div class="logo-icon-container">
-                        <i class="fas fa-users logo-icon"></i>
-                    </div>
-                    <div class="logo-text">
-                        <h1>Братья</h1>
-                        <p class="logo-subtitle">блог</p>
-                    </div>
+                <a href="/index.html">
+                    <div class="logo">
+                        <div class="logo-icon-container">
+                            <i class="fas fa-users logo-icon"></i>
+                        </div>
+                </a>
+                <div class="logo-text">
+                    <h1>Братья</h1>
+                    <p class="logo-subtitle">блог</p>
                 </div>
-                <button class="mobile-menu-btn" aria-label="Меню">
-                    <span></span>
-                    <span></span>
-                    <span></span>
-                </button>
-                <nav>
-                    <ul>
-                        <li><a href="#updates" class="nav-link"><span>Новости</span></a></li>
-                        <li><a href="#videos" class="nav-link"><span>Видео</span></a></li>
-                        <li><a href="#footer" class="nav-link"><span>Контакты</span></a></li>
-                    </ul>
-                    <div class="theme-toggle" aria-label="Сменить тему">
-                        <i class="fas fa-moon"></i>
-                    </div>
-                </nav>
             </div>
+            <button class="mobile-menu-btn" aria-label="Меню">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+            <nav>
+                <ul>
+                    <li><a href="/newswire.html" class="nav-link"><span>Новостная лента</span></a></li>
+                    <li><a href="/videos.html" class="nav-link"><span>Видеоролики</span></a></li>
+                </ul>
+                <div class="theme-toggle" aria-label="Сменить тему">
+                    <i class="fas fa-moon"></i>
+                </div>
+            </nav>
+        </div>
         </div>
     </header>
 
@@ -252,15 +260,16 @@
                     <span class="title-line">Три долбабоба.</span>
                     <span class="title-line accent">Одна любовь.</span>
                 </h2>
-                <p class="hero-description">Самые лучшие и любимые братья в одном месте. Следите за новыми видео, событиями и приключениями.</p>
+                <p class="hero-description">Самые лучшие и любимые братья в одном месте. Следите за новыми видео,
+                    событиями и приключениями.</p>
                 <div class="hero-meta">
                     <div class="meta-item">
                         <i class="fas fa-calendar-alt"></i>
-                        <span>Последнее редактирование: 09.12.2025</span>
+                        <span>Последнее редактирование: 11.12.2025</span>
                     </div>
                     <div class="meta-item">
                         <i class="fas fa-clock"></i>
-                        <span>22:00</span>
+                        <span>15:00</span>
                     </div>
                 </div>
                 <div class="hero-actions">
@@ -275,7 +284,7 @@
             </div>
         </div>
     </section>
-        
+
     <!-- Updates Section -->
     <section id="updates" class="updates">
         <div class="container">
@@ -287,125 +296,135 @@
             </div>
             <div class="updates-grid">
                 <!-- Основная новость -->
-               <a href="/newswire/christmas-update.html" class="other-news-button"> <div class="update-card featured">
-                    <div class="card-badge">
-                        <span>Главная новость</span>
-                    </div>
-                    <div class="update-image">
-                        <img src="/images/НОВОГОДНЕЕ ОБНОВЛЕНИЕ.png" alt="Новогоднее обновление сайта">
-                        <div class="image-overlay"></div>
-                    </div>
-                    <div class="update-content">
-                        <div class="update-meta">
-                            <span class="update-date">
-                                <i class="far fa-calendar"></i>
-                                26.11.2025
-                            </span>
-                            <span class="update-type">Обновление сайта</span>
+                <a href="/newswire/christmas-update.html" class="other-news-button">
+                    <div class="update-card featured">
+                        <div class="card-badge">
+                            <span>Главная новость</span>
                         </div>
-                        <h3 class="update-title">Новогоднее обновление дизайна</h3>
-                        <p class="update-excerpt">Был полностью изменен интерфейс сайта на новогоднюю тематику с добавлением современных элементов и анимаций.</p>
-                        <ul class="update-features">
-                            <li><i class="fas fa-check"></i> Обновленный интерфейс сайта</li>
-                            <li><i class="fas fa-check"></i> Добавлен блок с новостями</li>
-                            <li><i class="fas fa-check"></i> Для блока с видео были добавлены страницы</li>
-                            <li><i class="fas fa-check"></i> Новый медиаплеер с поддержкой YouTube</li>
-                        </ul>
-                        <div class="update-footer">
-                    <span class="read-more">Подробнее <i class="fas fa-arrow-right"></i></span>
-                        </div> 
+                        <div class="update-image">
+                            <img src="/images/НОВОГОДНЕЕ ОБНОВЛЕНИЕ.png" alt="Новогоднее обновление сайта">
+                            <div class="image-overlay"></div>
+                        </div>
+                        <div class="update-content">
+                            <div class="update-meta">
+                                <span class="update-date">
+                                    <i class="far fa-calendar"></i>
+                                    26.11.2025
+                                </span>
+                                <span class="update-type">Обновление сайта</span>
+                            </div>
+                            <h3 class="update-title">Новогоднее обновление дизайна</h3>
+                            <p class="update-excerpt">Был полностью изменен интерфейс сайта на новогоднюю тематику с
+                                добавлением современных элементов и анимаций.</p>
+                            <ul class="update-features">
+                                <li><i class="fas fa-check"></i> Обновленный интерфейс сайта</li>
+                                <li><i class="fas fa-check"></i> Добавлен блок с новостями</li>
+                                <li><i class="fas fa-check"></i> Для блока с видео были добавлены страницы</li>
+                                <li><i class="fas fa-check"></i> Новый медиаплеер с поддержкой YouTube</li>
+                            </ul>
+                            <div class="update-footer">
+                                <span class="read-more">Подробнее <i class="fas fa-arrow-right"></i></span>
+                            </div>
+                        </div>
                     </div>
-                </div> </a> 
+                </a>
 
                 <!-- Другие новости -->
                 <div class="other-news">
+
                     <!-- Новость 1 -->
-                    <div class="news-card small">
-                        <div class="news-image">
-                            <img src="/images/ЭКШЕН УЖЕ СЕГОДНЯ.png" alt="ЭКШЕН УЖЕ СЕГОДНЯ">
-                        </div>
-                        <div class="news-content">
-                            <div class="news-meta">
-                                <span class="news-date">08.11.2025</span>
-                                <span class="news-category">Прямой эфир</span>
+                    <a href="/newswire/house-arrest.html" class="other-news-small">
+                        <div class="news-card small">
+                            <div class="news-image">
+                                <img src="/images/ДОМАШНИЙ АРЕСТ.png" alt="Трансляция">
                             </div>
-                            <h4>🔫 КООПЕРАТИВ на МАКСИМАЛКАХ</h4>
-                            <p>Прошел самый лучший стрим в мире.</p>
+                            <div class="news-content">
+                                <div class="news-meta">
+                                    <span class="news-date">23.11.2025</span>
+                                    <span class="news-category">Прямой эфир</span>
+                                </div>
+                                <h4>🏚️ ДОМАШНИЙ АРЕСТ</h4>
+                                <p>Чисто домашние посиделки.</p>
+                            </div>
                         </div>
-                    </div>
+                    </a>
 
                     <!-- Новость 2 -->
-                    <div class="news-card small">
-                        <div class="news-image">
-                            <img src="/images/ДОМАШНИЙ АРЕСТ.png" alt="Трансляция">
-                        </div>
-                        <div class="news-content">
-                            <div class="news-meta">
-                                <span class="news-date">23.11.2025</span>
-                                <span class="news-category">Прямой эфир</span>
+                    <a href="/newswire/coop-at-maximum.html" class="other-news-small">
+                        <div class="news-card small">
+                            <div class="news-image">
+                                <img src="/images/ЭКШЕН УЖЕ СЕГОДНЯ.png" alt="ЭКШЕН УЖЕ СЕГОДНЯ">
                             </div>
-                            <h4>🏚️ ДОМАШНИЙ АРЕСТ</h4>
-                            <p>Чисто домашние посиделки.</p>
+                            <div class="news-content">
+                                <div class="news-meta">
+                                    <span class="news-date">08.11.2025</span>
+                                    <span class="news-category">Прямой эфир</span>
+                                </div>
+                                <h4>🔫 КООПЕРАТИВ на МАКСИМАЛКАХ</h4>
+                                <p>Прошел самый лучший стрим в мире.</p>
+                            </div>
                         </div>
-                    </div>
+                    </a>
 
                     <!-- Новость 3 -->
-                    <div class="news-card small">
-                        <div class="news-image">
-                            <img src="/images/ДОМАШНИЕ И УЛИЧНЫЕ ПРИКЛЮЧЕНИЯ.png" alt="Игры">
-                        </div>
-                        <div class="news-content">
-                            <div class="news-meta">
-                                <span class="news-date">26.10.2025</span>
-                                <span class="news-category">Прямой эфир</span>
+                    <a href="/newswire/coop-at-maximum.html" class="other-news-small">
+                        <div class="news-card small">
+                            <div class="news-image">
+                                <img src="/images/ДОМАШНИЕ И УЛИЧНЫЕ ПРИКЛЮЧЕНИЯ.png" alt="Игры">
                             </div>
-                            <h4>🏡 ДОМАШНИЕ И УЛИЧНЫЕ ПРИКЛЮЧЕНИЯ</h4>
-                            <p>Сначала дом потом улица, короче экшен.</p>
+                            <div class="news-content">
+                                <div class="news-meta">
+                                    <span class="news-date">26.10.2025</span>
+                                    <span class="news-category">Прямой эфир</span>
+                                </div>
+                                <h4>🏡 ДОМАШНИЕ И УЛИЧНЫЕ ПРИКЛЮЧЕНИЯ</h4>
+                                <p>Сначала дом потом улица, короче экшен.</p>
+                            </div>
                         </div>
-                    </div>
+                    </a>
 
                     <!-- Новость 4 -->
-                    <div class="news-card small">
-                        <div class="news-image">
-                            <img src="/images/НАВОДИМ СУЕТУ НА РАЙОНЕ.png" alt="Трансляция">
-                        </div>
-                        <div class="news-content">
-                            <div class="news-meta">
-                                <span class="news-date">12.10.2025</span>
-                                <span class="news-category">Прямой эфир</span>
+                    <a href="/newswire/coop-at-maximum.html" class="other-news-small">
+                        <div class="news-card small">
+                            <div class="news-image">
+                                <img src="/images/НАВОДИМ СУЕТУ НА РАЙОНЕ.png" alt="Трансляция">
                             </div>
-                            <h4>НАВОДИМ СУЕТУ НА РАЙОНЕ</h4>
-                            <p>Полный трэш в нашей любимой деревне.</p>
+                            <div class="news-content">
+                                <div class="news-meta">
+                                    <span class="news-date">12.10.2025</span>
+                                    <span class="news-category">Прямой эфир</span>
+                                </div>
+                                <h4>НАВОДИМ СУЕТУ НА РАЙОНЕ</h4>
+                                <p>Полный трэш в нашей любимой деревне.</p>
+                            </div>
                         </div>
-                    </div>
+                    </a>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- Video Section -->
+     <!-- Video Section -->
     <section id="videos" class="videos">
         <div class="container">
             <div class="section-header">
                 <div class="section-title">
-                    <h2>Видео и трансляции</h2>
-                    <p class="section-subtitle">Самые популярные и новые видео с канала</p>
-                </div>
-                <div class="section-filter">
-                    <button class="filter-btn active" data-filter="all">Все</button>
-                    <button class="filter-btn" data-filter="irl">IRL</button>
-                    <button class="filter-btn" data-filter="minecraft">Minecraft</button>
-                    <button class="filter-btn" data-filter="amongus">Among US</button>
-                    <button class="filter-btn" data-filter="rdr2">RDR 2</button>
-                    <button class="filter-btn" data-filter="hide&seek">Прятки</button>
-                    <button class="filter-btn" data-filter="gta">GTA</button>
-                    <button class="filter-btn" data-filter="other">Прочее</button>
+                    <h2>Последние видео и трансляции</h2>
+                    <p class="section-subtitle">Недавние видео с канала</p>
                 </div>
             </div>
             <div class="video-grid" id="video-grid">
                 <!-- Видео будут вставляться с помощью JavaScript -->
             </div>
-            
+
+            <!-- Кнопка "Все видеоролики" -->
+            <div class="all-videos-btn-container">
+                <a href="/videos.html" class="btn btn-secondary btn-wide">
+                    <span>Все видеоролики</span>
+                    <i class="fas fa-arrow-right"></i>
+                </a>
+            </div>
+
             <!-- Пагинация -->
             <div class="pagination" id="pagination">
                 <!-- Кнопки пагинации будут вставляться с помощью JavaScript -->
@@ -426,10 +445,12 @@
                         </div>
                     </div>
                     <div class="footer-social">
-                        <a href="https://www.youtube.com/@n1kolayrasetovich" target="_blank" class="social-link youtube" aria-label="YouTube">
+                        <a href="https://www.youtube.com/@n1kolayrasetovich" target="_blank" class="social-link youtube"
+                            aria-label="YouTube">
                             <i class="fab fa-youtube"></i>
                         </a>
-                        <a href="https://t.me/nesoqiton" target="_blank" class="social-link telegram" aria-label="Telegram">
+                        <a href="https://t.me/nesoqiton" target="_blank" class="social-link telegram"
+                            aria-label="Telegram">
                             <i class="fab fa-telegram"></i>
                         </a>
                         <a href="#" class="social-link instagram" aria-label="Instagram">
@@ -441,10 +462,10 @@
                     <div class="footer-column">
                         <h4>Разделы</h4>
                         <ul>
-                            <li><a href="#updates">Новости</a></li>
-                            <li><a href="#videos">Видео</a></li>
-                            <li><a href="#footer">Контакты</a></li>
-                            <li><a href="#" id="open-player-link">Медиаплеер</a></li>
+                            <li><a href="/newswire.html">Новостная лента</a></li>
+                            <li><a href="/videos.html">Видеоролики</a></li>
+                            <li><a href="/index.html#footer">Контакты</a></li>
+                            <li><a href="#">Архив</a></li>
                         </ul>
                     </div>
                     <div class="footer-column">
@@ -460,7 +481,8 @@
                         <ul>
                             <li><a href="https://t.me/nesoqiton" target="_blank">@nesoqiton (Никита)</a></li>
                             <li><a href="https://t.me/Legendary_7681" target="_blank">@Legendary_7681 (Евгений)</a></li>
-                            <li><a href="https://t.me/thanoslegenda1239" target="_blank">@thanoslegenda1239 (Ольга)</a></li>
+                            <li><a href="https://t.me/thanoslegenda1239" target="_blank">@thanoslegenda1239 (Ольга)</a>
+                            </li>
                         </ul>
                     </div>
                 </div>
@@ -480,7 +502,7 @@
 
     <!-- Загружаем YouTube API -->
     <script src="https://www.youtube.com/iframe_api"></script>
-    
+
     <script>
         // JavaScript код
         // Данные видео
@@ -502,206 +524,9 @@
                 title: "❄️ ЗИМА БЕЗ СНЕГА | ТРЭШ УЖЕ ТУТ 😱",
                 description: "🔴 Прямой эфир / 07 декабря 2025",
                 type: "other"
-            },    
-            {
-                id: "xFYtOOevaFE",
-                title: "🤬КАКОЙ-ТО ТРЭШ",
-                description: "🔴 Прямой эфир / 27 ноября 2025",
-                type: "irl"
             },
-            {
-                id: "ElbvvTuTJ9k",
-                title: "💦 ЧТО ТУТ ПРОИСХОДИТ?",
-                description: "🔴 Прямой эфир / 25 ноября 2025",
-                type: "irl"
-            },
-            {
-                id: "PboKwiqDOww",
-                title: "🏚️ ДОМАШНИЙ АРЕСТ",
-                description: "🔴 Прямой эфир / 23 ноября 2025",
-                type: "irl"
-            },
-            {
-                id: "kFOmLrHup2Y",
-                title: "НАВОДИМ СУЕТУ в МАЙНКРАФТЕ",
-                description: "🔴 Прямой эфир / 11 ноября 2025",
-                type: "minecraft"
-            },
-            {
-                id: "6d-OCpKGNaE",
-                title: "🔫 КООПЕРАТИВ на МАКСИМАЛКАХ",
-                description: "🔴 Прямой эфир / 08 ноября 2025",
-                type: "irl"
-            },
-            {
-                id: "-NFFd2d17Y8",
-                title: "АМОНГУС ++",
-                description: "🔴 Прямой эфир / 06 ноября 2025",
-                type: "amongus"
-            },
-            {
-                id: "jNA4AcHjL4E",
-                title: "🪱 МАЙНПУКТ И ДРУГОЕ...",
-                description: "🔴 Прямой эфир / 06 ноября 2025",
-                type: "minecraft"
-            },
-            {
-                id: "sohcPSnrv24",
-                title: "MINECRAT OLYA",
-                description: "🔴 Прямой эфир / 02 ноября 2025",
-                type: "minecraft"
-            },
-            {
-                id: "R292HOs1kGs",
-                title: "🌍 МАЙНСРУФТ + СРУМОГУС",
-                description: "🔴 Прямой эфир / 01 ноября 2025",
-                type: "minecraft"
-            },
-            {
-                id: "o-hrzNuy4-Y",
-                title: "🤥 АМАНАЛ АС",
-                description: "🔴 Прямой эфир / 29 октября 2025",
-                type: "amongus"
-            },
-            {
-                id: "avLUYnuH4ko",
-                title: "🌿ВСЁ КРОМЕ MINECRAFT",
-                description: "🔴 Прямой эфир / 28 октября 2025",
-                type: "other"
-            },
-            {
-                id: "lnnLftsmHCw",
-                title: "🥷 ARIZONA GAMES + AMONG US",
-                description: "🔴 Прямой эфир №2 / 26 октября 2025",
-                type: "amongus"
-            },
-            {
-                id: "dE8om75g0EE",
-                title: "🏡 ДОМАШНИЕ И УЛИЧНЫЕ ПРИКЛЮЧЕНИЯ",
-                description: "🔴 Прямой эфир / 26 октября 2025",
-                type: "irl"
-            },
-            {
-                id: "7Y2na4Bf-Xc",
-                title: "🐺 НОЧНЫЕ ПРИКЛЮЧЕНИЯ 9 | ФИНАЛ?",
-                description: "🔴 Прямой эфир / 25-26 октября 2025",
-                type: "irl"
-            },
-            {
-                id: "4LxNZsgnpbg",
-                title: "🫨 ПИЗ*EЦ в ПРЯМОМ ЭФИРЕ",
-                description: "🔴 Прямой эфир / 25 октября 2025",
-                type: "irl"
-            },
-            {
-                id: "YKO9QgoJB-A",
-                title: "🌙 НОЧНЫЕ ПРИКЛЮЧЕНИЯ 8",
-                description: "🔴 Прямой эфир / 24-25 октября 2025",
-                type: "irl"
-            },
-            {
-                id: "9z7zo0KFOv8",
-                title: "🥳 АМОГУС и ТОЧКА",
-                description: "🔴 Прямой эфир / 24 октября 2025",
-                type: "amongus"
-            },
-            {
-                id: "VMopJ3YB5DA",
-                title: "😎 СУЭТА НА СУЭТЭ и ВСЁ на ARIZONA",
-                description: "🔴 Прямой эфир / 23 октября 2025",
-                type: "amongus"
-            },
-            {
-                id: "qeRpk1kOTYU",
-                title: "🌳 СУЕТА В MINECRAFT + ☠️ АМОГУС",
-                description: "🔴 Прямой эфир / 22 октября 2025",
-                type: "minecraft"
-            },
-            {
-                id: "8yPT2taF5xg",
-                title: "💥АМОГУС В ЭФИРЕ",
-                description: "🔴 Прямой эфир / 21 октября 2025",
-                type: "amongus"
-            },
-            {
-                id: "33RHdlsNgw8",
-                title: "НОЧНЫЕ ПРИКЛЮЧЕНИЯ 7",
-                description: "🔴 Прямой эфир №2 / 18 октября 2025",
-                type: "irl"
-            },
-            {
-                id: "hiTdPkmw4L0",
-                title: "СУЕТАЛОГИЯ В ГОРОДЕ",
-                description: "18 октября 2025 прошла масштабная трансляция в парке и других местах 🔥",
-                type: "irl"
-            },
-            {
-                id: "f28EpJgVHSg",
-                title: "НОЧНЫЕ ПРИКЛЮЧЕНИЯ 6",
-                description: "17 октября 2025 прошла шестая трансляция моего сна в эфире 😎",
-                type: "irl"
-            },
-            {
-                id: "yulH8RUATuo",
-                title: "НАВОДИМ СУЕТУ НА ВОКЗАЛЕ",
-                description: "17 октября 2025 прошёл эфир на вокзале и в маршрутке",
-                type: "irl"
-            },
-            {
-                id: "4Tc_YYMKZvM",
-                title: "НАВОДИМ СУЕТУ НА РАЙОНЕ",
-                description: "🔴 Прямая трансляция №3 которая прошла 12 октября 2025, была самой смешной/прикольной за всё время",
-                type: "irl"
-            },
-            {
-                id: "QTLXGKIeWTE",
-                title: "НАВОДИМ СУЕТУ НА РАЙОНЕ",
-                description: "🔴 Прямая трансляция №2 которая прошла 12 октября 2025, была самой смешной/прикольной за всё время",
-                type: "irl"
-            },
-            {
-                id: "ogIYZkc2IbE",
-                title: "НОЧНЫЕ ПРИКЛЮЧЕНИЯ 5",
-                description: "🔴 Прямая трансляция №1 / 12 октября 2025",
-                type: "irl"
-            },
-            {
-                id: "ZYGvd2DPi7k",
-                title: "НАВОДИМ СУЕТОЛОГИЮ",
-                description: "🔴 Прямая трансляция №2 / 11 октября 2025",
-                type: "irl"
-            },
-            {
-                id: "fWMkiAlPJNE",
-                title: "СУЕТА УЖЕ СЕЙЧАС",
-                description: "🔴 Прямая трансляция №1 / 11 октября 2025",
-                type: "irl"
-            },
-            {
-                id: "HW0nLvyGQpQ",
-                title: "НАВОДИМ СУЕТУ + НОЧНЫЕ ПРИКЛЮЧЕНИЯ 4",
-                description: "🔴 Прямая трансляция / 09 октября 2025",
-                type: "irl"
-            },
-            {
-                id: "DEOTRqq8AOU",
-                title: "НАВОДИМ СУЕТУ + НОЧНЫЕ ПРИКЛЮЧЕНИЯ 3",
-                description: "🔴 Прямая трансляция / 08 октября 2025",
-                type: "irl"
-            },
-            {
-                id: "5kfIrnccag8",
-                title: "СОН УВАЖАЕМОГО",
-                description: "🔴 Прямая трансляция / 07 октября 2025",
-                type: "irl"
-            },
-            {
-                id: "c2X1Y_doIz8",
-                title: "СОН НИКИТОСИКА 👋",
-                description: "🔴 Прямой эфир / 06 октября 2025",
-                type: "irl"
-            }
         ];
+        
 
         // Настройки пагинации
         const videosPerPage = 6;
@@ -715,7 +540,7 @@
                 this.videoPlayer = document.createElement('video');
                 this.videoPlayer.id = 'player-video';
                 this.videoPlayer.crossOrigin = 'anonymous';
-                
+
                 this.playlist = [];
                 this.currentIndex = -1;
                 this.isPlaying = false;
@@ -726,12 +551,12 @@
                 this.repeatMode = 'none';
                 this.shuffleMode = false;
                 this.localFiles = [];
-                
+
                 this.initializeElements();
                 this.initializeEventListeners();
                 this.initializeYouTubePlaylist();
                 this.initializeLocalStorage();
-                
+
                 document.getElementById('video-container').appendChild(this.videoPlayer);
             }
 
@@ -889,7 +714,7 @@
                         lastPosition: 0
                     });
                 });
-                
+
                 this.renderPlaylist();
             }
 
@@ -971,16 +796,16 @@
                 this.elements.playerOverlay.style.display = 'none';
                 document.body.style.overflow = '';
                 this.pause();
-                
+
                 if (this.youtubePlayer) {
                     this.youtubePlayer.stopVideo();
                     this.youtubePlayer.destroy();
                     this.youtubePlayer = null;
                 }
-                
+
                 this.videoPlayer.src = '';
                 this.videoPlayer.load();
-                
+
                 const container = document.getElementById('video-container');
                 container.innerHTML = '';
                 container.appendChild(this.videoPlayer);
@@ -988,7 +813,7 @@
                 container.appendChild(this.elements.fullscreenBtn);
                 container.appendChild(this.elements.playerLoading);
                 container.appendChild(this.elements.playerError);
-                
+
                 this.elements.playerPlaceholder.style.display = 'block';
                 this.elements.playerCurrentTitle.textContent = 'Медиаплеер';
                 this.currentIndex = -1;
@@ -1001,7 +826,7 @@
                 this.elements.playerPlaceholder.style.display = 'none';
                 this.elements.playerCurrentTitle.textContent = videoItem.title;
 
-                this.currentIndex = this.playlist.findIndex(item => 
+                this.currentIndex = this.playlist.findIndex(item =>
                     item.id === videoItem.id && item.source === videoItem.source
                 );
 
@@ -1015,7 +840,7 @@
                 this.videoPlayer.load();
 
                 const container = document.getElementById('video-container');
-                
+
                 if (videoItem.source === 'youtube') {
                     this.loadYouTubeVideo(videoItem, container);
                 } else {
@@ -1023,7 +848,7 @@
                 }
 
                 this.updateActivePlaylistItem();
-                
+
                 setTimeout(() => {
                     if (videoItem.lastPosition && videoItem.lastPosition > 0) {
                         this.seekTo(videoItem.lastPosition);
@@ -1034,7 +859,7 @@
             loadYouTubeVideo(videoItem, container) {
                 const oldIframe = container.querySelector('iframe');
                 if (oldIframe) oldIframe.remove();
-                
+
                 const iframe = document.createElement('iframe');
                 iframe.id = 'youtube-iframe';
                 iframe.src = `https://www.youtube.com/embed/${videoItem.id}?enablejsapi=1&origin=${window.location.origin}&autoplay=1&rel=0&modestbranding=1`;
@@ -1043,10 +868,10 @@
                 iframe.style.width = '100%';
                 iframe.style.height = '100%';
                 iframe.style.border = 'none';
-                
+
                 container.insertBefore(iframe, this.videoPlayer);
                 this.videoPlayer.style.display = 'none';
-                
+
                 this.initializeYouTubePlayer(iframe, videoItem);
             }
 
@@ -1071,14 +896,14 @@
                                 this.hideLoading();
                                 this.isPlaying = true;
                                 this.updatePlayPauseButton();
-                                
+
                                 const quality = this.elements.qualitySelect.value;
                                 if (quality !== 'auto') {
                                     event.target.setPlaybackQuality(quality + 'p');
                                 }
                             },
                             'onStateChange': (event) => {
-                                switch(event.data) {
+                                switch (event.data) {
                                     case YT.PlayerState.PLAYING:
                                         this.isPlaying = true;
                                         this.hideLoading();
@@ -1116,12 +941,12 @@
                 const iframe = container.querySelector('iframe');
                 if (iframe) iframe.style.display = 'none';
                 this.videoPlayer.style.display = 'block';
-                
+
                 this.videoPlayer.src = videoItem.url;
                 this.videoPlayer.load();
-                
+
                 const playPromise = this.videoPlayer.play();
-                
+
                 if (playPromise !== undefined) {
                     playPromise.then(() => {
                         this.isPlaying = true;
@@ -1201,7 +1026,7 @@
                 const rect = this.elements.progressContainer.getBoundingClientRect();
                 const x = e.clientX - rect.left;
                 const percentage = x / rect.width;
-                
+
                 if (this.youtubePlayer) {
                     const duration = this.youtubePlayer.getDuration();
                     this.youtubePlayer.seekTo(duration * percentage, true);
@@ -1231,7 +1056,7 @@
 
             setVolume(volume) {
                 this.volume = Math.max(0, Math.min(1, volume));
-                
+
                 if (this.youtubePlayer) {
                     this.youtubePlayer.setVolume(this.volume * 100);
                     this.youtubePlayer.unMute();
@@ -1241,7 +1066,7 @@
                     this.videoPlayer.muted = false;
                     this.isMuted = false;
                 }
-                
+
                 this.updateVolumeDisplay();
                 this.saveToLocalStorage('player-volume', this.volume);
                 this.saveToLocalStorage('player-muted', this.isMuted);
@@ -1261,21 +1086,21 @@
             updateVolumeDisplay() {
                 const volumePercent = this.volume * 100;
                 this.elements.volumeLevel.style.width = `${volumePercent}%`;
-                
+
                 let volumeIcon = 'fa-volume-up';
                 if (this.isMuted || volumePercent === 0) {
                     volumeIcon = 'fa-volume-mute';
                 } else if (volumePercent < 50) {
                     volumeIcon = 'fa-volume-down';
                 }
-                
+
                 this.elements.volumeBtn.innerHTML = `<i class="fas ${volumeIcon}"></i>`;
                 this.elements.mobileVolume.innerHTML = `<i class="fas ${volumeIcon}"></i>`;
             }
 
             updateProgress() {
                 let currentTime, duration;
-                
+
                 if (this.youtubePlayer) {
                     try {
                         currentTime = this.youtubePlayer.getCurrentTime();
@@ -1287,14 +1112,14 @@
                     currentTime = this.videoPlayer.currentTime;
                     duration = this.videoPlayer.duration;
                 }
-                
+
                 if (duration && currentTime) {
                     const progress = (currentTime / duration) * 100;
                     this.elements.progressBar.style.width = `${progress}%`;
-                    
+
                     this.elements.currentTime.textContent = this.formatTime(currentTime);
                     this.elements.duration.textContent = this.formatTime(duration);
-                    
+
                     this.elements.progressTime.textContent = this.formatTime(currentTime);
                     this.elements.progressTime.style.left = `${progress}%`;
                 }
@@ -1308,11 +1133,11 @@
 
             formatTime(seconds) {
                 if (!isFinite(seconds)) return '0:00';
-                
+
                 const hours = Math.floor(seconds / 3600);
                 const mins = Math.floor((seconds % 3600) / 60);
                 const secs = Math.floor(seconds % 60);
-                
+
                 if (hours > 0) {
                     return `${hours}:${mins.toString().padStart(2, '0')}:${secs.toString().padStart(2, '0')}`;
                 } else {
@@ -1341,7 +1166,7 @@
                     this.playRandom();
                     return;
                 }
-                
+
                 if (this.currentIndex < this.playlist.length - 1) {
                     this.currentIndex++;
                     this.loadVideo(this.playlist[this.currentIndex]);
@@ -1360,19 +1185,19 @@
 
             playRandom() {
                 if (this.playlist.length <= 1) return;
-                
+
                 let randomIndex;
                 do {
                     randomIndex = Math.floor(Math.random() * this.playlist.length);
                 } while (randomIndex === this.currentIndex && this.playlist.length > 1);
-                
+
                 this.currentIndex = randomIndex;
                 this.loadVideo(this.playlist[randomIndex]);
             }
 
             toggleFullscreen() {
                 const container = document.querySelector('.media-player-container');
-                
+
                 if (!this.isFullscreen) {
                     container.classList.add('fullscreen');
                     if (container.requestFullscreen) {
@@ -1400,14 +1225,14 @@
                     document.webkitFullscreenElement ||
                     document.mozFullScreenElement
                 );
-                
+
                 const container = document.querySelector('.media-player-container');
                 if (this.isFullscreen) {
                     container.classList.add('fullscreen');
                 } else {
                     container.classList.remove('fullscreen');
                 }
-                
+
                 const icon = this.isFullscreen ? 'fa-compress' : 'fa-expand';
                 this.elements.fullscreenBtn.innerHTML = `<i class="fas ${icon}"></i>`;
             }
@@ -1425,13 +1250,13 @@
 
             changeSpeed(speed) {
                 this.playbackRate = parseFloat(speed);
-                
+
                 if (this.youtubePlayer) {
                     this.youtubePlayer.setPlaybackRate(this.playbackRate);
                 } else {
                     this.videoPlayer.playbackRate = this.playbackRate;
                 }
-                
+
                 this.updateSpeedButtons();
                 this.saveToLocalStorage('player-playbackRate', this.playbackRate);
             }
@@ -1460,13 +1285,13 @@
                     'one': 'fa-redo',
                     'all': 'fa-infinity'
                 };
-                
+
                 const colors = {
                     'none': 'var(--text)',
                     'one': 'var(--accent)',
                     'all': 'var(--accent)'
                 };
-                
+
                 this.elements.repeatBtn.innerHTML = `<i class="fas ${icons[this.repeatMode]}"></i>`;
                 this.elements.repeatBtn.style.color = colors[this.repeatMode];
                 this.elements.repeatBtn.classList.toggle('active', this.repeatMode !== 'none');
@@ -1492,17 +1317,17 @@
 
             async handleFiles(files) {
                 const fileArray = Array.from(files);
-                const videoFiles = fileArray.filter(file => 
-                    file.type.startsWith('video/') || 
+                const videoFiles = fileArray.filter(file =>
+                    file.type.startsWith('video/') ||
                     file.type.startsWith('audio/') ||
                     ['.mp4', '.webm', '.ogg', '.mov', '.avi', '.mkv', '.mp3', '.wav', '.flac', '.aac']
                         .some(ext => file.name.toLowerCase().endsWith(ext))
                 );
-                
+
                 for (const file of videoFiles) {
                     await this.addLocalFile(file);
                 }
-                
+
                 this.renderFileList();
                 this.renderPlaylist();
                 this.savePlaylist();
@@ -1524,10 +1349,10 @@
                         fileSize: file.size,
                         fileType: file.type
                     };
-                    
+
                     this.localFiles.push(videoItem);
                     this.addToPlaylist(videoItem);
-                    
+
                     this.getVideoDuration(url).then(duration => {
                         videoItem.duration = this.formatTime(duration);
                         this.renderFileList();
@@ -1546,26 +1371,26 @@
                 return new Promise((resolve, reject) => {
                     const video = document.createElement('video');
                     video.src = url;
-                    
+
                     const onLoaded = () => {
                         resolve(video.duration);
                         cleanup();
                     };
-                    
+
                     const onError = () => {
                         reject(new Error('Не удалось получить длительность'));
                         cleanup();
                     };
-                    
+
                     const cleanup = () => {
                         video.removeEventListener('loadedmetadata', onLoaded);
                         video.removeEventListener('error', onError);
                         URL.revokeObjectURL(url);
                     };
-                    
+
                     video.addEventListener('loadedmetadata', onLoaded);
                     video.addEventListener('error', onError);
-                    
+
                     setTimeout(() => {
                         cleanup();
                         reject(new Error('Таймаут загрузки'));
@@ -1584,9 +1409,9 @@
             handleUrlInput() {
                 const url = this.elements.urlInput.value.trim();
                 if (!url) return;
-                
+
                 this.elements.urlInput.value = '';
-                
+
                 if (this.isValidVideoUrl(url)) {
                     this.addVideoFromUrl(url);
                 } else {
@@ -1602,7 +1427,7 @@
                     /^blob:.+$/,
                     /^data:(video|audio)\/.+;base64,.+$/
                 ];
-                
+
                 return patterns.some(pattern => pattern.test(url));
             }
 
@@ -1610,7 +1435,7 @@
                 let source = 'direct';
                 let title = 'Видео по ссылке';
                 let id = `url-${Date.now()}`;
-                
+
                 if (url.includes('youtube.com') || url.includes('youtu.be')) {
                     source = 'youtube';
                     const videoId = this.extractYouTubeId(url);
@@ -1626,7 +1451,7 @@
                         title = `Vimeo видео (${videoId})`;
                     }
                 }
-                
+
                 const videoItem = {
                     id: id,
                     title: title,
@@ -1637,10 +1462,10 @@
                     duration: '...',
                     lastPosition: 0
                 };
-                
+
                 this.addToPlaylist(videoItem);
                 this.showNotification('Видео добавлено в плейлист', 'success');
-                
+
                 if (this.currentIndex === -1) {
                     this.loadVideo(videoItem);
                 }
@@ -1651,7 +1476,7 @@
                     /(?:youtube\.com\/(?:[^\/]+\/.+\/|(?:v|e(?:mbed)?)\/|.*[?&]v=)|youtu\.be\/)([^"&?\/\s]{11})/,
                     /^([^"&?\/\s]{11})$/
                 ];
-                
+
                 for (const pattern of patterns) {
                     const match = url.match(pattern);
                     if (match && match[1]) {
@@ -1662,10 +1487,10 @@
             }
 
             addToPlaylist(videoItem) {
-                const exists = this.playlist.some(item => 
+                const exists = this.playlist.some(item =>
                     item.id === videoItem.id && item.source === videoItem.source
                 );
-                
+
                 if (!exists) {
                     this.playlist.push(videoItem);
                     this.renderPlaylist();
@@ -1675,7 +1500,7 @@
             renderPlaylist() {
                 const container = this.elements.playlistContainer;
                 container.innerHTML = '';
-                
+
                 if (this.playlist.length === 0) {
                     container.innerHTML = `
                         <div class="playlist-empty">
@@ -1685,27 +1510,27 @@
                     `;
                     return;
                 }
-                
+
                 this.playlist.forEach((item, index) => {
                     const element = document.createElement('div');
                     element.className = `playlist-item ${index === this.currentIndex ? 'active' : ''}`;
                     element.dataset.index = index;
-                    
+
                     element.innerHTML = `
                         <div class="playlist-item-number">${index + 1}</div>
                         <div class="playlist-item-title">${this.escapeHtml(item.title)}</div>
                         <div class="playlist-item-duration">${item.duration || '...'}</div>
                     `;
-                    
+
                     element.addEventListener('click', () => {
                         this.loadVideo(item);
                     });
-                    
+
                     element.addEventListener('contextmenu', (e) => {
                         e.preventDefault();
                         this.showPlaylistContextMenu(e, index, item);
                     });
-                    
+
                     container.appendChild(element);
                 });
             }
@@ -1723,7 +1548,7 @@
                 menu.style.zIndex = '10000';
                 menu.style.padding = '5px 0';
                 menu.style.minWidth = '150px';
-                
+
                 const menuItems = [
                     {
                         text: 'Удалить из плейлиста',
@@ -1742,10 +1567,10 @@
                         action: () => window.open(item.url, '_blank')
                     }
                 ];
-                
+
                 menuItems.forEach(menuItem => {
                     if (menuItem.show === false) return;
-                    
+
                     const itemElement = document.createElement('div');
                     itemElement.className = 'context-menu-item';
                     itemElement.style.padding = '10px 15px';
@@ -1754,39 +1579,39 @@
                     itemElement.style.alignItems = 'center';
                     itemElement.style.gap = '10px';
                     itemElement.style.transition = 'var(--transition)';
-                    
+
                     itemElement.innerHTML = `
                         <i class="fas ${menuItem.icon}" style="width: 16px; text-align: center;"></i>
                         <span>${menuItem.text}</span>
                     `;
-                    
+
                     itemElement.addEventListener('mouseenter', () => {
                         itemElement.style.background = 'var(--accent)';
                         itemElement.style.color = 'white';
                     });
-                    
+
                     itemElement.addEventListener('mouseleave', () => {
                         itemElement.style.background = '';
                         itemElement.style.color = '';
                     });
-                    
+
                     itemElement.addEventListener('click', () => {
                         menuItem.action();
                         document.body.removeChild(menu);
                     });
-                    
+
                     menu.appendChild(itemElement);
                 });
-                
+
                 document.body.appendChild(menu);
-                
+
                 const removeMenu = () => {
                     if (document.body.contains(menu)) {
                         document.body.removeChild(menu);
                     }
                     document.removeEventListener('click', removeMenu);
                 };
-                
+
                 setTimeout(() => {
                     document.addEventListener('click', removeMenu);
                 }, 100);
@@ -1794,14 +1619,14 @@
 
             removeFromPlaylist(index) {
                 const item = this.playlist[index];
-                
+
                 if (index === this.currentIndex) {
                     this.pause();
                     this.currentIndex = -1;
                 }
-                
+
                 this.playlist.splice(index, 1);
-                
+
                 if (item.source === 'local') {
                     const fileIndex = this.localFiles.findIndex(f => f.id === item.id);
                     if (fileIndex !== -1) {
@@ -1811,11 +1636,11 @@
                         this.localFiles.splice(fileIndex, 1);
                     }
                 }
-                
+
                 this.renderPlaylist();
                 this.renderFileList();
                 this.savePlaylist();
-                
+
                 this.showNotification('Видео удалено из плейлиста', 'success');
             }
 
@@ -1827,7 +1652,7 @@
                     }
                     this.localFiles.splice(fileIndex, 1);
                 }
-                
+
                 const playlistIndex = this.playlist.findIndex(p => p.id === item.id && p.source === 'local');
                 if (playlistIndex !== -1) {
                     if (playlistIndex === this.currentIndex) {
@@ -1836,18 +1661,18 @@
                     }
                     this.playlist.splice(playlistIndex, 1);
                 }
-                
+
                 this.renderPlaylist();
                 this.renderFileList();
                 this.savePlaylist();
-                
+
                 this.showNotification('Файл удалён', 'success');
             }
 
             renderFileList() {
                 const container = this.elements.fileList;
                 container.innerHTML = '';
-                
+
                 if (this.localFiles.length === 0) {
                     container.innerHTML = `
                         <div class="file-list-empty">
@@ -1857,30 +1682,30 @@
                     `;
                     return;
                 }
-                
+
                 this.localFiles.forEach((item, index) => {
                     const element = document.createElement('div');
                     element.className = 'file-item';
                     element.dataset.index = index;
-                    
+
                     const fileIcon = item.fileType?.startsWith('audio/') ? 'fa-music' : 'fa-video';
-                    
+
                     element.innerHTML = `
                         <i class="fas ${fileIcon}"></i>
                         <div class="file-name">${this.escapeHtml(item.title)}</div>
                         <div class="file-size">${item.description.split('·')[1]?.trim() || ''}</div>
                     `;
-                    
+
                     element.addEventListener('click', () => {
                         this.loadVideo(item);
                         this.switchTab('playlist');
                     });
-                    
+
                     element.addEventListener('contextmenu', (e) => {
                         e.preventDefault();
                         this.showFileContextMenu(e, index, item);
                     });
-                    
+
                     container.appendChild(element);
                 });
             }
@@ -1898,7 +1723,7 @@
                 menu.style.zIndex = '10000';
                 menu.style.padding = '5px 0';
                 menu.style.minWidth = '150px';
-                
+
                 const menuItems = [
                     {
                         text: 'Воспроизвести',
@@ -1914,7 +1739,7 @@
                         action: () => this.removeLocalFile(item)
                     }
                 ];
-                
+
                 menuItems.forEach(menuItem => {
                     const itemElement = document.createElement('div');
                     itemElement.className = 'context-menu-item';
@@ -1924,39 +1749,39 @@
                     itemElement.style.alignItems = 'center';
                     itemElement.style.gap = '10px';
                     itemElement.style.transition = 'var(--transition)';
-                    
+
                     itemElement.innerHTML = `
                         <i class="fas ${menuItem.icon}" style="width: 16px; text-align: center;"></i>
                         <span>${menuItem.text}</span>
                     `;
-                    
+
                     itemElement.addEventListener('mouseenter', () => {
                         itemElement.style.background = 'var(--accent)';
                         itemElement.style.color = 'white';
                     });
-                    
+
                     itemElement.addEventListener('mouseleave', () => {
                         itemElement.style.background = '';
                         itemElement.style.color = '';
                     });
-                    
+
                     itemElement.addEventListener('click', () => {
                         menuItem.action();
                         document.body.removeChild(menu);
                     });
-                    
+
                     menu.appendChild(itemElement);
                 });
-                
+
                 document.body.appendChild(menu);
-                
+
                 const removeMenu = () => {
                     if (document.body.contains(menu)) {
                         document.body.removeChild(menu);
                     }
                     document.removeEventListener('click', removeMenu);
                 };
-                
+
                 setTimeout(() => {
                     document.addEventListener('click', removeMenu);
                 }, 100);
@@ -1980,7 +1805,7 @@
                         tab.classList.remove('active');
                     }
                 });
-                
+
                 this.elements.tabContents.forEach(content => {
                     if (content.id === `${tabName}-tab`) {
                         content.classList.add('active');
@@ -2006,7 +1831,7 @@
                 settingsModal.style.maxWidth = '90%';
                 settingsModal.style.maxHeight = '90vh';
                 settingsModal.style.overflowY = 'auto';
-                
+
                 settingsModal.innerHTML = `
                     <div class="settings-header">
                         <h3 style="margin: 0 0 20px 0; color: var(--text);">Настройки плеера</h3>
@@ -2074,16 +1899,16 @@
                         </div>
                     </div>
                 `;
-                
+
                 document.body.appendChild(settingsModal);
-                
+
                 const qualitySelect = settingsModal.querySelector('#settings-quality');
                 qualitySelect.value = this.elements.qualitySelect.value;
                 qualitySelect.addEventListener('change', (e) => {
                     this.changeQuality(e.target.value);
                     this.elements.qualitySelect.value = e.target.value;
                 });
-                
+
                 const speedBtns = settingsModal.querySelectorAll('.speed-setting-btn');
                 speedBtns.forEach(btn => {
                     btn.addEventListener('click', () => {
@@ -2093,13 +1918,13 @@
                         btn.classList.add('active');
                     });
                 });
-                
+
                 const repeatBtns = {
                     none: settingsModal.querySelector('#settings-repeat-none'),
                     one: settingsModal.querySelector('#settings-repeat-one'),
                     all: settingsModal.querySelector('#settings-repeat-all')
                 };
-                
+
                 Object.entries(repeatBtns).forEach(([mode, btn]) => {
                     btn.addEventListener('click', () => {
                         this.repeatMode = mode;
@@ -2109,14 +1934,14 @@
                         this.saveToLocalStorage('player-repeatMode', mode);
                     });
                 });
-                
+
                 const volumeSlider = settingsModal.querySelector('#settings-volume');
                 volumeSlider.addEventListener('input', (e) => {
                     const volume = e.target.value / 100;
                     this.setVolume(volume);
                     settingsModal.querySelector('span:nth-child(3)').textContent = `${e.target.value}%`;
                 });
-                
+
                 const resetBtn = settingsModal.querySelector('#settings-reset');
                 resetBtn.addEventListener('click', () => {
                     if (confirm('Вы уверены, что хотите сбросить все настройки?')) {
@@ -2125,12 +1950,12 @@
                         this.showNotification('Настройки сброшены', 'success');
                     }
                 });
-                
+
                 const closeBtn = settingsModal.querySelector('.settings-close');
                 closeBtn.addEventListener('click', () => {
                     document.body.removeChild(settingsModal);
                 });
-                
+
                 settingsModal.addEventListener('click', (e) => {
                     if (e.target === settingsModal) {
                         document.body.removeChild(settingsModal);
@@ -2143,19 +1968,19 @@
                 this.playbackRate = 1;
                 this.repeatMode = 'none';
                 this.shuffleMode = false;
-                
+
                 this.setVolume(this.volume);
                 this.changeSpeed(this.playbackRate);
                 this.updateRepeatButton();
                 this.updateShuffleButton();
-                
+
                 localStorage.removeItem('player-volume');
                 localStorage.removeItem('player-muted');
                 localStorage.removeItem('player-playbackRate');
                 localStorage.removeItem('player-repeatMode');
                 localStorage.removeItem('player-shuffleMode');
                 localStorage.removeItem('player-quality');
-                
+
                 this.elements.qualitySelect.value = 'auto';
             }
 
@@ -2163,12 +1988,12 @@
                 if (!this.elements.playerOverlay.style.display || this.elements.playerOverlay.style.display === 'none') {
                     return;
                 }
-                
+
                 if (document.activeElement.tagName === 'INPUT' || document.activeElement.tagName === 'TEXTAREA') {
                     return;
                 }
-                
-                switch(e.key) {
+
+                switch (e.key) {
                     case ' ':
                     case 'Spacebar':
                         e.preventDefault();
@@ -2252,7 +2077,7 @@
             handleVideoError(e) {
                 console.error('Ошибка видео:', e);
                 let message = 'Ошибка загрузки видео';
-                
+
                 switch (this.videoPlayer.error?.code) {
                     case 1:
                         message = 'Запрос прерван';
@@ -2267,7 +2092,7 @@
                         message = 'Формат не поддерживается';
                         break;
                 }
-                
+
                 this.showError(message);
             }
 
@@ -2284,7 +2109,7 @@
                     fileSize: item.fileSize,
                     fileType: item.fileType
                 }));
-                
+
                 this.saveToLocalStorage('player-playlist', saveData);
             }
 
@@ -2318,7 +2143,7 @@
                 notification.style.alignItems = 'center';
                 notification.style.gap = '10px';
                 notification.style.animation = 'slideIn 0.3s ease';
-                
+
                 let backgroundColor, icon;
                 switch (type) {
                     case 'success':
@@ -2337,17 +2162,17 @@
                         backgroundColor = 'var(--accent)';
                         icon = 'fa-info-circle';
                 }
-                
+
                 notification.style.background = backgroundColor;
                 notification.style.color = 'white';
-                
+
                 notification.innerHTML = `
                     <i class="fas ${icon}"></i>
                     <span>${message}</span>
                 `;
-                
+
                 document.body.appendChild(notification);
-                
+
                 setTimeout(() => {
                     if (document.body.contains(notification)) {
                         notification.style.animation = 'slideOut 0.3s ease';
@@ -2358,7 +2183,7 @@
                         }, 300);
                     }
                 }, 3000);
-                
+
                 if (!document.querySelector('#notification-styles')) {
                     const style = document.createElement('style');
                     style.id = 'notification-styles';
@@ -2414,7 +2239,7 @@
                     duration: videoData.duration || '...',
                     lastPosition: 0
                 };
-                
+
                 this.addToPlaylist(videoItem);
                 return videoItem;
             }
@@ -2436,14 +2261,14 @@
                         URL.revokeObjectURL(file.url);
                     }
                 });
-                
+
                 this.playlist = [];
                 this.localFiles = [];
                 this.currentIndex = -1;
                 this.renderPlaylist();
                 this.renderFileList();
                 localStorage.removeItem('player-playlist');
-                
+
                 this.videoPlayer.src = '';
                 this.videoPlayer.load();
                 this.elements.playerPlaceholder.style.display = 'block';
@@ -2467,7 +2292,7 @@
                 'hide&seek': '🙈',
                 'other': '🧩'
             };
-            
+
             const labels = {
                 'irl': 'IRL',
                 'minecraft': 'Minecraft',
@@ -2477,10 +2302,10 @@
                 'hide&seek': 'Прятки',
                 'other': 'Прочее'
             };
-            
+
             const isMobile = window.innerWidth <= 768;
             const isSmallMobile = window.innerWidth <= 480;
-            
+
             if (isSmallMobile) {
                 return `
                     <div class="video-type-badge compact">
@@ -2520,23 +2345,23 @@
         function displayVideos(page, filter = 'all') {
             const videoContainer = document.getElementById('video-grid');
             videoContainer.innerHTML = '';
-            
+
             let filteredVideos = videos;
             if (filter !== 'all') {
                 filteredVideos = videos.filter(video => video.type === filter);
             }
-            
+
             const startIndex = (page - 1) * videosPerPage;
             const endIndex = startIndex + videosPerPage;
             const videosToShow = filteredVideos.slice(startIndex, endIndex);
-            
+
             videosToShow.forEach(video => {
                 const videoCard = document.createElement('div');
                 videoCard.className = 'video-card';
                 videoCard.setAttribute('data-type', video.type);
-                
+
                 const typeTags = generateAdaptiveTags(video.type);
-                
+
                 videoCard.innerHTML = `
                     <div class="video-card-header">
                         ${typeTags}
@@ -2569,16 +2394,16 @@
                         </div>
                     </div>
                 `;
-                
+
                 videoContainer.appendChild(videoCard);
             });
-            
+
             attachVideoEventHandlers();
         }
 
         function attachVideoEventHandlers() {
             document.querySelectorAll('.watch-btn').forEach(btn => {
-                btn.addEventListener('click', function(e) {
+                btn.addEventListener('click', function (e) {
                     e.preventDefault();
                     const videoId = this.getAttribute('data-video-id');
                     const mediaPlayer = window.getMediaPlayer();
@@ -2587,9 +2412,9 @@
                     }
                 });
             });
-            
+
             document.querySelectorAll('.video-play-btn').forEach(btn => {
-                btn.addEventListener('click', function(e) {
+                btn.addEventListener('click', function (e) {
                     e.preventDefault();
                     const videoId = this.getAttribute('data-video-id');
                     const mediaPlayer = window.getMediaPlayer();
@@ -2598,13 +2423,13 @@
                     }
                 });
             });
-            
+
             document.querySelectorAll('.share-btn').forEach(btn => {
-                btn.addEventListener('click', async function(e) {
+                btn.addEventListener('click', async function (e) {
                     e.preventDefault();
                     e.stopPropagation();
                     const videoUrl = this.getAttribute('data-video-url');
-                    
+
                     try {
                         await navigatorClipboard.writeText(videoUrl);
                         showCopyNotification('Ссылка скопирована в буфер обмена!');
@@ -2617,16 +2442,16 @@
                         copyToClipboardFallback(videoUrl);
                     }
                 });
-                
-                btn.addEventListener('mouseenter', function() {
+
+                btn.addEventListener('mouseenter', function () {
                     const tooltip = this.querySelector('.share-tooltip');
                     if (tooltip) {
                         tooltip.style.opacity = '1';
                         tooltip.style.visibility = 'visible';
                     }
                 });
-                
-                btn.addEventListener('mouseleave', function() {
+
+                btn.addEventListener('mouseleave', function () {
                     const tooltip = this.querySelector('.share-tooltip');
                     if (tooltip) {
                         tooltip.style.opacity = '0';
@@ -2638,11 +2463,11 @@
 
         function showCopyNotification(message) {
             const notification = document.getElementById('copy-notification');
-            
+
             if (notification) {
                 notification.textContent = message;
                 notification.style.display = 'block';
-                
+
                 setTimeout(() => {
                     notification.style.display = 'none';
                 }, 2000);
@@ -2658,7 +2483,7 @@
             document.body.appendChild(textArea);
             textArea.focus();
             textArea.select();
-            
+
             try {
                 document.execCommand('copy');
                 showCopyNotification('Ссылка скопирована!');
@@ -2666,23 +2491,23 @@
                 console.error('Не удалось скопировать текст: ', err);
                 showCopyNotification('Не удалось скопировать ссылку');
             }
-            
+
             document.body.removeChild(textArea);
         }
 
         function createPagination(filter = 'all') {
             const paginationContainer = document.getElementById('pagination');
             paginationContainer.innerHTML = '';
-            
+
             let filteredVideos = videos;
             if (filter !== 'all') {
                 filteredVideos = videos.filter(video => video.type === filter);
             }
-            
+
             const totalPages = Math.ceil(filteredVideos.length / videosPerPage);
-            
+
             if (totalPages <= 1) return;
-            
+
             const prevButton = document.createElement('button');
             prevButton.className = `pagination-btn ${currentPage === 1 ? 'disabled' : ''}`;
             prevButton.innerHTML = '<i class="fas fa-chevron-left"></i>';
@@ -2699,15 +2524,15 @@
                 });
             }
             paginationContainer.appendChild(prevButton);
-            
+
             const maxVisiblePages = 5;
             let startPage = Math.max(1, currentPage - Math.floor(maxVisiblePages / 2));
             let endPage = Math.min(totalPages, startPage + maxVisiblePages - 1);
-            
+
             if (endPage - startPage + 1 < maxVisiblePages) {
                 startPage = Math.max(1, endPage - maxVisiblePages + 1);
             }
-            
+
             for (let i = startPage; i <= endPage; i++) {
                 const pageButton = document.createElement('button');
                 pageButton.className = `pagination-btn ${i === currentPage ? 'active' : ''}`;
@@ -2724,7 +2549,7 @@
                 });
                 paginationContainer.appendChild(pageButton);
             }
-            
+
             const nextButton = document.createElement('button');
             nextButton.className = `pagination-btn ${currentPage === totalPages ? 'disabled' : ''}`;
             nextButton.innerHTML = '<i class="fas fa-chevron-right"></i>';
@@ -2746,17 +2571,17 @@
         function createSnowflakes() {
             const snowflakesContainer = document.getElementById('snowflakes');
             const snowflakeCount = 50;
-            
+
             for (let i = 0; i < snowflakeCount; i++) {
                 const snowflake = document.createElement('div');
                 snowflake.classList.add('snowflake');
-                
+
                 const size = Math.random() * 6 + 4;
                 const left = Math.random() * 100;
                 const animationDuration = Math.random() * 10 + 10;
                 const animationDelay = Math.random() * 5;
                 const opacity = Math.random() * 0.6 + 0.4;
-                
+
                 snowflake.style.width = `${size}px`;
                 snowflake.style.height = `${size}px`;
                 snowflake.style.left = `${left}%`;
@@ -2766,7 +2591,7 @@
                 snowflake.style.background = 'white';
                 snowflake.style.borderRadius = '50%';
                 snowflake.style.boxShadow = '0 0 5px white';
-                
+
                 snowflakesContainer.appendChild(snowflake);
             }
         }
@@ -2774,17 +2599,17 @@
         function createParticles() {
             const particlesContainer = document.getElementById('particles');
             const particleCount = 20;
-            
+
             for (let i = 0; i < particleCount; i++) {
                 const particle = document.createElement('div');
                 particle.classList.add('particle');
-                
+
                 const size = Math.random() * 100 + 50;
                 const left = Math.random() * 100;
                 const top = Math.random() * 100;
                 const animationDuration = Math.random() * 20 + 20;
                 const animationDelay = Math.random() * 5;
-                
+
                 particle.style.width = `${size}px`;
                 particle.style.height = `${size}px`;
                 particle.style.left = `${left}%`;
@@ -2792,16 +2617,16 @@
                 particle.style.animationDuration = `${animationDuration}s`;
                 particle.style.animationDelay = `${animationDelay}s`;
                 particle.style.background = `radial-gradient(circle, rgba(255,255,255,0.1) 0%, rgba(255,255,255,0) 70%)`;
-                
+
                 particlesContainer.appendChild(particle);
             }
         }
 
         // Инициализация при загрузке страницы
-        document.addEventListener('DOMContentLoaded', function() {
+        document.addEventListener('DOMContentLoaded', function () {
             // Инициализация медиаплеера
             mediaPlayerInstance = new MediaPlayer();
-            
+
             // Ссылка на открытие плеера в футере
             const openPlayerLink = document.getElementById('open-player-link');
             if (openPlayerLink) {
@@ -2810,15 +2635,15 @@
                     mediaPlayerInstance.openPlayer();
                 });
             }
-            
+
             // Создание снежинок и частиц
             createSnowflakes();
             createParticles();
-            
+
             // Отображение видео
             displayVideos(currentPage);
             createPagination();
-            
+
             // Mobile menu toggle
             document.querySelector('.mobile-menu-btn').addEventListener('click', function () {
                 this.classList.toggle('active');
@@ -2864,7 +2689,7 @@
 
             // Filter buttons
             document.querySelectorAll('.filter-btn').forEach(btn => {
-                btn.addEventListener('click', function() {
+                btn.addEventListener('click', function () {
                     document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
                     this.classList.add('active');
                     currentFilter = this.dataset.filter;
@@ -2875,7 +2700,7 @@
             });
 
             // Theme toggle
-            document.querySelector('.theme-toggle').addEventListener('click', function() {
+            document.querySelector('.theme-toggle').addEventListener('click', function () {
                 document.body.classList.toggle('dark-mode');
                 this.querySelector('i').classList.toggle('fa-moon');
                 this.querySelector('i').classList.toggle('fa-sun');
@@ -2885,38 +2710,38 @@
             setTimeout(() => {
                 document.body.classList.add('loaded');
             }, 100);
-            
+
             // Обновление адаптивных тегов при изменении размера окна
             let resizeTimeout;
-            window.addEventListener('resize', function() {
+            window.addEventListener('resize', function () {
                 clearTimeout(resizeTimeout);
-                resizeTimeout = setTimeout(function() {
+                resizeTimeout = setTimeout(function () {
                     displayVideos(currentPage, currentFilter);
                 }, 250);
             });
         });
 
         // Глобальные методы для использования из других скриптов
-        window.openMediaPlayer = function(videoItem) {
+        window.openMediaPlayer = function (videoItem) {
             if (mediaPlayerInstance) {
                 mediaPlayerInstance.openPlayer(videoItem);
             }
         };
 
-        window.addVideoToPlayer = function(videoData) {
+        window.addVideoToPlayer = function (videoData) {
             if (mediaPlayerInstance) {
                 return mediaPlayerInstance.addVideo(videoData);
             }
             return null;
         };
 
-        window.getMediaPlayer = function() {
+        window.getMediaPlayer = function () {
             return mediaPlayerInstance;
         };
 
         // Fallback для navigator.clipboard
         const navigatorClipboard = {
-            writeText: async function(text) {
+            writeText: async function (text) {
                 if (navigator.clipboard && navigator.clipboard.writeText) {
                     return navigator.clipboard.writeText(text);
                 } else {
@@ -2929,7 +2754,7 @@
                         document.body.appendChild(textArea);
                         textArea.focus();
                         textArea.select();
-                        
+
                         try {
                             const successful = document.execCommand('copy');
                             document.body.removeChild(textArea);
