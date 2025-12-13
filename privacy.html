@@ -1,0 +1,519 @@
+<!DOCTYPE html>
+<html lang="ru_RU">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Политика конфиденциальности | Блог братьев</title>
+    <link rel="icon" href="/images/logo.png" type="image/png">
+    <link rel="stylesheet" href="/styles/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700;800&family=Playfair+Display:wght@700&display=swap">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        /* Дополнительные стили для страницы политики конфиденциальности */
+        .privacy-policy {
+            padding: 120px 0 80px;
+            background: rgba(255, 255, 255, 0.02);
+            min-height: 100vh;
+        }
+        
+        .privacy-container {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 0 24px;
+        }
+        
+        .privacy-header {
+            text-align: center;
+            margin-bottom: 60px;
+        }
+        
+        .privacy-header h1 {
+            font-size: 2.8rem;
+            margin-bottom: 20px;
+            background: linear-gradient(90deg, #6366f1, #8b5cf6);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        
+        .privacy-header .last-updated {
+            color: var(--text-secondary);
+            font-size: 1rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+        }
+        
+        .privacy-header .last-updated i {
+            color: var(--accent);
+        }
+        
+        .privacy-content {
+            background: rgba(255, 255, 255, 0.03);
+            border-radius: var(--radius-xl);
+            padding: 50px;
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            box-shadow: var(--shadow-lg);
+            backdrop-filter: var(--blur-intensity);
+        }
+        
+        .privacy-section {
+            margin-bottom: 40px;
+        }
+        
+        .privacy-section:last-child {
+            margin-bottom: 0;
+        }
+        
+        .privacy-section h2 {
+            font-size: 1.8rem;
+            margin-bottom: 20px;
+            color: var(--text);
+            padding-bottom: 15px;
+            border-bottom: 2px solid rgba(99, 102, 241, 0.3);
+            position: relative;
+        }
+        
+        .privacy-section h2:after {
+            content: '';
+            position: absolute;
+            bottom: -2px;
+            left: 0;
+            width: 100px;
+            height: 2px;
+            background: var(--gradient);
+        }
+        
+        .privacy-section p {
+            color: var(--text-secondary);
+            line-height: 1.8;
+            margin-bottom: 15px;
+        }
+        
+        .privacy-section ul {
+            list-style: none;
+            padding-left: 20px;
+            margin-bottom: 20px;
+        }
+        
+        .privacy-section li {
+            color: var(--text-secondary);
+            line-height: 1.8;
+            margin-bottom: 10px;
+            padding-left: 25px;
+            position: relative;
+        }
+        
+        .privacy-section li:before {
+            content: '•';
+            position: absolute;
+            left: 0;
+            color: var(--accent);
+            font-weight: bold;
+        }
+        
+        .privacy-section strong {
+            color: var(--text);
+            font-weight: 600;
+        }
+        
+        .contact-info {
+            background: rgba(99, 102, 241, 0.05);
+            border-radius: var(--radius);
+            padding: 25px;
+            margin: 30px 0;
+            border: 1px solid rgba(99, 102, 241, 0.1);
+        }
+        
+        .contact-info h3 {
+            color: var(--accent);
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .contact-info h3 i {
+            font-size: 1.2rem;
+        }
+        
+        .back-to-home {
+            text-align: center;
+            margin-top: 60px;
+        }
+        
+        .btn-back {
+            display: inline-flex;
+            align-items: center;
+            gap: 12px;
+            padding: 14px 32px;
+            background: var(--gradient);
+            color: white;
+            text-decoration: none;
+            border-radius: var(--radius);
+            font-weight: 600;
+            transition: all 0.3s ease;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            box-shadow: 0 8px 25px rgba(99, 102, 241, 0.3);
+        }
+        
+        .btn-back:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 12px 35px rgba(99, 102, 241, 0.4);
+            gap: 15px;
+        }
+        
+        .btn-back i {
+            transition: transform 0.3s ease;
+        }
+        
+        .btn-back:hover i {
+            transform: translateX(-5px);
+        }
+        
+        /* Мобильная адаптация */
+        @media (max-width: 768px) {
+            .privacy-policy {
+                padding: 100px 0 60px;
+            }
+            
+            .privacy-header h1 {
+                font-size: 2.2rem;
+            }
+            
+            .privacy-content {
+                padding: 30px 20px;
+            }
+            
+            .privacy-section h2 {
+                font-size: 1.5rem;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .privacy-policy {
+                padding: 80px 0 40px;
+            }
+            
+            .privacy-header h1 {
+                font-size: 1.8rem;
+            }
+            
+            .privacy-content {
+                padding: 20px 15px;
+            }
+        }
+    </style>
+</head>
+<body class="dark-theme">
+
+    <!-- Анимированный фон -->
+    <div class="animated-background">
+        <div class="gradient-bg"></div>
+        <div class="particles" id="particles"></div>
+    </div>
+
+    <!-- Новогодние элементы -->
+    <div class="snowflakes" id="snowflakes"></div>
+    <div class="snowdrifts"></div>
+
+    <!-- Header -->
+    <header id="header">
+        <div class="container">
+            <div class="header-content">
+                <a href="/index.html" class="logo-link">
+                    <div class="logo">
+                        <div class="logo-icon-container">
+                            <i class="fas fa-users logo-icon"></i>
+                        </div>
+                        <div class="logo-text">
+                            <h1>Братья</h1>
+                            <p class="logo-subtitle">блог</p>
+                        </div>
+                    </div>
+                </a>
+                
+                <!-- Кнопка меню для мобильных -->
+                <button class="mobile-menu-btn" id="mobile-menu-btn" aria-label="Открыть меню">
+                    <span class="menu-line"></span>
+                    <span class="menu-line"></span>
+                    <span class="menu-line"></span>
+                </button>
+                
+                <!-- Навигация -->
+                <nav class="main-nav" id="main-nav">
+                    <ul class="nav-list">
+                        <li class="nav-item">
+                            <a href="/index.html" class="nav-link">
+                                <i class="fas fa-home nav-icon"></i>
+                                <span class="nav-text">Главная</span>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="/newswire.html" class="nav-link">
+                                <i class="fas fa-newspaper nav-icon"></i>
+                                <span class="nav-text">Новостная лента</span>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="/videos.html" class="nav-link">
+                                <i class="fas fa-play-circle nav-icon"></i>
+                                <span class="nav-text">Видеоролики</span>
+                            </a>
+                        </li>
+                    </ul>
+                    
+                    <!-- Дополнительные элементы навигации -->
+                    <div class="nav-extra">
+                        <!-- <button class="media-player-btn" id="open-player-btn" aria-label="Открыть медиаплеер">
+                            <i class="fa-solid fa-face-laugh"> </i>
+                        </button> -->
+                    </div>
+                </nav>
+            </div>
+        </div>
+    </header>
+
+    <!-- Основной контент политики конфиденциальности -->
+    <main class="privacy-policy">
+        <div class="privacy-container">
+            <div class="privacy-header">
+                <h1>Политика конфиденциальности</h1>
+                <div class="last-updated">
+                    <i class="fas fa-history"></i>
+                    <span>Последнее обновление: 12 декабря 2025 года</span>
+                </div>
+            </div>
+            
+            <div class="privacy-content">
+                <section class="privacy-section">
+                    <h2>1. Общие положения</h2>
+                    <p>Настоящая Политика конфиденциальности персональных данных (далее – Политика конфиденциальности) действует в отношении всей информации, которую сайт «Блог братьев», расположенный на доменном имени <strong>http://nikolayrasetovich-cloud.github.io</strong>, может получить о Пользователе во время использования сайта, программ и продуктов сайта.</p>
+                    
+                    <p>Использование сайта «Блог братьев» означает безоговорочное согласие Пользователя с настоящей Политикой и указанными в ней условиями обработки его персональной информации; в случае несогласия с этими условиями Пользователь должен воздержаться от использования сайта.</p>
+                </section>
+                
+                <section class="privacy-section">
+                    <h2>2. Персональная информация Пользователей, которую обрабатывает сайт</h2>
+                    <p><strong>2.1.</strong> В рамках настоящей Политики под «персональной информацией Пользователя» понимаются:</p>
+                    
+                    <ul>
+                        <li>Персональная информация, которую Пользователь предоставляет о себе самостоятельно при использовании функционала сайта (комментарии, обратная связь)</li>
+                        <li>Данные, которые автоматически передаются сайту в процессе их использования с помощью установленного на устройстве Пользователя программного обеспечения, включая IP-адрес, информацию из cookie, информацию о браузере Пользователя (или иной программе, с помощью которой осуществляется доступ к сайту), время доступа, адрес запрашиваемой страницы</li>
+                        <li>Иная информация о Пользователе, сбор и/или предоставление которой определено в Регулирующих документах отдельных сервисов сайта</li>
+                    </ul>
+                    
+                    <p><strong>2.2.</strong> Настоящая Политика конфиденциальности применяется только к сайту «Блог братьев». Сайт не контролирует и не несет ответственность за сайты третьих лиц, на которые Пользователь может перейти по ссылкам, доступным на сайте.</p>
+                </section>
+                
+                <section class="privacy-section">
+                    <h2>3. Цели сбора и обработки персональной информации Пользователей</h2>
+                    <p><strong>3.1.</strong> Сайт собирает и хранит только те персональные данные, которые необходимы для предоставления сервисов или исполнения соглашений и договоров с Пользователем.</p>
+                    
+                    <p><strong>3.2.</strong> Персональную информацию Пользователя сайт может использовать в следующих целях:</p>
+                    
+                    <ul>
+                        <li>Идентификация Пользователя для предоставления персонализированного контента</li>
+                        <li>Предоставление Пользователю доступа к персонализированным ресурсам сайта</li>
+                        <li>Установление с Пользователем обратной связи, включая направление уведомлений, запросов, касающихся использования сайта, оказания услуг, обработка запросов и заявок от Пользователя</li>
+                        <li>Определение места нахождения Пользователя для обеспечения безопасности, предотвращения мошенничества</li>
+                        <li>Подтверждение достоверности и полноты персональных данных, предоставленных Пользователем</li>
+                        <li>Создание учетной записи для использования частей сайта, если Пользователь дал согласие на создание учетной записи</li>
+                        <li>Уведомление Пользователя сайта о состоянии его заявки</li>
+                        <li>Обработка и получение платежей</li>
+                        <li>Предоставление Пользователю эффективной клиентской и технической поддержки при возникновении проблем, связанных с использованием сайта</li>
+                        <li>Предоставление Пользователю с его согласия, обновлений продукции, специальных предложений, информации о ценах, новостной рассылки и иных сведений от имени сайта</li>
+                        <li>Осуществление рекламной деятельности с согласия Пользователя</li>
+                    </ul>
+                </section>
+                
+                <section class="privacy-section">
+                    <h2>4. Условия обработки персональной информации Пользователя и её передачи третьим лицам</h2>
+                    <p><strong>4.1.</strong> Сайт хранит персональную информацию Пользователей в соответствии с внутренними регламентами конкретных сервисов.</p>
+                    
+                    <p><strong>4.2.</strong> В отношении персональной информации Пользователя сохраняется ее конфиденциальность, кроме случаев добровольного предоставления Пользователем информации о себе для общего доступа неограниченному кругу лиц.</p>
+                    
+                    <p><strong>4.3.</strong> Сайт вправе передать персональную информацию Пользователя третьим лицам в следующих случаях:</p>
+                    
+                    <ul>
+                        <li>Пользователь выразил согласие на такие действия</li>
+                        <li>Передача необходима для использования Пользователем определенного сервиса либо для исполнения определенного соглашения или договора с Пользователем</li>
+                        <li>Передача предусмотрена российским или иным применимым законодательством в рамках установленной законодательством процедуры</li>
+                        <li>Такая передача происходит в рамках продажи или иной передачи бизнеса (полностью или в части), при этом к приобретателю переходят все обязательства по соблюдению условий настоящей Политики применительно к полученной им персональной информации</li>
+                        <li>В целях обеспечения возможности защиты прав и законных интересов сайта или третьих лиц в случаях, когда Пользователь нарушает Пользовательское соглашение сайта</li>
+                    </ul>
+                    
+                    <p><strong>4.4.</strong> При обработке персональных данных Пользователей сайт руководствуется Федеральным законом РФ «О персональных данных».</p>
+                </section>
+                
+                <section class="privacy-section">
+                    <h2>5. Изменение Пользователем персональной информации</h2>
+                    <p><strong>5.1.</strong> Пользователь может в любой момент изменить (обновить, дополнить) предоставленную им персональную информацию или её часть, а также параметры её конфиденциальности.</p>
+                    
+                    <p><strong>5.2.</strong> Пользователь также может удалить предоставленную им в рамках определенной учетной записи персональную информацию. При этом удаление аккаунта может повлечь невозможность использования некоторых сервисов сайта.</p>
+                </section>
+                
+                <section class="privacy-section">
+                    <h2>6. Меры, применяемые для защиты персональной информации Пользователя</h2>
+                    <p><strong>6.1.</strong> Сайт принимает необходимые и достаточные организационные и технические меры для защиты персональной информации Пользователя от неправомерного или случайного доступа, уничтожения, изменения, блокирования, копирования, распространения, а также от иных неправомерных действий с ней третьих лиц.</p>
+                    
+                    <p><strong>6.2.</strong> Для авторизации доступа к сайту используется защищенное соединение (HTTPS), обеспечивающее безопасную передачу данных.</p>
+                    
+                    <p><strong>6.3.</strong> Сайт не несет ответственности за возможные последствия утери Пользователем данных для авторизации (логин, пароль) на сторонних ресурсах.</p>
+                </section>
+                
+                <section class="privacy-section">
+                    <h2>7. Изменение Политики конфиденциальности. Применимое законодательство</h2>
+                    <p><strong>7.1.</strong> Сайт имеет право вносить изменения в настоящую Политику конфиденциальности. При внесении изменений в актуальной редакции указывается дата последнего обновления. Новая редакция Политики вступает в силу с момента ее размещения, если иное не предусмотрено новой редакцией Политики.</p>
+                    
+                    <p><strong>7.2.</strong> К настоящей Политике и отношениям между Пользователем и Сайтом, возникающим в связи с применением Политики конфиденциальности, подлежит применению право Российской Федерации.</p>
+                </section>
+                
+                <section class="privacy-section">
+                    <h2>8. Обратная связь. Вопросы и предложения</h2>
+                    <p><strong>8.1.</strong> Все предложения или вопросы по поводу настоящей Политики следует сообщать в Службу поддержки сайта.</p>
+                    
+                    <div class="contact-info">
+                        <h3><i class="fas fa-envelope"></i> Контактная информация</h3>
+                        <p><strong>Электронная почта:</strong> support@nikolayrasetovich</p>
+                        <p><strong>Телефон:</strong> +375 (29) XXX-XX-XX</p>
+                        <p><strong>Адрес:</strong> Республика Беларусь</p>
+                    </div>
+                    
+                    <p><strong>8.2.</strong> Действующая Политика конфиденциальности размещена на странице по адресу: <strong>http://nikolayrasetovich-cloud.github.io/privacy</strong></p>
+                </section>
+                
+                <div class="back-to-home">
+                    <a href="/index.html" class="btn btn-back">
+                        <i class="fas fa-arrow-left"></i>
+                        <span>Вернуться на главную</span>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer id="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-main">
+                    <div class="footer-logo">
+                        <i class="fas fa-users logo-icon"></i>
+                        <div>
+                            <h3>Блог братьев</h3>
+                            <p>Два брата и одна девочка в увлекательных приключениях</p>
+                        </div>
+                    </div>
+                    <div class="footer-social">
+                        <a href="https://www.youtube.com/@n1kolayrasetovich" target="_blank" class="social-link youtube"
+                            aria-label="YouTube">
+                            <i class="fab fa-youtube"></i>
+                        </a>
+                        <a href="https://t.me/nesoqiton" target="_blank" class="social-link telegram"
+                            aria-label="Telegram">
+                            <i class="fab fa-telegram"></i>
+                        </a>
+                        <a href="#" class="social-link instagram" aria-label="Instagram">
+                            <i class="fab fa-instagram"></i>
+                        </a>
+                    </div>
+                </div>
+                <div class="footer-links">
+                    <div class="footer-column">
+                        <h4>Разделы</h4>
+                        <ul>
+                            <li><a href="/index.html">Главная</a></li>
+                            <li><a href="/newswire.html">Новостная лента</a></li>
+                            <li><a href="/videos.html">Видеоролики</a></li>
+                        </ul>
+                    </div>
+                    <div class="footer-column">
+                        <h4>Документы</h4>
+                        <ul>
+                            <li><a href="/privacy.html" class="active">Политика конфиденциальности</a></li>
+                            <li><a href="/terms.html">Пользовательское соглашение</a></li>
+                            <li><a href="/index.html#footer">Контакты</a></li>
+                        </ul>
+                    </div>
+                    <div class="footer-column">
+                        <h4>Контакты</h4>
+                        <ul>
+                            <li><i class="fas fa-user"></i> Никита</li>
+                            <li><i class="fas fa-user"></i> Евгений</li>
+                            <li><i class="fas fa-user"></i> Ольга</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2025 Блог братьев. Все права защищены.</p>
+                <div class="footer-links-bottom">
+                    <a href="/privacy.html">Политика конфиденциальности</a>
+                    <a href="/terms.html">Условия использования</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Базовый JavaScript для навигации
+        document.addEventListener('DOMContentLoaded', function() {
+            // Mobile menu toggle
+            const mobileMenuBtn = document.getElementById('mobile-menu-btn');
+            const mainNav = document.getElementById('main-nav');
+            
+            if (mobileMenuBtn && mainNav) {
+                mobileMenuBtn.addEventListener('click', function() {
+                    this.classList.toggle('active');
+                    mainNav.classList.toggle('active');
+                });
+            }
+            
+            // Header scroll effect
+            window.addEventListener('scroll', function() {
+                const header = document.getElementById('header');
+                if (window.scrollY > 50) {
+                    header.style.backdropFilter = 'blur(20px)';
+                    header.style.backgroundColor = 'rgba(0, 0, 0, 0.95)';
+                } else {
+                    header.style.backdropFilter = 'none';
+                    header.style.backgroundColor = 'rgba(0, 0, 0, 0.85)';
+                }
+            });
+            
+            // Создание снежинок
+            function createSnowflakes() {
+                const snowflakesContainer = document.getElementById('snowflakes');
+                const snowflakeCount = 50;
+                
+                for (let i = 0; i < snowflakeCount; i++) {
+                    const snowflake = document.createElement('div');
+                    snowflake.classList.add('snowflake');
+                    
+                    const size = Math.random() * 6 + 4;
+                    const left = Math.random() * 100;
+                    const animationDuration = Math.random() * 10 + 10;
+                    const animationDelay = Math.random() * 5;
+                    const opacity = Math.random() * 0.6 + 0.4;
+                    
+                    snowflake.style.width = `${size}px`;
+                    snowflake.style.height = `${size}px`;
+                    snowflake.style.left = `${left}%`;
+                    snowflake.style.animationDuration = `${animationDuration}s`;
+                    snowflake.style.animationDelay = `${animationDelay}s`;
+                    snowflake.style.opacity = opacity;
+                    snowflake.style.background = 'white';
+                    snowflake.style.borderRadius = '50%';
+                    snowflake.style.boxShadow = '0 0 5px white';
+                    
+                    snowflakesContainer.appendChild(snowflake);
+                }
+            }
+            
+            createSnowflakes();
+        });
+    </script>
+</body>
+</html>

@@ -6,17 +6,13 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Блог братьев | Новогоднее обновление</title>
     <link rel="icon" href="images/logo.png" type="images/logo.png">
-    <link rel="stylesheet" href="/style.css">
+    <link rel="stylesheet" href="/styles/style.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <link
-        href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700;800&family=Playfair+Display:wght@700&display=swap"
-        rel="stylesheet">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700;800&family=Playfair+Display:wght@700&display=swap">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-
-
 </head>
+    <body>
 
-<body>
     <!-- Анимированный фон -->
     <div class="animated-background">
         <div class="gradient-bg"></div>
@@ -30,7 +26,7 @@
     <!-- Медиаплеер -->
     <div class="media-player-overlay" id="media-player">
         <div class="media-player-container">
-            <div class="player-header">
+            <div class="player- ">
                 <div class="player-title">
                     <i class="fas fa-play-circle"></i>
                     <span id="player-current-title">Медиаплеер</span>
@@ -215,37 +211,95 @@
         </div>
     </div>
 
-    <!-- Header -->
-    <header id="header">
-        <div class="container">
-            <div class="header-content">
-                <a href="/index.html">
-                    <div class="logo">
-                        <div class="logo-icon-container">
-                            <i class="fas fa-users logo-icon"></i>
-                        </div>
-                </a>
-                <div class="logo-text">
-                    <h1>Братья</h1>
-                    <p class="logo-subtitle">блог</p>
+  <!-- Header -->
+<header id="header" class="header-hidden">
+    <div class="container">
+        <div class="header-content">
+            <a href="/index.html" class="logo-link">
+                <div class="logo">
+                    <div class="logo-icon-container">
+                        <i class="fas fa-users logo-icon"></i>
+                    </div>
+                    <div class="logo-text">
+                        <h1>Братья</h1>
+                        <p class="logo-subtitle">блог</p>
+                    </div>
                 </div>
-            </div>
-            <button class="mobile-menu-btn" aria-label="Меню">
-                <span></span>
-                <span></span>
-                <span></span>
+            </a>
+            
+            <!-- Кнопка меню для мобильных -->
+            <button class="mobile-menu-btn" id="mobile-menu-btn" aria-label="Открыть меню">
+                <span class="menu-line"></span>
+                <span class="menu-line"></span>
+                <span class="menu-line"></span>
             </button>
-            <nav>
-                <ul>
-                    <li><a href="/newswire.html" class="nav-link"><span>Новостная лента</span></a></li>
-                    <li><a href="/videos.html" class="nav-link"><span>Видеоролики</span></a></li>
+            
+            <!-- Навигация -->
+            <nav class="main-nav" id="main-nav">
+                <ul class="nav-list">
+                    <li class="nav-item">
+                        <a href="/newswire.html" class="nav-link">
+                            <i class="fas fa-newspaper nav-icon"></i>
+                            <span class="nav-text">Новостная лента</span>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="/videos.html" class="nav-link">
+                            <i class="fas fa-play-circle nav-icon"></i>
+                            <span class="nav-text">Видеоролики</span>
+                        </a>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a href="#" class="nav-link dropdown-toggle">
+                            <i class="fas fa-ellipsis-h nav-icon"></i>
+                            <span class="nav-text">Ещё</span>
+                            <i class="fas fa-chevron-down dropdown-arrow"></i>
+                        </a>
+                        <div class="dropdown-menu">
+                            <a href="/index.html#footer" class="dropdown-item">
+                                <i class="fas fa-phone-alt"></i>
+                                Контакты
+                            </a>
+                            <a href="#" class="dropdown-item">
+                                <i class="fas fa-archive"></i>
+                                Архив
+                            </a>
+                            <a href="#" class="dropdown-item">
+                                <i class="fas fa-cog"></i>
+                                Профиль (!скоро)
+                            </a>
+                        </div>
+                    </li>
                 </ul>
+                
+                <!-- Дополнительные элементы навигации -->
+                <div class="nav-extra">
+                    <div class="search-toggle">
+                        <i class="fas fa-search"></i>
+                    </div>
+                   <!-- <button class="media-player-btn" id="open-player-btn" aria-label="Открыть медиаплеер">
+                        <i class="fa-solid fa-face-laugh"> </i>
+                    </button> -->
+                </div>
             </nav>
         </div>
+    </div>
+    
+    <!-- Поисковая панель (скрыта по умолчанию) -->
+    <div class="search-panel" id="search-panel">
+        <div class="container">
+            <div class="search-container">
+                <i class="fas fa-search search-icon"></i>
+                <input type="text" class="search-input" placeholder="Поиск новостей, видео..." autocomplete="off">
+                <button class="search-close" id="search-close" aria-label="Закрыть поиск">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
         </div>
-    </header>
+    </div>
+</header>
 
-    <!-- Hero Section -->
+<!-- Hero Section -->
     <section class="hero">
         <div class="container">
             <div class="hero-content">
@@ -262,11 +316,11 @@
                 <div class="hero-meta">
                     <div class="meta-item">
                         <i class="fas fa-calendar-alt"></i>
-                        <span>Последнее редактирование: 12.12.2025</span>
+                        <span>Последнее редактирование: 13 декабря 2025г</span>
                     </div>
                     <div class="meta-item">
                         <i class="fas fa-clock"></i>
-                        <span>22:00</span>
+                        <span>17:00</span>
                     </div>
                 </div>
                 <div class="hero-actions">
@@ -281,6 +335,215 @@
             </div>
         </div>
     </section>
+
+   <!-- Hero Slider Section -->
+<section class="hero-slider">
+    <div class="container slider-container">
+        <!-- СТРЕЛКИ ПО БОКАМ -->
+        <div class="slider-arrows">
+            <button class="slider-arrow arrow-prev" aria-label="Предыдущий слайд">
+                <i class="fas fa-chevron-left"></i>
+            </button>
+            <button class="slider-arrow arrow-next" aria-label="Следующий слайд">
+                <i class="fas fa-chevron-right"></i>
+            </button>
+        </div>
+            <!-- Слайд 1 -->
+            <div class="slider-slide active">
+                <div class="slide-grid">
+                    <!-- Левая часть: изображение -->
+                    <div class="slide-image-container">
+                        <div class="image-wrapper">
+                            <img src="/images/НОВОГОДНЕЕ ОБНОВЛЕНИЕ.png" alt="Новогоднее обновление" class="slide-image">
+                            <div class="image-overlay"></div>
+                            <div class="image-badge">Главная новость</div>
+                        </div>
+                    </div>
+                    
+                    <!-- Правая часть: контент и навигация -->
+                    <div class="slide-content-container">
+                        <div class="content-wrapper">
+                            <div class="slide-meta">
+                                <span class="slide-date"><i class="far fa-calendar"></i> 26.11.2025</span>
+                                <span class="slide-category">Обновление сайта</span>
+                            </div>
+                            
+                            <h2 class="slide-title">Новогоднее обновление сайта</h2>
+                            
+                            <p class="slide-description">
+                                Был полностью изменен интерфейс сайта на новогоднюю тематику 
+                                с добавлением современных элементов и анимаций. Добавлен новый 
+                                медиаплеер с поддержкой YouTube и локальных файлов.
+                            </p>
+                            
+                            <ul class="slide-features">
+                                <li><i class="fas fa-check"></i> Обновленный интерфейс сайта</li>
+                                <li><i class="fas fa-check"></i> Добавлен блок с новостями</li>
+                                <li><i class="fas fa-check"></i> Новый медиаплеер с поддержкой YouTube</li>
+                                <li><i class="fas fa-check"></i> Полностью тёмная тема с градиентами</li>
+                            </ul>
+                            
+                            <div class="slide-actions">
+                                <a href="/newswire/christmas-update.html" class="btn btn-details">
+                                    <span>Подробнее</span>
+                                    <i class="fas fa-arrow-right"></i>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Слайд 2 -->
+            <div class="slider-slide">
+                <div class="slide-grid">
+                    <!-- Левая часть: изображение -->
+                    <div class="slide-image-container">
+                        <div class="image-wrapper">
+                            <img src="/images/ДОМАШНИЙ АРЕСТ.png" alt="Домашний арест" class="slide-image">
+                            <div class="image-overlay"></div>
+                            <div class="image-badge">Трансляция</div>
+                        </div>
+                    </div>
+                    
+                    <!-- Правая часть: контент и навигация -->
+                    <div class="slide-content-container">
+                        <div class="content-wrapper">
+                            <div class="slide-meta">
+                                <span class="slide-date"><i class="far fa-calendar"></i> 23.11.2025</span>
+                                <span class="slide-category">Трансляция</span>
+                            </div>
+                            
+                            <h2 class="slide-title">🏚️ ДОМАШНИЙ АРЕСТ</h2>
+                            
+                            <p class="slide-description">
+                                Самая уютная и весёлая трансляция этого сезона. Два брата 
+                                в самых безумных домашних приключениях. Экшен, юмор и отличное настроение.
+                            </p>
+                            
+                            <ul class="slide-features">
+                                <li><i class="fas fa-check"></i> Полная версия трансляции</li>
+                                <li><i class="fas fa-check"></i> 1080p качество</li>
+                                <li><i class="fas fa-check"></i> Продолжительность: 2ч 45м</li>
+                            </ul>
+                            
+                            <div class="slide-actions">
+                                <a href="/newswire/house-arrest.html" class="btn btn-details">
+                                    <span>Подробнее</span>
+                                    <i class="fas fa-arrow-right"></i>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Слайд 3 -->
+            <div class="slider-slide">
+                <div class="slide-grid">
+                    <!-- Левая часть: изображение -->
+                    <div class="slide-image-container">
+                        <div class="image-wrapper">
+                            <img src="/images/ЭКШЕН УЖЕ СЕГОДНЯ.png" alt="Экшен уже сегодня" class="slide-image">
+                            <div class="image-overlay"></div>
+                            <div class="image-badge">Масштабная трансляция</div>
+                        </div>
+                    </div>
+                    
+                    <!-- Правая часть: контент и навигация -->
+                    <div class="slide-content-container">
+                        <div class="content-wrapper">
+                            <div class="slide-meta">
+                                <span class="slide-date"><i class="far fa-calendar"></i> 08.12.2025</span>
+                                <span class="slide-category">Масштабная трансляция</span>
+                            </div>
+                            
+                            <h2 class="slide-title">🔫 КООПЕРАТИВ на МАКСИМАЛКАХ</h2>
+                            
+                            <p class="slide-description">
+                                Самый эпичный кооператив с максимальным 
+                                экшеном и юмором. Приготовьтесь к невероятным приключениям!
+                            </p>
+                            
+                            <ul class="slide-features">
+                                <li><i class="fas fa-check"></i> Классные выходные</li>
+                                <li><i class="fas fa-check"></i> Максимальный экшен</li>
+                                <li><i class="fas fa-check"></i> Старые личности</li>
+                            </ul>
+                            
+                            <div class="slide-actions">
+                                <a href="/newswire/coop-at-maximum.html" class="btn btn-details">
+                                    <span>Подробнее</span>
+                                    <i class="fas fa-arrow-right"></i>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Слайд 4 -->
+            <div class="slider-slide">
+                <div class="slide-grid">
+                    <!-- Левая часть: изображение -->
+                    <div class="slide-image-container">
+                        <div class="image-wrapper">
+                            <img src="/images/ДОМАШНИЕ И УЛИЧНЫЕ ПРИКЛЮЧЕНИЯ.png" alt="Наводим суету на районе" class="slide-image">
+                            <div class="image-overlay"></div>
+                            <div class="image-badge">Трансляция</div>
+                        </div>
+                    </div>
+                    
+                    <!-- Правая часть: контент и навигация -->
+                    <div class="slide-content-container">
+                        <div class="content-wrapper">
+                            <div class="slide-meta">
+                                <span class="slide-date"><i class="far fa-calendar"></i> 05.12.2025</span>
+                                <span class="slide-category">Трансляция</span>
+                            </div>
+                            
+                            <h2 class="slide-title">🏡 ДОМАШНИЕ и УЛИЧНЫЕ ПРИКЛЮЧЕНИЯ </h2>
+                            
+                            <p class="slide-description">
+                                Полномасштабная трансляция с самыми безумными приключениями на районе. 
+                                Трэш, угар и полный развал в лучших традициях братьев!
+                            </p>
+                            
+                            <ul class="slide-features">
+                                <li><i class="fas fa-check"></i> Запись экшен-трансляции</li>
+                                <li><i class="fas fa-check"></i> Полный трэш на районе</li>
+                                <li><i class="fas fa-check"></i> Продолжительность: 3ч 20м</li>
+                            </ul>
+                            
+                            <div class="slide-actions">
+                                <a href="/newswire/home-and-street-adventures.html" class="btn btn-details">
+                                    <span>Подробнее</span>
+                                    <i class="fas fa-arrow-right"></i>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- ТОЧКИ ПАГИНАЦИИ - под правой частью секции -->
+        <div class="slider-pagination">
+            <button class="slide-dot active" data-slide="0" aria-label="Перейти к слайду 1">
+                <span class="dot-visual"></span>
+            </button>
+            <button class="slide-dot" data-slide="1" aria-label="Перейти к слайду 2">
+                <span class="dot-visual"></span>
+            </button>
+            <button class="slide-dot" data-slide="2" aria-label="Перейти к слайду 3">
+                <span class="dot-visual"></span>
+            </button>
+            <button class="slide-dot" data-slide="3" aria-label="Перейти к слайду 4">
+                <span class="dot-visual"></span>
+            </button>
+        </div>
+    </div>
+</section>
 
     <!-- Updates Section -->
     <section id="updates" class="updates">
@@ -364,7 +627,7 @@
                     </a>
 
                     <!-- Новость 3 -->
-                    <a href="/newswire/coop-at-maximum.html" class="other-news-small">
+                    <a href="/newswire/home-and-street-adventures.html" class="other-news-small">
                         <div class="news-card small">
                             <div class="news-image">
                                 <img src="/images/ДОМАШНИЕ И УЛИЧНЫЕ ПРИКЛЮЧЕНИЯ.png" alt="Игры">
@@ -381,7 +644,7 @@
                     </a>
 
                     <!-- Новость 4 -->
-                    <a href="/newswire/coop-at-maximum.html" class="other-news-small">
+                    <a href="/newswire/were-causing-stir-in-the-area.html" class="other-news-small">
                         <div class="news-card small">
                             <div class="news-image">
                                 <img src="/images/НАВОДИМ СУЕТУ НА РАЙОНЕ.png" alt="Трансляция">
@@ -496,7 +759,7 @@
             <div class="footer-bottom">
                 <p>&copy; 2025 Блог братьев. Все права защищены.</p>
                 <div class="footer-links-bottom">
-                    <a href="#">Политика конфиденциальности</a>
+                    <a href="/privacy.html">Политика конфиденциальности</a>
                     <a href="#">Условия использования</a>
                 </div>
             </div>
@@ -2778,6 +3041,7 @@
             }
         };
     </script>
+    <script src="/script-slider.js"></script>
 </body>
 
 </html>
