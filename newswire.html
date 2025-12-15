@@ -5,8 +5,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Новости | Блог братьев</title>
     <link rel="icon" href="images/logo.png" type="images/logo.png">
-    <link rel="stylesheet" href="styles/style.css">
-    <link rel="stylesheet" href="styles/newswire.css">
+    <link rel="stylesheet" href="/styles/style.css">
+    <link rel="stylesheet" href="/styles/newswire.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700;800&family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
@@ -25,33 +25,75 @@
     <div class="snowflakes" id="snowflakes"></div>
     <div class="snowdrifts"></div>
 
-    <!-- Header -->
-    <header id="header">
-        <div class="container">
-            <div class="header-content">
+   <!-- Header - Чистый HTML без JavaScript -->
+<header id="header">
+    <div class="container">
+        <div class="header-content">
+            <!-- Логотип -->
+            <a href="/index.html" class="logo-link">
                 <div class="logo">
-                    <a href="/index.html"><div class="logo-icon-container">
+                    <div class="logo-icon-container">
                         <i class="fas fa-users logo-icon"></i>
-                    </div></a>
+                    </div>
                     <div class="logo-text">
                         <h1>Братья</h1>
                         <p class="logo-subtitle">блог</p>
                     </div>
                 </div>
-                <button class="mobile-menu-btn">
-                    <span></span>
-                    <span></span>
-                    <span></span>
-                </button>
-                <nav>
-                    <ul>
-                    <li><a href="/newswire.html" class="nav-link"><span>Новостная лента</span></a></li>
-                    <li><a href="/videos.html" class="nav-link"><span>Видеоролики</span></a></li>
-                    </ul>
-                </nav>
-            </div>
+            </a>
+            
+            <!-- Мобильное меню - чекбокс техника -->
+            <input type="checkbox" id="mobile-menu-toggle" class="mobile-menu-toggle" hidden>
+            <label for="mobile-menu-toggle" class="mobile-menu-btn" aria-label="Открыть меню">
+                <span class="menu-line"></span>
+                <span class="menu-line"></span>
+                <span class="menu-line"></span>
+            </label>
+            
+            <!-- Навигация -->
+            <nav class="main-nav">
+                <ul class="nav-list">
+                    <li class="nav-item">
+                        <a href="/newswire.html" class="nav-link">
+                            <i class="fas fa-newspaper nav-icon"></i>
+                            <span class="nav-text">Новостная лента</span>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="/videos.html" class="nav-link">
+                            <i class="fas fa-play-circle nav-icon"></i>
+                            <span class="nav-text">Видеоролики</span>
+                        </a>
+                    </li>
+                    
+                    <!-- Выпадающее меню - чистая CSS 
+                    <li class="nav-item dropdown">
+                        <input type="checkbox" id="dropdown-toggle" class="dropdown-toggle-checkbox" hidden>
+                        <label for="dropdown-toggle" class="nav-link dropdown-label">
+                            <i class="fas fa-ellipsis-h nav-icon"></i>
+                            <span class="nav-text">Ещё</span>
+                            <i class="fas fa-chevron-down dropdown-arrow"></i>
+                        </label>
+                        <div class="dropdown-menu">
+                            <a href="/index.html#footer" class="dropdown-item">
+                                <i class="fas fa-phone-alt"></i>
+                                Контакты
+                            </a>
+                            <a href="#" class="dropdown-item">
+                                <i class="fas fa-archive"></i>
+                                Архив
+                            </a>
+                            <a href="#" class="dropdown-item">
+                                <i class="fas fa-cog"></i>
+                                Профиль (!скоро) -->
+                            </a>
+                        </div>
+                    </li>
+                </ul>
+            </nav>
         </div>
-    </header>
+    </div>
+</header>
 
     <!-- Hero Section для новостей -->
     <section class="news-hero">
@@ -70,7 +112,7 @@
                     <button class="news-filter-btn" data-filter="update">Обновления</button>
                     <button class="news-filter-btn" data-filter="live">Прямые эфиры</button>
                     <button class="news-filter-btn" data-filter="event">События</button>
-                    <button class="news-filter-btn" data-filter="announcement">Анонсы</button>
+                    <button class="news-filter-btn" data-filter="weeklyresults">Итоги недели</button>
                 </div>
             </div>
         </div>
@@ -157,6 +199,17 @@
         const newsData = [
             {
                 id: 1,
+                title: "Еженедельные итоги",
+                excerpt: "Итоги недели в период с 8 по 14 декабря 2025г.",
+                date: "14.12.2025",
+                category: "Итоги недели",
+                type: "weeklyresults",
+                image: "/images/Итоги недели 08-14 декабря 2025.png",
+                author: "TTFBB COMPANY",
+                url: "/newswire/weekly-results/08dec2025-14dec2025.html"
+            },
+            {
+                id: 2,
                 title: "Новогоднее обновление сайта",
                 excerpt: "Был полностью изменен интерфейс сайта на новогоднюю тематику с добавлением современных элементов и анимаций.",
                 date: "26.11.2025",
@@ -167,7 +220,7 @@
                 url: "/newswire/christmas-update.html"
             },
             {
-                id: 2,
+                id: 3,
                 title: "🏚️ ДОМАШНИЙ АРЕСТ",
                 excerpt: "Чисто домашние посиделки с атмосферой уюта и веселья.",
                 date: "23.11.2025",
@@ -178,7 +231,7 @@
                 url: "/newswire/house-arrest.html"
             },
             {
-                id: 3,
+                id: 4,
                 title: "🔫 КООПЕРАТИВ на МАКСИМАЛКАХ",
                 excerpt: "Прошел самый лучший стрим в мире. Полный экшен и безумие в прямом эфире!",
                 date: "08.11.2025",
@@ -190,7 +243,7 @@
             },
 
             {
-                id: 4,
+                id: 5,
                 title: "🏡 ДОМАШНИЕ И УЛИЧНЫЕ ПРИКЛЮЧЕНИЯ",
                 excerpt: "Сначала дом потом улица, короче экшен и приключения на весь день.",
                 date: "26.10.2025",
@@ -201,7 +254,7 @@
                 url: "/newswire/home-and-street-adventures.html"
             },
             {
-                id: 5,
+                id: 6,
                 title: "НАВОДИМ СУЕТУ НА РАЙОНЕ",
                 excerpt: "Полный трэш в нашей любимой деревне. Невероятные события и смешные ситуации.",
                 date: "12.10.2025",
@@ -303,7 +356,7 @@
                 case 'update': return 'Обновление';
                 case 'live': return 'Прямой эфир';
                 case 'event': return 'Событие';
-                case 'announcement': return 'Анонс';
+                case 'weeklyresults': return 'Еженедельные итоги';
                 default: return 'Новость';
             }
         }
@@ -562,5 +615,4 @@
         });
     </script>
 </body>
-
 </html>
