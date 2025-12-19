@@ -105,6 +105,12 @@ body {
     color: var(--text);
 }
 
+.btn-secondary2 {
+    background: #8ff2ffad;
+    border-color: #8ff2ff;
+    color: var(--text);
+}
+
 .btn-secondary:hover {
     background: var(--accent);
     color: white;
@@ -255,15 +261,16 @@ header * {
    NAVBAR БЕЗ JAVASCRIPT (ЧИСТАЯ CSS)
    ============================= */
 
-/* Скрыть чекбоксы */
-.mobile-menu-toggle,
-.dropdown-toggle-checkbox {
+/* =============================
+   МОБИЛЬНОЕ МЕНЮ - ПЕРЕДЕЛАННОЕ
+   ============================= */
+
+/* Скрываем чекбокс */
+#mobile-menu-toggle {
     display: none;
-    position: absolute;
-    opacity: 0;
 }
 
-/* Мобильное меню - чекбокс техника */
+/* Бургер-кнопка */
 .mobile-menu-btn {
     display: none;
     flex-direction: column;
@@ -275,135 +282,63 @@ header * {
     padding: 0;
     cursor: pointer;
     z-index: 1002;
+    position: relative;
 }
 
-/* Анимация для мобильного меню */
 .mobile-menu-btn .menu-line {
     width: 100%;
-    height: 2px;
-    background: rgba(255, 255, 255, 0.98);
+    height: 3px;
+    background: white;
     border-radius: 2px;
-    transition: var(--transition);
+    transition: all 0.3s ease;
+    transform-origin: center;
 }
 
-/* Когда меню открыто на мобильных */
-.mobile-menu-toggle:checked ~ .mobile-menu-btn .menu-line:nth-child(1) {
-    transform: rotate(45deg) translate(2px, -2px);
+/* Анимация бургера при открытии */
+#mobile-menu-toggle:checked + .mobile-menu-btn .menu-line:nth-child(1) {
+    transform: rotate(45deg) translate(6px, 6px);
 }
 
-.mobile-menu-toggle:checked ~ .mobile-menu-btn .menu-line:nth-child(2) {
+#mobile-menu-toggle:checked + .mobile-menu-btn .menu-line:nth-child(2) {
     opacity: 0;
+    transform: scale(0);
 }
 
-.mobile-menu-toggle:checked ~ .mobile-menu-btn .menu-line:nth-child(3) {
-    transform: rotate(-45deg) translate(2px, 2px);
+#mobile-menu-toggle:checked + .mobile-menu-btn .menu-line:nth-child(3) {
+    transform: rotate(-45deg) translate(6px, -6px);
 }
 
-/* Выпадающее меню - чистая CSS */
-.dropdown-label {
-    cursor: pointer;
-    display: flex;
-    align-items: center;
-    gap: 10px;
-    padding: 12px 20px;
-    color: var(--text-secondary);
-    text-decoration: none;
-    border-radius: var(--radius);
-    font-weight: 600;
-    font-size: 0.95rem;
-    transition: var(--transition);
-    background: transparent;
-    border: 1px solid transparent;
-}
-
-.dropdown-label:hover {
-    color: white;
-    border-color: rgba(138, 75, 175, 0.3);
-    background: rgba(138, 75, 175, 0.1);
-}
-
-/* Показать выпадающее меню при наведении (десктоп) */
-@media (hover: hover) and (pointer: fine) {
-    .dropdown:hover .dropdown-menu {
-        opacity: 1;
-        visibility: visible;
-        transform: translateY(0);
-    }
-}
-
-/* На мобильных - показывать по клику */
-.dropdown-toggle-checkbox:checked ~ .dropdown-menu {
-    opacity: 1 !important;
-    visibility: visible !important;
-    transform: none !important;
-    display: block !important;
-}
-
-/* Адаптивность для мобильных */
+/* Меню для мобильных */
 @media (max-width: 768px) {
     .mobile-menu-btn {
         display: flex;
     }
     
+    /* Основная навигация */
     .main-nav {
         position: fixed;
         top: 0;
         right: -100%;
-        width: 300px;
+        width: 100%;
         height: 100vh;
         background: rgba(14, 14, 14, 0.98);
         backdrop-filter: blur(20px);
+        -webkit-backdrop-filter: blur(20px);
         flex-direction: column;
-        align-items: flex-start;
-        padding: 100px 30px 40px;
-        border-left: 1px solid rgba(255, 255, 255, 0.1);
+        padding: 100px 20px 40px;
         transition: right 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
-        overflow-y: auto;
         z-index: 1001;
+        overflow-y: auto;
+        border-left: none;
     }
     
-    .mobile-menu-toggle:checked ~ .main-nav {
+    /* Когда меню открыто */
+    #mobile-menu-toggle:checked ~ .main-nav {
         right: 0;
     }
     
-    .nav-list {
-        flex-direction: column;
-        width: 100%;
-        gap: 10px;
-    }
-    
-    .nav-link,
-    .dropdown-label {
-        padding: 16px 20px;
-        justify-content: flex-start;
-        border-radius: 12px;
-        width: 100%;
-    }
-    
-    .dropdown-menu {
-        position: static;
-        opacity: 1;
-        visibility: visible;
-        transform: none;
-        background: rgba(255, 255, 255, 0.03);
-        margin-top: 10px;
-        margin-left: 20px;
-        display: none;
-    }
-    
-    .dropdown-arrow {
-        margin-left: auto;
-        transition: transform 0.3s ease;
-    }
-    
-    .dropdown-toggle-checkbox:checked ~ .dropdown-label .dropdown-arrow {
-        transform: rotate(180deg);
-    }
-}
-
-/* Оверлей для мобильного меню */
-@media (max-width: 768px) {
-    .mobile-menu-toggle:checked ~ .mobile-menu-overlay {
+    /* Оверлей для затемнения фона */
+    #mobile-menu-toggle:checked ~ .mobile-menu-overlay {
         position: fixed;
         top: 0;
         left: 0;
@@ -414,11 +349,127 @@ header * {
         z-index: 1000;
         display: block;
     }
+    
+    /* Список навигации */
+    .nav-list {
+        flex-direction: column;
+        width: 100%;
+        gap: 10px;
+    }
+    
+    /* Ссылки навигации */
+    .nav-link {
+        width: 100%;
+        padding: 18px 20px;
+        justify-content: flex-start;
+        border-radius: 12px;
+        font-size: 1.1rem;
+        border: 1px solid rgba(255, 255, 255, 0.1);
+        background: rgba(255, 255, 255, 0.05);
+        margin-bottom: 5px;
+    }
+    
+    .nav-link:hover {
+        background: rgba(138, 75, 175, 0.2);
+        border-color: rgba(138, 75, 175, 0.3);
+    }
+    
+    .nav-icon {
+        font-size: 1.3rem;
+        width: 24px;
+    }
+    
+    .nav-text {
+        font-size: 1rem;
+        font-weight: 500;
+    }
+    
+    /* Выпадающее меню на мобильных */
+    .dropdown {
+        position: relative;
+    }
+    
+    .dropdown-menu {
+        position: static;
+        opacity: 1;
+        visibility: visible;
+        transform: none;
+        background: rgba(255, 255, 255, 0.03);
+        border: 1px solid rgba(255, 255, 255, 0.1);
+        margin: 10px 0 0 20px;
+        display: none;
+        box-shadow: none;
+        padding: 10px 0;
+        border-radius: var(--radius);
+    }
+    
+    #dropdown-toggle:checked ~ .dropdown-menu {
+        display: block;
+    }
+    
+    .dropdown-label {
+        cursor: pointer;
+        position: relative;
+    }
+    
+    .dropdown-arrow {
+        margin-left: auto;
+        transition: transform 0.3s ease;
+        font-size: 0.9rem;
+    }
+    
+    #dropdown-toggle:checked ~ .dropdown-label .dropdown-arrow {
+        transform: rotate(180deg);
+    }
+    
+    .dropdown-item {
+        padding: 14px 25px;
+        font-size: 0.95rem;
+        color: var(--text-secondary);
+    }
+    
+    .dropdown-item:hover {
+        background: rgba(138, 75, 175, 0.1);
+        color: white;
+    }
 }
 
-/* Для закрытия меню при клике на оверлей */
-.mobile-menu-overlay {
-    display: none;
+/* Для очень маленьких экранов */
+@media (max-width: 480px) {
+    .main-nav {
+        width: 100%;
+    }
+    
+    .nav-link {
+        padding: 16px 20px;
+        font-size: 1rem;
+    }
+    
+    .header-content {
+        padding: 0 10px;
+    }
+}
+
+/* Анимация для элементов меню */
+.main-nav.active .nav-item {
+    animation: slideInRight 0.3s ease forwards;
+    opacity: 0;
+}
+
+.main-nav.active .nav-item:nth-child(1) { animation-delay: 0.1s; }
+.main-nav.active .nav-item:nth-child(2) { animation-delay: 0.2s; }
+.main-nav.active .nav-item:nth-child(3) { animation-delay: 0.3s; }
+.main-nav.active .nav-item:nth-child(4) { animation-delay: 0.4s; }
+
+@keyframes slideInRight {
+    from {
+        opacity: 0;
+        transform: translateX(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
 }
 
 /* Логотип */
@@ -644,7 +695,321 @@ header * {
 /* =============================
    СЛАЙДЕР
    ============================= */
-.hero-slider {
+
+   /* Слайдер с анимациями */
+/* Слайдер с анимациями */
+.slides-wrapper {
+    position: relative;
+    min-height: 500px;
+    overflow: hidden;
+}
+
+.slider-slide {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    opacity: 0;
+    visibility: hidden;
+    transform: translateX(30px);
+    transition: all 0.6s cubic-bezier(0.165, 0.84, 0.44, 1);
+    pointer-events: none;
+    z-index: 1;
+}
+
+.slider-slide.active {
+    position: relative;
+    opacity: 1;
+    visibility: visible;
+    transform: translateX(0);
+    pointer-events: all;
+    z-index: 2;
+}
+
+/* Показываем только активный слайд */
+.slider-slide:not(.active) {
+    display: none;
+}
+
+.slider-slide.active {
+    display: block;
+}
+
+/* Анимации для элементов внутри слайда */
+.slider-slide.active .slide-image-container {
+    animation: slideImageAppear 0.8s ease-out 0.3s both;
+}
+
+.slider-slide.active .slide-content-container {
+    animation: slideContentAppear 0.8s ease-out 0.5s both;
+}
+
+@keyframes slideImageAppear {
+    from {
+        opacity: 0;
+        transform: translateX(-30px) scale(0.95);
+    }
+    to {
+        opacity: 1;
+        transform: translateX(0) scale(1);
+    }
+}
+
+@keyframes slideContentAppear {
+    from {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Изображение в слайдере */
+.image-wrapper {
+    position: relative;
+    border-radius: var(--radius-lg);
+    overflow: hidden;
+    transform-style: preserve-3d;
+    perspective: 1000px;
+}
+
+.slide-image {
+    width: 100%;
+    height: 400px;
+    object-fit: cover;
+    border-radius: var(--radius-lg);
+    transition: transform 0.5s ease;
+}
+
+.slider-slide.active .slide-image {
+    animation: imageZoomIn 0.8s ease-out 0.4s both;
+}
+
+@keyframes imageZoomIn {
+    from {
+        transform: scale(1.05);
+    }
+    to {
+        transform: scale(1);
+    }
+}
+
+/* Бейдж на изображении */
+.image-badge {
+    position: absolute;
+    top: 20px;
+    left: 20px;
+    background: linear-gradient(135deg, #8a4baf, #6d28d9);
+    color: white;
+    padding: 8px 20px;
+    border-radius: 20px;
+    font-size: 0.85rem;
+    font-weight: 700;
+    z-index: 2;
+    animation: badgePulse 2s infinite;
+}
+
+@keyframes badgePulse {
+    0%, 100% { box-shadow: 0 0 0 0 rgba(138, 75, 175, 0.4); }
+    50% { box-shadow: 0 0 0 10px rgba(138, 75, 175, 0); }
+}
+
+/* Контент слайда */
+.slide-content-container {
+    opacity: 0;
+}
+
+.slide-title {
+    position: relative;
+    overflow: hidden;
+}
+
+.slide-title::after {
+    content: '';
+    position: absolute;
+    bottom: -5px;
+    left: 0;
+    width: 60px;
+    height: 3px;
+    background: var(--gradient);
+    transform: scaleX(0);
+    transform-origin: left;
+    transition: transform 0.6s ease 0.8s;
+}
+
+.slider-slide.active .slide-title::after {
+    transform: scaleX(1);
+}
+
+/* Пункты списка с анимацией */
+.slide-features li {
+    opacity: 0;
+    transform: translateX(-20px);
+    transition: all 0.4s ease;
+}
+
+.slider-slide.active .slide-features li:nth-child(1) { transition-delay: 0.6s; }
+.slider-slide.active .slide-features li:nth-child(2) { transition-delay: 0.7s; }
+.slider-slide.active .slide-features li:nth-child(3) { transition-delay: 0.8s; }
+.slider-slide.active .slide-features li:nth-child(4) { transition-delay: 0.9s; }
+
+.slider-slide.active .slide-features li {
+    opacity: 1;
+    transform: translateX(0);
+}
+
+/* Кнопки стрелок */
+.slider-arrow {
+    width: 56px;
+    height: 56px;
+    border-radius: 50%;
+    background: rgba(14, 14, 14, 0.7);
+    border: 1px solid rgba(138, 75, 175, 0.3);
+    color: white;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.3rem;
+    transition: all 0.3s ease;
+    backdrop-filter: blur(10px);
+    position: relative;
+    overflow: hidden;
+}
+
+.slider-arrow::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: var(--gradient);
+    transition: left 0.3s ease;
+    z-index: -1;
+}
+
+.slider-arrow:hover {
+    transform: translateY(-2px);
+    border-color: transparent;
+    box-shadow: 0 10px 20px rgba(138, 75, 175, 0.3);
+}
+
+.slider-arrow:hover::before {
+    left: 0;
+}
+
+/* Точки пагинации */
+.slide-dot {
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    border: none;
+    background: rgba(255, 255, 255, 0.2);
+    cursor: pointer;
+    padding: 0;
+    transition: all 0.3s ease;
+    position: relative;
+    overflow: hidden;
+}
+
+.slide-dot:hover {
+    background: rgba(255, 255, 255, 0.4);
+    transform: scale(1.2);
+}
+
+.slide-dot.active {
+    background: var(--gradient);
+    transform: scale(1.3);
+    box-shadow: 0 0 15px rgba(138, 75, 175, 0.5);
+}
+
+.slide-dot::after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 0;
+    height: 0;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.1);
+    transform: translate(-50%, -50%);
+    transition: all 0.3s ease;
+}
+
+.slide-dot:hover::after {
+    width: 30px;
+    height: 30px;
+}
+
+/* Кнопка "Подробнее" */
+.btn-details {
+    position: relative;
+    overflow: hidden;
+    transition: all 0.3s ease;
+}
+
+.btn-details::after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 0;
+    height: 0;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.2);
+    transform: translate(-50%, -50%);
+    transition: width 0.6s, height 0.6s;
+}
+
+.btn-details:hover::after {
+    width: 300px;
+    height: 300px;
+}
+
+.btn-details:hover {
+    transform: translateY(-3px) scale(1.02);
+    box-shadow: 0 15px 30px rgba(138, 75, 175, 0.4);
+}
+
+/* Адаптивность */
+@media (max-width: 768px) {
+    .slider-slide.active .slide-image-container,
+    .slider-slide.active .slide-content-container {
+        animation: none;
+        opacity: 1;
+        transform: none;
+    }
+    
+    .slider-slide {
+        transition: all 0.4s ease;
+    }
+    
+    .slider-arrow {
+        width: 44px;
+        height: 44px;
+        font-size: 1.1rem;
+    }
+    
+    .slide-image {
+        height: 300px;
+    }
+}
+
+@media (max-width: 480px) {
+    .slider-arrows {
+        display: none;
+    }
+    
+    .slide-image {
+        height: 250px;
+    }
+}
+
+   .hero-slider {
     padding: 100px 0;
     position: relative;
 }
@@ -1761,5 +2126,525 @@ footer {
     
     .main-nav {
         background: rgba(14, 14, 14, 0.98);
+    }
+}
+
+/* =============================
+   СЕКЦИЯ "БРАТЬЯ" - УПРОЩЕННАЯ ВЕРСИЯ
+   ============================= */
+.brothers-section {
+    position: relative;
+    padding: 120px 0;
+    overflow: hidden;
+    background: var(--primary);
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+}
+
+/* Видеофон - БОЛЕЕ ВИДИМЫЙ */
+.video-background {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 0;
+    overflow: hidden;
+}
+
+.video-bg {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    min-width: 100%;
+    min-height: 100%;
+    width: auto;
+    height: auto;
+    transform: translate(-50%, -50%);
+    filter: brightness(1) contrast(1.2) saturate(1.8); /* Увеличили яркость и насыщенность */
+    object-fit: cover;
+    animation: videoZoom 30s infinite alternate ease-in-out;
+}
+
+@keyframes videoZoom {
+    0% { transform: translate(-50%, -50%) scale(1); }
+    100% { transform: translate(-50%, -50%) scale(1.05); }
+}
+
+.video-overlay-dark {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(14, 14, 14, 0.4); /* Уменьшили прозрачность */
+    z-index: 1;
+}
+
+.video-overlay-gradient {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(
+        135deg,
+        rgba(138, 75, 175, 0.2) 0%, /* Увеличили прозрачность */
+        rgba(14, 14, 14, 0.5) 50%, /* Уменьшили затемнение */
+        rgba(109, 40, 217, 0.2) 100%
+    );
+    z-index: 2;
+}
+
+/* Контент поверх видео */
+.brothers-content {
+    position: relative;
+    z-index: 3;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+/* Заголовок */
+.brothers-title-wrapper {
+    text-align: center;
+    margin-bottom: 60px;
+}
+
+.brothers-title {
+    font-size: 5rem;
+    font-weight: 800;
+    margin-bottom: 20px;
+    background: linear-gradient(135deg, #fff 0%, #8a4baf 50%, #6d28d9 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    position: relative;
+    display: inline-block;
+    text-shadow: 0 5px 15px rgba(0, 0, 0, 0.5);
+    animation: titleGlow 3s infinite alternate;
+}
+
+@keyframes titleGlow {
+    0% { text-shadow: 0 5px 15px rgba(138, 75, 175, 0.3); }
+    100% { text-shadow: 0 5px 25px rgba(138, 75, 175, 0.6); }
+}
+
+.title-underline {
+    position: absolute;
+    bottom: -10px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 150px;
+    height: 4px;
+    background: linear-gradient(90deg, transparent, var(--accent), transparent);
+    border-radius: 2px;
+    animation: underlineFlow 3s infinite linear;
+}
+
+@keyframes underlineFlow {
+    0% { background-position: -150px 0; }
+    100% { background-position: 150px 0; }
+}
+
+.brothers-subtitle {
+    font-size: 1.4rem;
+    color: var(--text-light);
+    max-width: 700px;
+    margin: 20px auto 0;
+    opacity: 0.9;
+    font-weight: 300;
+    letter-spacing: 1px;
+}
+
+/* Основной текст */
+.brothers-text {
+    background: rgba(255, 255, 255, 0.05);
+    backdrop-filter: blur(10px);
+    border-radius: var(--radius-xl);
+    padding: 50px;
+    margin: 60px 0;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    position: relative;
+    overflow: hidden;
+}
+
+.brothers-text::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" width="100" height="100" viewBox="0 0 100 100"><path d="M0,50 Q25,40 50,50 T100,50" fill="none" stroke="%238a4baf" stroke-width="0.3" opacity="0.1"/></svg>');
+    opacity: 0.1;
+    z-index: 0;
+}
+
+.main-quote {
+    font-size: 1.8rem;
+    line-height: 1.6;
+    color: white;
+    text-align: center;
+    margin-bottom: 50px;
+    font-style: italic;
+    position: relative;
+    z-index: 1;
+    padding: 0 20px;
+    font-weight: 300;
+}
+
+.main-quote::before,
+.main-quote::after {
+    content: '"';
+    font-size: 4rem;
+    color: var(--accent);
+    opacity: 0.3;
+    position: absolute;
+}
+
+.main-quote::before {
+    top: -20px;
+    left: 0;
+}
+
+.main-quote::after {
+    bottom: -40px;
+    right: 0;
+}
+
+.text-columns {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 40px;
+    margin-top: 50px;
+}
+
+.text-column {
+    text-align: center;
+    padding: 30px;
+    background: rgba(255, 255, 255, 0.03);
+    border-radius: var(--radius-lg);
+    transition: all 0.3s ease;
+    border: 1px solid transparent;
+}
+
+.text-column:hover {
+    background: rgba(255, 255, 255, 0.06);
+    border-color: rgba(138, 75, 175, 0.2);
+    transform: translateY(-5px);
+}
+
+.text-column h3 {
+    color: var(--accent);
+    margin-bottom: 20px;
+    font-size: 1.3rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+}
+
+.text-column h3 i {
+    font-size: 1.5rem;
+}
+
+.text-column p {
+    color: var(--text-light);
+    line-height: 1.6;
+    font-size: 1rem;
+}
+
+/* Контактная информация */
+.contact-info {
+    display: flex;
+    justify-content: center;
+    gap: 40px;
+    margin: 60px 0;
+    flex-wrap: wrap;
+}
+
+.contact-item {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    background: rgba(255, 255, 255, 0.05);
+    backdrop-filter: blur(10px);
+    padding: 25px;
+    border-radius: var(--radius-lg);
+    min-width: 280px;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    transition: all 0.3s ease;
+}
+
+.contact-item:hover {
+    background: rgba(255, 255, 255, 0.08);
+    border-color: var(--accent);
+    transform: translateY(-5px);
+}
+
+.contact-item i {
+    font-size: 2.5rem;
+    color: var(--accent);
+    background: rgba(138, 75, 175, 0.1);
+    width: 70px;
+    height: 70px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.contact-item h4 {
+    color: white;
+    margin-bottom: 5px;
+    font-size: 1.3rem;
+}
+
+.contact-item p {
+    color: var(--text-secondary);
+    font-size: 0.9rem;
+    margin-bottom: 8px;
+}
+
+.contact-item a {
+    color: var(--accent);
+    text-decoration: none;
+    font-size: 0.9rem;
+    transition: color 0.3s ease;
+}
+
+.contact-item a:hover {
+    color: var(--accent-light);
+    text-decoration: underline;
+}
+
+/* Кнопки */
+.brothers-cta {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    margin-top: 60px;
+    flex-wrap: wrap;
+}
+
+.btn {
+    padding: 18px 40px;
+    font-size: 1.1rem;
+    font-weight: 600;
+    border-radius: var(--radius);
+    cursor: pointer;
+    transition: all 0.3s ease;
+    text-decoration: none;
+    display: inline-flex;
+    align-items: center;
+    gap: 12px;
+    border: none;
+    min-width: 200px;
+    justify-content: center;
+}
+
+.btn-gradient {
+    background: linear-gradient(135deg, #8a4baf, #6d28d9);
+    color: white;
+    box-shadow: 0 10px 30px rgba(138, 75, 175, 0.3);
+}
+
+.btn-gradient:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 15px 40px rgba(138, 75, 175, 0.5);
+    background: linear-gradient(135deg, #9d6bc0, #7c3aed);
+}
+
+.btn-outline {
+    background: transparent;
+    color: white;
+    border: 2px solid var(--accent);
+}
+
+.btn-outline:hover {
+    background: var(--accent);
+    transform: translateY(-5px);
+    box-shadow: 0 10px 30px rgba(138, 75, 175, 0.3);
+}
+
+.btn-secondary {
+    background: rgba(255, 255, 255, 0.1);
+    color: white;
+    border: 2px solid rgba(255, 255, 255, 0.2);
+}
+
+.btn-secondary:hover {
+    background: rgba(255, 255, 255, 0.2);
+    transform: translateY(-5px);
+    border-color: var(--accent);
+}
+
+/* Декоративные элементы */
+.brothers-decoration {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    z-index: 1;
+}
+
+.decoration-circle {
+    position: absolute;
+    border-radius: 50%;
+    border: 1px solid rgba(138, 75, 175, 0.15);
+    animation: float 15s infinite linear;
+}
+
+.circle-1 {
+    width: 300px;
+    height: 300px;
+    top: 10%;
+    left: 5%;
+    animation-delay: 0s;
+}
+
+.circle-2 {
+    width: 200px;
+    height: 200px;
+    bottom: 20%;
+    right: 10%;
+    animation-delay: -5s;
+}
+
+.circle-3 {
+    width: 150px;
+    height: 150px;
+    top: 40%;
+    right: 20%;
+    animation-delay: -10s;
+}
+
+@keyframes float {
+    0%, 100% { transform: translateY(0) rotate(0deg); }
+    50% { transform: translateY(-30px) rotate(180deg); }
+}
+
+/* Анимация появления при скролле */
+.brothers-content > * {
+    opacity: 0;
+    transform: translateY(30px);
+    transition: opacity 0.8s ease, transform 0.8s ease;
+}
+
+.brothers-section.in-view .brothers-content > * {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* Задержки для последовательной анимации */
+.brothers-section.in-view .brothers-title-wrapper {
+    transition-delay: 0.2s;
+}
+
+.brothers-section.in-view .brothers-text {
+    transition-delay: 0.4s;
+}
+
+.brothers-section.in-view .contact-info {
+    transition-delay: 0.6s;
+}
+
+.brothers-section.in-view .brothers-cta {
+    transition-delay: 0.8s;
+}
+
+/* Адаптивность */
+@media (max-width: 1024px) {
+    .brothers-title {
+        font-size: 4rem;
+    }
+    
+    .text-columns {
+        grid-template-columns: repeat(2, 1fr);
+    }
+    
+    .text-column:last-child {
+        grid-column: span 2;
+        max-width: 500px;
+        margin: 0 auto;
+    }
+}
+
+@media (max-width: 768px) {
+    .brothers-section {
+        padding: 80px 0;
+    }
+    
+    .brothers-title {
+        font-size: 3rem;
+    }
+    
+    .brothers-subtitle {
+        font-size: 1.2rem;
+    }
+    
+    .main-quote {
+        font-size: 1.4rem;
+        padding: 0;
+    }
+    
+    .text-columns {
+        grid-template-columns: 1fr;
+        gap: 20px;
+    }
+    
+    .text-column:last-child {
+        grid-column: span 1;
+        max-width: 100%;
+    }
+    
+    .brothers-text {
+        padding: 30px 20px;
+    }
+    
+    .contact-info {
+        flex-direction: column;
+        align-items: center;
+    }
+    
+    .contact-item {
+        width: 100%;
+        max-width: 350px;
+    }
+    
+    .brothers-cta {
+        flex-direction: column;
+        align-items: center;
+    }
+    
+    .btn {
+        width: 100%;
+        max-width: 300px;
+    }
+    
+    .video-bg {
+        filter: brightness(0.8) contrast(1.1) saturate(1.2);
+    }
+}
+
+@media (max-width: 480px) {
+    .brothers-title {
+        font-size: 2.5rem;
+    }
+    
+    .main-quote {
+        font-size: 1.2rem;
+    }
+    
+    .text-column h3 {
+        font-size: 1.1rem;
+    }
+    
+    .contact-item {
+        flex-direction: column;
+        text-align: center;
+        padding: 20px;
     }
 }

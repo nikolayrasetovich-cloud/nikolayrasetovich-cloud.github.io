@@ -1,0 +1,422 @@
+<!DOCTYPE html>
+<html lang="ru_RU">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TTFBB COMPANY</title>
+    <link rel="icon" href="images/logo.png" type="images/logo.png">
+    <link rel="stylesheet" href="styles/style.css">
+    <link rel="stylesheet" href="styles/character.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+</head>
+
+<body>
+    <!-- Анимированный фон -->
+    <div class="animated-background">
+        <div class="gradient-bg"></div>
+        <div class="particles" id="particles"></div>
+    </div>
+
+    <!-- Снежинки -->
+    <div class="snowflakes" id="snowflakes"></div>
+    <div class="snowdrifts"></div>
+
+    <!-- Header -->
+    <header id="header">
+        <div class="container">
+            <div class="header-content">
+                <!-- Логотип -->
+                <a href="/index.html" class="logo-link">
+                    <div class="logo">
+                        <div class="logo-icon-container">
+                            <i class="fas fa-users logo-icon"></i>
+                        </div>
+                        <div class="logo-text">
+                            <h1>Братья</h1>
+                            <p class="logo-subtitle">блог</p>
+                        </div>
+                    </div>
+                </a>
+                
+                <!-- Мобильное меню -->
+                <input type="checkbox" id="mobile-menu-toggle" class="mobile-menu-toggle" hidden>
+                <label for="mobile-menu-toggle" class="mobile-menu-btn" aria-label="Открыть меню">
+                    <span class="menu-line"></span>
+                    <span class="menu-line"></span>
+                    <span class="menu-line"></span>
+                </label>
+                
+                <!-- Оверлей для мобильного меню -->
+                <div class="mobile-menu-overlay"></div>
+                
+                <!-- Навигация -->
+                <nav class="main-nav">
+                    <ul class="nav-list">
+                        <li class="nav-item">
+                            <a href="/index.html" class="nav-link">
+                                <i class="fas fa-home nav-icon"></i>
+                                <span class="nav-text">Главная</span>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="/newswire.html" class="nav-link">
+                                <i class="fas fa-newspaper nav-icon"></i>
+                                <span class="nav-text">Новости</span>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="/videos.html" class="nav-link">
+                                <i class="fas fa-play-circle nav-icon"></i>
+                                <span class="nav-text">Видео</span>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="/access.html" class="nav-link active">
+                                <i class="fas fa-lock nav-icon"></i>
+                                <span class="nav-text">Доступ</span>
+                            </a>
+                        </li>
+                    </ul>
+                </nav>
+            </div>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="access-hero">
+        <div class="container">
+            <div class="hero-content">
+                <div class="hero-badge">
+                    <span>🔐 Защищенный доступ</span>
+                </div>
+                <h1 class="hero-title">Выбери человека</h1>
+                <p class="hero-description">Каждый человек имеет свой пароль. Выбери нужную карточку и введи пароль для доступа к секретным материалам.</p>
+                
+                <!-- Секретный счетчик попыток -->
+                <div class="attempts-counter">
+                    <i class="fas fa-shield-alt"></i>
+                    <span>Попыток использовано: <strong id="attempts-count">0</strong> из 5</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Основной контент -->
+    <main class="access-main">
+        <div class="container">
+            <!-- Сетка людей -->
+            <div class="people-grid" id="people-grid">
+                <!-- Человек 1 -->
+                <div class="person-card" data-person-id="nikita">
+                    <div class="person-image">
+                        <img src="/images/brothers-gallery/Никита.jpg" 
+                             alt="Никита" loading="lazy">
+                        <div class="person-overlay">
+                            <div class="person-name">Никита</div>
+                        </div>
+                        <div class="person-lock">
+                            <i class="fas fa-lock"></i>
+                        </div>
+                    </div>
+                    <div class="person-info">
+                        <h3>Никита</h3>
+                        <p class="person-tagline">"Создатель, стример"</p>
+                        <div class="person-stats">
+                            <div class="stat">
+                                <i class="fas fa-lightbulb"></i>
+                                <span>Программист</span>
+                            </div>
+                            <div class="stat">
+                                <i class="fas fa-crown"></i>
+                                <span>Режисер</span>
+                            </div>
+                        </div>
+                        <button class="btn btn-access" data-person="nikita">
+                            <i class="fas fa-key"></i>
+                            <span>Получить доступ</span>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Человек 2 -->
+                <div class="person-card" data-person-id="evgeny">
+                    <div class="person-image">
+                        <img src="/images/brothers-gallery/Евгений.jpg" 
+                             alt="Евгений" loading="lazy">
+                        <div class="person-overlay">
+                            <div class="person-name">Евгений</div>
+                        </div>
+                        <div class="person-lock">
+                            <i class="fas fa-lock"></i>
+                        </div>
+                    </div>
+                    <div class="person-info">
+                        <h3>Евгений</h3>
+                        <p class="person-tagline">"Лучшая персона"</p>
+                        <div class="person-stats">
+                            <div class="stat">
+                                <i class="fas fa-cogs"></i>
+                                <span>Юморной</span>
+                            </div>
+                            <div class="stat">
+                                <i class="fas fa-magic"></i>
+                                <span>Видеокреатор</span>
+                            </div>
+                        </div>
+                        <button class="btn btn-access" data-person="evgeny">
+                            <i class="fas fa-key"></i>
+                            <span>Получить доступ</span>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Человек 3 -->
+                <div class="person-card" data-person-id="olga">
+                    <div class="person-image">
+                        <img src="/images/brothers-gallery/Ольга.jpg" 
+                             alt="Ольга" loading="lazy">
+                        <div class="person-overlay">
+                            <div class="person-name">Ольга</div>
+                        </div>
+                        <div class="person-lock">
+                            <i class="fas fa-lock"></i>
+                        </div>
+                    </div>
+                    <div class="person-info">
+                        <h3>Ольга</h3>
+                        <p class="person-tagline">"Создатель атмосферы"</p>
+                        <div class="person-stats">
+                            <div class="stat">
+                                <i class="fas fa-paint-brush"></i>
+                                <span>Смешная</span>
+                            </div>
+                            <div class="stat">
+                                <i class="fas fa-comments"></i>
+                                <span>Требовательная</span>
+                            </div>
+                        </div>
+                        <button class="btn btn-access" data-person="olga">
+                            <i class="fas fa-key"></i>
+                            <span>Получить доступ</span>
+                        </button>
+                    </div>
+                </div>
+
+               
+            </div>
+
+            <!-- Панель ввода пароля (скрыта по умолчанию) -->
+            <div class="password-panel" id="password-panel">
+                <div class="panel-header">
+                    <h3><i class="fas fa-lock"></i> Введите пароль</h3>
+                    <button class="panel-close" id="panel-close">
+                        <i class="fas fa-times"></i>
+                    </button>
+                </div>
+                
+                <div class="panel-body">
+                    <div class="selected-person" id="selected-person-info">
+                        <!-- Информация о выбранном человеке -->
+                    </div>
+                    
+                    <div class="password-input-group">
+                        <div class="input-with-icon">
+                            <i class="fas fa-key"></i>
+                            <input type="password" 
+                                   id="password-input" 
+                                   placeholder="Введите секретный пароль" 
+                                   maxlength="20"
+                                   autocomplete="off">
+                            <button class="toggle-password" id="toggle-password">
+                                <i class="fas fa-eye"></i>
+                            </button>
+                        </div>
+                        <div class="password-hint" id="password-hint">
+                            <i class="fas fa-lightbulb"></i>
+                            <span>Подсказка появится после 3 ошибок</span>
+                        </div>
+                    </div>
+                    
+                    <div class="password-actions">
+                        <button class="btn btn-primary" id="submit-password">
+                            <i class="fas fa-unlock"></i>
+                            <span>Разблокировать</span>
+                        </button>
+                        <button class="btn btn-secondary" id="cancel-password">
+                            <i class="fas fa-times"></i>
+                            <span>Отмена</span>
+                        </button>
+                    </div>
+                    
+                    <div class="password-status">
+                        <div class="status-message" id="status-message">
+                            <!-- Сообщения о статусе ввода -->
+                        </div>
+                        <div class="attempts-display">
+                            <i class="fas fa-exclamation-triangle"></i>
+                            <span>Осталось попыток: <strong id="remaining-attempts">5</strong></span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Инструкция -->
+            <div class="instructions">
+                <h3><i class="fas fa-info-circle"></i> Как получить доступ?</h3>
+                <div class="instruction-steps">
+                    <div class="step">
+                        <div class="step-icon">
+                            <i class="fas fa-user"></i>
+                        </div>
+                        <div class="step-content">
+                            <h4>Выбери человека</h4>
+                            <p>Нажми на карточку человека, к материалам которого хочешь получить доступ</p>
+                        </div>
+                    </div>
+                    <div class="step">
+                        <div class="step-icon">
+                            <i class="fas fa-key"></i>
+                        </div>
+                        <div class="step-content">
+                            <h4>Введи пароль</h4>
+                            <p>Введи правильный пароль в появившемся поле</p>
+                        </div>
+                    </div>
+                    <div class="step">
+                        <div class="step-icon">
+                            <i class="fas fa-unlock"></i>
+                        </div>
+                        <div class="step-content">
+                            <h4>Получи доступ</h4>
+                            <p>При правильном пароле ты будешь перенаправлен на секретную страницу</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="security-notice">
+                    <i class="fas fa-shield-alt"></i>
+                    <p>Система безопасности ограничивает количество попыток ввода пароля. Будьте внимательны!</p>
+                </div>
+            </div>
+    </main>
+
+    <!-- Модальное окно блокировки -->
+    <div class="modal" id="lockout-modal">
+        <div class="modal-content lockout-modal">
+            <div class="modal-header">
+                <h3><i class="fas fa-ban"></i> Доступ заблокирован</h3>
+            </div>
+            <div class="modal-body">
+                <div class="lockout-icon">
+                    <i class="fas fa-lock"></i>
+                </div>
+                <h4>Превышено количество попыток!</h4>
+                <p>Вы использовали все 5 попыток ввода пароля. Доступ временно заблокирован.</p>
+                <div class="lockout-timer">
+                    <i class="fas fa-clock"></i>
+                    <span>Доступ откроется через: <strong id="lockout-timer">60</strong> секунд</span>
+                </div>
+                <p class="lockout-note">Пожалуйста, попробуйте позже или обратитесь к администратору.</p>
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-secondary" id="refresh-page">
+                    <i class="fas fa-redo"></i>
+                    <span>Обновить страницу</span>
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Модальное окно успешного доступа -->
+    <div class="modal" id="success-modal">
+        <div class="modal-content success-modal">
+            <div class="modal-header">
+                <h3><i class="fas fa-check-circle"></i> Доступ получен!</h3>
+            </div>
+            <div class="modal-body">
+                <div class="success-icon">
+                    <i class="fas fa-unlock-alt"></i>
+                </div>
+                <h4>Пароль верный!</h4>
+                <p>Вы успешно ввели правильный пароль. Сейчас вы будете перенаправлены на секретную страницу.</p>
+                <div class="redirect-timer">
+                    <i class="fas fa-hourglass-half"></i>
+                    <span>Перенаправление через: <strong id="redirect-timer">3</strong> секунды</span>
+                </div>
+                <div class="access-info">
+                    <p><strong>Доступ к:</strong> <span id="access-person-name">Никита</span></p>
+                    <p><strong>Уровень доступа:</strong> <span id="access-level">Полный</span></p>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-primary" id="go-now">
+                    <i class="fas fa-rocket"></i>
+                    <span>Перейти сейчас</span>
+                </button>
+                <button class="btn btn-secondary" id="stay-here">
+                    <i class="fas fa-times"></i>
+                    <span>Остаться здесь</span>
+                </button>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Footer -->
+    <footer id="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-main">
+                    <div class="footer-logo">
+                        <i class="fas fa-users logo-icon"></i>
+                        <div>
+                            <h3>Блог братьев</h3>
+                            <p>Система защищенного доступа</p>
+                        </div>
+                    </div>
+                    <div class="footer-social">
+                        <a href="https://www.youtube.com/@n1kolayrasetovich" target="_blank" class="social-link youtube">
+                            <i class="fab fa-youtube"></i>
+                        </a>
+                        <a href="https://t.me/nesoqiton" target="_blank" class="social-link telegram">
+                            <i class="fab fa-telegram"></i>
+                        </a>
+                    </div>
+                </div>
+                <div class="footer-links">
+                    <div class="footer-column">
+                        <h4>Безопасность</h4>
+                        <ul>
+                            <li><a href="#" id="view-log">Посмотреть логи доступа</a></li>
+                            <li><a href="#" id="reset-attempts">Сбросить попытки</a></li>
+                            <li><a href="#" id="change-passwords">Изменить пароли</a></li>
+                        </ul>
+                    </div>
+                    <div class="footer-column">
+                        <h4>Контакты</h4>
+                        <ul>
+                            <li><i class="fas fa-user-secret"></i> Администратор</li>
+                            <li><i class="fas fa-phone"></i> Техподдержка</li>
+                            <li><i class="fas fa-envelope"></i> security@братья.рус</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2025 Блог братьев. Система защищенного доступа. Все пароли хранятся локально.</p>
+                <div class="security-status">
+                    <i class="fas fa-shield-alt"></i>
+                    <span>Статус: <strong id="security-status">Защищено</strong></span>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Уведомления -->
+    <div class="notification" id="notification"></div>
+
+    <!-- Скрипты -->
+    <script src="character.js"></script>
+</body>
+
+</html>
