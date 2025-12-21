@@ -25,75 +25,155 @@
     <div class="snowflakes" id="snowflakes"></div>
     <div class="snowdrifts"></div>
 
-   <!-- Header - Чистый HTML без JavaScript -->
-<header id="header">
-    <div class="container">
-        <div class="header-content">
-            <!-- Логотип -->
-            <a href="/index.html" class="logo-link">
-                <div class="logo">
-                    <div class="logo-icon-container">
-                        <i class="fas fa-users logo-icon"></i>
-                    </div>
-                    <div class="logo-text">
-                        <h1>Братья</h1>
-                        <p class="logo-subtitle">блог</p>
-                    </div>
-                </div>
-            </a>
-            
-            <!-- Мобильное меню - чекбокс техника -->
-            <input type="checkbox" id="mobile-menu-toggle" class="mobile-menu-toggle" hidden>
-            <label for="mobile-menu-toggle" class="mobile-menu-btn" aria-label="Открыть меню">
-                <span class="menu-line"></span>
-                <span class="menu-line"></span>
-                <span class="menu-line"></span>
-            </label>
-            
-            <!-- Навигация -->
-            <nav class="main-nav">
-                <ul class="nav-list">
-                    <li class="nav-item">
-                        <a href="/newswire.html" class="nav-link">
-                            <i class="fas fa-newspaper nav-icon"></i>
-                            <span class="nav-text">Новостная лента</span>
-                        </a>
-                    </li>
-                    <li class="nav-item">
-                        <a href="/videos.html" class="nav-link">
-                            <i class="fas fa-play-circle nav-icon"></i>
-                            <span class="nav-text">Видеоролики</span>
-                        </a>
-                    </li>
-                    
-                    <!-- Выпадающее меню - чистая CSS 
-                    <li class="nav-item dropdown">
-                        <input type="checkbox" id="dropdown-toggle" class="dropdown-toggle-checkbox" hidden>
-                        <label for="dropdown-toggle" class="nav-link dropdown-label">
-                            <i class="fas fa-ellipsis-h nav-icon"></i>
-                            <span class="nav-text">Ещё</span>
-                            <i class="fas fa-chevron-down dropdown-arrow"></i>
-                        </label>
-                        <div class="dropdown-menu">
-                            <a href="/index.html#footer" class="dropdown-item">
-                                <i class="fas fa-phone-alt"></i>
-                                Контакты
-                            </a>
-                            <a href="#" class="dropdown-item">
-                                <i class="fas fa-archive"></i>
-                                Архив
-                            </a>
-                            <a href="#" class="dropdown-item">
-                                <i class="fas fa-cog"></i>
-                                Профиль (!скоро) -->
-                            </a>
+   <!-- Header -->
+    <header id="header">
+        <div class="container">
+            <div class="header-content">
+                <!-- Логотип -->
+                <a href="/index.html" class="logo-link">
+                    <div class="logo">
+                        <div class="logo-icon-container">
+                            <i class="fas fa-users logo-icon"></i>
                         </div>
-                    </li>
-                </ul>
-            </nav>
+                        <div class="logo-text">
+                            <h1>Братья</h1>
+                            <p class="logo-subtitle">TTFBB COMPANY</p>
+                        </div>
+                    </div>
+                </a>
+
+                <!-- Кнопка мобильного меню -->
+                <button class="mobile-menu-btn" id="mobileMenuBtn" aria-label="Открыть меню">
+                    <span class="menu-line"></span>
+                    <span class="menu-line"></span>
+                    <span class="menu-line"></span>
+                </button>
+
+                <!-- Оверлей для мобильного меню -->
+                <div class="mobile-menu-overlay" id="mobileMenuOverlay"></div>
+
+                <!-- Навигация -->
+                <nav class="main-nav" id="mainNav">
+                    <ul class="nav-list">
+                        <li class="nav-item">
+                            <a href="/newswire.html" class="nav-link">
+                                <i class="fas fa-newspaper nav-icon"></i>
+                                <span class="nav-text">Новостная лента</span>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="/videos.html" class="nav-link">
+                                <i class="fas fa-play-circle nav-icon"></i>
+                                <span class="nav-text">Видеоролики</span>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="/character.html" class="nav-link">
+                                <i class="fa-solid fa-user nav-icon"></i>
+                                <span class="nav-text">Профиль</span>
+                            </a>
+                        </li>
+                    </ul>
+                </nav>
+            </div>
         </div>
-    </div>
-</header>
+    </header>
+
+     <script>
+        // DOM элементы
+        const header = document.getElementById('header');
+        const mobileMenuBtn = document.getElementById('mobileMenuBtn');
+        const mainNav = document.getElementById('mainNav');
+        const mobileMenuOverlay = document.getElementById('mobileMenuOverlay');
+        const navLinks = document.querySelectorAll('.nav-link');
+
+        // Переменные для скролла
+        let lastScrollTop = 0;
+        const scrollThreshold = 100;
+
+        // Функция для скрытия/показа навбара при скролле
+        function handleScroll() {
+            const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+            
+            if (scrollTop > scrollThreshold) {
+                // Прокрутка вниз
+                if (scrollTop > lastScrollTop && !mainNav.classList.contains('active')) {
+                    header.classList.add('header-hidden');
+                } 
+                // Прокрутка вверх
+                else if (scrollTop < lastScrollTop) {
+                    header.classList.remove('header-hidden');
+                }
+            } else {
+                // Вверху страницы
+                header.classList.remove('header-hidden');
+            }
+            
+            lastScrollTop = scrollTop;
+        }
+
+        // Функция для открытия/закрытия мобильного меню
+        function toggleMobileMenu() {
+            const isActive = mainNav.classList.contains('active');
+            
+            if (isActive) {
+                closeMobileMenu();
+            } else {
+                openMobileMenu();
+            }
+        }
+
+        function openMobileMenu() {
+            mainNav.classList.add('active');
+            mobileMenuBtn.classList.add('active');
+            mobileMenuOverlay.classList.add('active');
+            document.body.style.overflow = 'hidden'; // Блокируем скролл на body
+        }
+
+        function closeMobileMenu() {
+            mainNav.classList.remove('active');
+            mobileMenuBtn.classList.remove('active');
+            mobileMenuOverlay.classList.remove('active');
+            document.body.style.overflow = ''; // Разблокируем скролл
+        }
+
+        // Обработчики событий
+        window.addEventListener('scroll', handleScroll, { passive: true });
+
+        mobileMenuBtn.addEventListener('click', toggleMobileMenu);
+        mobileMenuOverlay.addEventListener('click', closeMobileMenu);
+
+        // Закрытие меню при клике на ссылку
+        navLinks.forEach(link => {
+            link.addEventListener('click', () => {
+                if (window.innerWidth <= 768) {
+                    closeMobileMenu();
+                }
+            });
+        });
+
+        // Закрытие меню при изменении размера окна
+        window.addEventListener('resize', () => {
+            if (window.innerWidth > 768 && mainNav.classList.contains('active')) {
+                closeMobileMenu();
+            }
+        });
+
+        // Предотвращаем скролл под меню на мобильных устройствах
+        document.addEventListener('touchmove', function(e) {
+            if (mainNav.classList.contains('active')) {
+                e.preventDefault();
+            }
+        }, { passive: false });
+
+        // Инициализация
+        document.addEventListener('DOMContentLoaded', () => {
+            // Проверяем ширину экрана при загрузке
+            if (window.innerWidth <= 768) {
+                header.classList.remove('header-hidden');
+            }
+        });
+    </script>
 
     <!-- Hero Section для новостей -->
     <section class="news-hero">
