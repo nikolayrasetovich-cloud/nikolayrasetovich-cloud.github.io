@@ -6,7 +6,7 @@
 .access-hero {
     padding: 120px 0 60px;
     position: relative;
-    background: linear-gradient(135deg, rgba(14, 14, 14, 0.95), rgba(138, 75, 175, 0.1));
+    background-image: url(https://s.rsg.sc/sc/images/games/RDR2/bg.jpg);
 }
 
 .access-hero .hero-content {
@@ -81,6 +81,10 @@
     position: relative;
     max-width: 420px; /* Ограничиваем максимальную ширину */
     margin: 0 auto; /* Центрируем карточки */
+}
+
+.person-select-text {
+    text-decoration: none;
 }
 
 .person-card:hover {

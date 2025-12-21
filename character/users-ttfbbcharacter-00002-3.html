@@ -64,15 +64,9 @@
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a href="/profile.html" class="nav-link active">
-                                <i class="fas fa-user-circle nav-icon"></i>
+                            <a href="/character.html" class="nav-link active">
+                                <i class="fa-solid fa-user"></i>
                                 <span class="nav-text">Профиль</span>
-                            </a>
-                        </li>
-                        <li class="nav-item">
-                            <a href="/index.html#footer" class="nav-link">
-                                <i class="fas fa-phone-alt nav-icon"></i>
-                                <span class="nav-text">Контакты</span>
                             </a>
                         </li>
                     </ul>
@@ -81,445 +75,111 @@
         </div>
     </header>
 
-    <!-- Основной контент профиля -->
-    <main class="profile-page">
-        <div class="container">
-            <div class="profile-header">
-                <div class="profile-back-btn">
-                    <a href="/index.html" class="btn btn-secondary">
-                        <i class="fas fa-arrow-left"></i>
-                        <span>На главную</span>
-                    </a>
-                </div>
-                <h1 class="page-title">Мой профиль</h1>
-                <p class="page-subtitle">Выполняй задания, собирай достижения и повышай свой уровень</p>
+<!-- Основной контент профиля -->
+<main class="profile-page">
+    <div class="container">
+        <div class="profile-header">
+            <div class="profile-back-btn">
+                <a href="/character.html" class="btn btn-secondary">
+                    <i class="fas fa-arrow-left"></i>
+                    <span>Назад</span>
+                </a>
             </div>
+            <h1 class="page-title">Профиль - thanoslegenda1239</h1>
+            <p class="page-subtitle">У вас нет доступа к главам</p>
+        </div>
 
-            <div class="profile-content">
-                <!-- Боковая панель с информацией о пользователе -->
-                <aside class="profile-sidebar">
+        <div class="profile-content">
+            <!-- Обертка для боковой панели с горизонтальным расположением -->
+            <div class="profile-sidebar-horizontal">
+                <div class="sidebar-cards-container">
+                    <!-- Карточка пользователя -->
                     <div class="user-card">
                         <div class="user-avatar">
                             <div class="avatar-container">
                                 <img src="/images/brothers-gallery/Ольга.jpg" alt="Аватар пользователя" class="avatar-img">
                                 <div class="avatar-status"></div>
                             </div>
-                            <div class="level-badge">Уровень 1</div>
+                            <div class="level-badge">Уровень 29</div>
                         </div>
                         
                         <div class="user-info">
                             <h2 class="user-name">Ольга</h2>
-                            <p class="colorwoman">Контент-мейкер</p>
+                            <a class="social-link-profile" href="https://t.me/thanoslegenda1239" target="_blank"><p class="coloradmins">@thanoslegenda1239</p></a>
                             <div class="user-stats">
                             </div>
                         </div>
                     </div>
 
-                    <!-- Прогресс уровня -->
-                    <div class="level-progress">
-                        <div class="progress-header">
-                            <h3><i class="fas fa-chart-line"></i> Прогресс уровня</h3>
-                        </div>
-                        <div class="progress-bar">
-                            <div class="progress-fill" style="width: 40%"></div>
-                        </div>
-                        <div class="progress-stats">
-                            <span>30/100 XP</span>
-                            <span>Осталось: 70 XP</span>
-                        </div>
-                    </div>
-                    </aside>
-
-                <!-- Основной контент с заданиями и достижениями -->
-                <div class="profile-main">
-                    <!-- Вкладки -->
-                    <div class="profile-tabs">
-                        <button class="tab-btn active" data-tab="tasks">
-                            <i class="fas fa-tasks"></i>
-                            <span>Задания</span>
-                        </button>
-                        <button class="tab-btn" data-tab="achievements">
-                            <i class="fas fa-trophy"></i>
-                            <span>Достижения</span>
-                        </button>
-                    </div>
-
-                    <!-- Контент вкладок -->
-                    <div class="tab-content active" id="tasks-tab">
-                        <div class="section-header">
-                            <h2>Активные задания</h2>
-                            <p>Выполняй задания, получай опыт и награды</p>
-                        </div>
-
-                        <div class="tasks-grid">
-                             <!-- Задание 1 -->
-                            <div class="task-card completed">
-                                <div class="task-header">
-                                    <div class="task-icon">
-                                        <i class="fa-solid fa-scroll"></i>
-                                    </div>
-                                    <div class="task-info">
-                                        <h3>Любопытный</h3>
-                                        <p>Зайдите на мой профиль</p>
-                                    </div>
-                                    <span class="task-xp">+30 XP</span>
-                                </div>
-                                <div class="task-progress">
-                                    <div class="progress-bar">
-                                        <div class="progress-fill" style="width: 100%"></div>
-                                    </div>
-                                    <span class="progress-text">Выполнено</span>
-                                </div>
-                                <div class="task-footer">
-                                    <span class="task-time completed"><i class="fas fa-check-circle"></i> Задание выполнено</span>
-                                    <!-- <button class="btn btn-primary btn-sm">
-                                        <i class="fas fa-play"></i> Смотреть
-                                    </button> -->
-                                </div>
+                    <!-- Правая колонка с прогрессом и ролями -->
+                    <div class="right-sidebar-column">
+                        <!-- Прогресс уровня -->
+                        <div class="level-progress">
+                            <div class="progress-header">
+                                <h3><i class="fas fa-chart-line"></i> Прогресс уровня</h3>
                             </div>
-
-                            <!-- Задание 2 -->
-                            <div class="task-card">
-                                <div class="task-header">
-                                    <div class="task-icon">
-                                        <i class="fa-solid fa-scroll"></i>
-                                    </div>
-                                    <div class="task-info">
-                                        <h3>Ежедневный визит</h3>
-                                        <p>Зайти на сайт 3 дня подряд</p>
-                                    </div>
-                                    <span class="task-xp">+10 XP</span>
-                                </div>
-                                <div class="task-progress">
-                                    <div class="progress-bar">
-                                        <div class="progress-fill" style="width: 33%"></div>
-                                    </div>
-                                    <span class="progress-text">Прогресс: 1/3</span>
-                                </div>
-                                <div class="task-footer">
-                                    <span class="task-time"><i class="far fa-clock"></i> Неограничено</span>
-                                </div>
+                            <div class="progress-bar">
+                                <div class="progress-fill" style="width: 50%"></div>
                             </div>
-
+                            <div class="progress-stats">
+                                <span>1 450/2 900 XP</span>
+                                <span>Осталось: 1 450 XP</span>
+                            </div>
                         </div>
 
-                    <!-- Вкладка достижений -->
-                    <div class="tab-content" id="achievements-tab">
-                        <div class="section-header">
-                            <h2>Мои достижения</h2>
-                            <p>Собери все достижения и стань легендой братьев</p>
-                        </div>
-
-                        <div class="achievements-grid">
-                            <!-- Достижение 1 -->
-                            <div class="achievement-card unlocked">
-                                <div class="achievement-icon">
-                                    <i class="fas fa-star"></i>
-                                </div>
-                                <div class="achievement-info">
-                                    <h3>Первые шаги</h3>
-                                    <p>Посетить сайт впервые</p>
-                                </div>
-                                <div class="achievement-date">
-                                    <i class="far fa-calendar"></i>
-                                    12.12.2024
-                                </div>
+                        <!-- Роли пользователя -->
+                        <div class="user-roles">
+                            <div class="roles-header">
+                                <h3><i class="fas fa-user-tag"></i> Роли</h3>
                             </div>
-
-                            <!-- Достижение 2 -->
-                            <div class="achievement-card unlocked">
-                                <div class="achievement-icon">
-                                    <i class="fas fa-comment"></i>
-                                </div>
-                                <div class="achievement-info">
-                                    <h3>Голос сообщества</h3>
-                                    <p>Оставить 100 комментариев</p>
-                                </div>
-                                <div class="achievement-date">
-                                    <i class="far fa-calendar"></i>
-                                    15.01.2025
-                                </div>
-                            </div>
-
-                            <!-- Достижение 3 -->
-                            <div class="achievement-card unlocked">
-                                <div class="achievement-icon">
-                                    <i class="fas fa-clock"></i>
-                                </div>
-                                <div class="achievement-info">
-                                    <h3>Завсегдатай</h3>
-                                    <p>Провести 50 часов на сайте</p>
-                                </div>
-                                <div class="achievement-date">
-                                    <i class="far fa-calendar"></i>
-                                    20.02.2025
-                                </div>
-                            </div>
-
-                            <!-- Достижение 4 -->
-                            <div class="achievement-card">
-                                <div class="achievement-icon">
+                            <div class="roles-grid">
+                                <div class="role-card">
                                     <i class="fas fa-crown"></i>
+                                    <span class="role-name">Дурак</span>
+                                    <p class="role-name">5 000/10 000 опыта</p>
+                                    <div class="role-progress" data-progress="50"></div>
                                 </div>
-                                <div class="achievement-info">
-                                    <h3>Король стримов</h3>
-                                    <p>Посмотреть все стримы месяца</p>
+                                <div class="role-card">
+                                    <i class="fas fa-search"></i>
+                                    <span class="role-name">Искатель</span>
+                                    <p class="role-name">3 000/10 000 опыта</p>
+                                    <div class="role-progress" data-progress="30"></div>
                                 </div>
-                                <div class="achievement-progress">
-                                    <span>Прогресс: 8/30</span>
+                                <div class="role-card">
+                                    <i class="fas fa-home"></i>
+                                    <span class="role-name">Домашний</span>
+                                    <p class="role-name">9 000/10 000 опыта</p>
+                                    <div class="role-progress" data-progress="90"></div>
                                 </div>
-                            </div>
-
-                            <!-- Достижение 5 -->
-                            <div class="achievement-card">
-                                <div class="achievement-icon">
-                                    <i class="fas fa-share-square"></i>
+                                <div class="role-card">
+                                    <i class="fas fa-road"></i>
+                                    <span class="role-name">Уличный</span>
+                                    <p class="role-name">4 000/10 000 опыта</p>
+                                    <div class="role-progress" data-progress="40"></div>
                                 </div>
-                                <div class="achievement-info">
-                                    <h3>Амбассадор</h3>
-                                    <p>Поделиться 50 разами</p>
+                                <div class="role-card">
+                                    <i class="fas fa-beer"></i>
+                                    <span class="role-name">Алкаш</span>
+                                    <p class="role-name">3 000/10 000 опыта</p>
+                                    <div class="role-progress" data-progress="30"></div>
                                 </div>
-                                <div class="achievement-progress">
-                                    <span>Прогресс: 12/50</span>
-                                </div>
-                            </div>
-
-                            <!-- Достижение 6 -->
-                            <div class="achievement-card">
-                                <div class="achievement-icon">
+                                <div class="role-card">
                                     <i class="fas fa-gem"></i>
+                                    <span class="role-name">Богатый</span>
+                                    <p class="role-name">3 000/10 000 опыта</p>
+                                    <div class="role-progress" data-progress="30"></div>
                                 </div>
-                                <div class="achievement-info">
-                                    <h3>Легенда</h3>
-                                    <p>Достичь 10 уровня</p>
+                                <div class="role-card">
+                                    <i class="fas fa-campground"></i>
+                                    <span class="role-name">Бомж</span>
+                                    <p class="role-name">1 000/10 000 опыта</p>
+                                    <div class="role-progress" data-progress="10"></div>
                                 </div>
-                                <div class="achievement-progress">
-                                    <span>Прогресс: уровень 7</span>
-                                </div>
-                            </div>
-
-                            <!-- Достижение 7 -->
-                            <div class="achievement-card unlocked">
-                                <div class="achievement-icon">
-                                    <i class="fas fa-heart"></i>
-                                </div>
-                                <div class="achievement-info">
-                                    <h3>Сердце братьев</h3>
-                                    <p>Быть активным 30 дней подряд</p>
-                                </div>
-                                <div class="achievement-date">
-                                    <i class="far fa-calendar"></i>
-                                    01.03.2025
-                                </div>
-                            </div>
-
-                            <!-- Достижение 8 -->
-                            <div class="achievement-card">
-                                <div class="achievement-icon">
+                                <div class="role-card">
                                     <i class="fas fa-trophy"></i>
-                                </div>
-                                <div class="achievement-info">
-                                    <h3>Коллекционер</h3>
-                                    <p>Получить 20 достижений</p>
-                                </div>
-                                <div class="achievement-progress">
-                                    <span>Прогресс: 7/20</span>
-                                </div>
-                            </div>
-                        </div>
-
-                        <!-- Статистика достижений -->
-                        <div class="achievement-stats">
-                            <div class="stat-card">
-                                <h4><i class="fas fa-trophy"></i> Общая статистика</h4>
-                                <div class="stats-grid">
-                                    <div class="stat-item">
-                                        <span class="stat-number">7</span>
-                                        <span class="stat-label">Получено</span>
-                                    </div>
-                                    <div class="stat-item">
-                                        <span class="stat-number">13</span>
-                                        <span class="stat-label">Осталось</span>
-                                    </div>
-                                    <div class="stat-item">
-                                        <span class="stat-number">35%</span>
-                                        <span class="stat-label">Прогресс</span>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Вкладка статистики -->
-                    <div class="tab-content" id="stats-tab">
-                        <div class="section-header">
-                            <h2>Статистика активности</h2>
-                            <p>Твои успехи и активность за всё время</p>
-                        </div>
-
-                        <div class="stats-container">
-                            <div class="stats-grid-large">
-                                <div class="stat-card-large">
-                                    <h3><i class="fas fa-eye"></i> Просмотры</h3>
-                                    <div class="stat-number-large">1,247</div>
-                                    <p>Всего просмотрено видео</p>
-                                    <div class="stat-trend up">
-                                        <i class="fas fa-arrow-up"></i> 12% за месяц
-                                    </div>
-                                </div>
-
-                                <div class="stat-card-large">
-                                    <h3><i class="fas fa-clock"></i> Время</h3>
-                                    <div class="stat-number-large">156ч</div>
-                                    <p>Всего проведено времени</p>
-                                    <div class="stat-trend up">
-                                        <i class="fas fa-arrow-up"></i> 8% за месяц
-                                    </div>
-                                </div>
-
-                                <div class="stat-card-large">
-                                    <h3><i class="fas fa-comments"></i> Комментарии</h3>
-                                    <div class="stat-number-large">89</div>
-                                    <p>Всего комментариев</p>
-                                    <div class="stat-trend up">
-                                        <i class="fas fa-arrow-up"></i> 24% за месяц
-                                    </div>
-                                </div>
-
-                                <div class="stat-card-large">
-                                    <h3><i class="fas fa-calendar-alt"></i> Дни</h3>
-                                    <div class="stat-number-large">45</div>
-                                    <p>Дней активности</p>
-                                    <div class="stat-trend down">
-                                        <i class="fas fa-arrow-down"></i> 3% за месяц
-                                    </div>
-                                </div>
-                            </div>
-
-                            <!-- График активности -->
-                            <div class="activity-chart">
-                                <h3><i class="fas fa-chart-line"></i> Активность за месяц</h3>
-                                <div class="chart-container">
-                                    <canvas id="activityChart"></canvas>
-                                </div>
-                            </div>
-
-                            <!-- Распределение по времени -->
-                            <div class="time-distribution">
-                                <h3><i class="fas fa-chart-pie"></i> Распределение времени</h3>
-                                <div class="distribution-chart">
-                                    <canvas id="timeChart"></canvas>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Вкладка наград -->
-                    <div class="tab-content" id="rewards-tab">
-                        <div class="section-header">
-                            <h2>Мои награды</h2>
-                            <p>Особые бонусы и привилегии за активность</p>
-                        </div>
-
-                        <div class="rewards-container">
-                            <!-- Доступные награды -->
-                            <div class="rewards-section">
-                                <h3><i class="fas fa-gift"></i> Доступные награды</h3>
-                                <div class="rewards-grid">
-                                    <div class="reward-card">
-                                        <div class="reward-icon">
-                                            <i class="fas fa-star premium"></i>
-                                        </div>
-                                        <div class="reward-info">
-                                            <h4>Эксклюзивный бейдж</h4>
-                                            <p>Особая иконка в комментариях</p>
-                                        </div>
-                                        <button class="btn btn-primary btn-sm">
-                                            500 XP
-                                        </button>
-                                    </div>
-
-                                    <div class="reward-card">
-                                        <div class="reward-icon">
-                                            <i class="fas fa-palette"></i>
-                                        </div>
-                                        <div class="reward-info">
-                                            <h4>Кастомный аватар</h4>
-                                            <p>Особенная рамка для аватара</p>
-                                        </div>
-                                        <button class="btn btn-primary btn-sm">
-                                            1000 XP
-                                        </button>
-                                    </div>
-
-                                    <div class="reward-card">
-                                        <div class="reward-icon">
-                                            <i class="fas fa-heart"></i>
-                                        </div>
-                                        <div class="reward-info">
-                                            <h4>Поддержка братьев</h4>
-                                            <p>Ваше имя в титрах стрима</p>
-                                        </div>
-                                        <button class="btn btn-primary btn-sm">
-                                            2000 XP
-                                        </button>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <!-- Полученные награды -->
-                            <div class="rewards-section">
-                                <h3><i class="fas fa-award"></i> Полученные награды</h3>
-                                <div class="rewards-grid">
-                                    <div class="reward-card obtained">
-                                        <div class="reward-icon">
-                                            <i class="fas fa-crown"></i>
-                                        </div>
-                                        <div class="reward-info">
-                                            <h4>Ранний поклонник</h4>
-                                            <p>Бейдж первого года</p>
-                                            <span class="obtained-date">Получено: 12.12.2024</span>
-                                        </div>
-                                        <div class="reward-status">
-                                            <i class="fas fa-check-circle"></i>
-                                        </div>
-                                    </div>
-
-                                    <div class="reward-card obtained">
-                                        <div class="reward-icon">
-                                            <i class="fas fa-fire"></i>
-                                        </div>
-                                        <div class="reward-info">
-                                            <h4>Активный зритель</h4>
-                                            <p>Золотая рамка профиля</p>
-                                            <span class="obtained-date">Получено: 15.01.2025</span>
-                                        </div>
-                                        <div class="reward-status">
-                                            <i class="fas fa-check-circle"></i>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <!-- Валюта -->
-                            <div class="currency-section">
-                                <h3><i class="fas fa-coins"></i> Моя валюта</h3>
-                                <div class="currency-card">
-                                    <div class="currency-info">
-                                        <div class="currency-icon">
-                                            <i class="fas fa-gem"></i>
-                                        </div>
-                                        <div>
-                                            <h4>Бриллианты братьев</h4>
-                                            <p>Используйте для получения наград</p>
-                                        </div>
-                                    </div>
-                                    <div class="currency-amount">
-                                        <span class="amount">1,250</span>
-                                        <button class="btn btn-secondary btn-sm">
-                                            <i class="fas fa-plus"></i> Пополнить
-                                        </button>
-                                    </div>
+                                    <span class="role-name">Успешный</span>
+                                    <p class="role-name">2 000/10 000 опыта</p>
+                                    <div class="role-progress" data-progress="20"></div>
                                 </div>
                             </div>
                         </div>
@@ -527,72 +187,9 @@
                 </div>
             </div>
         </div>
-    </main>
+    </div>
+</main>
 
-    <!-- Footer -->
-    <footer id="footer">
-        <div class="container">
-            <div class="footer-content">
-                <div class="footer-main">
-                    <div class="footer-logo">
-                        <i class="fas fa-users logo-icon"></i>
-                        <div>
-                            <h3>Блог братьев</h3>
-                            <p>Два брата и одна девочка в увлекательных приключениях</p>
-                        </div>
-                    </div>
-                    <div class="footer-social">
-                        <a href="https://www.youtube.com/@n1kolayrasetovich" target="_blank" class="social-link youtube"
-                            aria-label="YouTube">
-                            <i class="fab fa-youtube"></i>
-                        </a>
-                        <a href="https://t.me/nesoqiton" target="_blank" class="social-link telegram"
-                            aria-label="Telegram">
-                            <i class="fab fa-telegram"></i>
-                        </a>
-                        <a href="#" class="social-link instagram" aria-label="Instagram">
-                            <i class="fab fa-instagram"></i>
-                        </a>
-                    </div>
-                </div>
-                <div class="footer-links">
-                    <div class="footer-column">
-                        <h4>Разделы</h4>
-                        <ul>
-                            <li><a href="/newswire.html">Новостная лента</a></li>
-                            <li><a href="/videos.html">Видеоролики</a></li>
-                            <li><a href="/profile.html">Профиль</a></li>
-                            <li><a href="/index.html#footer">Контакты</a></li>
-                        </ul>
-                    </div>
-                    <div class="footer-column">
-                        <h4>Контакты</h4>
-                        <ul>
-                            <li><i class="fas fa-user"></i> Никита: +375 (29) 959-00-97</li>
-                            <li><i class="fas fa-user"></i> Евгений: +375 (29) 870-23-67</li>
-                            <li><i class="fas fa-user"></i> Ольга: +375 (25) 729-54-17</li>
-                        </ul>
-                    </div>
-                    <div class="footer-column">
-                        <h4>Telegram</h4>
-                        <ul>
-                            <li><a href="https://t.me/nesoqiton" target="_blank">@nesoqiton (Никита)</a></li>
-                            <li><a href="https://t.me/Legendary_7681" target="_blank">@Legendary_7681 (Евгений)</a></li>
-                            <li><a href="https://t.me/thanoslegenda1239" target="_blank">@thanoslegenda1239 (Ольга)</a>
-                            </li>
-                        </ul>
-                    </div>
-                </div>
-            </div>
-            <div class="footer-bottom">
-                <p>&copy; 2025 Блог братьев. Все права защищены.</p>
-                <div class="footer-links-bottom">
-                    <a href="/privacy.html">Политика конфиденциальности</a>
-                    <a href="#">Условия использования</a>
-                </div>
-            </div>
-        </div>
-    </footer>
 
     <!-- Скрипты -->
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>

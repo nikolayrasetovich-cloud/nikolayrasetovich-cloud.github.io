@@ -3,9 +3,18 @@
    ============================= */
 
 /* Основные стили страницы */
+
+@font-face {
+    font-family: 'RDR-Line'; /* Имя, которое вы будете использовать */
+    src: url('fonts/RDR2-fonts.woff2') format('woff2');
+    font-weight: normal; /* Обычное начертание */
+    font-style: normal; /* Обычный стиль */
+}
+
 .profile-page {
     padding: 140px 0 80px;
     min-height: 100vh;
+    background-image: url(https://s.rsg.sc/sc/images/games/RDR2/bg.jpg);
 }
 
 .profile-header {
@@ -420,6 +429,247 @@
 
 .btn-success:hover {
     background: #0da674;
+}
+
+/* =============================
+   ГОРИЗОНТАЛЬНЫЙ МАКЕТ БОКОВОЙ ПАНЕЛИ
+   ============================= */
+
+.profile-sidebar-horizontal {
+    width: 100%;
+    margin-bottom: 30px;
+}
+
+.sidebar-cards-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 25px;
+}
+
+.user-card {
+    margin-bottom: 0;
+}
+
+.level-progress {
+    height: fit-content;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+/* Адаптивность для горизонтального макета */
+@media (max-width: 768px) {
+    .sidebar-cards-container {
+        grid-template-columns: 1fr;
+        gap: 20px;
+    }
+    
+    .level-progress {
+        margin-top: 0;
+    }
+}
+
+@media (max-width: 1024px) {
+    .sidebar-cards-container {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media (min-width: 1200px) {
+    .sidebar-cards-container {
+        grid-template-columns: 350px 1fr;
+    }
+}
+
+/* Обновленные стили для .profile-content */
+.profile-content {
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+}
+
+.profile-main {
+    background: rgba(255, 255, 255, 0.03);
+    border-radius: var(--radius-xl);
+    padding: 30px;
+    border: 1px solid rgba(255, 255, 255, 0.05);
+    min-height: 400px;
+}
+
+.social-link-profile {
+    text-decoration: none;
+}
+
+/* =============================
+   СТИЛИ ДЛЯ РОЛЕЙ
+   ============================= */
+
+.right-sidebar-column {
+    display: flex;
+    flex-direction: column;
+    gap: 25px;
+}
+
+.user-roles {
+    background: rgba(255, 255, 255, 0.03);
+    border-radius: var(--radius-lg);
+    padding: 20px;
+    border: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.roles-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 15px;
+}
+
+.roles-header h3 {
+    font-size: 1.1rem;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.roles-count {
+    background: var(--gradient);
+    color: white;
+    padding: 4px 12px;
+    border-radius: 15px;
+    font-size: 0.9rem;
+    font-weight: 600;
+}
+
+.roles-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 10px;
+    margin-bottom: 15px;
+}
+
+@media (max-width: 480px) {
+    .roles-grid {
+        grid-template-columns: 1fr;
+    }
+}
+
+.role-card {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 12px 15px;
+    background: rgba(255, 255, 255, 0.02);
+    border-radius: var(--radius);
+    border: 1px solid rgba(255, 255, 255, 0.03);
+    position: relative;
+    overflow: hidden;
+    transition: all 0.3s ease;
+}
+
+.role-card.active {
+    background: rgba(138, 75, 175, 0.08);
+    border-color: rgba(138, 75, 175, 0.2);
+}
+
+.role-card:hover {
+    border-color: var(--accent);
+    transform: translateY(-2px);
+}
+
+.role-card i {
+    color: var(--accent);
+    font-size: 1.1rem;
+    width: 20px;
+    text-align: center;
+}
+
+.role-card .fa-crown { color: #FFD700; }
+.role-card .fa-search { color: #4ECDC4; }
+.role-card .fa-home { color: #FF6B6B; }
+.role-card .fa-road { color: #45B7D1; }
+.role-card .fa-beer { color: #F9A825; }
+.role-card .fa-gem { color: #9C27B0; }
+.role-card .fa-campground { color: #8BC34A; }
+.role-card .fa-trophy { color: #FF9800; }
+
+.role-name {
+    flex: 1;
+    font-size: 0.9rem;
+    font-weight: 500;
+}
+
+.role-progress {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    height: 3px;
+    background: var(--gradient);
+    border-radius: 0 0 var(--radius) var(--radius);
+    transition: width 0.5s ease;
+}
+
+/* Задаем ширину прогресса через data-атрибуты */
+.role-progress[data-progress="100"] { width: 100%; }
+.role-progress[data-progress="95"] { width: 95%; }
+.role-progress[data-progress="90"] { width: 90%; }
+.role-progress[data-progress="85"] { width: 85%; }
+.role-progress[data-progress="80"] { width: 80%; }
+.role-progress[data-progress="75"] { width: 75%; }
+.role-progress[data-progress="70"] { width: 70%; }
+.role-progress[data-progress="65"] { width: 65%; }
+.role-progress[data-progress="60"] { width: 60%; }
+.role-progress[data-progress="55"] { width: 55%; }
+.role-progress[data-progress="50"] { width: 50%; }
+.role-progress[data-progress="45"] { width: 45%; }
+.role-progress[data-progress="40"] { width: 40%; }
+.role-progress[data-progress="35"] { width: 35%; }
+.role-progress[data-progress="30"] { width: 30%; }
+.role-progress[data-progress="25"] { width: 25%; }
+.role-progress[data-progress="20"] { width: 20%; }
+.role-progress[data-progress="15"] { width: 15%; }
+.role-progress[data-progress="10"] { width: 10%; }
+.role-progress[data-progress="5"] { width: 5%; }
+
+.roles-info {
+    padding-top: 15px;
+    border-top: 1px solid rgba(255, 255, 255, 0.05);
+    color: var(--text-secondary);
+    font-size: 0.85rem;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.roles-info i {
+    color: var(--accent);
+}
+
+/* Обновляем стили для горизонтального расположения */
+.sidebar-cards-container {
+    display: grid;
+    grid-template-columns: 350px 1fr;
+    gap: 25px;
+    width: 100%;
+}
+
+@media (max-width: 1024px) {
+    .sidebar-cards-container {
+        grid-template-columns: 300px 1fr;
+    }
+}
+
+@media (max-width: 768px) {
+    .sidebar-cards-container {
+        grid-template-columns: 1fr;
+    }
+}
+
+.user-card {
+    height: fit-content;
+}
+
+.level-progress {
+    margin-bottom: 0;
 }
 
 /* Завершенные задания */
@@ -900,3 +1150,406 @@
     color: rgb(236, 91, 255);
     font-weight: bold;
 }
+
+
+/*СТИЛИ ДЛЯ БЛОКА С ЗАДАНИЯМИ*/
+
+.taskjob-main-section {
+   background-image: url(https://s.rsg.sc/sc/images/games/RDR2/bg.jpg); 
+}
+
+@media (min-width: 64em) {
+    .taskjob-story-main {
+        padding: 0 10px;
+    } 
+}
+
+.taskjob-story-main {
+    display: flex;
+    flex-flow: wrap;
+    margin: 0 auto;
+    max-width: 1420px;
+    flex-wrap: wrap;
+}
+
+.taskjob-sector {
+    display: block;
+    padding: 10px;
+    position: relative;
+    width: 100%;
+    box-sizing: inherit;
+    touch-action: manipulation;
+}
+
+.taskjob-title {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    box-sizing: inherit;
+    touch-action: manipulation;
+    margin-bottom: 20px;
+    padding: 0 10px;
+}
+
+.taskjob-title-left {
+    font-family: "RDR-Line";
+    font-style: normal;
+    font-size: 1.6rem;
+    font-weight: 1800;
+    line-height: 1.4rem;
+    margin: 0;
+    padding-left: 0px;
+}
+
+.taskjob-title-right {
+    font-family: "RDR-Line";
+    font-style: normal;
+    font-size: 1.8rem;
+    font-weight: 1800;
+    line-height: 1.4rem;
+    margin: 0;
+    padding-right: 15px;
+}
+
+.taskjob-missions {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: flex-start;
+    margin: 0 auto;
+    margin: -10px;
+    margin-bottom: 20px;
+    position: relative;
+    box-sizing: inherit;
+    touch-action: manipulation;
+    width: 100%;
+}
+
+.taskjob-mission-g1 {
+    flex: 0 0 calc(16.666% - 20px); /* 6 элементов в строке на десктопе */
+    margin: 10px;
+    box-sizing: border-box;
+    text-decoration: none;
+    display: block;
+    position: relative;
+}
+
+.image-container {
+    width: 100%;
+    padding-top: 62.5%; /* Соотношение 8:5 (1.6) */
+    position: relative;
+    overflow: hidden;
+    border-radius: 4px;
+}
+
+.taskjob-missions-1-1 {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+    border-radius: 4px;
+    transition: transform 0.3s ease;
+}
+
+/* Эффект при наведении */
+.taskjob-mission-g1:hover .taskjob-missions-1-1 {
+    transform: scale(1.03);
+}
+
+/* Обертка для каждого задания */
+.mission-wrapper {
+    position: relative;
+    width: 100%;
+}
+
+/* Текст над картинкой - ОДНА СТРОКА БЕЗ СОКРАЩЕНИЙ */
+.mission-title-overlay {
+    position: absolute;
+    top: -50px;
+    left: 0;
+    width: 100%;
+    background-image: url(https://img.freepik.com/premium-photo/distressed-white-grunge-texture-overlay_298617-1548.jpg);
+    color: #2f2f2f;
+    font-family: "RDR-Line";
+    font-size: 14px;
+    font-weight: 600;
+    padding: 10px 5px;
+    box-sizing: border-box;
+    opacity: 0;
+    visibility: hidden;
+    z-index: 10;
+    border-radius: 4px 4px 0 0;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    text-align: center;
+    white-space: nowrap;
+    overflow: visible; /* Важно: разрешаем выход за границы */
+    text-overflow: clip; /* Убираем многоточие */
+    transition: opacity 0.3s ease;
+    line-height: 1.3;
+    /* Гарантируем что текст в одну строку */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 40px; /* Фиксированная высота */
+}
+
+/* Альтернативный вариант с динамическим размером шрифта */
+.mission-title-overlay.dynamic-font {
+    font-size: calc(12px + 0.2vw); /* Динамический размер шрифта */
+    padding: 10px 3px;
+}
+
+/* Показываем текст при наведении */
+.taskjob-mission-g1:hover .mission-title-overlay {
+    opacity: 1;
+    visibility: visible;
+}
+
+/* АДАПТИВНОСТЬ */
+
+/* Для планшетов (от 769px до 1024px) - 3 элемента в строке */
+@media (max-width: 1024px) and (min-width: 769px) {
+    .taskjob-mission-g1 {
+        flex: 0 0 calc(33.333% - 20px);
+    }
+    
+    .mission-title-overlay {
+        font-size: 13px;
+        padding: 10px 4px;
+        top: -45px;
+        height: 38px;
+    }
+}
+
+/* Для телефонов (от 481px до 768px) - 2 элемента в строке */
+@media (max-width: 768px) and (min-width: 481px) {
+    .taskjob-mission-g1 {
+        flex: 0 0 calc(50% - 20px);
+    }
+    
+    .taskjob-title-left {
+        font-size: 1.4rem;
+        padding-left: 5px;
+    }
+    
+    .taskjob-title-right {
+        font-size: 1.5rem;
+        padding-right: 10px;
+    }
+    
+    /* Уменьшаем отступы между элементами */
+    .taskjob-missions {
+        margin: -8px;
+        margin-bottom: 15px;
+    }
+    
+    .taskjob-mission-g1 {
+        margin: 8px;
+    }
+    
+    /* Настройки для текста на телефонах */
+    .mission-title-overlay {
+        font-size: 12px;
+        padding: 10px 3px;
+        top: -40px;
+        height: 35px;
+        white-space: nowrap; /* Одна строка! */
+        overflow: visible;
+        text-overflow: clip;
+    }
+    
+    /* Если текст очень длинный, уменьшаем отступы */
+    .mission-title-overlay.long-text {
+        padding: 10px 1px;
+        font-size: 11px;
+    }
+}
+
+/* Для маленьких телефонов (до 480px) - 2 элемента в строке */
+@media (max-width: 480px) {
+    .taskjob-mission-g1 {
+        flex: 0 0 calc(50% - 12px);
+        margin: 6px;
+    }
+    
+    .taskjob-title-left {
+        font-size: 1.2rem;
+        padding-left: 5px;
+    }
+    
+    .taskjob-title-right {
+        font-size: 1.3rem;
+        padding-right: 8px;
+    }
+    
+    .taskjob-missions {
+        margin: -6px;
+        margin-bottom: 12px;
+    }
+    
+    .taskjob-sector {
+        padding: 8px 5px;
+    }
+    
+    .taskjob-title {
+        padding: 0 5px;
+        margin-bottom: 15px;
+    }
+    
+    /* Критически важные настройки для текста на маленьких экранах */
+    .mission-title-overlay {
+        font-size: 11px;
+        padding: 8px 2px;
+        top: -35px;
+        height: 32px;
+        white-space: nowrap; /* Одна строка! */
+        overflow: visible; /* Разрешаем выход за пределы */
+        text-overflow: clip; /* Убираем многоточие */
+        min-width: 100%; /* Минимальная ширина */
+    }
+    
+    /* Уменьшаем паддинги для длинного текста */
+    .mission-wrapper {
+        padding-top: 8px;
+    }
+}
+
+/* Для очень маленьких экранов (до 360px) */
+@media (max-width: 360px) {
+    .taskjob-mission-g1 {
+        flex: 0 0 calc(50% - 8px);
+        margin: 4px;
+    }
+    
+    .taskjob-missions {
+        margin: -4px;
+        margin-bottom: 10px;
+    }
+    
+    .taskjob-title-left {
+        font-size: 1.1rem;
+    }
+    
+    .taskjob-title-right {
+        font-size: 1.2rem;
+    }
+    
+    /* Еще более компактный текст */
+    .mission-title-overlay {
+        font-size: 10px;
+        padding: 8px 1px;
+        top: -32px;
+        height: 30px;
+        letter-spacing: -0.2px; /* Слегка уменьшаем межбуквенный интервал */
+    }
+}
+
+/* Для экстремально маленьких экранов (до 320px) */
+@media (max-width: 320px) {
+    .mission-title-overlay {
+        font-size: 9.5px;
+        padding: 7px 1px;
+        top: -30px;
+        height: 28px;
+    }
+    
+    /* Альтернатива: динамический размер шрифта */
+    .mission-title-overlay.dynamic-font {
+        font-size: calc(8px + 0.5vw);
+        padding: 7px 0;
+    }
+}
+
+/* Улучшения для длинных названий */
+/* Можно добавить классы для очень длинных названий в HTML */
+.mission-title-overlay.extra-long {
+    font-size: calc(9px + 0.3vw); /* Динамический размер */
+    letter-spacing: -0.1px;
+    padding: 8px 1px;
+}
+
+/* Если нужно, чтобы текст не выходил за границы блока (альтернативный вариант) */
+.mission-title-overlay.contained {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    padding: 10px 5px;
+}
+
+/* Для конкретных длинных названий можно добавить медиа-запросы */
+@media (max-width: 400px) {
+    /* Специальные настройки для очень длинных названий */
+    .mission-title-overlay[data-title*="Назад пути нет"],
+    .mission-title-overlay[data-title*="Весенние приключения"],
+    .mission-title-overlay[data-title*="Стадионная битва"] {
+        font-size: 9px;
+        padding: 8px 0;
+    }
+}
+
+/* Улучшения для мобильных устройств */
+@media (max-width: 768px) {
+    /* Делаем тапы более заметными */
+    .taskjob-mission-g1:active .taskjob-missions-1-1 {
+        transform: scale(0.98);
+        transition: transform 0.1s ease;
+    }
+    
+    /* Показываем текст при тапе на мобильных */
+    .taskjob-mission-g1:active .mission-title-overlay {
+        opacity: 1;
+        visibility: visible;
+    }
+}
+
+/* Дополнительные классы для очень коротких названий */
+.mission-title-overlay.short {
+    font-size: 14px; /* Можно сделать шрифт больше для коротких названий */
+}
+
+/* Стили для разделителя глав (если используете) */
+.chapter-divider {
+    width: 100%;
+    margin: 30px 0;
+    padding: 0 10px;
+    box-sizing: border-box;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+}
+
+.chapter-divider img {
+    max-width: 100%;
+    height: auto;
+    max-height: 100px;
+    object-fit: contain;
+}
+
+/* Адаптивность для разделителей */
+@media (max-width: 768px) {
+    .chapter-divider {
+        margin: 20px 0;
+        padding: 0 5px;
+    }
+    
+    .chapter-divider img {
+        max-height: 70px;
+    }
+}
+
+@media (max-width: 480px) {
+    .chapter-divider {
+        margin: 15px 0;
+    }
+    
+    .chapter-divider img {
+        max-height: 50px;
+    }
+}
+
+
