@@ -286,6 +286,12 @@ class VideoManager {
         // Данные видео
         this.videos = [
             {
+                id: "UaK-sxdgCSs",
+                title: "🛜 ОНЛАЙН ИГРЫ 🎮",
+                description: "🔴 Прямой эфир / 24 декабря 2025",
+                type: "other"
+            },
+            {
                 id: "6C8aI3ujAIc",
                 title: "☁️ ПАСМУРНЫЕ ВЫХОДНЫЕ 🔥 КАЙФУЕМ В ИГРУЛЬКАХ 🕹️",
                 description: "🔴 Прямой эфир / 21 декабря 2025",
@@ -297,12 +303,7 @@ class VideoManager {
                 description: "🔴 Прямой эфир / 09 декабря 2025",
                 type: "other"
             },
-            {
-                id: "Ahn5xz1vTBM",
-                title: "❄️ НЕЖНАЯ ЗИМА | ТРЭШ УЖЕ ТУТ 😱",
-                description: "🔴 Прямой эфир / 08 декабря 2025",
-                type: "other"
-            },
+
         ];
         
         this.displayVideos();
