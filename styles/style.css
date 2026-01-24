@@ -245,7 +245,7 @@ header * {
 /* Убираем белый фон при любых условиях */
 #header:not(.header-hidden),
 #header.header-hidden {
-    background: rgba(14, 14, 14, 0.98) !important;
+    background: rgba(14, 14, 14, 0%) !important;
 }
 
 /* Для всех элементов внутри навбара */
@@ -309,7 +309,7 @@ header * {
 
         .logo-text h1 {
             font-size: 1.4rem;
-            background: var(--gradient);
+            background: rgb(251, 205, 255);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             margin: 0;

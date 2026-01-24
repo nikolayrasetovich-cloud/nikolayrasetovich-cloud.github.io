@@ -1,0 +1,874 @@
+<!DOCTYPE html>
+<html lang="ru_RU">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TTFBB COMPANY</title>
+    <link rel="icon" href="images/logo.png" type="images/logo.png">
+    <link rel="stylesheet" href="styles/style.css">
+    <link rel="stylesheet" href="styles/schedule.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+</head>
+
+<body>
+    <!-- Анимированный фон -->
+    <div class="animated-background">
+        <div class="gradient-bg"></div>
+        <div class="particles" id="particles"></div>
+    </div>
+
+    <!-- Новогодние элементы -->
+    <div class="snowflakes" id="snowflakes"></div>
+    <div class="snowdrifts"></div>
+
+    <!-- Header -->
+    <header id="header">
+        <div class="container">
+            <div class="header-content">
+                <!-- Логотип -->
+                <a href="/index.html" class="logo-link">
+                    <div class="logo">
+                        <div class="logo-icon-container">
+                            <i class="fas fa-users logo-icon"></i>
+                        </div>
+                        <div class="logo-text">
+                            <h1>Братья</h1>
+                            <p class="logo-subtitle">TTFBB COMPANY</p>
+                        </div>
+                    </div>
+                </a>
+
+                <!-- Кнопка мобильного меню -->
+                <button class="mobile-menu-btn" id="mobileMenuBtn" aria-label="Открыть меню">
+                    <span class="menu-line"></span>
+                    <span class="menu-line"></span>
+                    <span class="menu-line"></span>
+                </button>
+
+                <!-- Оверлей для мобильного меню -->
+                <div class="mobile-menu-overlay" id="mobileMenuOverlay"></div>
+
+                <!-- Навигация -->
+                <nav class="main-nav" id="mainNav">
+                    <ul class="nav-list">
+                        <li class="nav-item">
+                            <a href="/newswire.html" class="nav-link">
+                                <i class="fas fa-newspaper nav-icon"></i>
+                                <span class="nav-text">Новостная лента</span>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="/videos.html" class="nav-link">
+                                <i class="fas fa-play-circle nav-icon"></i>
+                                <span class="nav-text">Видеоролики</span>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="/schedule.html" class="nav-link">
+                                <i class="fas fa-calendar-alt nav-icon"></i>
+                                <span class="nav-text">Расписание</span>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="/character.html" class="nav-link">
+                                <i class="fa-solid fa-user nav-icon"></i>
+                                <span class="nav-text">Профиль</span>
+                            </a>
+                        </li>
+                    </ul>
+                </nav>
+            </div>
+        </div>
+    </header>
+
+    <script>
+        // DOM элементы
+        const header = document.getElementById('header');
+        const mobileMenuBtn = document.getElementById('mobileMenuBtn');
+        const mainNav = document.getElementById('mainNav');
+        const mobileMenuOverlay = document.getElementById('mobileMenuOverlay');
+        const navLinks = document.querySelectorAll('.nav-link');
+
+        // Переменные для скролла
+        let lastScrollTop = 0;
+        const scrollThreshold = 100;
+
+        // Функция для скрытия/показа навбара при скролле
+        function handleScroll() {
+            const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+            
+            if (scrollTop > scrollThreshold) {
+                // Прокрутка вниз
+                if (scrollTop > lastScrollTop && !mainNav.classList.contains('active')) {
+                    header.classList.add('header-hidden');
+                } 
+                // Прокрутка вверх
+                else if (scrollTop < lastScrollTop) {
+                    header.classList.remove('header-hidden');
+                }
+            } else {
+                // Вверху страницы
+                header.classList.remove('header-hidden');
+            }
+            
+            lastScrollTop = scrollTop;
+        }
+
+        // Функция для открытия/закрытия мобильного меню
+        function toggleMobileMenu() {
+            const isActive = mainNav.classList.contains('active');
+            
+            if (isActive) {
+                closeMobileMenu();
+            } else {
+                openMobileMenu();
+            }
+        }
+
+        function openMobileMenu() {
+            mainNav.classList.add('active');
+            mobileMenuBtn.classList.add('active');
+            mobileMenuOverlay.classList.add('active');
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeMobileMenu() {
+            mainNav.classList.remove('active');
+            mobileMenuBtn.classList.remove('active');
+            mobileMenuOverlay.classList.remove('active');
+            document.body.style.overflow = '';
+        }
+
+        // Обработчики событий
+        window.addEventListener('scroll', handleScroll, { passive: true });
+
+        mobileMenuBtn.addEventListener('click', toggleMobileMenu);
+        mobileMenuOverlay.addEventListener('click', closeMobileMenu);
+
+        // Закрытие меню при клике на ссылку
+        navLinks.forEach(link => {
+            link.addEventListener('click', () => {
+                if (window.innerWidth <= 768) {
+                    closeMobileMenu();
+                }
+            });
+        });
+
+        // Закрытие меню при изменении размера окна
+        window.addEventListener('resize', () => {
+            if (window.innerWidth > 768 && mainNav.classList.contains('active')) {
+                closeMobileMenu();
+            }
+        });
+
+        // Предотвращаем скролл под меню на мобильных устройствах
+        document.addEventListener('touchmove', function(e) {
+            if (mainNav.classList.contains('active')) {
+                e.preventDefault();
+            }
+        }, { passive: false });
+
+        // Инициализация
+        document.addEventListener('DOMContentLoaded', () => {
+            if (window.innerWidth <= 768) {
+                header.classList.remove('header-hidden');
+            }
+        });
+    </script>
+
+    <!-- Main Content -->
+    <main class="bus-schedule-page">
+        <div class="container">
+            <!-- Hero Section -->
+            <section class="bus-hero">
+                <div class="bus-hero-content">
+                    <div class="hero-badge">
+                        <span><i class="fas fa-bus"></i> Расписание транспорта</span>
+                    </div>
+                    <h1 class="hero-title">Расписание автобусов и маршруток</h1>
+                    <p class="hero-description">Актуальное расписание общественного транспорта. Все маршруты и время отправления в одном месте.</p>
+                    <p><h2>Дата: 21 января 2026г.</h2></p>
+                    
+                    <div class="current-time-card">
+                        <div class="time-icon">
+                            <i class="far fa-clock"></i>
+                        </div>
+                        <div class="time-info">
+                            <span class="time-label">Текущее время:</span>
+                            <span id="current-time" class="current-time">--:--:--</span>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Transport Filter -->
+            <section class="transport-filter">
+                <div class="filter-buttons">
+                    <button class="filter-btn active" data-type="all">
+                        <i class="fas fa-bus"></i>
+                        <span>Все маршруты</span>
+                    </button>
+                    <button class="filter-btn" data-type="bus">
+                        <i class="fas fa-bus"></i>
+                        <span>Автобусы</span>
+                    </button>
+                    <button class="filter-btn" data-type="minibus">
+                        <i class="fas fa-shuttle-van"></i>
+                        <span>Маршрутки</span>
+                    </button>
+                </div>
+            </section>
+
+            <!-- Bus 235 -->
+            <section class="bus-schedule">
+                <div class="section-header">
+                    <h2>Автобус №235</h2>
+                    <p class="section-subtitle">АВ ГОМЕЛЬ - НОВ ТЕРЕШКОВИЧИ</p>
+                </div>
+
+                <div class="route-info-card">
+                    <div class="route-stops">
+                        <div class="stop start">
+                            <div class="stop-icon">
+                                <i class="fas fa-map-marker-alt"></i>
+                            </div>
+                            <div class="stop-info">
+                                <h4>Автовокзал Гомель</h4>
+                                <p class="stop-address">ул. Курчатова, 1</p>
+                            </div>
+                        </div>
+                        
+                        <div class="route-line">
+                            <div class="line-dots">
+                                <div class="dot"></div>
+                                <div class="dot"></div>
+                                <div class="dot"></div>
+                                <div class="dot"></div>
+                            </div>
+                        </div>
+                        
+                        <div class="stop end">
+                            <div class="stop-icon">
+                                <i class="fas fa-flag-checkered"></i>
+                            </div>
+                            <div class="stop-info">
+                                <h4>Новые Терешковичи</h4>
+                                <p class="stop-address">ул. Центральная</p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="route-stats">
+                        <div class="stat-item">
+                            <i class="fas fa-road"></i>
+                            <div>
+                                <span class="stat-value">29 км</span>
+                                <span class="stat-label">Расстояние</span>
+                            </div>
+                        </div>
+                        <div class="stat-item">
+                            <i class="fas fa-hourglass-half"></i>
+                            <div>
+                                <span class="stat-value">60+ мин</span>
+                                <span class="stat-label">Время в пути</span>
+                            </div>
+                        </div>
+                        <div class="stat-item">
+                            <i class="fas fa-ticket-alt"></i>
+                            <div>
+                                <span class="stat-value">2.85 руб</span>
+                                <span class="stat-label">Стоимость</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Schedule Table -->
+                <div class="schedule-table-container">
+                    <div class="table-header">
+                        <h3>Расписание рейсов</h3>
+                        <div class="day-selector">
+                            <button class="day-btn active" data-day="today">21 января 2026</button>
+                        </div>
+                    </div>
+                    
+                    <div class="schedule-table active" id="today-schedule">
+                        <!-- Заголовки таблицы будут генерироваться через JS -->
+                        <div class="table-row header" id="bus235-today-header"></div>
+                        <div class="table-body" id="bus235-today"></div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Bus 253 -->
+            <section class="bus-schedule">
+                <div class="section-header">
+                    <h2>Автобус №253/252</h2>
+                    <p class="section-subtitle">АВ ГОМЕЛЬ - РУДНЯ МАРИМОНОВА</p>
+                </div>
+
+                <div class="route-info-card">
+                    <div class="route-stops">
+                        <div class="stop start">
+                            <div class="stop-icon">
+                                <i class="fas fa-map-marker-alt"></i>
+                            </div>
+                            <div class="stop-info">
+                                <h4>Автовокзал Гомель</h4>
+                                <p class="stop-address">ул. Курчатова, 1</p>
+                            </div>
+                        </div>
+                        
+                        <div class="route-line">
+                            <div class="line-dots">
+                                <div class="dot"></div>
+                                <div class="dot"></div>
+                                <div class="dot"></div>
+                                <div class="dot"></div>
+                            </div>
+                        </div>
+                        
+                        <div class="stop end">
+                            <div class="stop-icon">
+                                <i class="fas fa-flag-checkered"></i>
+                            </div>
+                            <div class="stop-info">
+                                <h4>Рудня Маримонова</h4>
+                                <p class="stop-address">д. Рудня Маримонова</p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="route-stats">
+                        <div class="stat-item">
+                            <i class="fas fa-road"></i>
+                            <div>
+                                <span class="stat-value">45 км</span>
+                                <span class="stat-label">Расстояние</span>
+                            </div>
+                        </div>
+                        <div class="stat-item">
+                            <i class="fas fa-hourglass-half"></i>
+                            <div>
+                                <span class="stat-value">90+ мин</span>
+                                <span class="stat-label">Время в пути</span>
+                            </div>
+                        </div>
+                        <div class="stat-item">
+                            <i class="fas fa-ticket-alt"></i>
+                            <div>
+                                <span class="stat-value">5.17 руб</span>
+                                <span class="stat-label">Стоимость</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="schedule-table-container">
+                    <div class="table-header">
+                        <h3>Расписание рейсов</h3>
+                        <div class="day-selector">
+                            <button class="day-btn active" data-day="today-253">21 января 2026</button>
+                        </div>
+                    </div>
+                    
+                    <div class="schedule-table active" id="today-schedule-253">
+                        <div class="table-row header" id="bus253-today-header"></div>
+                        <div class="table-body" id="bus253-today"></div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Minibus 114 -->
+            <section class="minibus-schedule">
+                <div class="section-header">
+                    <h2>Маршрутное такси №114</h2>
+                    <p class="section-subtitle">АВ ГОМЕЛЬ - ТЕРЕШКОВИЧИ</p>
+                </div>
+
+                <div class="route-info-card minibus">
+                    <div class="route-stops">
+                        <div class="stop start">
+                            <div class="stop-icon">
+                                <i class="fas fa-map-marker-alt"></i>
+                            </div>
+                            <div class="stop-info">
+                                <h4>Автовокзал Гомель</h4>
+                                <p class="stop-address">ул. Курчатова, 1</p>
+                            </div>
+                        </div>
+                        
+                        <div class="route-line">
+                            <div class="line-dots">
+                                <div class="dot"></div>
+                                <div class="dot"></div>
+                                <div class="dot"></div>
+                                <div class="dot"></div>
+                            </div>
+                        </div>
+                        
+                        <div class="stop end">
+                            <div class="stop-icon">
+                                <i class="fas fa-flag-checkered"></i>
+                            </div>
+                            <div class="stop-info">
+                                <h4>Старые Терешковичи</h4>
+                                <p class="stop-address">ул. Центральная</p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="route-stats">
+                        <div class="stat-item">
+                            <i class="fas fa-road"></i>
+                            <div>
+                                <span class="stat-value">29 км</span>
+                                <span class="stat-label">Расстояние</span>
+                            </div>
+                        </div>
+                        <div class="stat-item">
+                            <i class="fas fa-hourglass-half"></i>
+                            <div>
+                                <span class="stat-value">40+ мин</span>
+                                <span class="stat-label">Время в пути</span>
+                            </div>
+                        </div>
+                        <div class="stat-item">
+                            <i class="fas fa-ticket-alt"></i>
+                            <div>
+                                <span class="stat-value">3.50 руб</span>
+                                <span class="stat-label">Стоимость</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="schedule-table-container">
+                    <div class="table-header">
+                        <h3>Расписание рейсов</h3>
+                        <div class="day-selector">
+                            <button class="day-btn active" data-day="today-114">21 января 2026</button>
+                        </div>
+                    </div>
+                    
+                    <div class="schedule-table active" id="today-schedule-114">
+                        <div class="table-row header" id="minibus114-today-header"></div>
+                        <div class="table-body" id="minibus114-today"></div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Important Notes -->
+            <section class="important-notes">
+                <div class="notes-card">
+                    <div class="notes-header">
+                        <i class="fas fa-exclamation-circle"></i>
+                        <h3>Важная информация</h3>
+                    </div>
+                    <div class="notes-content">
+                        <ul>
+                            <li>Расписание может меняться. Рекомендуем уточнять информацию на автовокзале.</li>
+                            <li>Время отправления и прибытия указано приблизительно.</li>
+                            <li>В праздничные дни расписание может отличаться.</li>
+                            <li>При движении в час пик время в пути может увеличиться.</li>
+                            <li>Стоимость проезда актуальна на 2026 год.</li>
+                        </ul>
+                    </div>
+                </div>
+            </section>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer id="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-main">
+                    <div class="footer-logo">
+                        <i class="fas fa-users logo-icon"></i>
+                        <div>
+                            <h3>Блог братьев</h3>
+                            <p>Два брата и одна девочка в увлекательных приключениях</p>
+                        </div>
+                    </div>
+                    <div class="footer-social">
+                        <a href="https://www.youtube.com/@n1kolayrasetovich" target="_blank" class="social-link youtube"
+                            aria-label="YouTube">
+                            <i class="fab fa-youtube"></i>
+                        </a>
+                        <a href="https://t.me/nesoqiton" target="_blank" class="social-link telegram"
+                            aria-label="Telegram">
+                            <i class="fab fa-telegram"></i>
+                        </a>
+                        <a href="#" class="social-link instagram" aria-label="Instagram">
+                            <i class="fab fa-instagram"></i>
+                        </a>
+                    </div>
+                </div>
+                <div class="footer-links">
+                    <div class="footer-column">
+                        <h4>Разделы</h4>
+                        <ul>
+                            <li><a href="/newswire.html">Новостная лента</a></li>
+                            <li><a href="/videos.html">Видеоролики</a></li>
+                            <li><a href="/schedule.html">Расписание</a></li>
+                            <li><a href="/index.html#footer">Контакты</a></li>
+                            <li><a href="#">Архив</a></li>
+                        </ul>
+                    </div>
+                    <div class="footer-column">
+                        <h4>Контакты</h4>
+                        <ul>
+                            <li><i class="fas fa-user"></i> Никита: +375 (29) 959-00-97</li>
+                            <li><i class="fas fa-user"></i> Евгений: +375 (29) 870-23-67</li>
+                            <li><i class="fas fa-user"></i> Ольга: +375 (25) 729-54-17</li>
+                        </ul>
+                    </div>
+                    <div class="footer-column">
+                        <h4>Telegram</h4>
+                        <ul>
+                            <li><a href="https://t.me/nesoqiton" target="_blank">@nesoqiton (Никита)</a></li>
+                            <li><a href="https://t.me/Legendary_7681" target="_blank">@Legendary_7681 (Евгений)</a></li>
+                            <li><a href="https://t.me/thanoslegenda1239" target="_blank">@thanoslegenda1239 (Ольга)</a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2025-2026 Блог братьев. Все права защищены.</p>
+                <div class="footer-links-bottom">
+                    <a href="/privacy.html">Политика конфиденциальности</a>
+                    <a href="#">Условия использования</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // =============================
+        // КОНФИГУРАЦИЯ ТАБЛИЦ
+        // =============================
+        
+        // Конфигурация столбцов таблицы
+        const tableConfig = {
+            // Текущие колонки (можно менять)
+            columns: [
+                { 
+                    id: 'number', 
+                    title: '№ рейса',
+                    width: '1fr',
+                    mobile: true // Показывать на мобильных
+                },
+                { 
+                    id: 'departure', 
+                    title: 'Отправление',
+                    width: '1fr',
+                    mobile: true
+                },
+                { 
+                    id: 'arrival', 
+                    title: 'Прибытие',
+                    width: '1fr',
+                    mobile: true
+                },
+                {
+                    id: 'bus',           // автобус)
+                    title: 'Автобус',        // заголовок в таблице
+                    width: '1fr',           // ширина (1fr, 150px, auto и т.д.)
+                    mobile: true,          // показывать на мобильных?
+                    className: 'bus'     // опциональный CSS класс
+                }
+            ]
+        };
+        
+        // =============================
+        // ДАННЫЕ РАСПИСАНИЯ
+        // =============================
+        
+        const scheduleData = {
+            // Автобус 235
+            bus235: {
+                today: [
+                    { number: 1, departure: "7:20", arrival: "8:25", bus: "МАЗ 203 - 24" },
+                    { number: 2, departure: "11:15", arrival: "12:20", bus: "МАЗ 203 - 24" },
+                    { number: 3, departure: "14:10", arrival: "15:15", bus: "МАЗ 203 - 24" },
+                    { number: 4, departure: "17:20", arrival: "18:25", bus: "МАЗ 203 - 24" }
+                ]
+            },
+            
+            // Автобус 253
+            bus253: {
+                today: [
+                    { number: 1 , departure: "6:25", arrival: "7:50", bus: "МАЗ 103 (№252)"},
+                    { number: 2, departure: "13:00", arrival: "14:30", bus: "МАЗ 103 (№253)"},
+                    { number: 3 , departure: "17:10", arrival: "18:55", bus: "МАЗ 103 (№252)"}
+                ]
+            },
+            
+            // Маршрутка 114
+            minibus114: {
+                today: [
+                    { number: 1, departure: "6:40", arrival: "7:00", bus: "MERCEDES-BENZ 223203"},
+                    { number: 2, departure: "7:50", arrival: "7:20", bus: "MERCEDES-BENZ 223203" },
+                    { number: 3, departure: "8:50", arrival: "8:30", bus: "MERCEDES-BENZ 223203" },
+                    { number: 4, departure: "9:30", arrival: "9:30", bus: "MERCEDES-BENZ 223203" },
+                    { number: 5, departure: "10:30", arrival: "10:20", bus: "MERCEDES-BENZ 223203" },
+                    { number: 6, departure: "11:50", arrival: "11:10", bus: "MERCEDES-BENZ 223203" },
+                    { number: 7, departure: "13:50", arrival: "12:30", bus: "MERCEDES-BENZ 223203" },
+                    { number: 8, departure: "15:20", arrival: "15:20", bus: "MERCEDES-BENZ 223203" },
+                    { number: 9, departure: "16:10", arrival: "16:10", bus: "MERCEDES-BENZ 223203" },
+                    { number: 10, departure: "17:00", arrival: "16:55", bus: "MERCEDES-BENZ 223203" },
+                    { number: 11, departure: "17:50", arrival: "17:50", bus: "MERCEDES-BENZ 223203" },
+                    { number: 12, departure: "18:40", arrival: "18:40", bus: "MERCEDES-BENZ 223203" },
+                    { number: 13, departure: "20:10", arrival: "19:20", bus: "MERCEDES-BENZ 223203" }
+                ]
+            }
+        };
+        
+        // =============================
+        // УТИЛИТНЫЕ ФУНКЦИИ
+        // =============================
+        
+        // Обновление текущего времени
+        function updateCurrentTime() {
+            const now = new Date();
+            const timeString = now.toLocaleTimeString('ru-RU', {
+                hour: '2-digit',
+                minute: '2-digit',
+                second: '2-digit'
+            });
+            
+            const timeElement = document.getElementById('current-time');
+            if (timeElement) {
+                timeElement.textContent = timeString;
+            }
+        }
+        
+        // Создание заголовков таблицы
+        function createTableHeaders() {
+            const columnWidths = tableConfig.columns.map(col => col.width).join(' ');
+            
+            // Обновляем все заголовки таблиц
+            document.querySelectorAll('.table-row.header').forEach(header => {
+                header.style.gridTemplateColumns = columnWidths;
+                header.innerHTML = '';
+                
+                tableConfig.columns.forEach(column => {
+                    const cell = document.createElement('div');
+                    cell.className = `cell ${column.className || ''}`;
+                    cell.textContent = column.title;
+                    cell.dataset.column = column.id;
+                    header.appendChild(cell);
+                });
+            });
+        }
+        
+        // Загрузка расписания в таблицы
+        function loadSchedule() {
+            for (const [route, days] of Object.entries(scheduleData)) {
+                for (const [day, trips] of Object.entries(days)) {
+                    const tableBody = document.getElementById(`${route}-${day}`);
+                    if (!tableBody) continue;
+                    
+                    tableBody.innerHTML = '';
+                    
+                    trips.forEach(trip => {
+                        const row = document.createElement('div');
+                        row.className = 'table-row';
+                        row.style.gridTemplateColumns = tableConfig.columns.map(col => col.width).join(' ');
+                        
+                        tableConfig.columns.forEach(column => {
+                            const cell = document.createElement('div');
+                            cell.className = `cell ${column.className || ''}`;
+                            
+                            // Получаем значение из данных или генерируем
+                            let value = trip[column.id];
+                            
+                            // Если значение не найдено, можно добавить логику генерации
+                            if (value === undefined) {
+                                value = getDefaultValue(column.id, trip);
+                            }
+                            
+                            cell.textContent = value;
+                            cell.dataset.column = column.id;
+                            row.appendChild(cell);
+                        });
+                        
+                        tableBody.appendChild(row);
+                    });
+                }
+            }
+        }
+        
+        // Функция для получения значения по умолчанию для новых колонок
+        function getDefaultValue(columnId, tripData) {
+            switch(columnId) {
+                case 'status':
+                    // Пример: генерируем статус на основе времени
+                    return '—';
+                case 'interval':
+                    // Пример: рассчитываем интервал
+                    return '—';
+                case 'notes':
+                    // Пример: заметки
+                    return '';
+                default:
+                    return '—';
+            }
+        }
+        
+        // Адаптация таблиц для мобильных устройств
+        function adaptTablesForMobile() {
+            const isMobile = window.innerWidth <= 480;
+            
+            document.querySelectorAll('.table-row .cell').forEach(cell => {
+                const columnId = cell.dataset.column;
+                const columnConfig = tableConfig.columns.find(col => col.id === columnId);
+                
+                if (columnConfig) {
+                    if (isMobile && !columnConfig.mobile) {
+                        cell.style.display = 'none';
+                    } else {
+                        cell.style.display = 'flex';
+                    }
+                }
+            });
+        }
+        
+        // Переключение дней недели
+        function initDaySelectors() {
+            document.querySelectorAll('.day-btn').forEach(btn => {
+                btn.addEventListener('click', function() {
+                    const day = this.dataset.day;
+                    const container = this.closest('.schedule-table-container');
+                    
+                    // Убираем активный класс у всех кнопок в этом контейнере
+                    container.querySelectorAll('.day-btn').forEach(b => {
+                        b.classList.remove('active');
+                    });
+                    
+                    // Добавляем активный класс текущей кнопке
+                    this.classList.add('active');
+                    
+                    // Скрываем все таблицы в этом контейнере
+                    container.querySelectorAll('.schedule-table').forEach(table => {
+                        table.classList.remove('active');
+                    });
+                    
+                    // Показываем выбранную таблицу
+                    let tableId = '';
+                    if (day.includes('253')) {
+                        tableId = `${day.replace('-253', '')}-schedule-253`;
+                    } else if (day.includes('114')) {
+                        tableId = `${day.replace('-114', '')}-schedule-114`;
+                    } else {
+                        tableId = `${day}-schedule`;
+                    }
+                    
+                    const selectedTable = document.getElementById(tableId);
+                    if (selectedTable) {
+                        selectedTable.classList.add('active');
+                    }
+                });
+            });
+        }
+        
+        // Фильтрация маршрутов
+        function initRouteFilters() {
+            document.querySelectorAll('.filter-btn').forEach(btn => {
+                btn.addEventListener('click', function() {
+                    const type = this.dataset.type;
+                    
+                    // Обновляем активную кнопку
+                    document.querySelectorAll('.filter-btn').forEach(b => {
+                        b.classList.remove('active');
+                    });
+                    this.classList.add('active');
+                    
+                    // Показываем/скрываем секции
+                    const sections = {
+                        bus: document.querySelectorAll('.bus-schedule'),
+                        minibus: document.querySelectorAll('.minibus-schedule'),
+                        all: document.querySelectorAll('.bus-schedule, .minibus-schedule')
+                    };
+                    
+                    // Сначала скрываем все
+                    document.querySelectorAll('.bus-schedule, .minibus-schedule').forEach(section => {
+                        section.style.display = 'none';
+                    });
+                    
+                    // Показываем выбранные
+                    sections[type].forEach(section => {
+                        section.style.display = 'block';
+                    });
+                });
+            });
+        }
+        
+        // =============================
+        // ИНИЦИАЛИЗАЦИЯ
+        // =============================
+        
+        document.addEventListener('DOMContentLoaded', function() {
+            // Обновление времени
+            updateCurrentTime();
+            setInterval(updateCurrentTime, 1000);
+            
+            // Создание структуры таблиц
+            createTableHeaders();
+            
+            // Загрузка данных
+            loadSchedule();
+            
+            // Инициализация компонентов
+            initDaySelectors();
+            initRouteFilters();
+            
+            // Адаптация для мобильных
+            adaptTablesForMobile();
+            window.addEventListener('resize', adaptTablesForMobile);
+        });
+        
+        // =============================
+        // ИНСТРУКЦИЯ ПО ДОБАВЛЕНИЮ СТОЛБЦОВ
+        // =============================
+        
+        /*
+        КАК ДОБАВИТЬ НОВЫЙ СТОЛБЕЦ:
+        
+        1. Добавьте новую колонку в массив tableConfig.columns:
+        
+        tableConfig.columns.push({
+            id: 'название_колонки',      // уникальный ID (английскими буквами)
+            title: 'Название',           // заголовок в таблице
+            width: '1fr',                // ширина (1fr, 150px, auto и т.д.)
+            mobile: true/false,          // показывать на мобильных?
+            className: 'доп_класс'       // опциональный CSS класс
+        });
+        
+        2. Обновите данные в scheduleData, добавив значения для новой колонки:
+        
+        today: [
+            { 
+                number: 1, 
+                departure: "7:20", 
+                arrival: "8:25",
+                название_колонки: "значение"  // добавьте здесь
+            },
+            ...
+        ]
+        
+        3. Если нужно генерировать значения автоматически, обновите функцию getDefaultValue()
+        
+        ВАЖНО: после добавления колонок вызовите функции:
+        - createTableHeaders() - обновит заголовки
+        - loadSchedule() - обновит данные
+        */
+        
+    </script>
+</body>
+
+</html>

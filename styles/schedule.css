@@ -1,0 +1,487 @@
+        /* =============================
+           СТИЛИ ДЛЯ СТРАНИЦЫ АВТОБУСА
+           ============================= */
+        
+        .bus-schedule-page {
+            padding: 120px 0 80px;
+            min-height: 100vh;
+        }
+        
+        /* Hero Section */
+        .bus-hero {
+            text-align: center;
+            margin-bottom: 60px;
+            padding: 40px 0;
+        }
+        
+        .bus-hero-content {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        
+        .bus-hero .hero-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            background: linear-gradient(135deg, #8a4baf 0%, #6d28d9 100%);
+            color: white;
+            padding: 10px 24px;
+            border-radius: 30px;
+            font-size: 0.95rem;
+            font-weight: 600;
+            margin-bottom: 24px;
+        }
+        
+        .bus-hero .hero-title {
+            font-size: 3rem;
+            margin-bottom: 20px;
+            color: white;
+        }
+        
+        .bus-hero .hero-description {
+            font-size: 1.125rem;
+            color: var(--text-secondary);
+            margin-bottom: 40px;
+            line-height: 1.6;
+        }
+        
+        .current-time-card {
+            background: rgba(138, 75, 175, 0.1);
+            border-radius: var(--radius-lg);
+            padding: 20px;
+            border: 1px solid rgba(138, 75, 175, 0.2);
+            max-width: 300px;
+            margin: 0 auto;
+            display: flex;
+            align-items: center;
+            gap: 20px;
+        }
+        
+        .time-icon {
+            font-size: 2rem;
+            color: var(--accent);
+        }
+        
+        .time-info {
+            text-align: left;
+        }
+        
+        .time-label {
+            display: block;
+            color: var(--text-secondary);
+            font-size: 0.875rem;
+            margin-bottom: 4px;
+        }
+        
+        .current-time {
+            font-family: 'Courier New', monospace;
+            font-size: 1.5rem;
+            font-weight: 600;
+            color: white;
+        }
+        
+        /* Transport Filter */
+        .transport-filter {
+            margin-bottom: 40px;
+        }
+        
+        .filter-buttons {
+            display: flex;
+            gap: 15px;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+        
+        .filter-btn {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            color: var(--text);
+            padding: 12px 24px;
+            border-radius: var(--radius);
+            cursor: pointer;
+            transition: var(--transition);
+            font-weight: 500;
+        }
+        
+        .filter-btn.active {
+            background: linear-gradient(135deg, #8a4baf 0%, #6d28d9 100%);
+            border-color: transparent;
+            color: white;
+        }
+        
+        .filter-btn:hover:not(.active) {
+            background: rgba(138, 75, 175, 0.1);
+            border-color: rgba(138, 75, 175, 0.3);
+        }
+        
+        /* Bus Schedule Sections */
+        .bus-schedule, .minibus-schedule {
+            margin-bottom: 80px;
+        }
+        
+        .section-header {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+        
+        .section-header h2 {
+            font-size: 2.5rem;
+            margin-bottom: 8px;
+            color: white;
+        }
+        
+        .section-subtitle {
+            color: var(--accent);
+            font-size: 1.125rem;
+            font-weight: 500;
+        }
+        
+        /* Route Info Card */
+        .route-info-card {
+            background: rgba(255, 255, 255, 0.03);
+            border-radius: var(--radius-lg);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            padding: 30px;
+            margin-bottom: 40px;
+        }
+        
+        .route-info-card.minibus {
+            border-color: rgba(255, 193, 7, 0.3);
+        }
+        
+        .route-stops {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 30px;
+            position: relative;
+        }
+        
+        .stop {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            flex: 1;
+        }
+        
+        .stop.start {
+            justify-content: flex-start;
+        }
+        
+        .stop.end {
+            justify-content: flex-end;
+        }
+        
+        .stop-icon {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            background: rgba(138, 75, 175, 0.1);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.2rem;
+            color: var(--accent);
+        }
+        
+        .stop-info h4 {
+            font-size: 1.25rem;
+            color: white;
+            margin-bottom: 4px;
+        }
+        
+        .stop-address {
+            color: var(--text-secondary);
+            font-size: 0.875rem;
+        }
+        
+        .route-line {
+            flex: 2;
+            position: relative;
+            height: 2px;
+            background: rgba(138, 75, 175, 0.3);
+            margin: 0 20px;
+        }
+        
+        .line-dots {
+            position: absolute;
+            top: 50%;
+            left: 0;
+            right: 0;
+            transform: translateY(-50%);
+            display: flex;
+            justify-content: space-between;
+        }
+        
+        .line-dots .dot {
+            width: 8px;
+            height: 8px;
+            background: var(--accent);
+            border-radius: 50%;
+        }
+        
+        .route-stats {
+            display: flex;
+            justify-content: space-around;
+            padding-top: 20px;
+            border-top: 1px solid rgba(255, 255, 255, 0.05);
+        }
+        
+        .stat-item {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+        
+        .stat-item i {
+            font-size: 1.5rem;
+            color: var(--accent);
+        }
+        
+        .stat-value {
+            display: block;
+            font-size: 1.25rem;
+            font-weight: 600;
+            color: white;
+        }
+        
+        .stat-label {
+            display: block;
+            color: var(--text-secondary);
+            font-size: 0.875rem;
+        }
+        
+        /* Schedule Table - ГИБКАЯ СИСТЕМА */
+        .schedule-table-container {
+            background: rgba(255, 255, 255, 0.03);
+            border-radius: var(--radius-lg);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            overflow: hidden;
+        }
+        
+        .table-header {
+            padding: 20px 30px;
+            background: rgba(0, 0, 0, 0.3);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 20px;
+        }
+        
+        .table-header h3 {
+            font-size: 1.375rem;
+            color: white;
+        }
+        
+        .day-selector {
+            display: flex;
+            gap: 10px;
+        }
+        
+        .day-btn {
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            color: var(--text);
+            padding: 8px 16px;
+            border-radius: 20px;
+            cursor: pointer;
+            transition: var(--transition);
+            font-size: 0.875rem;
+        }
+        
+        .day-btn.active {
+            background: var(--accent);
+            border-color: transparent;
+            color: white;
+        }
+        
+        .day-btn:hover:not(.active) {
+            background: rgba(138, 75, 175, 0.1);
+            border-color: rgba(138, 75, 175, 0.3);
+        }
+        
+        .schedule-table {
+            display: none;
+        }
+        
+        .schedule-table.active {
+            display: block;
+        }
+        
+        /* Гибкая система колонок - будет меняться через JS */
+        .table-row {
+            display: grid;
+            /* Будет задано через JS: grid-template-columns: repeat(3, 1fr); */
+            padding: 15px 30px;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+            transition: var(--transition);
+        }
+        
+        .table-row:hover {
+            background: rgba(255, 255, 255, 0.02);
+        }
+        
+        .table-row.header {
+            background: rgba(0, 0, 0, 0.2);
+            font-weight: 600;
+            color: var(--text-light);
+        }
+        
+        .cell {
+            display: flex;
+            align-items: center;
+            color: var(--text);
+            font-weight: 500;
+        }
+        
+        /* Дополнительные классы для будущих столбцов */
+        .cell.status {
+            justify-content: center;
+        }
+        
+        .cell.intermediate {
+            font-size: 0.9rem;
+            color: var(--text-secondary);
+        }
+        
+        /* Important Notes */
+        .important-notes {
+            margin-top: 60px;
+        }
+        
+        .notes-card {
+            background: rgba(255, 255, 255, 0.03);
+            border-radius: var(--radius-lg);
+            border: 1px solid rgba(255, 193, 7, 0.3);
+            padding: 30px;
+        }
+        
+        .notes-header {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 25px;
+        }
+        
+        .notes-header i {
+            font-size: 2rem;
+            color: #ffc107;
+        }
+        
+        .notes-header h3 {
+            font-size: 1.5rem;
+            color: white;
+        }
+        
+        .notes-content ul {
+            list-style: none;
+            padding: 0;
+        }
+        
+        .notes-content li {
+            color: var(--text-secondary);
+            margin-bottom: 12px;
+            padding-left: 24px;
+            position: relative;
+            line-height: 1.6;
+        }
+        
+        .notes-content li:before {
+            content: '•';
+            color: #ffc107;
+            position: absolute;
+            left: 0;
+        }
+        
+        /* Адаптивность */
+        @media (max-width: 1024px) {
+            .bus-hero .hero-title {
+                font-size: 2.5rem;
+            }
+            
+            .section-header h2 {
+                font-size: 2rem;
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .bus-schedule-page {
+                padding: 100px 0 60px;
+            }
+            
+            .bus-hero .hero-title {
+                font-size: 2rem;
+            }
+            
+            .route-stops {
+                flex-direction: column;
+                gap: 20px;
+            }
+            
+            .route-line {
+                width: 2px;
+                height: 40px;
+                margin: 10px 0;
+            }
+            
+            .line-dots {
+                top: 0;
+                left: 50%;
+                transform: translateX(-50%);
+                flex-direction: column;
+                height: 100%;
+                width: auto;
+            }
+            
+            .route-stats {
+                flex-direction: column;
+                gap: 20px;
+            }
+            
+            .table-header {
+                flex-direction: column;
+                align-items: stretch;
+                text-align: center;
+            }
+            
+            .day-selector {
+                justify-content: center;
+            }
+            
+            .table-row {
+                padding: 15px 20px;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .bus-hero .hero-title {
+                font-size: 1.75rem;
+            }
+            
+            .section-header h2 {
+                font-size: 1.5rem;
+            }
+            
+            .filter-buttons {
+                flex-direction: column;
+            }
+            
+            .filter-btn {
+                justify-content: center;
+            }
+            
+            .table-row {
+                padding: 12px 15px;
+                font-size: 0.9rem;
+            }
+            
+            /* На мобильных скрываем лишние колонки если их много */
+            .cell:nth-child(n+4) {
+                display: none;
+            }
+        }

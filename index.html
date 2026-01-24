@@ -26,8 +26,7 @@
     <div class="snowflakes" id="snowflakes"></div>
     <div class="snowdrifts"></div>
 
- 
- <!-- Header -->
+    <!-- Header -->
     <header id="header">
         <div class="container">
             <div class="header-content">
@@ -70,6 +69,12 @@
                             </a>
                         </li>
                         <li class="nav-item">
+                            <a href="/schedule.html" class="nav-link">
+                                <i class="fas fa-calendar-alt nav-icon"></i>
+                                <span class="nav-text">Расписание</span>
+                            </a>
+                        </li>
+                        <li class="nav-item">
                             <a href="/character.html" class="nav-link">
                                 <i class="fa-solid fa-user nav-icon"></i>
                                 <span class="nav-text">Профиль</span>
@@ -81,7 +86,7 @@
         </div>
     </header>
 
-     <script>
+    <script>
         // DOM элементы
         const header = document.getElementById('header');
         const mobileMenuBtn = document.getElementById('mobileMenuBtn');
@@ -129,14 +134,14 @@
             mainNav.classList.add('active');
             mobileMenuBtn.classList.add('active');
             mobileMenuOverlay.classList.add('active');
-            document.body.style.overflow = 'hidden'; // Блокируем скролл на body
+            document.body.style.overflow = 'hidden';
         }
 
         function closeMobileMenu() {
             mainNav.classList.remove('active');
             mobileMenuBtn.classList.remove('active');
             mobileMenuOverlay.classList.remove('active');
-            document.body.style.overflow = ''; // Разблокируем скролл
+            document.body.style.overflow = '';
         }
 
         // Обработчики событий
@@ -170,7 +175,6 @@
 
         // Инициализация
         document.addEventListener('DOMContentLoaded', () => {
-            // Проверяем ширину экрана при загрузке
             if (window.innerWidth <= 768) {
                 header.classList.remove('header-hidden');
             }
@@ -181,9 +185,6 @@
     <section class="hero">
         <div class="container">
             <div class="hero-content">
-                <div class="hero-badge">
-                    <span>✨ Новогоднее обновление</span>
-                </div>
                 <h2 class="hero-title">
                     <span class="title-line">Два брата.</span>
                     <span class="title-line">Три долбабоба.</span>
@@ -194,11 +195,11 @@
                 <div class="hero-meta">
                     <div class="meta-item">
                         <i class="fas fa-calendar-alt"></i>
-                        <span>Последнее редактирование: 06 января 2026г</span>
+                        <span>Последнее редактирование: 24 января 2026г</span>
                     </div>
                     <div class="meta-item">
                         <i class="fas fa-clock"></i>
-                        <span>20:00</span>
+                        <span>14:00</span>
                     </div>
                 </div>
                 <div class="hero-actions">
@@ -213,166 +214,6 @@
                         <span>Открыть профиль</span>
                     </a>
                 </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Hero Slider Section -->
-    <section class="hero-slider">
-        <div class="container slider-container">
-            <!-- Стрелки по бокам -->
-            <div class="slider-arrows">
-                <button class="slider-arrow arrow-prev" aria-label="Предыдущий слайд">
-                    <i class="fas fa-chevron-left"></i>
-                </button>
-                <button class="slider-arrow arrow-next" aria-label="Следующий слайд">
-                    <i class="fas fa-chevron-right"></i>
-                </button>
-            </div>
-
-            <!-- Слайды -->
-            <div class="slides-wrapper">
-                <!-- Слайд 1 -->
-                <div class="slider-slide active">
-                    <div class="slide-grid">
-                        <div class="slide-image-container">
-                            <div class="image-wrapper">
-                                <img src="/images/НОВОГОДНЕЕ ОБНОВЛЕНИЕ.png" alt="Новогоднее обновление"
-                                    class="slide-image">
-                                <div class="image-overlay"></div>
-                                <div class="image-badge">Главная новость</div>
-                            </div>
-                        </div>
-
-                        <div class="slide-content-container">
-                            <div class="content-wrapper">
-                                <div class="slide-meta">
-                                    <span class="slide-date"><i class="far fa-calendar"></i> 26 ноября 2025г.</span>
-                                    <span class="slide-category">Обновление сайта</span>
-                                </div>
-
-                                <h2 class="slide-title">Новогоднее обновление сайта</h2>
-
-                                <p class="slide-description">
-                                    Был полностью изменен интерфейс сайта на новогоднюю тематику
-                                    с добавлением современных элементов и анимаций. Добавлен новый
-                                    медиаплеер с поддержкой YouTube и локальных файлов.
-                                </p>
-
-                                <ul class="slide-features">
-                                    <li><i class="fas fa-check"></i> Обновленный интерфейс сайта</li>
-                                    <li><i class="fas fa-check"></i> Добавлен блок с новостями</li>
-                                    <li><i class="fas fa-check"></i> Новый медиаплеер с поддержкой YouTube</li>
-                                    <li><i class="fas fa-check"></i> Полностью тёмная тема с градиентами</li>
-                                </ul>
-
-                                <div class="slide-actions">
-                                    <a href="/newswire/christmas-update.html" class="btn btn-details">
-                                        <span>Подробнее</span>
-                                        <i class="fas fa-arrow-right"></i>
-                                    </a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Слайд 2 -->
-                <div class="slider-slide">
-                    <div class="slide-grid">
-                        <div class="slide-image-container">
-                            <div class="image-wrapper">
-                                <img src="/images/ДОМАШНИЙ АРЕСТ.png" alt="Домашний арест" class="slide-image">
-                                <div class="image-overlay"></div>
-                                <div class="image-badge">Трансляция</div>
-                            </div>
-                        </div>
-
-                        <div class="slide-content-container">
-                            <div class="content-wrapper">
-                                <div class="slide-meta">
-                                    <span class="slide-date"><i class="far fa-calendar"></i> 23 ноября 2025г.</span>
-                                    <span class="slide-category">Трансляция</span>
-                                </div>
-
-                                <h2 class="slide-title">🏚️ ДОМАШНИЙ АРЕСТ</h2>
-
-                                <p class="slide-description">
-                                    Самая уютная и весёлая трансляция этого сезона. Два брата
-                                    в самых безумных домашних приключениях. Экшен, юмор и отличное настроение.
-                                </p>
-
-                                <ul class="slide-features">
-                                    <li><i class="fas fa-check"></i> Полная версия трансляции</li>
-                                    <li><i class="fas fa-check"></i> 1080p качество</li>
-                                    <li><i class="fas fa-check"></i> Продолжительность: 2ч 45м</li>
-                                </ul>
-
-                                <div class="slide-actions">
-                                    <a href="/newswire/house-arrest.html" class="btn btn-details">
-                                        <span>Подробнее</span>
-                                        <i class="fas fa-arrow-right"></i>
-                                    </a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Слайд 3 -->
-                <div class="slider-slide">
-                    <div class="slide-grid">
-                        <div class="slide-image-container">
-                            <div class="image-wrapper">
-                                <img src="/images/ЭКШЕН УЖЕ СЕГОДНЯ.png" alt="Экшен уже сегодня" class="slide-image">
-                                <div class="image-overlay"></div>
-                                <div class="image-badge">Масштабная трансляция</div>
-                            </div>
-                        </div>
-
-                        <div class="slide-content-container">
-                            <div class="content-wrapper">
-                                <div class="slide-meta">
-                                    <span class="slide-date"><i class="far fa-calendar"></i> 8 декабря 2025г.</span>
-                                    <span class="slide-category">Масштабная трансляция</span>
-                                </div>
-
-                                <h2 class="slide-title">🔫 КООПЕРАТИВ на МАКСИМАЛКАХ</h2>
-
-                                <p class="slide-description">
-                                    Самый эпичный кооператив с максимальным
-                                    экшеном и юмором. Приготовьтесь к невероятным приключениям!
-                                </p>
-
-                                <ul class="slide-features">
-                                    <li><i class="fas fa-check"></i> Классные выходные</li>
-                                    <li><i class="fas fa-check"></i> Максимальный экшен</li>
-                                    <li><i class="fas fa-check"></i> Старые личности</li>
-                                </ul>
-
-                                <div class="slide-actions">
-                                    <a href="/newswire/coop-at-maximum.html" class="btn btn-details">
-                                        <span>Подробнее</span>
-                                        <i class="fas fa-arrow-right"></i>
-                                    </a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Точки пагинации -->
-            <div class="slider-pagination">
-                <button class="slide-dot active" data-slide="0" aria-label="Перейти к слайду 1">
-                    <span class="dot-visual"></span>
-                </button>
-                <button class="slide-dot" data-slide="1" aria-label="Перейти к слайду 2">
-                    <span class="dot-visual"></span>
-                </button>
-                <button class="slide-dot" data-slide="2" aria-label="Перейти к слайду 3">
-                    <span class="dot-visual"></span>
-                </button>
             </div>
         </div>
     </section>
@@ -491,9 +332,6 @@
                             </div>
                         </div>
                     </a>
-
-
-
                 </div>
                 <!-- Кнопка "Все новости" -->
                 <div class="all-news-btn-container">
@@ -544,7 +382,7 @@
                     <div class="footer-logo">
                         <i class="fas fa-users logo-icon"></i>
                         <div>
-                            <h3>Блог братьев</h3>
+                            <h3>TTFBB COMPANY</h3>
                             <p>Два брата и одна девочка в увлекательных приключениях</p>
                         </div>
                     </div>
@@ -568,6 +406,9 @@
                         <ul>
                             <li><a href="/newswire.html">Новостная лента</a></li>
                             <li><a href="/videos.html">Видеоролики</a></li>
+                            <li><a href="/schedule.html">Расписание</a></li>
+                            <li><a href="/ref/nesoqiton.html">Реферал - Никита</a></li>
+                            <li><a href="/ref/kasper.html">Реферал - Евгений</a></li>
                             <li><a href="/index.html#footer">Контакты</a></li>
                             <li><a href="#">Архив</a></li>
                         </ul>
@@ -592,7 +433,7 @@
                 </div>
             </div>
             <div class="footer-bottom">
-                <p>&copy; 2025 Блог братьев. Все права защищены.</p>
+                <p>&copy; 2025-2026 • TTFBB COMPANY. Все права защищены.</p>
                 <div class="footer-links-bottom">
                     <a href="/privacy.html">Политика конфиденциальности</a>
                     <a href="#">Условия использования</a>

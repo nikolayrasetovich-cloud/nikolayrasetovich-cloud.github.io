@@ -1,0 +1,456 @@
+<!DOCTYPE html>
+<html lang="ru_RU">
+<head>
+    <meta charset="UTF-8">
+    <title>TTFBB COMPANY</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" href="images/logo.png" type="images/logo.png">
+    <link rel="stylesheet" href="/styles/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700;800&family=Playfair+Display:wght@700&display=swap">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+    <!-- Шрифт (максимально близкий) -->
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+<!-- Header -->
+    <header id="header">
+        <div class="container">
+            <div class="header-content">
+                <!-- Логотип -->
+                <a href="/index.html" class="logo-link">
+                    <div class="logo">
+                        <div class="logo-icon-container">
+                            <i class="fas fa-users logo-icon"></i>
+                        </div>
+                        <div class="logo-text">
+                            <h1>Братья</h1>
+                            <p class="logo-subtitle">TTFBB COMPANY</p>
+                        </div>
+                    </div>
+                </a>
+
+                <!-- Кнопка мобильного меню -->
+                <button class="mobile-menu-btn" id="mobileMenuBtn" aria-label="Открыть меню">
+                    <span class="menu-line"></span>
+                    <span class="menu-line"></span>
+                    <span class="menu-line"></span>
+                </button>
+
+                <!-- Оверлей для мобильного меню -->
+                <div class="mobile-menu-overlay" id="mobileMenuOverlay"></div>
+
+                <!-- Навигация -->
+                <nav class="main-nav" id="mainNav">
+                    <ul class="nav-list">
+                        <li class="nav-item">
+                            <a href="/newswire.html" class="nav-link">
+                                <i class="fas fa-newspaper nav-icon"></i>
+                                <span class="nav-text">Новостная лента</span>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="/videos.html" class="nav-link">
+                                <i class="fas fa-play-circle nav-icon"></i>
+                                <span class="nav-text">Видеоролики</span>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="/schedule.html" class="nav-link">
+                                <i class="fas fa-calendar-alt nav-icon"></i>
+                                <span class="nav-text">Расписание</span>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="/character.html" class="nav-link">
+                                <i class="fa-solid fa-user nav-icon"></i>
+                                <span class="nav-text">Профиль</span>
+                            </a>
+                        </li>
+                    </ul>
+                </nav>
+            </div>
+        </div>
+    </header>
+
+    <script>
+        // DOM элементы
+        const header = document.getElementById('header');
+        const mobileMenuBtn = document.getElementById('mobileMenuBtn');
+        const mainNav = document.getElementById('mainNav');
+        const mobileMenuOverlay = document.getElementById('mobileMenuOverlay');
+        const navLinks = document.querySelectorAll('.nav-link');
+
+        // Переменные для скролла
+        let lastScrollTop = 0;
+        const scrollThreshold = 100;
+
+        // Функция для скрытия/показа навбара при скролле
+        function handleScroll() {
+            const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+            
+            if (scrollTop > scrollThreshold) {
+                // Прокрутка вниз
+                if (scrollTop > lastScrollTop && !mainNav.classList.contains('active')) {
+                    header.classList.add('header-hidden');
+                } 
+                // Прокрутка вверх
+                else if (scrollTop < lastScrollTop) {
+                    header.classList.remove('header-hidden');
+                }
+            } else {
+                // Вверху страницы
+                header.classList.remove('header-hidden');
+            }
+            
+            lastScrollTop = scrollTop;
+        }
+
+        // Функция для открытия/закрытия мобильного меню
+        function toggleMobileMenu() {
+            const isActive = mainNav.classList.contains('active');
+            
+            if (isActive) {
+                closeMobileMenu();
+            } else {
+                openMobileMenu();
+            }
+        }
+
+        function openMobileMenu() {
+            mainNav.classList.add('active');
+            mobileMenuBtn.classList.add('active');
+            mobileMenuOverlay.classList.add('active');
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeMobileMenu() {
+            mainNav.classList.remove('active');
+            mobileMenuBtn.classList.remove('active');
+            mobileMenuOverlay.classList.remove('active');
+            document.body.style.overflow = '';
+        }
+
+        // Обработчики событий
+        window.addEventListener('scroll', handleScroll, { passive: true });
+
+        mobileMenuBtn.addEventListener('click', toggleMobileMenu);
+        mobileMenuOverlay.addEventListener('click', closeMobileMenu);
+
+        // Закрытие меню при клике на ссылку
+        navLinks.forEach(link => {
+            link.addEventListener('click', () => {
+                if (window.innerWidth <= 768) {
+                    closeMobileMenu();
+                }
+            });
+        });
+
+        // Закрытие меню при изменении размера окна
+        window.addEventListener('resize', () => {
+            if (window.innerWidth > 768 && mainNav.classList.contains('active')) {
+                closeMobileMenu();
+            }
+        });
+
+        // Предотвращаем скролл под меню на мобильных устройствах
+        document.addEventListener('touchmove', function(e) {
+            if (mainNav.classList.contains('active')) {
+                e.preventDefault();
+            }
+        }, { passive: false });
+
+        // Инициализация
+        document.addEventListener('DOMContentLoaded', () => {
+            if (window.innerWidth <= 768) {
+                header.classList.remove('header-hidden');
+            }
+        });
+    </script>
+
+<style>
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Montserrat', sans-serif;
+}
+
+body {
+    min-height: 100vh;
+    background: #0b0b0b;
+    color: #fff;
+}
+
+.header {
+    background: rgb(14 14 14 / 0%)
+}
+
+.wrapper {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 60px 120px;
+    gap: 60px;
+    background:
+        linear-gradient(0deg, #0b0b0b 40%, rgba(0,0,0,0.4) 100%),
+        url("/images/bg-promo2.jpg") center/cover no-repeat;
+}
+
+/* LEFT */
+.left {
+    max-width: 560px;
+}
+
+.logo {
+    font-size: 56px;
+    font-weight: 800;
+    letter-spacing: 3px;
+}
+
+.subtitle {
+    font-size: 22px;
+    font-weight: 500;
+    line-height: 1.4;
+    margin: 20px 0;
+}
+
+.subtitle span {
+    color: rgb(251, 205, 255);
+    font-weight: 600;
+}
+
+.text {
+    font-size: 16px;
+    line-height: 1.6;
+    opacity: 0.85;
+    margin-bottom: 20px;
+}
+
+.bonus {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 16px;
+    margin: 30px 0;
+}
+
+.bonus-item {
+    font-size: 16px;
+    opacity: 0.9;
+}
+
+.btn {
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+    margin-top: 30px;
+    background: rgb(251, 205, 255);
+    padding: 18px 34px;
+    border-radius: 12px;
+    font-size: 16px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: 0.2s;
+}
+
+.btn:hover {
+    background: rgb(232, 164, 238);;
+}
+
+.socials {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 16px;
+    margin-top: 40px;
+    opacity: 0.7;
+}
+
+/* RIGHT */
+.right {
+    position: relative;
+    width: 520px;
+    height: 520px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.circle {
+    position: absolute;
+    width: 520px;
+    height: 520px;
+    border-radius: 50%;
+    background: rgb(251, 205, 255);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.circle::before {
+    content: "";
+    position: absolute;
+    width: 360px;
+    height: 360px;
+    border-radius: 50%;
+    background: #111;
+}
+
+.avatar {
+    position: relative;
+    z-index: 2;
+    width: 580px;
+    max-width: 100%;
+}
+
+/* ================== ADAPTIVE ================== */
+
+/* ≤1200px */
+@media (max-width: 1200px) {
+    .wrapper {
+        padding: 60px;
+    }
+
+    .right {
+        width: 420px;
+        height: 420px;
+    }
+
+    .circle {
+        width: 420px;
+        height: 420px;
+    }
+
+    .circle::before {
+        width: 280px;
+        height: 280px;
+    }
+
+    .avatar {
+        width: 460px;
+    }
+}
+
+/* ≤900px (tablet) */
+@media (max-width: 900px) {
+    .wrapper {
+        flex-direction: column;
+        text-align: center;
+    }
+
+    .left {
+        max-width: 100%;
+    }
+
+    .bonus,
+    .socials {
+        justify-content: center;
+    }
+}
+
+/* ≤600px (phones) */
+@media (max-width: 600px) {
+    .wrapper {
+        padding: 40px 20px;
+        gap: 40px;
+    }
+
+    .logo {
+        font-size: 38px;
+    }
+
+    .subtitle {
+        font-size: 18px;
+    }
+
+    .text {
+        font-size: 15px;
+    }
+
+    .btn {
+        width: 100%;
+    }
+
+    .right {
+        width: 300px;
+        height: 300px;
+    }
+
+    .circle {
+        width: 300px;
+        height: 300px;
+    }
+
+    .circle::before {
+        width: 200px;
+        height: 200px;
+    }
+
+    .avatar {
+        width: 320px;
+    }
+}
+    .links {
+        text-decoration:  none;
+        color: floralwhite ;
+    }
+
+        .links-form {
+        text-decoration:  none;
+        color: rgb(0, 0, 0) ;
+    }
+</style>
+
+</head>
+<body>
+
+<div class="wrapper">
+    <!-- LEFT -->
+    <div class="left">
+        <div class="logo">kasper</div>
+
+        <div class="subtitle">
+            УДИВИТЕЛЬНЫЕ ПРИКЛЮЧЕНИЯ В <span>БЛОГЕ БРАТЬЕВ</span>
+        </div>
+
+        <div class="text">
+            Здесь вас ждёт совершенно новый интересный опыт, крутые приключения и
+            захватывающие события, которые не дадут заскучать.
+        </div>
+
+        <div class="text">
+            Это приключения, где мы можем проявить свои таланты и стать не скучными, а тем которым всегда хотели.
+            Выбирайте любой юмор, погружайтесь в атмосферу смеха и приключений, и заводите
+            новые знакомства.
+        </div>
+
+        <div class="text">
+            Придумай план приключений прямо сейчас и получи бонус
+        </div>
+
+        <div class="bonus">
+            <div class="bonus-item">👑 Cекретный подарок</div>
+            <div class="bonus-item">💰 5 рублей на банковскую карту</div>
+            <!-- <div class="promo">Промокод: <span>kasper</span></div> -->
+        </div>
+
+       <div class="btn"><a class="links-form" href="https://forms.gle/Jec2JzebGKjFjcZ29">▶ ПРИДУМАТЬ ПРИКЛЮЧЕНИЯ</a></div>
+
+        <div class="socials">
+            <div><a class="links" href="https://vk.com/id1076398656">VK</a></div>
+            <div><a class="links" href="https://t.me/Legendary_7681">Telegram</a></div>
+        </div>
+    </div>
+
+    <!-- RIGHT -->
+    <div class="right">
+        <div class="circle">
+            <div class="dots"></div>
+        </div>
+        <img src="/images/kasper.png" alt="kasper" class="avatar">
+    </div>
+</div>
+
+</body>
+</html>
