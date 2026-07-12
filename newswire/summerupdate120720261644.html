@@ -1,0 +1,1547 @@
+<!DOCTYPE html>
+<html lang="ru_RU">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Новое обновление сайта 2026 | TTFBB COMPANY</title>
+    <link rel="icon" href="images/logo.png" type="images/logo.png">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        /* ===== ОБЩИЕ ПЕРЕМЕННЫЕ ===== */
+        :root {
+            --bg-primary: #0d0d0d;
+            --bg-card: #1a1a1a;
+            --bg-card-hover: #222;
+            --text-primary: #f0f0f0;
+            --text-secondary: #a0a0a0;
+            --text-light: #e2e8f0;
+            --border-color: #2a2a2a;
+            --accent: #4cc9f0;
+            --accent-dark: #3a8fa8;
+            --gradient: linear-gradient(135deg, #4361ee, #3a0ca3);
+            --radius: 12px;
+            --radius-lg: 16px;
+            --radius-xl: 20px;
+            --shadow: 0 8px 24px rgba(0,0,0,0.4);
+            --shadow-lg: 0 12px 40px rgba(0,0,0,0.5);
+            --shadow-xl: 0 20px 60px rgba(0,0,0,0.6);
+            --transition: 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        /* ===== СБРОС ===== */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background: var(--bg-primary);
+            color: var(--text-primary);
+            line-height: 1.6;
+            padding-top: 80px;
+            -webkit-font-smoothing: antialiased;
+            overflow-x: hidden;
+        }
+
+        a {
+            text-decoration: none;
+            color: inherit;
+        }
+
+        .container {
+            max-width: 1240px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* ===== АНИМИРОВАННЫЙ ФОН ===== */
+        .animated-background {
+            position: fixed;
+            inset: 0;
+            z-index: 0;
+            pointer-events: none;
+            overflow: hidden;
+        }
+
+        .gradient-bg {
+            position: absolute;
+            inset: 0;
+            background: radial-gradient(ellipse at 30% 50%, rgba(67,97,238,0.08) 0%, transparent 70%),
+                        radial-gradient(ellipse at 70% 80%, rgba(58,12,163,0.06) 0%, transparent 60%);
+        }
+
+        .particles {
+            position: absolute;
+            inset: 0;
+        }
+
+        .particle {
+            position: absolute;
+            border-radius: 50%;
+            background: radial-gradient(circle, rgba(255,255,255,0.04) 0%, transparent 70%);
+            animation: floatParticle 30s ease-in-out infinite alternate;
+            will-change: transform;
+        }
+
+        @keyframes floatParticle {
+            0%   { transform: translate(0, 0) scale(1); }
+            100% { transform: translate(40px, -40px) scale(1.2); }
+        }
+
+        /* ===== NAVBAR ===== */
+        #header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            z-index: 1000;
+            background: rgba(13,13,13,0.92);
+            backdrop-filter: blur(12px);
+            border-bottom: 1px solid var(--border-color);
+            transition: transform 0.4s ease, background 0.3s ease;
+        }
+
+        #header.header-hidden {
+            transform: translateY(-100%);
+        }
+
+        .header-content {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            height: 70px;
+            gap: 20px;
+        }
+
+        .logo-link {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            flex-shrink: 0;
+            text-decoration: none;
+            max-width: 100%;
+        }
+
+        .logo-icon-container {
+            width: 44px;
+            min-width: 44px;
+            height: 44px;
+            border-radius: 50%;
+            background: var(--gradient);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #fff;
+            font-size: 1.2rem;
+            flex-shrink: 0;
+        }
+
+        .logo-text {
+            display: flex;
+            flex-direction: column;
+            min-width: 0;
+            overflow: hidden;
+        }
+
+        .logo-text h1 {
+            font-size: 1.4rem;
+            font-weight: 800;
+            letter-spacing: -0.5px;
+            line-height: 1.2;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+
+        .logo-subtitle {
+            font-size: 0.7rem;
+            color: var(--text-secondary);
+            letter-spacing: 2px;
+            font-weight: 500;
+            text-transform: uppercase;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+
+        .nav-list {
+            display: flex;
+            list-style: none;
+            gap: 8px;
+            margin: 0;
+            padding: 0;
+        }
+
+        .nav-link {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            padding: 8px 18px;
+            border-radius: 30px;
+            font-size: 0.9rem;
+            font-weight: 500;
+            color: var(--text-secondary);
+            transition: var(--transition);
+            white-space: nowrap;
+            text-decoration: none;
+        }
+
+        .nav-link:hover,
+        .nav-link.active {
+            color: #fff;
+            background: rgba(255,255,255,0.06);
+        }
+
+        .nav-icon {
+            font-size: 0.9rem;
+            flex-shrink: 0;
+        }
+
+        .mobile-menu-btn {
+            display: none;
+            flex-direction: column;
+            gap: 5px;
+            background: none;
+            border: none;
+            cursor: pointer;
+            padding: 4px;
+            flex-shrink: 0;
+            margin-left: auto;
+        }
+
+        .menu-line {
+            width: 26px;
+            height: 2.5px;
+            background: var(--text-primary);
+            border-radius: 4px;
+            transition: var(--transition);
+        }
+
+        .mobile-menu-overlay {
+            display: none;
+            position: fixed;
+            inset: 0;
+            background: rgba(0,0,0,0.5);
+            z-index: 998;
+        }
+
+        /* ===== СТРАНИЦА НОВОСТИ ===== */
+        .news-page {
+            position: relative;
+            z-index: 1;
+            min-height: 100vh;
+        }
+
+        /* ===== HERO ===== */
+        .news-hero {
+            padding: 40px 0 30px;
+            position: relative;
+            text-align: center;
+        }
+
+        .news-hero-content {
+            max-width: 1100px;
+            margin: 0 auto;
+            background: var(--bg-card);
+            border-radius: var(--radius-xl);
+            padding: 50px 40px;
+            border: 1px solid var(--border-color);
+            transition: var(--transition);
+        }
+
+        .news-hero-content:hover {
+            border-color: rgba(76,201,240,0.3);
+        }
+
+        .news-hero-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            background: var(--gradient);
+            color: #fff;
+            padding: 8px 22px;
+            border-radius: 30px;
+            font-size: 0.85rem;
+            font-weight: 600;
+            margin-bottom: 20px;
+            animation: pulseBadge 2s ease-in-out infinite;
+        }
+
+        @keyframes pulseBadge {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+        }
+
+        .news-hero-badge i {
+            font-size: 0.9rem;
+        }
+
+        .news-hero h1 {
+            font-size: 3rem;
+            font-weight: 800;
+            letter-spacing: -1px;
+            margin-bottom: 16px;
+            background: var(--gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .news-hero-description {
+            font-size: 1.15rem;
+            color: var(--text-secondary);
+            max-width: 600px;
+            margin: 0 auto 32px;
+            line-height: 1.7;
+        }
+
+        .news-meta {
+            display: flex;
+            justify-content: center;
+            gap: 16px;
+            flex-wrap: wrap;
+        }
+
+        .news-meta-item {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            padding: 8px 18px;
+            background: rgba(255,255,255,0.04);
+            border-radius: var(--radius);
+            font-size: 0.85rem;
+            color: var(--text-secondary);
+            border: 1px solid var(--border-color);
+        }
+
+        .news-meta-item i {
+            color: var(--accent);
+        }
+
+        /* ===== КОНТЕНТ ===== */
+        .news-content-section {
+            padding: 20px 0 60px;
+        }
+
+        .news-container {
+            max-width: 1100px;
+            margin: 0 auto;
+            background: var(--bg-card);
+            border-radius: var(--radius-xl);
+            padding: 50px;
+            border: 1px solid var(--border-color);
+            transition: var(--transition);
+        }
+
+        .news-container:hover {
+            border-color: rgba(76,201,240,0.3);
+        }
+
+        /* ===== ГЛАВНОЕ ИЗОБРАЖЕНИЕ ===== */
+        .news-main-image {
+            width: 100%;
+            height: 450px;
+            border-radius: var(--radius-lg);
+            overflow: hidden;
+            margin-bottom: 40px;
+            border: 1px solid var(--border-color);
+            position: relative;
+        }
+
+        .news-main-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s ease;
+        }
+
+        .news-main-image:hover img {
+            transform: scale(1.03);
+        }
+
+        .news-main-image-overlay {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            padding: 30px 24px 20px;
+            background: linear-gradient(to top, rgba(0,0,0,0.8), transparent);
+        }
+
+        .news-main-image-overlay span {
+            color: var(--text-secondary);
+            font-size: 0.85rem;
+        }
+
+        .news-main-image-overlay i {
+            color: var(--accent);
+            margin-right: 6px;
+        }
+
+        /* ===== СЛАЙДЕР ===== */
+        .news-slider-section {
+            margin: 40px 0;
+        }
+
+        .news-slider-section h2 {
+            font-size: 1.8rem;
+            font-weight: 700;
+            margin-bottom: 24px;
+            padding-left: 20px;
+            position: relative;
+        }
+
+        .news-slider-section h2:before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 0;
+            height: 100%;
+            width: 4px;
+            background: var(--gradient);
+            border-radius: 2px;
+        }
+
+        .slider-container {
+            position: relative;
+            border-radius: var(--radius-lg);
+            overflow: hidden;
+            border: 1px solid var(--border-color);
+            background: var(--bg-primary);
+        }
+
+        .slider-track {
+            display: flex;
+            transition: transform 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+            touch-action: pan-y;
+        }
+
+        .slider-slide {
+            min-width: 100%;
+            position: relative;
+            aspect-ratio: 16/9;
+            overflow: hidden;
+        }
+
+        .slider-slide img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .slider-slide-caption {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            padding: 40px 30px 24px;
+            background: linear-gradient(to top, rgba(0,0,0,0.85), transparent);
+        }
+
+        .slider-slide-caption h3 {
+            font-size: 1.3rem;
+            font-weight: 700;
+            margin-bottom: 4px;
+        }
+
+        .slider-slide-caption p {
+            color: var(--text-secondary);
+            font-size: 0.95rem;
+        }
+
+        /* Кнопки слайдера */
+        .slider-btn {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 48px;
+            height: 48px;
+            border-radius: 50%;
+            background: rgba(0,0,0,0.6);
+            border: 2px solid rgba(255,255,255,0.1);
+            color: #fff;
+            font-size: 1.2rem;
+            cursor: pointer;
+            transition: var(--transition);
+            z-index: 5;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            backdrop-filter: blur(8px);
+        }
+
+        .slider-btn:hover {
+            background: var(--gradient);
+            border-color: transparent;
+            transform: translateY(-50%) scale(1.05);
+        }
+
+        .slider-btn.prev {
+            left: 16px;
+        }
+
+        .slider-btn.next {
+            right: 16px;
+        }
+
+        /* Индикаторы слайдера */
+        .slider-dots {
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+            padding: 18px 0 14px;
+            background: rgba(0,0,0,0.3);
+        }
+
+        .slider-dot {
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            background: rgba(255,255,255,0.2);
+            border: none;
+            cursor: pointer;
+            transition: var(--transition);
+            padding: 0;
+        }
+
+        .slider-dot.active {
+            background: var(--accent);
+            transform: scale(1.2);
+        }
+
+        .slider-dot:hover {
+            background: rgba(255,255,255,0.5);
+        }
+
+        .slider-dot.active:hover {
+            background: var(--accent);
+        }
+
+        /* ===== ТЕКСТ НОВОСТИ ===== */
+        .news-body {
+            font-size: 1.1rem;
+            line-height: 1.8;
+            color: var(--text-primary);
+        }
+
+        .news-body p {
+            margin-bottom: 20px;
+            color: var(--text-secondary);
+        }
+
+        .news-body h2 {
+            font-size: 2rem;
+            font-weight: 700;
+            margin: 40px 0 20px;
+            padding-left: 20px;
+            position: relative;
+        }
+
+        .news-body h2:before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 0;
+            height: 100%;
+            width: 4px;
+            background: var(--gradient);
+            border-radius: 2px;
+        }
+
+        .news-body h3 {
+            font-size: 1.4rem;
+            font-weight: 600;
+            margin: 32px 0 16px;
+            color: var(--accent);
+        }
+
+        .news-body ul,
+        .news-body ol {
+            margin: 20px 0;
+            padding-left: 28px;
+        }
+
+        .news-body li {
+            margin-bottom: 10px;
+            color: var(--text-secondary);
+            position: relative;
+        }
+
+        .news-body ul li:before {
+            content: '';
+            position: absolute;
+            left: -20px;
+            top: 10px;
+            width: 6px;
+            height: 6px;
+            background: var(--accent);
+            border-radius: 50%;
+        }
+
+        /* ===== КАРТОЧКА С ОСОБЕННОСТЯМИ ===== */
+        .news-feature-card {
+            background: rgba(255,255,255,0.03);
+            border-radius: var(--radius-lg);
+            padding: 28px 32px;
+            margin: 32px 0;
+            border-left: 4px solid var(--accent);
+            border: 1px solid var(--border-color);
+            border-left-width: 4px;
+            transition: var(--transition);
+        }
+
+        .news-feature-card:hover {
+            border-color: rgba(76,201,240,0.3);
+            border-left-color: var(--accent);
+        }
+
+        .news-feature-card h3 {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-top: 0;
+            color: var(--text-primary);
+        }
+
+        .news-feature-card h3:before {
+            content: '✨';
+            font-size: 1.4rem;
+        }
+
+        /* ===== СПИСОК ОБНОВЛЕНИЙ ===== */
+        .update-list {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 20px;
+            margin: 32px 0;
+        }
+
+        .update-item {
+            background: rgba(255,255,255,0.03);
+            border-radius: var(--radius-lg);
+            padding: 24px;
+            border: 1px solid var(--border-color);
+            transition: var(--transition);
+        }
+
+        .update-item:hover {
+            border-color: rgba(76,201,240,0.3);
+            transform: translateY(-4px);
+        }
+
+        .update-item .icon {
+            font-size: 2rem;
+            color: var(--accent);
+            margin-bottom: 12px;
+            display: block;
+        }
+
+        .update-item h4 {
+            font-size: 1.1rem;
+            font-weight: 600;
+            margin-bottom: 6px;
+        }
+
+        .update-item p {
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+            margin: 0;
+        }
+
+        /* ===== ФУТЕР НОВОСТИ ===== */
+        .news-footer {
+            margin-top: 48px;
+            padding-top: 40px;
+            border-top: 1px solid var(--border-color);
+            text-align: center;
+        }
+
+        .news-footer h2 {
+            font-size: 2rem;
+            font-weight: 700;
+            margin-bottom: 16px;
+        }
+
+        .news-footer p {
+            color: var(--text-secondary);
+            max-width: 600px;
+            margin: 0 auto 24px;
+        }
+
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            padding: 14px 32px;
+            border-radius: 30px;
+            background: var(--gradient);
+            color: #fff;
+            font-weight: 600;
+            border: none;
+            cursor: pointer;
+            transition: var(--transition);
+            text-decoration: none;
+        }
+
+        .btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 30px rgba(67,97,238,0.35);
+        }
+
+        /* ===== НАВИГАЦИЯ ===== */
+        .news-navigation {
+            display: flex;
+            justify-content: space-between;
+            gap: 16px;
+            margin-top: 50px;
+            padding-top: 40px;
+            border-top: 1px solid var(--border-color);
+        }
+
+        .news-nav-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            padding: 14px 28px;
+            background: rgba(255,255,255,0.04);
+            border: 1px solid var(--border-color);
+            border-radius: var(--radius);
+            color: var(--text-secondary);
+            text-decoration: none;
+            font-weight: 600;
+            transition: var(--transition);
+        }
+
+        .news-nav-btn:hover {
+            background: var(--gradient);
+            color: #fff;
+            border-color: transparent;
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(67,97,238,0.3);
+        }
+
+        /* ===== ФУТЕР ===== */
+        #footer {
+            position: relative;
+            z-index: 1;
+            border-top: 1px solid var(--border-color);
+            padding: 50px 0 30px;
+            background: rgba(0,0,0,0.4);
+            margin-top: 20px;
+        }
+
+        .footer-content {
+            display: grid;
+            grid-template-columns: 1fr 2fr;
+            gap: 40px;
+            margin-bottom: 30px;
+        }
+
+        .footer-logo {
+            display: flex;
+            align-items: center;
+            gap: 14px;
+        }
+
+        .footer-logo .logo-icon {
+            width: 44px;
+            height: 44px;
+            border-radius: 50%;
+            background: var(--gradient);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #fff;
+            font-size: 1.2rem;
+        }
+
+        .footer-logo h3 {
+            font-size: 1.2rem;
+            font-weight: 700;
+        }
+
+        .footer-logo p {
+            font-size: 0.85rem;
+            color: var(--text-secondary);
+        }
+
+        .footer-social {
+            display: flex;
+            gap: 12px;
+            margin-top: 14px;
+        }
+
+        .social-link {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: var(--border-color);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--text-secondary);
+            transition: var(--transition);
+        }
+
+        .social-link:hover {
+            color: #fff;
+            background: var(--gradient);
+        }
+
+        .footer-links {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 30px;
+        }
+
+        .footer-column h4 {
+            font-size: 0.9rem;
+            font-weight: 700;
+            margin-bottom: 12px;
+        }
+
+        .footer-column ul {
+            list-style: none;
+        }
+
+        .footer-column ul li {
+            margin-bottom: 6px;
+            font-size: 0.85rem;
+            color: var(--text-secondary);
+        }
+
+        .footer-column ul li a:hover {
+            color: #fff;
+        }
+
+        .footer-bottom {
+            border-top: 1px solid var(--border-color);
+            padding-top: 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 12px;
+            font-size: 0.8rem;
+            color: var(--text-secondary);
+        }
+
+        .footer-links-bottom {
+            display: flex;
+            gap: 20px;
+        }
+
+        .footer-links-bottom a:hover {
+            color: #fff;
+        }
+
+        /* ===== АДАПТИВ ===== */
+        @media (max-width: 992px) {
+            .logo-text h1 {
+                font-size: 1.2rem;
+            }
+            .logo-icon-container {
+                width: 38px;
+                min-width: 38px;
+                height: 38px;
+                font-size: 1rem;
+            }
+            .nav-link {
+                padding: 6px 14px;
+                font-size: 0.85rem;
+            }
+            .nav-text {
+                display: none;
+            }
+            .nav-link .nav-icon {
+                font-size: 1.1rem;
+            }
+
+            .footer-content {
+                grid-template-columns: 1fr;
+                gap: 30px;
+            }
+            .footer-links {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .update-list {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        @media (max-width: 768px) {
+            body { padding-top: 70px; }
+
+            .header-content {
+                height: 64px;
+                gap: 12px;
+            }
+
+            .mobile-menu-btn {
+                display: flex;
+            }
+
+            .main-nav {
+                position: fixed;
+                top: 0;
+                right: -300px;
+                width: 280px;
+                height: 100vh;
+                background: var(--bg-primary);
+                padding: 80px 24px 30px;
+                transition: right 0.35s ease;
+                z-index: 999;
+                border-left: 1px solid var(--border-color);
+                overflow-y: auto;
+            }
+
+            .main-nav.active {
+                right: 0;
+            }
+
+            .mobile-menu-overlay.active {
+                display: block;
+            }
+
+            .nav-list {
+                flex-direction: column;
+                gap: 4px;
+                width: 100%;
+            }
+
+            .nav-link {
+                padding: 12px 16px;
+                border-radius: var(--radius);
+                font-size: 1rem;
+                width: 100%;
+                justify-content: flex-start;
+            }
+
+            .nav-text {
+                display: inline;
+            }
+
+            .mobile-menu-btn.active .menu-line:nth-child(1) {
+                transform: rotate(45deg) translate(5px, 5px);
+            }
+            .mobile-menu-btn.active .menu-line:nth-child(2) {
+                opacity: 0;
+            }
+            .mobile-menu-btn.active .menu-line:nth-child(3) {
+                transform: rotate(-45deg) translate(5px, -5px);
+            }
+
+            .logo-text h1 {
+                font-size: 1.1rem;
+            }
+            .logo-icon-container {
+                width: 34px;
+                min-width: 34px;
+                height: 34px;
+                font-size: 0.9rem;
+            }
+            .logo-subtitle {
+                font-size: 0.6rem;
+                letter-spacing: 1.5px;
+            }
+
+            .news-hero {
+                padding: 20px 0 10px;
+            }
+
+            .news-hero h1 {
+                font-size: 2rem;
+            }
+
+            .news-hero-description {
+                font-size: 1rem;
+            }
+
+            .news-hero-content,
+            .news-container {
+                padding: 30px 20px;
+                border-radius: var(--radius-lg);
+            }
+
+            .news-main-image {
+                height: 250px;
+                margin-bottom: 28px;
+            }
+
+            .slider-slide-caption h3 {
+                font-size: 1.1rem;
+            }
+
+            .slider-slide-caption p {
+                font-size: 0.85rem;
+            }
+
+            .slider-btn {
+                width: 36px;
+                height: 36px;
+                font-size: 0.9rem;
+            }
+
+            .slider-btn.prev {
+                left: 8px;
+            }
+
+            .slider-btn.next {
+                right: 8px;
+            }
+
+            .news-body h2 {
+                font-size: 1.6rem;
+            }
+            .news-body h3 {
+                font-size: 1.2rem;
+            }
+
+            .news-navigation {
+                flex-direction: column;
+                gap: 12px;
+            }
+
+            .news-nav-btn {
+                justify-content: center;
+            }
+
+            .update-list {
+                grid-template-columns: 1fr;
+            }
+
+            .footer-links {
+                grid-template-columns: 1fr;
+                gap: 20px;
+            }
+
+            .footer-bottom {
+                flex-direction: column;
+                text-align: center;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .logo-text h1 {
+                font-size: 0.95rem;
+            }
+            .logo-icon-container {
+                width: 30px;
+                min-width: 30px;
+                height: 30px;
+                font-size: 0.8rem;
+            }
+            .logo-subtitle {
+                font-size: 0.5rem;
+                letter-spacing: 1px;
+            }
+            .logo-link {
+                gap: 8px;
+            }
+            .header-content {
+                height: 58px;
+                gap: 8px;
+            }
+
+            .news-hero h1 {
+                font-size: 1.6rem;
+            }
+
+            .news-hero-content,
+            .news-container {
+                padding: 20px 16px;
+                margin: 0 10px;
+                border-radius: var(--radius-lg);
+            }
+
+            .news-main-image {
+                height: 200px;
+            }
+
+            .news-meta {
+                flex-direction: column;
+                align-items: stretch;
+                gap: 8px;
+            }
+
+            .news-meta-item {
+                justify-content: center;
+            }
+
+            .news-body {
+                font-size: 1rem;
+            }
+
+            .news-body h2 {
+                font-size: 1.3rem;
+                padding-left: 14px;
+            }
+
+            .news-feature-card {
+                padding: 20px;
+            }
+
+            .news-slider-section h2 {
+                font-size: 1.4rem;
+            }
+
+            .slider-slide-caption {
+                padding: 24px 16px 16px;
+            }
+
+            .slider-slide-caption h3 {
+                font-size: 1rem;
+            }
+
+            .slider-slide-caption p {
+                font-size: 0.8rem;
+            }
+
+            .slider-btn {
+                width: 32px;
+                height: 32px;
+                font-size: 0.8rem;
+            }
+
+            .news-footer h2 {
+                font-size: 1.5rem;
+            }
+
+            .news-navigation {
+                margin-top: 30px;
+                padding-top: 24px;
+            }
+        }
+
+        @media (max-width: 360px) {
+            .news-hero h1 {
+                font-size: 1.3rem;
+            }
+            .news-hero-content,
+            .news-container {
+                padding: 16px 12px;
+            }
+            .news-main-image {
+                height: 170px;
+            }
+            .news-body h2 {
+                font-size: 1.1rem;
+            }
+        }
+    </style>
+</head>
+
+<body class="news-page">
+
+    <!-- ФОН -->
+    <div class="animated-background">
+        <div class="gradient-bg"></div>
+        <div class="particles" id="particles"></div>
+    </div>
+
+    <!-- ===== HEADER ===== -->
+    <header id="header">
+        <div class="container">
+            <div class="header-content">
+                <a href="index.html" class="logo-link">
+                    <div class="logo-icon-container">
+                        <i class="fas fa-users"></i>
+                    </div>
+                    <div class="logo-text">
+                        <h1>Братья</h1>
+                        <p class="logo-subtitle">TTFBB COMPANY</p>
+                    </div>
+                </a>
+
+                <button class="mobile-menu-btn" id="mobileMenuBtn" aria-label="Меню">
+                    <span class="menu-line"></span>
+                    <span class="menu-line"></span>
+                    <span class="menu-line"></span>
+                </button>
+
+                <div class="mobile-menu-overlay" id="mobileMenuOverlay"></div>
+
+                <nav class="main-nav" id="mainNav">
+                    <ul class="nav-list">
+                        <li><a href="newswire.html" class="nav-link"><i class="fas fa-newspaper nav-icon"></i> <span class="nav-text">Новостная лента</span></a></li>
+                        <li><a href="videos.html" class="nav-link"><i class="fas fa-play-circle nav-icon"></i> <span class="nav-text">Видеоролики</span></a></li>
+                        <li><a href="schedule.html" class="nav-link"><i class="fas fa-calendar-alt nav-icon"></i> <span class="nav-text">Расписание</span></a></li>
+                        <li><a href="character.html" class="nav-link"><i class="fas fa-user nav-icon"></i> <span class="nav-text">Профиль</span></a></li>
+                    </ul>
+                </nav>
+            </div>
+        </div>
+    </header>
+
+    <!-- ===== HERO ===== -->
+    <section class="news-hero">
+        <div class="container">
+            <div class="news-hero-content">
+                <div class="news-hero-badge">
+                    <i class="fas fa-rocket"></i>
+                    <span>Большое обновление</span>
+                </div>
+                <h1>Обновление сайта 2026</h1>
+                <p class="news-hero-description">Полный редизайн, новый функционал и улучшения для удобства пользователей</p>
+                <div class="news-meta">
+                    <div class="news-meta-item">
+                        <i class="far fa-calendar-alt"></i>
+                        <span>12 июля 2026</span>
+                    </div>
+                    <div class="news-meta-item">
+                        <i class="fas fa-tag"></i>
+                        <span>Обновление сайта</span>
+                    </div>
+                    <div class="news-meta-item">
+                        <i class="fas fa-code"></i>
+                        <span>Версия 2.0</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== КОНТЕНТ ===== -->
+    <section class="news-content-section">
+        <div class="container news-container">
+
+            <!-- Главное изображение -->
+            <div class="news-main-image">
+                <img src="/images/ОБНОВА ЛЕТНЯЯ САЙТА.png" alt="Обновление сайта 2026">
+                <div class="news-main-image-overlay">
+                    <span><i class="fas fa-camera"></i> Новый обновление</span>
+                </div>
+            </div>
+
+            <!-- ===== СЛАЙДЕР ===== -->
+            <div class="news-slider-section">
+                <h2>Галерея обновлений</h2>
+                <div class="slider-container">
+                    <div class="slider-track" id="sliderTrack">
+                        <div class="slider-slide">
+                            <img src="/images/Главная.png" alt="Новый дизайн">
+                            <div class="slider-slide-caption">
+                                <h3>Новый дизайн сайта</h3>
+                                <p>Полностью обновлённый интерфейс в тёмной теме с акцентами</p>
+                            </div>
+                        </div>
+                        <div class="slider-slide">
+                            <img src="/images/Новости.png" alt="Блок новостей">
+                            <div class="slider-slide-caption">
+                                <h3>Блок новостей</h3>
+                                <p>Удобный просмотр всех обновлений и событий</p>
+                            </div>
+                        </div>
+                        <div class="slider-slide">
+                            <img src="/images/Видео.png" alt="Видео раздел">
+                            <div class="slider-slide-caption">
+                                <h3>Видео раздел</h3>
+                                <p>Пагинация и удобная навигация по видео</p>
+                            </div>
+                        </div>
+                        <div class="slider-slide">
+                            <img src="/images/МОБ АДАПТАЦИЯ.png" alt="Мобильная адаптация">
+                            <div class="slider-slide-caption">
+                                <h3>Мобильная адаптация</h3>
+                                <p>Полная поддержка всех устройств</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <button class="slider-btn prev" id="sliderPrev" aria-label="Предыдущий">
+                        <i class="fas fa-chevron-left"></i>
+                    </button>
+                    <button class="slider-btn next" id="sliderNext" aria-label="Следующий">
+                        <i class="fas fa-chevron-right"></i>
+                    </button>
+
+                    <div class="slider-dots" id="sliderDots"></div>
+                </div>
+            </div>
+
+            <!-- ===== ТЕКСТ НОВОСТИ ===== -->
+            <div class="news-body">
+                <p>Мы рады представить вам масштабное обновление нашего сайта! Полностью переработан дизайн, добавлены новые функции и улучшена производительность. Всё это для того, чтобы сделать ваш опыт использования сайта максимально комфортным.</p>
+
+                <h2>Что нового?</h2>
+
+                <div class="news-feature-card">
+                    <h3>Ключевые изменения</h3>
+                    <ul>
+                        <li>Полностью новый дизайн в тёмной теме</li>
+                        <li>Единый стиль всех страниц</li>
+                        <li>Улучшенная навигация и мобильная адаптация</li>
+                        <li>Новый блок новостей с удобной системой фильтрации</li>
+                        <li>Обновлённый видеораздел с пагинацией</li>
+                        <li>Современный анимированный фон</li>
+                    </ul>
+                </div>
+
+                <!-- Список обновлений -->
+                <div class="update-list">
+                    <div class="update-item">
+                        <span class="icon">🎨</span>
+                        <h4>Новый дизайн</h4>
+                        <p>Современный минималистичный дизайн в тёмной теме с акцентными цветами</p>
+                    </div>
+                    <div class="update-item">
+                        <span class="icon">📱</span>
+                        <h4>Мобильная адаптация</h4>
+                        <p>Полная поддержка всех устройств — от смартфонов до больших экранов</p>
+                    </div>
+                    <div class="update-item">
+                        <span class="icon">📰</span>
+                        <h4>Блок новостей</h4>
+                        <p>Все новости в одном месте с фильтрацией по категориям</p>
+                    </div>
+                    <div class="update-item">
+                        <span class="icon">🎬</span>
+                        <h4>Видеораздел</h4>
+                        <p>Удобная навигация с пагинацией и фильтрацией по темам</p>
+                    </div>
+                    <div class="update-item">
+                        <span class="icon">⚡</span>
+                        <h4>Производительность</h4>
+                        <p>Оптимизированный код для быстрой загрузки страниц</p>
+                    </div>
+                    <div class="update-item">
+                        <span class="icon">🔒</span>
+                        <h4>Безопасность</h4>
+                        <p>Обновлённые механизмы защиты и безопасности данных</p>
+                    </div>
+                </div>
+
+                <h2>Детали обновления</h2>
+
+                <h3>Дизайн и интерфейс</h3>
+                <p>Мы полностью переработали визуальную составляющую сайта. Теперь сайт выполнен в едином стиле с тёмной темой, которая снижает нагрузку на глаза и создаёт комфортную атмосферу для чтения. Акцентные цвета, анимации и плавные переходы делают взаимодействие с сайтом более приятным.</p>
+
+                <h3>Функциональность</h3>
+                <p>Добавлены новые разделы и улучшены существующие. Теперь вы можете легко находить нужную информацию благодаря удобной системе навигации. Блок новостей позволяет отслеживать все обновления, а видеораздел — наслаждаться контентом без лишних сложностей.</p>
+
+                <div class="news-footer">
+                    <h2>Что дальше?</h2>
+                    <p>Мы продолжаем работать над улучшением сайта. В планах — добавление новых функций, интеграция с социальными сетями и расширение контента. Следите за обновлениями!</p>
+                    <a href="newswire.html" class="btn">
+                        <span>Все новости</span>
+                        <i class="fas fa-newspaper"></i>
+                    </a>
+                </div>
+            </div>
+
+            <!-- ===== НАВИГАЦИЯ ===== -->
+            <div class="news-navigation">
+                <a href="index.html" class="news-nav-btn">
+                    <i class="fas fa-arrow-left"></i>
+                    <span>К главной странице</span>
+                </a>
+                <a href="newswire.html" class="news-nav-btn">
+                    <span>К новостям</span>
+                    <i class="fas fa-arrow-right"></i>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== FOOTER ===== -->
+    <footer id="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-logo">
+                    <div class="logo-icon"><i class="fas fa-users"></i></div>
+                    <div>
+                        <h3>TTFBB COMPANY</h3>
+                        <p>Два брата в увлекательных приключениях</p>
+                    </div>
+                </div>
+                <div class="footer-social">
+                    <a href="https://www.youtube.com/@n1kolayrl" target="_blank" class="social-link"><i class="fab fa-youtube"></i></a>
+                    <a href="https://t.me/nesoqiton" target="_blank" class="social-link"><i class="fab fa-telegram"></i></a>
+                    <a href="#" class="social-link"><i class="fab fa-instagram"></i></a>
+                </div>
+            </div>
+
+            <div class="footer-links">
+                <div class="footer-column">
+                    <h4>Разделы</h4>
+                    <ul>
+                        <li><a href="newswire.html">Новостная лента</a></li>
+                        <li><a href="videos.html">Видеоролики</a></li>
+                        <li><a href="schedule.html">Расписание</a></li>
+                        <li><a href="index.html#footer">Контакты</a></li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h4>Контакты</h4>
+                    <ul>
+                        <li><i class="fas fa-user"></i> Никита: +375 (29) 959-00-97</li>
+                        <li><i class="fas fa-user"></i> Евгений: +375 (25) 791-40-26</li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h4>Telegram</h4>
+                    <ul>
+                        <li><a href="https://t.me/nesoqiton" target="_blank">@nesoqiton (Никита)</a></li>
+                        <li><a href="https://t.me/" target="_blank">Nickname not found (Евгений)</a></li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="footer-bottom">
+                <p>&copy; 2025-2026 • TTFBB COMPANY. Все права защищены.</p>
+                <div class="footer-links-bottom">
+                    <a href="privacy.html">Политика конфиденциальности</a>
+                    <a href="#">Условия использования</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // ===== МОБИЛЬНОЕ МЕНЮ =====
+        (function mobileMenu() {
+            const btn = document.getElementById('mobileMenuBtn');
+            const nav = document.getElementById('mainNav');
+            const overlay = document.getElementById('mobileMenuOverlay');
+
+            function toggle() {
+                nav.classList.toggle('active');
+                overlay.classList.toggle('active');
+                btn.classList.toggle('active');
+                document.body.style.overflow = nav.classList.contains('active') ? 'hidden' : '';
+            }
+
+            btn.addEventListener('click', toggle);
+            overlay.addEventListener('click', toggle);
+            document.querySelectorAll('.nav-link').forEach(link => {
+                link.addEventListener('click', () => {
+                    if (window.innerWidth <= 768 && nav.classList.contains('active')) toggle();
+                });
+            });
+        })();
+
+        // ===== ХЕДЕР ПРИ СКРОЛЛЕ =====
+        (function headerScroll() {
+            const header = document.getElementById('header');
+            let last = 0;
+            window.addEventListener('scroll', () => {
+                const y = window.pageYOffset;
+                if (y > 100 && y > last) header.classList.add('header-hidden');
+                else if (y < last || y <= 100) header.classList.remove('header-hidden');
+                last = y;
+            }, { passive: true });
+        })();
+
+        // ===== ПАРТИКЛЫ =====
+        (function createParticles() {
+            const container = document.getElementById('particles');
+            for (let i = 0; i < 12; i++) {
+                const el = document.createElement('div');
+                el.className = 'particle';
+                const size = 40 + Math.random() * 80;
+                el.style.cssText = `
+                    width:${size}px; height:${size}px;
+                    left:${Math.random()*100}%; top:${Math.random()*100}%;
+                    animation-duration:${20+Math.random()*20}s;
+                    animation-delay:${Math.random()*5}s;
+                `;
+                container.appendChild(el);
+            }
+        })();
+
+        // ===== СЛАЙДЕР =====
+        (function slider() {
+            const track = document.getElementById('sliderTrack');
+            const slides = track.querySelectorAll('.slider-slide');
+            const dotsContainer = document.getElementById('sliderDots');
+            const prevBtn = document.getElementById('sliderPrev');
+            const nextBtn = document.getElementById('sliderNext');
+
+            let currentIndex = 0;
+            const totalSlides = slides.length;
+
+            // Создаём точки
+            slides.forEach((_, i) => {
+                const dot = document.createElement('button');
+                dot.className = 'slider-dot' + (i === 0 ? ' active' : '');
+                dot.setAttribute('aria-label', `Перейти к слайду ${i + 1}`);
+                dot.addEventListener('click', () => goToSlide(i));
+                dotsContainer.appendChild(dot);
+            });
+
+            const dots = dotsContainer.querySelectorAll('.slider-dot');
+
+            function goToSlide(index) {
+                if (index < 0) index = totalSlides - 1;
+                if (index >= totalSlides) index = 0;
+                currentIndex = index;
+                track.style.transform = `translateX(-${currentIndex * 100}%)`;
+                dots.forEach((dot, i) => {
+                    dot.classList.toggle('active', i === currentIndex);
+                });
+            }
+
+            function nextSlide() {
+                goToSlide(currentIndex + 1);
+            }
+
+            function prevSlide() {
+                goToSlide(currentIndex - 1);
+            }
+
+            // Автопрокрутка
+            let autoSlide = setInterval(nextSlide, 5000);
+
+            // Кнопки
+            nextBtn.addEventListener('click', () => {
+                clearInterval(autoSlide);
+                nextSlide();
+                autoSlide = setInterval(nextSlide, 5000);
+            });
+
+            prevBtn.addEventListener('click', () => {
+                clearInterval(autoSlide);
+                prevSlide();
+                autoSlide = setInterval(nextSlide, 5000);
+            });
+
+            // Клавиатура
+            document.addEventListener('keydown', (e) => {
+                if (e.key === 'ArrowRight') {
+                    clearInterval(autoSlide);
+                    nextSlide();
+                    autoSlide = setInterval(nextSlide, 5000);
+                }
+                if (e.key === 'ArrowLeft') {
+                    clearInterval(autoSlide);
+                    prevSlide();
+                    autoSlide = setInterval(nextSlide, 5000);
+                }
+            });
+
+            // Свайп для мобильных
+            let touchStartX = 0;
+            let touchEndX = 0;
+
+            track.addEventListener('touchstart', (e) => {
+                touchStartX = e.changedTouches[0].screenX;
+                clearInterval(autoSlide);
+            }, { passive: true });
+
+            track.addEventListener('touchend', (e) => {
+                touchEndX = e.changedTouches[0].screenX;
+                const diff = touchStartX - touchEndX;
+                if (Math.abs(diff) > 50) {
+                    if (diff > 0) nextSlide();
+                    else prevSlide();
+                }
+                autoSlide = setInterval(nextSlide, 5000);
+            }, { passive: true });
+        })();
+    </script>
+</body>
+</html>

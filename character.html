@@ -6,180 +6,53 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>TTFBB COMPANY</title>
     <link rel="icon" href="images/logo.png" type="images/logo.png">
-    <link rel="stylesheet" href="styles/style.css">
     <link rel="stylesheet" href="styles/character.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
 </head>
-
 <body>
-    <!-- Анимированный фон -->
+
+    <!-- ФОН -->
     <div class="animated-background">
         <div class="gradient-bg"></div>
         <div class="particles" id="particles"></div>
     </div>
 
-    <!-- Снежинки -->
-    <div class="snowflakes" id="snowflakes"></div>
-    <div class="snowdrifts"></div>
-
-  <!-- Header -->
+    <!-- ===== HEADER ===== -->
     <header id="header">
         <div class="container">
             <div class="header-content">
-                <!-- Логотип -->
                 <a href="index.html" class="logo-link">
-                    <div class="logo">
-                        <div class="logo-icon-container">
-                            <i class="fas fa-users logo-icon"></i>
-                        </div>
-                        <div class="logo-text">
-                            <h1>Братья</h1>
-                            <p class="logo-subtitle">TTFBB COMPANY</p>
-                        </div>
+                    <div class="logo-icon-container">
+                        <i class="fas fa-users"></i>
+                    </div>
+                    <div class="logo-text">
+                        <h1>Братья</h1>
+                        <p class="logo-subtitle">TTFBB COMPANY</p>
                     </div>
                 </a>
 
-                <!-- Кнопка мобильного меню -->
-                <button class="mobile-menu-btn" id="mobileMenuBtn" aria-label="Открыть меню">
+                <button class="mobile-menu-btn" id="mobileMenuBtn" aria-label="Меню">
                     <span class="menu-line"></span>
                     <span class="menu-line"></span>
                     <span class="menu-line"></span>
                 </button>
 
-                <!-- Оверлей для мобильного меню -->
                 <div class="mobile-menu-overlay" id="mobileMenuOverlay"></div>
 
-                <!-- Навигация -->
                 <nav class="main-nav" id="mainNav">
                     <ul class="nav-list">
-                        <li class="nav-item">
-                            <a href="newswire.html" class="nav-link">
-                                <i class="fas fa-newspaper nav-icon"></i>
-                                <span class="nav-text">Новостная лента</span>
-                            </a>
-                        </li>
-                        <li class="nav-item">
-                            <a href="videos.html" class="nav-link">
-                                <i class="fas fa-play-circle nav-icon"></i>
-                                <span class="nav-text">Видеоролики</span>
-                            </a>
-                        </li>
-                        <li class="nav-item">
-                            <a href="schedule.html" class="nav-link">
-                                <i class="fas fa-calendar-alt nav-icon"></i>
-                                <span class="nav-text">Расписание</span>
-                            </a>
-                        </li>
-                        <li class="nav-item">
-                            <a href="character.html" class="nav-link">
-                                <i class="fa-solid fa-user nav-icon"></i>
-                                <span class="nav-text">Профиль</span>
-                            </a>
-                        </li>
+                        <li><a href="newswire.html" class="nav-link"><i class="fas fa-newspaper nav-icon"></i> <span class="nav-text">Новостная лента</span></a></li>
+                        <li><a href="videos.html" class="nav-link"><i class="fas fa-play-circle nav-icon"></i> <span class="nav-text">Видеоролики</span></a></li>
+                        <li><a href="schedule.html" class="nav-link"><i class="fas fa-calendar-alt nav-icon"></i> <span class="nav-text">Расписание</span></a></li>
+                        <li><a href="character.html" class="nav-link active"><i class="fas fa-user nav-icon"></i> <span class="nav-text">Профиль</span></a></li>
                     </ul>
                 </nav>
             </div>
         </div>
     </header>
 
-     <script>
-        // DOM элементы
-        const header = document.getElementById('header');
-        const mobileMenuBtn = document.getElementById('mobileMenuBtn');
-        const mainNav = document.getElementById('mainNav');
-        const mobileMenuOverlay = document.getElementById('mobileMenuOverlay');
-        const navLinks = document.querySelectorAll('.nav-link');
-
-        // Переменные для скролла
-        let lastScrollTop = 0;
-        const scrollThreshold = 100;
-
-        // Функция для скрытия/показа навбара при скролле
-        function handleScroll() {
-            const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
-            
-            if (scrollTop > scrollThreshold) {
-                // Прокрутка вниз
-                if (scrollTop > lastScrollTop && !mainNav.classList.contains('active')) {
-                    header.classList.add('header-hidden');
-                } 
-                // Прокрутка вверх
-                else if (scrollTop < lastScrollTop) {
-                    header.classList.remove('header-hidden');
-                }
-            } else {
-                // Вверху страницы
-                header.classList.remove('header-hidden');
-            }
-            
-            lastScrollTop = scrollTop;
-        }
-
-        // Функция для открытия/закрытия мобильного меню
-        function toggleMobileMenu() {
-            const isActive = mainNav.classList.contains('active');
-            
-            if (isActive) {
-                closeMobileMenu();
-            } else {
-                openMobileMenu();
-            }
-        }
-
-        function openMobileMenu() {
-            mainNav.classList.add('active');
-            mobileMenuBtn.classList.add('active');
-            mobileMenuOverlay.classList.add('active');
-            document.body.style.overflow = 'hidden'; // Блокируем скролл на body
-        }
-
-        function closeMobileMenu() {
-            mainNav.classList.remove('active');
-            mobileMenuBtn.classList.remove('active');
-            mobileMenuOverlay.classList.remove('active');
-            document.body.style.overflow = ''; // Разблокируем скролл
-        }
-
-        // Обработчики событий
-        window.addEventListener('scroll', handleScroll, { passive: true });
-
-        mobileMenuBtn.addEventListener('click', toggleMobileMenu);
-        mobileMenuOverlay.addEventListener('click', closeMobileMenu);
-
-        // Закрытие меню при клике на ссылку
-        navLinks.forEach(link => {
-            link.addEventListener('click', () => {
-                if (window.innerWidth <= 768) {
-                    closeMobileMenu();
-                }
-            });
-        });
-
-        // Закрытие меню при изменении размера окна
-        window.addEventListener('resize', () => {
-            if (window.innerWidth > 768 && mainNav.classList.contains('active')) {
-                closeMobileMenu();
-            }
-        });
-
-        // Предотвращаем скролл под меню на мобильных устройствах
-        document.addEventListener('touchmove', function(e) {
-            if (mainNav.classList.contains('active')) {
-                e.preventDefault();
-            }
-        }, { passive: false });
-
-        // Инициализация
-        document.addEventListener('DOMContentLoaded', () => {
-            // Проверяем ширину экрана при загрузке
-            if (window.innerWidth <= 768) {
-                header.classList.remove('header-hidden');
-            }
-        });
-    </script>
-
-    <!-- Hero Section -->
+    <!-- ===== HERO ===== -->
     <section class="access-hero">
         <div class="container">
             <div class="hero-content">
@@ -187,207 +60,112 @@
                     <span>🔓 Открытый доступ</span>
                 </div>
                 <h1 class="hero-title">Выберите профиль</h1>
-                <p class="hero-description"></p>
-                
+                <p class="hero-description">Нажмите на карточку человека, чтобы перейти к его странице</p>
             </div>
         </div>
     </section>
 
-    <!-- Основной контент -->
+    <!-- ===== СЕТКА ПРОФИЛЕЙ ===== -->
     <main class="access-main">
         <div class="container">
-            <!-- Сетка людей -->
             <div class="people-grid" id="people-grid">
-                <!-- Человек 1 -->
+
+                <!-- Никита -->
                 <a class="person-select-text" href="character/users-ttfbbcharacter-00000-1.html">
-                <div class="person-card" data-person-id="nikita">
-                    <div class="person-image">
-                        <img src="/images/brothers-gallery/Никита.jpg" 
-                             alt="Никита" loading="lazy">
-                        <div class="person-overlay">
-                            <div class="person-name">Никита</div>
-                        </div>
-                    </div>
-                    <div class="person-info">
-                        <h3>Никита</h3>
-                        <p class="person-tagline">"Создатель, стример"</p>
-                        <div class="person-stats">
-                            <div class="stat">
-                                <i class="fas fa-lightbulb"></i>
-                                <span>Программист</span>
-                            </div>
-                            <div class="stat">
-                                <i class="fas fa-crown"></i>
-                                <span>Режисер</span>
+                    <div class="person-card" data-person-id="nikita">
+                        <div class="person-image">
+                            <img src="/images/brothers-gallery/Никита.jpg" alt="Никита" loading="lazy">
+                            <div class="person-overlay">
+                                <div class="person-name">Никита</div>
                             </div>
                         </div>
-                        <button class="btn btn-access" data-person="nikita">
-                            <i class="fa-solid fa-user"></i>
-                            <span>Войти</span>
-                        </button>
+                        <div class="person-info">
+                            <h3>Никита</h3>
+                            <p class="person-tagline">"Создатель, стример"</p>
+                            <div class="person-stats">
+                                <span class="stat"><i class="fas fa-lightbulb"></i> Программист</span>
+                                <span class="stat"><i class="fas fa-crown"></i> Режисёр</span>
+                            </div>
+                            <button class="btn-access">
+                                <i class="fas fa-user"></i>
+                                <span>Перейти</span>
+                            </button>
+                        </div>
                     </div>
-                </div>
                 </a>
 
-                <!-- Человек 2 -->
-               <a class="person-select-text" href="character/users-ttfbbcharacter-00001-2.html">
-                <div class="person-card" data-person-id="evgeny">
-                    <div class="person-image">
-                        <img src="/images/brothers-gallery/Евгений.jpg" 
-                             alt="Евгений" loading="lazy">
-                        <div class="person-overlay">
-                            <div class="person-name">Евгений</div>
-                        </div>
-                    </div>
-                    <div class="person-info">
-                        <h3>Евгений</h3>
-                        <p class="person-tagline">"Лучшая персона"</p>
-                        <div class="person-stats">
-                            <div class="stat">
-                                <i class="fas fa-cogs"></i>
-                                <span>Юморной</span>
-                            </div>
-                            <div class="stat">
-                                <i class="fas fa-magic"></i>
-                                <span>Видеокреатор</span>
+                <!-- Евгений -->
+                <a class="person-select-text" href="character/users-ttfbbcharacter-00001-2.html">
+                    <div class="person-card" data-person-id="evgeny">
+                        <div class="person-image">
+                            <img src="/images/brothers-gallery/Евгений.jpg" alt="Евгений" loading="lazy">
+                            <div class="person-overlay">
+                                <div class="person-name">Евгений</div>
                             </div>
                         </div>
-                        <button class="btn btn-access" data-person="evgeny">
-                            <i class="fa-solid fa-user"></i>
-                            <span>Войти</span>
-                        </button> 
+                        <div class="person-info">
+                            <h3>Евгений</h3>
+                            <p class="person-tagline">"Лучшая персона"</p>
+                            <div class="person-stats">
+                                <span class="stat"><i class="fas fa-cogs"></i> Юморной</span>
+                                <span class="stat"><i class="fas fa-magic"></i> Видеокреатор</span>
+                            </div>
+                            <button class="btn-access">
+                                <i class="fas fa-user"></i>
+                                <span>Перейти</span>
+                            </button>
+                        </div>
                     </div>
-                </div> 
-            </a>
+                </a>
 
-                <!-- Человек 3 -->
-                <a class="person-select-text" href="character/users-ttfbbcharacter-00002-3.html">
-                    <div class="person-card" data-person-id="olga">
-                    <div class="person-image">
-                        <img src="/images/brothers-gallery/Ольга.jpg" 
-                             alt="Ольга" loading="lazy">
-                        <div class="person-overlay">
-                            <div class="person-name">Ольга</div>
-                        </div>
-                    </div>
-                    <div class="person-info">
-                        <h3>Ольга</h3>
-                        <p class="person-tagline">"Создатель атмосферы"</p>
-                        <div class="person-stats">
-                            <div class="stat">
-                                <i class="fas fa-paint-brush"></i>
-                                <span>Смешная</span>
-                            </div>
-                            <div class="stat">
-                                <i class="fas fa-comments"></i>
-                                <span>Требовательная</span>
-                            </div>
-                        </div>
-                        <button class="btn btn-access" data-person="olga">
-                            <i class="fa-solid fa-user"></i>
-                            <span>Войти</span>
-                        </button>
-                    </div>
-                </div>
             </div>
-            </a>
-  
-            <!-- Инструкция 
-            <div class="instructions">
-                <h3><i class="fas fa-info-circle"></i> Как получить доступ?</h3>
-                <div class="instruction-steps">
-                    <div class="step">
-                        <div class="step-icon">
-                            <i class="fas fa-user"></i>
-                        </div>
-                        <div class="step-content">
-                            <h4>Выбери человека</h4>
-                            <p>Нажми на карточку человека, к материалам которого хочешь получить доступ</p>
-                        </div>
-                    </div>
-                    <div class="step">
-                        <div class="step-icon">
-                            <i class="fas fa-key"></i>
-                        </div>
-                        <div class="step-content">
-                            <h4>Введи пароль</h4>
-                            <p>Введи правильный пароль в появившемся поле</p>
-                        </div>
-                    </div>
-                    <div class="step">
-                        <div class="step-icon">
-                            <i class="fas fa-unlock"></i>
-                        </div>
-                        <div class="step-content">
-                            <h4>Получи доступ</h4>
-                            <p>При правильном пароле ты будешь перенаправлен на секретную страницу</p>
-                        </div>
-                    </div>
-                </div>
-                <div class="security-notice">
-                    <i class="fas fa-shield-alt"></i>
-                    <p>Система безопасности ограничивает количество попыток ввода пароля. Будьте внимательны!</p>
-                </div>
-            </div>
-        </div> -->
-    </main> 
+        </div>
+    </main>
 
-<!-- Footer -->
+    <!-- ===== FOOTER ===== -->
     <footer id="footer">
         <div class="container">
             <div class="footer-content">
-                <div class="footer-main">
-                    <div class="footer-logo">
-                        <i class="fas fa-users logo-icon"></i>
-                        <div>
-                            <h3>TTFBB COMPANY</h3>
-                            <p>Два брата и одна девочка в увлекательных приключениях</p>
-                        </div>
-                    </div>
-                    <div class="footer-social">
-                        <a href="https://www.youtube.com/@n1kolayrasetovich" target="_blank" class="social-link youtube"
-                            aria-label="YouTube">
-                            <i class="fab fa-youtube"></i>
-                        </a>
-                        <a href="https://t.me/nesoqiton" target="_blank" class="social-link telegram"
-                            aria-label="Telegram">
-                            <i class="fab fa-telegram"></i>
-                        </a>
-                        <a href="#" class="social-link instagram" aria-label="Instagram">
-                            <i class="fab fa-instagram"></i>
-                        </a>
+                <div class="footer-logo">
+                    <div class="logo-icon"><i class="fas fa-users"></i></div>
+                    <div>
+                        <h3>TTFBB COMPANY</h3>
+                        <p>Два брата в увлекательных приключениях</p>
                     </div>
                 </div>
-                <div class="footer-links">
-                    <div class="footer-column">
-                        <h4>Разделы</h4>
-                        <ul>
-                            <li><a href="newswire.html">Новостная лента</a></li>
-                            <li><a href="videos.html">Видеоролики</a></li>
-                            <li><a href="schedule.html">Расписание</a></li>
-                            <li><a href="index.html#footer">Контакты</a></li>
-                            <li><a href="#">Архив</a></li>
-                        </ul>
-                    </div>
-                    <div class="footer-column">
-                        <h4>Контакты</h4>
-                        <ul>
-                            <li><i class="fas fa-user"></i> Никита: +375 (29) 959-00-97</li>
-                            <li><i class="fas fa-user"></i> Евгений: +375 (29) 870-23-67</li>
-                            <li><i class="fas fa-user"></i> Ольга: +375 (25) 729-54-17</li>
-                        </ul>
-                    </div>
-                    <div class="footer-column">
-                        <h4>Telegram</h4>
-                        <ul>
-                            <li><a href="https://t.me/nesoqiton" target="_blank">@nesoqiton (Никита)</a></li>
-                            <li><a href="https://t.me/Legendary_7681" target="_blank">@Legendary_7681 (Евгений)</a></li>
-                            <li><a href="https://t.me/thanoslegenda1239" target="_blank">@thanoslegenda1239 (Ольга)</a>
-                            </li>
-                        </ul>
-                    </div>
+                <div class="footer-social">
+                    <a href="https://www.youtube.com/@n1kolayrl" target="_blank" class="social-link"><i class="fab fa-youtube"></i></a>
+                    <a href="https://t.me/nesoqiton" target="_blank" class="social-link"><i class="fab fa-telegram"></i></a>
+                    <a href="#" class="social-link"><i class="fab fa-instagram"></i></a>
                 </div>
             </div>
+
+            <div class="footer-links">
+                <div class="footer-column">
+                    <h4>Разделы</h4>
+                    <ul>
+                        <li><a href="newswire.html">Новостная лента</a></li>
+                        <li><a href="videos.html">Видеоролики</a></li>
+                        <li><a href="schedule.html">Расписание</a></li>
+                        <li><a href="index.html#footer">Контакты</a></li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h4>Контакты</h4>
+                    <ul>
+                        <li><i class="fas fa-user"></i> Никита: +375 (29) 959-00-97</li>
+                        <li><i class="fas fa-user"></i> Евгений: +375 (25) 791-40-26</li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h4>Telegram</h4>
+                    <ul>
+                        <li><a href="https://t.me/nesoqiton" target="_blank">@nesoqiton (Никита)</a></li>
+                        <li><a href="https://t.me/" target="_blank">Nickname not found (Евгений)</a></li>
+                    </ul>
+                </div>
+            </div>
+
             <div class="footer-bottom">
                 <p>&copy; 2025-2026 • TTFBB COMPANY. Все права защищены.</p>
                 <div class="footer-links-bottom">
@@ -398,10 +176,57 @@
         </div>
     </footer>
 
-    <!-- Уведомления -->
-    <div class="notification" id="notification"></div>
+    <script>
+        // ===== МОБИЛЬНОЕ МЕНЮ =====
+        (function mobileMenu() {
+            const btn = document.getElementById('mobileMenuBtn');
+            const nav = document.getElementById('mainNav');
+            const overlay = document.getElementById('mobileMenuOverlay');
 
-    <!-- Скрипты -->
-    <script src="/character.js"></script>
+            function toggle() {
+                nav.classList.toggle('active');
+                overlay.classList.toggle('active');
+                btn.classList.toggle('active');
+                document.body.style.overflow = nav.classList.contains('active') ? 'hidden' : '';
+            }
+
+            btn.addEventListener('click', toggle);
+            overlay.addEventListener('click', toggle);
+            document.querySelectorAll('.nav-link').forEach(link => {
+                link.addEventListener('click', () => {
+                    if (window.innerWidth <= 768 && nav.classList.contains('active')) toggle();
+                });
+            });
+        })();
+
+        // ===== ХЕДЕР ПРИ СКРОЛЛЕ =====
+        (function headerScroll() {
+            const header = document.getElementById('header');
+            let last = 0;
+            window.addEventListener('scroll', () => {
+                const y = window.pageYOffset;
+                if (y > 100 && y > last) header.classList.add('header-hidden');
+                else if (y < last || y <= 100) header.classList.remove('header-hidden');
+                last = y;
+            }, { passive: true });
+        })();
+
+        // ===== ПАРТИКЛЫ =====
+        (function createParticles() {
+            const container = document.getElementById('particles');
+            for (let i = 0; i < 12; i++) {
+                const el = document.createElement('div');
+                el.className = 'particle';
+                const size = 40 + Math.random() * 80;
+                el.style.cssText = `
+                    width:${size}px; height:${size}px;
+                    left:${Math.random()*100}%; top:${Math.random()*100}%;
+                    animation-duration:${20+Math.random()*20}s;
+                    animation-delay:${Math.random()*5}s;
+                `;
+                container.appendChild(el);
+            }
+        })();
+    </script>
 </body>
 </html>

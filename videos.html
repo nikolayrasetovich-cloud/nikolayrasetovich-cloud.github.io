@@ -5,247 +5,98 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>TTFBB COMPANY</title>
     <link rel="icon" href="images/logo.png" type="images/logo.png">
-    <link rel="stylesheet" href="/styles/style.css">
-    <link rel="stylesheet" href="/styles/video-style.css">
+    <link rel="stylesheet" href="styles/video-style.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700;800&family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
 </head>
 <body>
-    <!-- Анимированный фон -->
+
+    <!-- ФОН -->
     <div class="animated-background">
         <div class="gradient-bg"></div>
         <div class="particles" id="particles"></div>
     </div>
 
-    <!-- Новогодние элементы -->
-    <div class="snowflakes" id="snowflakes"></div>
-    <div class="snowdrifts"></div>
-
-    <!-- YouTube плеер модальное окно -->
-    <div class="youtube-modal" id="youtubeModal">
-        <div class="youtube-container">
-            <iframe class="youtube-iframe" id="youtubeIframe" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-            <button class="youtube-close" id="youtubeClose" aria-label="Закрыть плеер">
-                <i class="fas fa-times"></i>
-            </button>
-            <div class="youtube-title" id="youtubeTitle"></div>
-        </div>
-    </div>
-
- <!-- Header -->
+    <!-- ===== HEADER ===== -->
     <header id="header">
         <div class="container">
             <div class="header-content">
-                <!-- Логотип -->
                 <a href="index.html" class="logo-link">
-                    <div class="logo">
-                        <div class="logo-icon-container">
-                            <i class="fas fa-users logo-icon"></i>
-                        </div>
-                        <div class="logo-text">
-                            <h1>Братья</h1>
-                            <p class="logo-subtitle">TTFBB COMPANY</p>
-                        </div>
+                    <div class="logo-icon-container">
+                        <i class="fas fa-users"></i>
+                    </div>
+                    <div class="logo-text">
+                        <h1>Братья</h1>
+                        <p class="logo-subtitle">TTFBB COMPANY</p>
                     </div>
                 </a>
 
-                <!-- Кнопка мобильного меню -->
-                <button class="mobile-menu-btn" id="mobileMenuBtn" aria-label="Открыть меню">
+                <button class="mobile-menu-btn" id="mobileMenuBtn" aria-label="Меню">
                     <span class="menu-line"></span>
                     <span class="menu-line"></span>
                     <span class="menu-line"></span>
                 </button>
 
-                <!-- Оверлей для мобильного меню -->
                 <div class="mobile-menu-overlay" id="mobileMenuOverlay"></div>
 
-                <!-- Навигация -->
                 <nav class="main-nav" id="mainNav">
                     <ul class="nav-list">
-                        <li class="nav-item">
-                            <a href="newswire.html" class="nav-link">
-                                <i class="fas fa-newspaper nav-icon"></i>
-                                <span class="nav-text">Новостная лента</span>
-                            </a>
-                        </li>
-                        <li class="nav-item">
-                            <a href="videos.html" class="nav-link">
-                                <i class="fas fa-play-circle nav-icon"></i>
-                                <span class="nav-text">Видеоролики</span>
-                            </a>
-                        </li>
-                       <li class="nav-item">
-                            <a href="schedule.html" class="nav-link">
-                                <i class="fas fa-calendar-alt nav-icon"></i>
-                                <span class="nav-text">Расписание</span>
-                            </a>
-                        </li>
-                        <li class="nav-item">
-                            <a href="character.html" class="nav-link">
-                                <i class="fa-solid fa-user nav-icon"></i>
-                                <span class="nav-text">Профиль</span>
-                            </a>
-                        </li>
+                        <li><a href="newswire.html" class="nav-link"><i class="fas fa-newspaper nav-icon"></i> Новостная лента</a></li>
+                        <li><a href="videos.html" class="nav-link active"><i class="fas fa-play-circle nav-icon"></i> Видеоролики</a></li>
+                        <li><a href="schedule.html" class="nav-link"><i class="fas fa-calendar-alt nav-icon"></i> Расписание</a></li>
+                        <li><a href="character.html" class="nav-link"><i class="fas fa-user nav-icon"></i> Профиль</a></li>
                     </ul>
                 </nav>
             </div>
         </div>
     </header>
 
-     <script>
-        // DOM элементы
-        const header = document.getElementById('header');
-        const mobileMenuBtn = document.getElementById('mobileMenuBtn');
-        const mainNav = document.getElementById('mainNav');
-        const mobileMenuOverlay = document.getElementById('mobileMenuOverlay');
-        const navLinks = document.querySelectorAll('.nav-link');
-
-        // Переменные для скролла
-        let lastScrollTop = 0;
-        const scrollThreshold = 100;
-
-        // Функция для скрытия/показа навбара при скролле
-        function handleScroll() {
-            const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
-            
-            if (scrollTop > scrollThreshold) {
-                // Прокрутка вниз
-                if (scrollTop > lastScrollTop && !mainNav.classList.contains('active')) {
-                    header.classList.add('header-hidden');
-                } 
-                // Прокрутка вверх
-                else if (scrollTop < lastScrollTop) {
-                    header.classList.remove('header-hidden');
-                }
-            } else {
-                // Вверху страницы
-                header.classList.remove('header-hidden');
-            }
-            
-            lastScrollTop = scrollTop;
-        }
-
-        // Функция для открытия/закрытия мобильного меню
-        function toggleMobileMenu() {
-            const isActive = mainNav.classList.contains('active');
-            
-            if (isActive) {
-                closeMobileMenu();
-            } else {
-                openMobileMenu();
-            }
-        }
-
-        function openMobileMenu() {
-            mainNav.classList.add('active');
-            mobileMenuBtn.classList.add('active');
-            mobileMenuOverlay.classList.add('active');
-            document.body.style.overflow = 'hidden'; // Блокируем скролл на body
-        }
-
-        function closeMobileMenu() {
-            mainNav.classList.remove('active');
-            mobileMenuBtn.classList.remove('active');
-            mobileMenuOverlay.classList.remove('active');
-            document.body.style.overflow = ''; // Разблокируем скролл
-        }
-
-        // Обработчики событий
-        window.addEventListener('scroll', handleScroll, { passive: true });
-
-        mobileMenuBtn.addEventListener('click', toggleMobileMenu);
-        mobileMenuOverlay.addEventListener('click', closeMobileMenu);
-
-        // Закрытие меню при клике на ссылку
-        navLinks.forEach(link => {
-            link.addEventListener('click', () => {
-                if (window.innerWidth <= 768) {
-                    closeMobileMenu();
-                }
-            });
-        });
-
-        // Закрытие меню при изменении размера окна
-        window.addEventListener('resize', () => {
-            if (window.innerWidth > 768 && mainNav.classList.contains('active')) {
-                closeMobileMenu();
-            }
-        });
-
-        // Предотвращаем скролл под меню на мобильных устройствах
-        document.addEventListener('touchmove', function(e) {
-            if (mainNav.classList.contains('active')) {
-                e.preventDefault();
-            }
-        }, { passive: false });
-
-        // Инициализация
-        document.addEventListener('DOMContentLoaded', () => {
-            // Проверяем ширину экрана при загрузке
-            if (window.innerWidth <= 768) {
-                header.classList.remove('header-hidden');
-            }
-        });
-    </script>
-
-    <!-- Основной контент -->
+    <!-- ===== ОСНОВНОЙ КОНТЕНТ ===== -->
     <main class="videos-page">
         <div class="container">
-            <a href="index.html" class="back-button">
-                <i class="fas fa-arrow-left"></i>
-                <span>Вернуться на главную</span>
-            </a>
-            
+
             <div class="videos-header">
                 <h1>Видеоролики</h1>
                 <p>Все видео с канала в одном месте. Смотрите прямые эфиры, игровые стримы и интересные моменты из жизни братьев.</p>
             </div>
-            
-            <!-- Блок с видео за месяц -->
+
+            <!-- Блок за месяц -->
             <section class="monthly-videos-section">
                 <div class="section-header">
-                    <h2><i class="fas fa-calendar-star"></i> Видео за этот месяц</h2>
-                    <p class="section-subtitle">Самые свежие записи с канала</p>
+                    <div>
+                        <h2><i class="fas fa-calendar-star"></i> Видео за этот месяц</h2>
+                        <p class="section-subtitle">Самые свежие записи с канала</p>
+                    </div>
                 </div>
-                
-                <div class="monthly-videos-container" id="monthlyVideosContainer">
-                    <!-- Видео за месяц будут вставлены с помощью JavaScript -->
-                </div>
-                
+
+                <div class="monthly-videos-container" id="monthlyVideosContainer"></div>
+
                 <div class="month-stats">
                     <div class="stat-item">
-                        <div class="stat-icon">
-                            <i class="fas fa-play-circle"></i>
-                        </div>
+                        <div class="stat-icon"><i class="fas fa-play-circle"></i></div>
                         <div class="stat-content">
                             <h3 id="monthVideoCount">0</h3>
                             <p>Видео в этом месяце</p>
                         </div>
                     </div>
                     <div class="stat-item">
-                        <div class="stat-icon">
-                            <i class="fas fa-clock"></i>
-                        </div>
+                        <div class="stat-icon"><i class="fas fa-clock"></i></div>
                         <div class="stat-content">
                             <h3 id="monthHoursCount">0</h3>
                             <p>Часов контента</p>
                         </div>
                     </div>
                     <div class="stat-item">
-                        <div class="stat-icon">
-                            <i class="fas fa-fire"></i>
-                        </div>
+                        <div class="stat-icon"><i class="fas fa-fire"></i></div>
                         <div class="stat-content">
-                            <h3>Декабрь, 2025</h3>
+                            <h3>Июль, 2026</h3>
                             <p>Текущий месяц</p>
                         </div>
                     </div>
                 </div>
             </section>
-            
-            <!-- Все видеоролики -->
+
+            <!-- Все видео -->
             <section class="all-videos-section">
                 <div class="section-header">
                     <h2><i class="fas fa-video"></i> Все видеоролики</h2>
@@ -257,70 +108,66 @@
                         <button class="filter-btn" data-filter="other">Другие</button>
                     </div>
                 </div>
-                
-                <div class="videos-container" id="videosContainer">
-                    <!-- Все видео будут вставлены с помощью JavaScript -->
-                </div>
+
+                <div class="videos-container" id="videosContainer"></div>
             </section>
+
         </div>
     </main>
 
-<!-- Footer -->
+    <!-- ===== МОДАЛЬНОЕ ОКНО ===== -->
+    <div class="youtube-modal" id="youtubeModal">
+        <div class="youtube-container">
+            <iframe class="youtube-iframe" id="youtubeIframe" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+            <button class="youtube-close" id="youtubeClose"><i class="fas fa-times"></i></button>
+            <div class="youtube-title" id="youtubeTitle"></div>
+        </div>
+    </div>
+
+    <!-- ===== FOOTER ===== -->
     <footer id="footer">
         <div class="container">
             <div class="footer-content">
-                <div class="footer-main">
-                    <div class="footer-logo">
-                        <i class="fas fa-users logo-icon"></i>
-                        <div>
-                            <h3>TTFBB COMPANY</h3>
-                            <p>Два брата и одна девочка в увлекательных приключениях</p>
-                        </div>
-                    </div>
-                    <div class="footer-social">
-                        <a href="https://www.youtube.com/@n1kolayrasetovich" target="_blank" class="social-link youtube"
-                            aria-label="YouTube">
-                            <i class="fab fa-youtube"></i>
-                        </a>
-                        <a href="https://t.me/nesoqiton" target="_blank" class="social-link telegram"
-                            aria-label="Telegram">
-                            <i class="fab fa-telegram"></i>
-                        </a>
-                        <a href="#" class="social-link instagram" aria-label="Instagram">
-                            <i class="fab fa-instagram"></i>
-                        </a>
+                <div class="footer-logo">
+                    <div class="logo-icon"><i class="fas fa-users"></i></div>
+                    <div>
+                        <h3>TTFBB COMPANY</h3>
+                        <p>Два брата и одна девочка в увлекательных приключениях</p>
                     </div>
                 </div>
-                <div class="footer-links">
-                    <div class="footer-column">
-                        <h4>Разделы</h4>
-                        <ul>
-                            <li><a href="newswire.html">Новостная лента</a></li>
-                            <li><a href="videos.html">Видеоролики</a></li>
-                            <li><a href="schedule.html">Расписание</a></li>
-                            <li><a href="index.html#footer">Контакты</a></li>
-                            <li><a href="#">Архив</a></li>
-                        </ul>
-                    </div>
-                    <div class="footer-column">
-                        <h4>Контакты</h4>
-                        <ul>
-                            <li><i class="fas fa-user"></i> Никита: +375 (29) 959-00-97</li>
-                            <li><i class="fas fa-user"></i> Евгений: +375 (29) 870-23-67</li>
-                            <li><i class="fas fa-user"></i> Ольга: +375 (25) 729-54-17</li>
-                        </ul>
-                    </div>
-                    <div class="footer-column">
-                        <h4>Telegram</h4>
-                        <ul>
-                            <li><a href="https://t.me/nesoqiton" target="_blank">@nesoqiton (Никита)</a></li>
-                            <li><a href="https://t.me/Legendary_7681" target="_blank">@Legendary_7681 (Евгений)</a></li>
-                            <li><a href="https://t.me/thanoslegenda1239" target="_blank">@thanoslegenda1239 (Ольга)</a>
-                            </li>
-                        </ul>
-                    </div>
+                <div class="footer-social">
+                    <a href="https://www.youtube.com/@n1kolayrl" target="_blank" class="social-link"><i class="fab fa-youtube"></i></a>
+                    <a href="https://t.me/nesoqiton" target="_blank" class="social-link"><i class="fab fa-telegram"></i></a>
+                    <a href="#" class="social-link"><i class="fab fa-instagram"></i></a>
                 </div>
             </div>
+
+            <div class="footer-links">
+                <div class="footer-column">
+                    <h4>Разделы</h4>
+                    <ul>
+                        <li><a href="newswire.html">Новостная лента</a></li>
+                        <li><a href="videos.html">Видеоролики</a></li>
+                        <li><a href="schedule.html">Расписание</a></li>
+                        <li><a href="index.html#footer">Контакты</a></li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h4>Контакты</h4>
+                    <ul>
+                        <li><i class="fas fa-user"></i> Никита: +375 (29) 959-00-97</li>
+                        <li><i class="fas fa-user"></i> Евгений: +375 (25) 791-40-26</li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h4>Telegram</h4>
+                    <ul>
+                        <li><a href="https://t.me/nesoqiton" target="_blank">@nesoqiton (Никита)</a></li>
+                        <li><a href="https://t.me/" target="_blank">Nickname not find (Евгений)</a></li>
+                    </ul>
+                </div>
+            </div>
+
             <div class="footer-bottom">
                 <p>&copy; 2025-2026 • TTFBB COMPANY. Все права защищены.</p>
                 <div class="footer-links-bottom">
@@ -331,454 +178,147 @@
         </div>
     </footer>
 
-    <!-- Загружаем YouTube API -->
-    <script src="https://www.youtube.com/iframe_api"></script>
-
     <script>
-        // Данные видео
+        // ===== ДАННЫЕ ВИДЕО =====
         const videos = [
-            {
-                id: "2eWAaH099-k",
-                title: "💣 АТМОСФЕРНОЕ ДАВЛЕНИЕ 😵‍💫",
-                description: "Игры и больше ничего",
-                duration: "1:09:42",
-                date: "25.12.2025",
-                type: "other"
-            },
-            {
-                id: "UaK-sxdgCSs",
-                title: "🛜 ОНЛАЙН ИГРЫ 🎮",
-                description: "Игры и больше ничего",
-                duration: "2:57:52",
-                date: "24.12.2025",
-                type: "other"
-            },
-            {
-                id: "6C8aI3ujAIc",
-                title: "☁️ ПАСМУРНЫЕ ВЫХОДНЫЕ 🔥 КАЙФУЕМ В ИГРУЛЬКАХ 🕹️",
-                description: "Игры и больше ничего",
-                duration: "1:59:38",
-                date: "21.12.2025",
-                type: "other"
-            },
-            {
-                id: "fB-CkOhtxy8",
-                title: "❄️ ТРЭШ УЖЕ ТУТ 😱",
-                description: "Игры и больше ничего",
-                duration: "2:15:30",
-                date: "09.12.2025",
-                type: "other"
-            },
-            {
-                id: "Ahn5xz1vTBM",
-                title: "❄️ НЕЖНАЯ ЗИМА | ТРЭШ УЖЕ ТУТ 😱",
-                description: "Игры и больше ничего",
-                duration: "1:45:22",
-                date: "08.12.2025",
-                type: "other"
-            },
-            {
-                id: "c3H3r-eo6K4",
-                title: "❄️ ЗИМА БЕЗ СНЕГА | ТРЭШ УЖЕ ТУТ 😱",
-                description: "Игры и больше ничего",
-                duration: "1:58:14",
-                date: "07.12.2025",
-                type: "other"
-            },
-            {
-                id: "xFYtOOevaFE",
-                title: "🤬КАКОЙ-ТО ТРЭШ",
-                description: "Обычные домашние посиделки",
-                duration: "2:30:45",
-                date: "27.11.2025",
-                type: "irl"
-            },
-            {
-                id: "ElbvvTuTJ9k",
-                title: "💦 ЧТО ТУТ ПРОИСХОДИТ?",
-                description: "Просто всё и всё",
-                duration: "1:55:20",
-                date: "25.11.2025",
-                type: "irl"
-            },
-            {
-                id: "PboKwiqDOww",
-                title: "🏚️ ДОМАШНИЙ АРЕСТ",
-                description: "Домашние посиделки с играми, разговорами и теплой атмосферой.",
-                duration: "2:15:18",
-                date: "23.11.2025",
-                type: "irl"
-            },
-            {
-                id: "kFOmLrHup2Y",
-                title: "НАВОДИМ СУЕТУ в МАЙНКРАФТЕ",
-                description: "Игры и больше ничего",
-                duration: "3:10:45",
-                date: "11.11.2025",
-                type: "minecraft"
-            },
-            {
-                id: "6d-OCpKGNaE",
-                title: "🔫 КООПЕРАТИВ на МАКСИМАЛКАХ",
-                description: "Самый прикольный стрим за всё время",
-                duration: "2:45:30",
-                date: "08.11.2025",
-                type: "irl"
-            },
-            {
-                id: "-NFFd2d17Y8",
-                title: "АМОНГУС ++",
-                description: "Игры и больше ничего",
-                duration: "2:20:15",
-                date: "06.11.2025",
-                type: "amongus"
-            },
-            {
-                id: "jNA4AcHjL4E",
-                title: "🪱 МАЙНПУКТ И ДРУГОЕ...",
-                description: "Игры и больше ничего",
-                duration: "2:05:40",
-                date: "06.11.2025",
-                type: "minecraft"
-            },
-            {
-                id: "sohcPSnrv24",
-                title: "MINECRAT OLYA",
-                description: "Игры и больше ничего",
-                duration: "1:50:25",
-                date: "02.11.2025",
-                type: "minecraft"
-            },
-            {
-                id: "R292HOs1kGs",
-                title: "🌍 МАЙНСРУФТ + СРУМОГУС",
-                description: "Игры и больше ничего",
-                duration: "2:30:10",
-                date: "01.11.2025",
-                type: "minecraft"
-            },
-            {
-                id: "o-hrzNuy4-Y",
-                title: "🤥 АМАНАЛ АС",
-                description: "Игры и больше ничего",
-                duration: "2:15:55",
-                date: "29.10.2025",
-                type: "amongus"
-            },
-            {
-                id: "avLUYnuH4ko",
-                title: "🌿ВСЁ КРОМЕ MINECRAFT",
-                description: "Игры и больше ничего",
-                duration: "2:40:30",
-                date: "28.10.2025",
-                type: "other"
-            },
-            {
-                id: "lnnLftsmHCw",
-                title: "🥷 ARIZONA GAMES + AMONG US",
-                description: "Игры и больше ничего",
-                duration: "2:25:45",
-                date: "26.10.2025",
-                type: "amongus"
-            },
-            {
-                id: "dE8om75g0EE",
-                title: "🏡 ДОМАШНИЕ И УЛИЧНЫЕ ПРИКЛЮЧЕНИЯ",
-                description: "Сидим дома и гуляем на улице ",
-                duration: "3:05:20",
-                date: "26.10.2025",
-                type: "irl"
-            },
-            {
-                id: "7Y2na4Bf-Xc",
-                title: "🐺 НОЧНЫЕ ПРИКЛЮЧЕНИЯ 9 | ФИНАЛ?",
-                description: "Просто финальная часть просто сон и всё",
-                duration: "2:50:15",
-                date: "25-26.10.2025",
-                type: "irl"
-            },
-            {
-                id: "4LxNZsgnpbg",
-                title: "🫨 ПИЗ*EЦ в ПРЯМОМ ЭФИРЕ",
-                description: "Прикольные посиделки, а также улица",
-                duration: "2:15:40",
-                date: "25.10.2025",
-                type: "irl"
-            },
-            {
-                id: "YKO9QgoJB-A",
-                title: "🌙 НОЧНЫЕ ПРИКЛЮЧЕНИЯ 8",
-                description: "Просто сон и всё",
-                duration: "2:35:50",
-                date: "24-25.10.2025",
-                type: "irl"
-            },
-            {
-                id: "9z7zo0KFOv8",
-                title: "🥳 АМОГУС и ТОЧКА",
-                description: "Игры и больше ничего",
-                duration: "2:10:25",
-                date: "24.10.2025",
-                type: "amongus"
-            },
-            {
-                id: "VMopJ3YB5DA",
-                title: "😎 СУЭТА НА СУЭТЭ и ВСЁ на ARIZONA",
-                description: "Игры и больше ничего",
-                duration: "2:40:15",
-                date: "23.10.2025",
-                type: "amongus"
-            },
-            {
-                id: "qeRpk1kOTYU",
-                title: "🌳 СУЕТА В MINECRAFT + ☠️ АМОГУС",
-                description: "Игры и больше ничего",
-                duration: "2:55:30",
-                date: "22.10.2025",
-                type: "minecraft"
-            },
-            {
-                id: "8yPT2taF5xg",
-                title: "💥АМОГУС В ЭФИРЕ",
-                description: "Игры и больше ничего",
-                duration: "2:25:40",
-                date: "21.10.2025",
-                type: "amongus"
-            },
-            {
-                id: "33RHdlsNgw8",
-                title: "НОЧНЫЕ ПРИКЛЮЧЕНИЯ 7",
-                description: "Просто сон и всё",
-                duration: "2:45:20",
-                date: "18.10.2025",
-                type: "irl"
-            },
-            {
-                id: "hiTdPkmw4L0",
-                title: "СУЕТАЛОГИЯ В ГОРОДЕ",
-                description: "Гуляем в городе, а также парк атракционов",
-                duration: "3:15:45",
-                date: "18.10.2025",
-                type: "irl"
-            },
-            {
-                id: "f28EpJgVHSg",
-                title: "НОЧНЫЕ ПРИКЛЮЧЕНИЯ 6",
-                description: "Просто сон и всё",
-                duration: "2:35:50",
-                date: "17.10.2025",
-                type: "irl"
-            },
-            {
-                id: "yulH8RUATuo",
-                title: "НАВОДИМ СУЕТУ НА ВОКЗАЛЕ",
-                description: "Гуляем на вокзале и едем в маршрутке",
-                duration: "2:50:10",
-                date: "17.10.2025",
-                type: "irl"
-            },
-            {
-                id: "4Tc_YYMKZvM",
-                title: "НАВОДИМ СУЕТУ НА РАЙОНЕ",
-                description: "Гуляем на улице",
-                duration: "3:05:25",
-                date: "12.10.2025",
-                type: "irl"
-            },
-            {
-                id: "QTLXGKIeWTE",
-                title: "НАВОДИМ СУЕТУ НА РАЙОНЕ",
-                description: "Гуляем на улице",
-                duration: "2:55:40",
-                date: "12.10.2025",
-                type: "irl"
-            },
-            {
-                id: "ogIYZkc2IbE",
-                title: "НОЧНЫЕ ПРИКЛЮЧЕНИЯ 5",
-                description: "Просто сон и всё",
-                duration: "2:40:15",
-                date: "12.10.2025",
-                type: "irl"
-            },
-            {
-                id: "ZYGvd2DPi7k",
-                title: "НАВОДИМ СУЕТОЛОГИЮ",
-                description: "Гуляем на улице",
-                duration: "2:30:50",
-                date: "11.10.2025",
-                type: "irl"
-            },
-            {
-                id: "fWMkiAlPJNE",
-                title: "СУЕТА УЖЕ СЕЙЧАС",
-                description: "Гуляем на улице",
-                duration: "2:20:35",
-                date: "11.10.2025",
-                type: "irl"
-            },
-            {
-                id: "HW0nLvyGQpQ",
-                title: "НАВОДИМ СУЕТУ + НОЧНЫЕ ПРИКЛЮЧЕНИЯ 4",
-                description: "Гуляем на улице + сон и всё",
-                duration: "3:25:40",
-                date: "09.10.2025",
-                type: "irl"
-            },
-            {
-                id: "DEOTRqq8AOU",
-                title: "НАВОДИМ СУЕТУ + НОЧНЫЕ ПРИКЛЮЧЕНИЯ 3",
-                description: "Гуляем на улице + сон и всё",
-                duration: "3:15:30",
-                date: "08.10.2025",
-                type: "irl"
-            },
-            {
-                id: "5kfIrnccag8",
-                title: "СОН УВАЖАЕМОГО",
-                description: "Просто сон и всё",
-                duration: "4:10:25",
-                date: "07.10.2025",
-                type: "irl"
-            },
-            {
-                id: "c2X1Y_doIz8",
-                title: "СОН НИКИТОСИКА 👋",
-                description: "Просто сон и всё",
-                duration: "3:45:50",
-                date: "06.10.2025",
-                type: "irl"
-            }
+            { id: "BJIwEr1MoVI", title: "☠️ БЕЗ СМЕРТЕЙ и ПРОВАЛОВ GTA 3 + ДРУГИЕ ИГРЫ", description: "Прохождение GTA 3 и BRAWL STARS", duration: "2:00:44", date: "08.07.2026", type: "other" },
+            { id: "E6WyHm6E74Q", title: "😎 ВОЗВРАЩЕНИЕ 2026! ПРЕКРАСНЫЕ ВЫХОДНЫЕ ☀️ СТАРЫЕ и ЛЕТНИЕ ДЕЛА 🏝️", description: "Возвращение легендарных долбабобов", duration: "17:01", date: "26.06.2026", type: "irl" },
+            { id: "2eWAaH099-k", title: "💣 АТМОСФЕРНОЕ ДАВЛЕНИЕ 😵‍💫", description: "Игры и больше ничего", duration: "1:09:42", date: "25.12.2025", type: "other" },
+            { id: "UaK-sxdgCSs", title: "🛜 ОНЛАЙН ИГРЫ 🎮", description: "Игры и больше ничего", duration: "2:57:52", date: "24.12.2025", type: "other" },
+            { id: "6C8aI3ujAIc", title: "☁️ ПАСМУРНЫЕ ВЫХОДНЫЕ 🔥 КАЙФУЕМ В ИГРУЛЬКАХ 🕹️", description: "Игры и больше ничего", duration: "1:59:38", date: "21.12.2025", type: "other" },
+            { id: "fB-CkOhtxy8", title: "❄️ ТРЭШ УЖЕ ТУТ 😱", description: "Игры и больше ничего", duration: "2:15:30", date: "09.12.2025", type: "other" },
+            { id: "Ahn5xz1vTBM", title: "❄️ НЕЖНАЯ ЗИМА | ТРЭШ УЖЕ ТУТ 😱", description: "Игры и больше ничего", duration: "1:45:22", date: "08.12.2025", type: "other" },
+            { id: "c3H3r-eo6K4", title: "❄️ ЗИМА БЕЗ СНЕГА | ТРЭШ УЖЕ ТУТ 😱", description: "Игры и больше ничего", duration: "1:58:14", date: "07.12.2025", type: "other" },
+            { id: "xFYtOOevaFE", title: "🤬КАКОЙ-ТО ТРЭШ", description: "Обычные домашние посиделки", duration: "2:30:45", date: "27.11.2025", type: "irl" },
+            { id: "ElbvvTuTJ9k", title: "💦 ЧТО ТУТ ПРОИСХОДИТ?", description: "Просто всё и всё", duration: "1:55:20", date: "25.11.2025", type: "irl" },
+            { id: "PboKwiqDOww", title: "🏚️ ДОМАШНИЙ АРЕСТ", description: "Домашние посиделки с играми, разговорами и теплой атмосферой.", duration: "2:15:18", date: "23.11.2025", type: "irl" },
+            { id: "kFOmLrHup2Y", title: "НАВОДИМ СУЕТУ в МАЙНКРАФТЕ", description: "Игры и больше ничего", duration: "3:10:45", date: "11.11.2025", type: "minecraft" },
+            { id: "6d-OCpKGNaE", title: "🔫 КООПЕРАТИВ на МАКСИМАЛКАХ", description: "Самый прикольный стрим за всё время", duration: "2:45:30", date: "08.11.2025", type: "irl" },
+            { id: "-NFFd2d17Y8", title: "АМОНГУС ++", description: "Игры и больше ничего", duration: "2:20:15", date: "06.11.2025", type: "amongus" },
+            { id: "jNA4AcHjL4E", title: "🪱 МАЙНПУКТ И ДРУГОЕ...", description: "Игры и больше ничего", duration: "2:05:40", date: "06.11.2025", type: "minecraft" },
+            { id: "sohcPSnrv24", title: "MINECRAT OLYA", description: "Игры и больше ничего", duration: "1:50:25", date: "02.11.2025", type: "minecraft" },
+            { id: "R292HOs1kGs", title: "🌍 МАЙНСРУФТ + СРУМОГУС", description: "Игры и больше ничего", duration: "2:30:10", date: "01.11.2025", type: "minecraft" },
+            { id: "o-hrzNuy4-Y", title: "🤥 АМАНАЛ АС", description: "Игры и больше ничего", duration: "2:15:55", date: "29.10.2025", type: "amongus" },
+            { id: "avLUYnuH4ko", title: "🌿ВСЁ КРОМЕ MINECRAFT", description: "Игры и больше ничего", duration: "2:40:30", date: "28.10.2025", type: "other" },
+            { id: "lnnLftsmHCw", title: "🥷 ARIZONA GAMES + AMONG US", description: "Игры и больше ничего", duration: "2:25:45", date: "26.10.2025", type: "amongus" },
+            { id: "dE8om75g0EE", title: "🏡 ДОМАШНИЕ И УЛИЧНЫЕ ПРИКЛЮЧЕНИЯ", description: "Сидим дома и гуляем на улице", duration: "3:05:20", date: "26.10.2025", type: "irl" },
+            { id: "7Y2na4Bf-Xc", title: "🐺 НОЧНЫЕ ПРИКЛЮЧЕНИЯ 9 | ФИНАЛ?", description: "Просто финальная часть просто сон и всё", duration: "2:50:15", date: "25-26.10.2025", type: "irl" },
+            { id: "4LxNZsgnpbg", title: "🫨 ПИЗ*EЦ в ПРЯМОМ ЭФИРЕ", description: "Прикольные посиделки, а также улица", duration: "2:15:40", date: "25.10.2025", type: "irl" },
+            { id: "YKO9QgoJB-A", title: "🌙 НОЧНЫЕ ПРИКЛЮЧЕНИЯ 8", description: "Просто сон и всё", duration: "2:35:50", date: "24-25.10.2025", type: "irl" },
+            { id: "9z7zo0KFOv8", title: "🥳 АМОГУС и ТОЧКА", description: "Игры и больше ничего", duration: "2:10:25", date: "24.10.2025", type: "amongus" },
+            { id: "VMopJ3YB5DA", title: "😎 СУЭТА НА СУЭТЭ и ВСЁ на ARIZONA", description: "Игры и больше ничего", duration: "2:40:15", date: "23.10.2025", type: "amongus" },
+            { id: "qeRpk1kOTYU", title: "🌳 СУЕТА В MINECRAFT + ☠️ АМОГУС", description: "Игры и больше ничего", duration: "2:55:30", date: "22.10.2025", type: "minecraft" },
+            { id: "8yPT2taF5xg", title: "💥АМОГУС В ЭФИРЕ", description: "Игры и больше ничего", duration: "2:25:40", date: "21.10.2025", type: "amongus" },
+            { id: "33RHdlsNgw8", title: "НОЧНЫЕ ПРИКЛЮЧЕНИЯ 7", description: "Просто сон и всё", duration: "2:45:20", date: "18.10.2025", type: "irl" },
+            { id: "hiTdPkmw4L0", title: "СУЕТАЛОГИЯ В ГОРОДЕ", description: "Гуляем в городе, а также парк атракционов", duration: "3:15:45", date: "18.10.2025", type: "irl" },
+            { id: "f28EpJgVHSg", title: "НОЧНЫЕ ПРИКЛЮЧЕНИЯ 6", description: "Просто сон и всё", duration: "2:35:50", date: "17.10.2025", type: "irl" },
+            { id: "yulH8RUATuo", title: "НАВОДИМ СУЕТУ НА ВОКЗАЛЕ", description: "Гуляем на вокзале и едем в маршрутке", duration: "2:50:10", date: "17.10.2025", type: "irl" },
+            { id: "4Tc_YYMKZvM", title: "НАВОДИМ СУЕТУ НА РАЙОНЕ", description: "Гуляем на улице", duration: "3:05:25", date: "12.10.2025", type: "irl" },
+            { id: "QTLXGKIeWTE", title: "НАВОДИМ СУЕТУ НА РАЙОНЕ", description: "Гуляем на улице", duration: "2:55:40", date: "12.10.2025", type: "irl" },
+            { id: "ogIYZkc2IbE", title: "НОЧНЫЕ ПРИКЛЮЧЕНИЯ 5", description: "Просто сон и всё", duration: "2:40:15", date: "12.10.2025", type: "irl" },
+            { id: "ZYGvd2DPi7k", title: "НАВОДИМ СУЕТОЛОГИЮ", description: "Гуляем на улице", duration: "2:30:50", date: "11.10.2025", type: "irl" },
+            { id: "fWMkiAlPJNE", title: "СУЕТА УЖЕ СЕЙЧАС", description: "Гуляем на улице", duration: "2:20:35", date: "11.10.2025", type: "irl" },
+            { id: "HW0nLvyGQpQ", title: "НАВОДИМ СУЕТУ + НОЧНЫЕ ПРИКЛЮЧЕНИЯ 4", description: "Гуляем на улице + сон и всё", duration: "3:25:40", date: "09.10.2025", type: "irl" },
+            { id: "DEOTRqq8AOU", title: "НАВОДИМ СУЕТУ + НОЧНЫЕ ПРИКЛЮЧЕНИЯ 3", description: "Гуляем на улице + сон и всё", duration: "3:15:30", date: "08.10.2025", type: "irl" },
+            { id: "5kfIrnccag8", title: "СОН УВАЖАЕМОГО", description: "Просто сон и всё", duration: "4:10:25", date: "07.10.2025", type: "irl" },
+            { id: "c2X1Y_doIz8", title: "СОН НИКИТОСИКА 👋", description: "Просто сон и всё", duration: "3:45:50", date: "06.10.2025", type: "irl" }
         ];
 
-        // DOM элементы
-        const videosContainer = document.getElementById('videosContainer');
-        const monthlyVideosContainer = document.getElementById('monthlyVideosContainer');
-        const youtubeModal = document.getElementById('youtubeModal');
-        const youtubeIframe = document.getElementById('youtubeIframe');
-        const youtubeClose = document.getElementById('youtubeClose');
-        const youtubeTitle = document.getElementById('youtubeTitle');
-        const monthVideoCount = document.getElementById('monthVideoCount');
-        const monthHoursCount = document.getElementById('monthHoursCount');
-
-        // Функция для получения видео за текущий месяц
+        // ===== ВСПОМОГАТЕЛЬНЫЕ ФУНКЦИИ =====
         function getCurrentMonthVideos() {
-            const currentDate = new Date();
-            const currentYear = currentDate.getFullYear();
-            const currentMonth = currentDate.getMonth() + 1; // Январь = 1
-            
-            return videos.filter(video => {
-                const videoDate = video.date.split('.');
-                const videoYear = parseInt(videoDate[2] || videoDate[2]);
-                const videoMonth = parseInt(videoDate[1]);
-                
-                return videoYear === currentYear && videoMonth === currentMonth;
+            const now = new Date();
+            const year = now.getFullYear();
+            const month = now.getMonth() + 1;
+            return videos.filter(v => {
+                const parts = v.date.split('.');
+                return parseInt(parts[2]) === year && parseInt(parts[1]) === month;
             });
         }
 
-        // Функция для расчета общего количества часов видео
-        function calculateTotalHours(videosArray) {
-            let totalMinutes = 0;
-            
-            videosArray.forEach(video => {
-                const timeParts = video.duration.split(':');
-                if (timeParts.length === 3) {
-                    // Формат ЧЧ:ММ:СС
-                    totalMinutes += parseInt(timeParts[0]) * 60 + parseInt(timeParts[1]);
-                } else if (timeParts.length === 2) {
-                    // Формат ММ:СС
-                    totalMinutes += parseInt(timeParts[0]);
-                }
+        function calculateTotalHours(arr) {
+            let totalMin = 0;
+            arr.forEach(v => {
+                const parts = v.duration.split(':');
+                if (parts.length === 3) totalMin += parseInt(parts[0]) * 60 + parseInt(parts[1]);
+                else if (parts.length === 2) totalMin += parseInt(parts[0]);
             });
-            
-            const hours = Math.floor(totalMinutes / 60);
-            const minutes = totalMinutes % 60;
-            
-            return { hours, minutes, totalMinutes };
+            return Math.floor(totalMin / 60);
         }
 
-        // Функция для отображения статистики месяца
-        function displayMonthStats() {
-            const monthlyVideos = getCurrentMonthVideos();
-            const stats = calculateTotalHours(monthlyVideos);
-            
-            monthVideoCount.textContent = `${monthlyVideos.length}`;
-            monthHoursCount.textContent = `${stats.hours}+`;
+        function getCategoryIcon(type) {
+            const map = {
+                'irl': 'fa-home',
+                'minecraft': 'fa-cube',
+                'amongus': 'fa-user-secret',
+                'other': 'fa-gamepad'
+            };
+            return map[type] || 'fa-video';
         }
 
-        // Функция для отображения видео за месяц
-        function displayMonthlyVideos() {
-            const monthlyVideos = getCurrentMonthVideos();
-            
-            if (monthlyVideos.length === 0) {
-                monthlyVideosContainer.innerHTML = `
+        function getThumbnail(id) {
+            return `https://img.youtube.com/vi/${id}/maxresdefault.jpg`;
+        }
+
+        function getFallbackThumbnail(id) {
+            return `https://img.youtube.com/vi/${id}/hqdefault.jpg`;
+        }
+
+        // ===== ОТОБРАЖЕНИЕ ВИДЕО ЗА МЕСЯЦ =====
+        function renderMonthlyVideos() {
+            const container = document.getElementById('monthlyVideosContainer');
+            const monthVideos = getCurrentMonthVideos();
+
+            if (!monthVideos.length) {
+                container.innerHTML = `
                     <div class="no-videos-message">
                         <i class="fas fa-video-slash"></i>
-                        <h3>В этом месяце еще нет видео</h3>
+                        <h3>В этом месяце ещё нет видео</h3>
                         <p>Скоро появятся новые записи!</p>
                     </div>
                 `;
                 return;
             }
-            
-            monthlyVideosContainer.innerHTML = '';
-            
-            // Ограничиваем показ 4 видео для блока
-            const videosToShow = monthlyVideos.slice(0, 4);
-            
-            videosToShow.forEach((video, index) => {
-                const videoElement = document.createElement('div');
-                videoElement.className = 'monthly-video-item video-item';
-                if (index === 0) {
-                    videoElement.classList.add('highlighted');
-                }
-                videoElement.setAttribute('data-video-id', video.id);
-                
-                const thumbnailUrl = `https://img.youtube.com/vi/${video.id}/maxresdefault.jpg`;
-                const fallbackThumbnail = `https://img.youtube.com/vi/${video.id}/hqdefault.jpg`;
-                
-                videoElement.innerHTML = `
+
+            const toShow = monthVideos.slice(0, 4);
+            container.innerHTML = toShow.map((v, i) => `
+                <div class="monthly-video-item ${i === 0 ? 'highlighted' : ''}" data-id="${v.id}">
                     <div class="video-thumbnail-container">
-                        <img src="${thumbnailUrl}" 
-                             alt="${video.title}" 
-                             class="video-thumbnail"
-                             onerror="this.src='${fallbackThumbnail}'">
-                        <div class="video-play-overlay">
-                            <div class="play-icon">
-                                <i class="fas fa-play"></i>
-                            </div>
-                        </div>
-                        <div class="video-duration">${video.duration}</div>
-                        ${index === 0 ? '<div class="featured-badge">Новое</div>' : ''}
+                        <img class="video-thumbnail" src="${getThumbnail(v.id)}" alt="${v.title}" loading="lazy" onerror="this.src='${getFallbackThumbnail(v.id)}'">
+                        ${i === 0 ? '<span class="featured-badge">Новое</span>' : ''}
+                        <span class="video-duration">${v.duration}</span>
                     </div>
                     <div class="video-info">
-                        <h3>${video.title}</h3>
+                        <h3>${v.title}</h3>
                         <div class="video-meta">
-                            <span><i class="far fa-calendar"></i> ${video.date}</span>
-                            <span><i class="far fa-clock"></i> ${video.duration}</span>
+                            <span><i class="far fa-calendar"></i> ${v.date}</span>
+                            <span><i class="far fa-clock"></i> ${v.duration}</span>
                         </div>
                     </div>
-                `;
-                
-                monthlyVideosContainer.appendChild(videoElement);
+                </div>
+            `).join('');
+
+            // Клик по видео
+            container.querySelectorAll('.monthly-video-item').forEach(el => {
+                el.addEventListener('click', () => {
+                    const id = el.dataset.id;
+                    const video = videos.find(v => v.id === id);
+                    if (video) openPlayer(video);
+                });
             });
-            
-            // Обновляем статистику
-            displayMonthStats();
+
+            // Статистика
+            document.getElementById('monthVideoCount').textContent = monthVideos.length;
+            document.getElementById('monthHoursCount').textContent = calculateTotalHours(monthVideos) + '+';
         }
 
-        // Функция для отображения всех видео с фильтрацией
-        function displayVideos(filter = 'all') {
+        // ===== ОТОБРАЖЕНИЕ ВСЕХ ВИДЕО =====
+        let currentFilter = 'all';
+
+        function renderAllVideos(filter = 'all') {
             const container = document.getElementById('videosContainer');
-            container.innerHTML = '';
-            
-            let filteredVideos = videos;
-            
-            if (filter !== 'all') {
-                filteredVideos = videos.filter(video => video.type === filter);
-            }
-            
-            if (filteredVideos.length === 0) {
+            const filtered = filter === 'all' ? videos : videos.filter(v => v.type === filter);
+
+            if (!filtered.length) {
                 container.innerHTML = `
                     <div class="no-videos-message">
                         <i class="fas fa-search"></i>
@@ -788,256 +328,127 @@
                 `;
                 return;
             }
-            
-            filteredVideos.forEach(video => {
-                const videoElement = document.createElement('div');
-                videoElement.className = 'video-item';
-                videoElement.setAttribute('data-video-id', video.id);
-                videoElement.setAttribute('data-type', video.type);
-                
-                const thumbnailUrl = `https://img.youtube.com/vi/${video.id}/maxresdefault.jpg`;
-                const fallbackThumbnail = `https://img.youtube.com/vi/${video.id}/hqdefault.jpg`;
-                
-                // Иконка категории
-                let categoryIcon = 'fa-video';
-                switch(video.type) {
-                    case 'irl': categoryIcon = 'fa-home'; break;
-                    case 'minecraft': categoryIcon = 'fa-cube'; break;
-                    case 'amongus': categoryIcon = 'fa-user-secret'; break;
-                    case 'other': categoryIcon = 'fa-gamepad'; break;
-                }
-                
-                videoElement.innerHTML = `
+
+            container.innerHTML = filtered.map(v => `
+                <div class="video-item" data-id="${v.id}">
                     <div class="video-thumbnail-container">
-                        <img src="${thumbnailUrl}" 
-                             alt="${video.title}" 
-                             class="video-thumbnail"
-                             onerror="this.src='${fallbackThumbnail}'">
+                        <img class="video-thumbnail" src="${getThumbnail(v.id)}" alt="${v.title}" loading="lazy" onerror="this.src='${getFallbackThumbnail(v.id)}'">
                         <div class="video-play-overlay">
-                            <div class="play-icon">
-                                <i class="fas fa-play"></i>
-                            </div>
+                            <div class="play-icon"><i class="fas fa-play"></i></div>
                         </div>
-                        <div class="video-duration">${video.duration}</div>
-                        <div class="video-category">
-                            <i class="fas ${categoryIcon}"></i>
-                        </div>
+                        <span class="video-duration">${v.duration}</span>
+                        <span class="video-category"><i class="fas ${getCategoryIcon(v.type)}"></i></span>
                     </div>
                     <div class="video-info">
-                        <h3>${video.title}</h3>
+                        <h3>${v.title}</h3>
                         <div class="video-meta">
-                            <span><i class="far fa-calendar"></i> ${video.date}</span>
-                            <span><i class="far fa-clock"></i> ${video.duration}</span>
+                            <span><i class="far fa-calendar"></i> ${v.date}</span>
+                            <span><i class="far fa-clock"></i> ${v.duration}</span>
                         </div>
-                        <p class="video-description">${video.description}</p>
+                        <p class="video-description">${v.description}</p>
                     </div>
-                `;
-                
-                container.appendChild(videoElement);
+                </div>
+            `).join('');
+
+            container.querySelectorAll('.video-item').forEach(el => {
+                el.addEventListener('click', () => {
+                    const id = el.dataset.id;
+                    const video = videos.find(v => v.id === id);
+                    if (video) openPlayer(video);
+                });
             });
-            
-            attachVideoListeners();
         }
 
-        // Функция для инициализации фильтров
+        // ===== ФИЛЬТРЫ =====
         function initFilters() {
-            const filterButtons = document.querySelectorAll('.filter-btn');
-            
-            filterButtons.forEach(button => {
-                button.addEventListener('click', function() {
-                    // Убираем активный класс у всех кнопок
-                    filterButtons.forEach(btn => btn.classList.remove('active'));
-                    
-                    // Добавляем активный класс текущей кнопке
+            document.querySelectorAll('.filter-btn').forEach(btn => {
+                btn.addEventListener('click', function() {
+                    document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
                     this.classList.add('active');
-                    
-                    // Получаем фильтр
-                    const filter = this.getAttribute('data-filter');
-                    
-                    // Отображаем видео с фильтром
-                    displayVideos(filter);
-                    
-                    // Прокручиваем к началу списка видео
-                    document.getElementById('videosContainer').scrollIntoView({
-                        behavior: 'smooth',
-                        block: 'start'
-                    });
+                    currentFilter = this.dataset.filter;
+                    renderAllVideos(currentFilter);
                 });
             });
         }
 
-        // Функция для привязки обработчиков событий к видео
-        function attachVideoListeners() {
-            document.querySelectorAll('.video-item').forEach(item => {
-                item.addEventListener('click', function() {
-                    const videoId = this.getAttribute('data-video-id');
-                    const video = videos.find(v => v.id === videoId);
-                    
-                    if (video) {
-                        openYouTubePlayer(video);
-                    }
-                });
-            });
-        }
+        // ===== ПЛЕЕР =====
+        const modal = document.getElementById('youtubeModal');
+        const iframe = document.getElementById('youtubeIframe');
+        const closeBtn = document.getElementById('youtubeClose');
+        const titleEl = document.getElementById('youtubeTitle');
 
-        // Функция для открытия YouTube плеера
-        function openYouTubePlayer(video) {
-            youtubeTitle.textContent = video.title;
-            youtubeIframe.src = `https://www.youtube.com/embed/${video.id}?autoplay=1&rel=0&modestbranding=1&showinfo=0`;
-            youtubeModal.classList.add('active');
+        function openPlayer(video) {
+            titleEl.textContent = video.title;
+            iframe.src = `https://www.youtube.com/embed/${video.id}?autoplay=1&rel=0&modestbranding=1`;
+            modal.classList.add('active');
             document.body.style.overflow = 'hidden';
-            
-            // Установить фокус на кнопку закрытия для доступности
-            setTimeout(() => {
-                youtubeClose.focus();
-            }, 100);
         }
 
-        // Функция для закрытия YouTube плеера
-        function closeYouTubePlayer() {
-            youtubeModal.classList.remove('active');
-            youtubeIframe.src = '';
+        function closePlayer() {
+            modal.classList.remove('active');
+            iframe.src = '';
             document.body.style.overflow = '';
         }
 
-        // Закрытие плеера при клике на кнопку закрытия
-        youtubeClose.addEventListener('click', closeYouTubePlayer);
+        closeBtn.addEventListener('click', closePlayer);
+        modal.addEventListener('click', e => { if (e.target === modal) closePlayer(); });
+        document.addEventListener('keydown', e => { if (e.key === 'Escape') closePlayer(); });
 
-        // Закрытие плеера при клике вне области плеера
-        youtubeModal.addEventListener('click', function(event) {
-            if (event.target === youtubeModal) {
-                closeYouTubePlayer();
+        // ===== МОБИЛЬНОЕ МЕНЮ =====
+        (function mobileMenu() {
+            const btn = document.getElementById('mobileMenuBtn');
+            const nav = document.getElementById('mainNav');
+            const overlay = document.getElementById('mobileMenuOverlay');
+
+            function toggle() {
+                nav.classList.toggle('active');
+                overlay.classList.toggle('active');
+                btn.classList.toggle('active');
+                document.body.style.overflow = nav.classList.contains('active') ? 'hidden' : '';
             }
-        });
 
-        // Закрытие плеера при нажатии Escape
-        document.addEventListener('keydown', function(event) {
-            if (event.key === 'Escape' && youtubeModal.classList.contains('active')) {
-                closeYouTubePlayer();
-            }
-        });
-
-        // Функция для создания снежинок
-        function createSnowflakes() {
-            const snowflakesContainer = document.getElementById('snowflakes');
-            const snowflakeCount = 50;
-
-            for (let i = 0; i < snowflakeCount; i++) {
-                const snowflake = document.createElement('div');
-                snowflake.classList.add('snowflake');
-
-                const size = Math.random() * 6 + 4;
-                const left = Math.random() * 100;
-                const animationDuration = Math.random() * 10 + 10;
-                const animationDelay = Math.random() * 5;
-                const opacity = Math.random() * 0.6 + 0.4;
-
-                snowflake.style.width = `${size}px`;
-                snowflake.style.height = `${size}px`;
-                snowflake.style.left = `${left}%`;
-                snowflake.style.animationDuration = `${animationDuration}s`;
-                snowflake.style.animationDelay = `${animationDelay}s`;
-                snowflake.style.opacity = opacity;
-                snowflake.style.background = 'white';
-                snowflake.style.borderRadius = '50%';
-                snowflake.style.boxShadow = '0 0 5px white';
-
-                snowflakesContainer.appendChild(snowflake);
-            }
-        }
-
-        // Функция для создания частиц
-        function createParticles() {
-            const particlesContainer = document.getElementById('particles');
-            const particleCount = 20;
-
-            for (let i = 0; i < particleCount; i++) {
-                const particle = document.createElement('div');
-                particle.classList.add('particle');
-
-                const size = Math.random() * 100 + 50;
-                const left = Math.random() * 100;
-                const top = Math.random() * 100;
-                const animationDuration = Math.random() * 20 + 20;
-                const animationDelay = Math.random() * 5;
-
-                particle.style.width = `${size}px`;
-                particle.style.height = `${size}px`;
-                particle.style.left = `${left}%`;
-                particle.style.top = `${top}%`;
-                particle.style.animationDuration = `${animationDuration}s`;
-                particle.style.animationDelay = `${animationDelay}s`;
-                particle.style.background = `radial-gradient(circle, rgba(255,255,255,0.1) 0%, rgba(255,255,255,0) 70%)`;
-
-                particlesContainer.appendChild(particle);
-            }
-        }
-
-        // Инициализация при загрузке страницы
-        document.addEventListener('DOMContentLoaded', function() {
-            // Отображение видео за месяц
-            displayMonthlyVideos();
-            
-            // Отображение всех видео
-            displayVideos();
-            
-            // Инициализация фильтров
-            initFilters();
-            
-            // Создание снежинок и частиц
-            createSnowflakes();
-            createParticles();
-
-            // Mobile menu toggle
-            document.querySelector('.mobile-menu-btn').addEventListener('click', function() {
-                this.classList.toggle('active');
-                document.querySelector('nav ul').classList.toggle('show');
-            });
-
-            // Header scroll effect
-            window.addEventListener('scroll', function() {
-                const header = document.getElementById('header');
-                if (window.scrollY > 50) {
-                    header.style.backdropFilter = 'blur(10px)';
-                    header.style.backgroundColor = 'rgba(255, 255, 255, 0.95)';
-                } else {
-                    header.style.backdropFilter = 'none';
-                    header.style.backgroundColor = 'rgba(255, 255, 255, 0.98)';
-                }
-            });
-
-            // Theme toggle
-            document.querySelector('.theme-toggle').addEventListener('click', function() {
-                document.body.classList.toggle('dark-mode');
-                this.querySelector('i').classList.toggle('fa-moon');
-                this.querySelector('i').classList.toggle('fa-sun');
-            });
-
-            // Закрытие мобильного меню при клике на ссылку
-            document.querySelectorAll('nav a').forEach(link => {
-                link.addEventListener('click', function() {
-                    const mobileMenu = document.querySelector('nav ul');
-                    const menuBtn = document.querySelector('.mobile-menu-btn');
-                    if (mobileMenu && menuBtn) {
-                        mobileMenu.classList.remove('show');
-                        menuBtn.classList.remove('active');
-                    }
+            btn.addEventListener('click', toggle);
+            overlay.addEventListener('click', toggle);
+            document.querySelectorAll('.nav-link').forEach(link => {
+                link.addEventListener('click', () => {
+                    if (window.innerWidth <= 768 && nav.classList.contains('active')) toggle();
                 });
             });
+        })();
 
-            // Анимация при загрузке
-            setTimeout(() => {
-                document.body.classList.add('loaded');
-            }, 100);
-        });
+        // ===== ХЕДЕР ПРИ СКРОЛЛЕ =====
+        (function headerScroll() {
+            const header = document.getElementById('header');
+            let last = 0;
+            window.addEventListener('scroll', () => {
+                const y = window.pageYOffset;
+                if (y > 100 && y > last) header.classList.add('header-hidden');
+                else if (y < last || y <= 100) header.classList.remove('header-hidden');
+                last = y;
+            }, { passive: true });
+        })();
 
-        // Обработка ошибок загрузки миниатюр
-        window.addEventListener('error', function(e) {
-            if (e.target.tagName === 'IMG' && e.target.classList.contains('video-thumbnail')) {
-                const videoId = e.target.closest('.video-item').getAttribute('data-video-id');
-                e.target.src = `https://img.youtube.com/vi/${videoId}/hqdefault.jpg`;
+        // ===== ПАРТИКЛЫ =====
+        (function createParticles() {
+            const container = document.getElementById('particles');
+            for (let i = 0; i < 12; i++) {
+                const el = document.createElement('div');
+                el.className = 'particle';
+                const size = 40 + Math.random() * 80;
+                el.style.cssText = `
+                    width:${size}px; height:${size}px;
+                    left:${Math.random()*100}%; top:${Math.random()*100}%;
+                    animation-duration:${20+Math.random()*20}s;
+                    animation-delay:${Math.random()*5}s;
+                `;
+                container.appendChild(el);
             }
-        }, true);
+        })();
+
+        // ===== ИНИЦИАЛИЗАЦИЯ =====
+        renderMonthlyVideos();
+        renderAllVideos();
+        initFilters();
     </script>
 </body>
 </html>
