@@ -1,0 +1,1501 @@
+<!DOCTYPE html>
+<html lang="ru">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>TTFBB COMPANY</title>
+    
+    <link rel="icon" href="images/logo.png" type="images/logo.png">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
+    
+
+</head>
+
+<style>
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+}
+
+html{
+    scroll-behavior:smooth;
+}
+
+body{
+    padding-top: 82px;
+    font-family:"Inter",sans-serif;
+    background: url("/images/6cac0d2e6cc7a8508d0e5ef6c09a8ff02de7e946.png") repeat;
+}
+
+/*========================*/
+
+.background{
+    background:
+        linear-gradient(rgba(0,0,0,.82),rgba(0,0,0,.82)),
+        url("/images/6cac0d2e6cc7a8508d0e5ef6c09a8ff02de7e946.png") repeat;
+        
+}
+
+/*==========================
+NAVBAR
+==========================*/
+
+.navbar{
+
+    position:fixed;
+    top:0;
+    left:0;
+
+    width:100%;
+    height:82px;
+
+    display:flex;
+    align-items:center;
+
+    background:rgba(10,10,10,.55);
+
+    -webkit-backdrop-filter:blur(18px);
+    backdrop-filter:blur(18px);
+
+    border-bottom:1px solid rgba(255,255,255,.06);
+
+    transition:
+        transform .35s ease,
+        background .3s ease,
+        backdrop-filter .3s ease;
+
+    z-index:1000;
+
+}
+
+.navbar::before{
+
+    content:"";
+
+    position:absolute;
+
+    inset:0;
+
+    background:linear-gradient(
+        to bottom,
+        rgba(255,255,255,.06),
+        rgba(255,255,255,0)
+    );
+
+    pointer-events:none;
+
+}
+
+.navbar.hide{
+
+    transform:translateY(-100%);
+
+}
+
+.nav-container{
+
+    width:1700px;
+    max-width:96%;
+
+    height:82px;
+
+    margin:auto;
+
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+
+}
+
+.logo img{
+
+    height:42px;
+
+}
+
+.nav-menu{
+
+    display:flex;
+    gap:46px;
+
+    list-style:none;
+
+}
+
+.nav-menu a{
+
+    color:#d7d7d7;
+
+    text-decoration:none;
+
+    font-size:15px;
+
+    font-weight:700;
+
+    letter-spacing:.4px;
+
+    transition:.2s;
+
+}
+
+.nav-menu a:hover{
+
+    color:#fff;
+
+}
+
+.nav-right{
+
+    display:flex;
+    align-items:center;
+    gap:22px;
+
+}
+
+.download-btn{
+
+    padding:11px 22px;
+
+    border:1px solid rgba(255,255,255,.25);
+
+    border-radius:30px;
+
+    color:#fff;
+
+    text-decoration:none;
+
+    font-weight:700;
+
+    transition:.2s;
+
+}
+
+.download-btn:hover{
+
+    background:#fff;
+    color:#000;
+
+}
+
+.search-btn{
+
+    color:#fff;
+
+    font-size:18px;
+
+    text-decoration:none;
+
+}
+
+.profile img{
+
+    width:42px;
+    height:42px;
+
+    border-radius:50%;
+
+    object-fit:cover;
+
+}
+
+.navbar.scrolled{
+
+    background:rgba(10,10,10,.72);
+
+    -webkit-backdrop-filter:blur(22px);
+    backdrop-filter:blur(22px);
+
+}
+
+/*========================*/
+/* VIDEO */
+/*========================*/
+
+.video-section{
+
+    display:flex;
+
+    justify-content:center;
+
+    padding:40px 0 25px;
+
+}
+
+.video-wrapper{
+
+    width:930px;
+
+    max-width:92%;
+
+    overflow:hidden;
+
+    border-radius:18px;
+
+    background:#111;
+
+    box-shadow:0 20px 60px rgba(0,0,0,.55);
+
+}
+
+.video-wrapper iframe{
+
+    width:100%;
+
+    aspect-ratio:16/9;
+
+    display:block;
+
+    border:0;
+
+}
+
+/*==================================================
+RELATED NEWS
+==================================================*/
+
+.related-news{
+
+    width:1200px;
+    max-width:94%;
+    margin:90px auto 70px;
+
+}
+
+.related-header{
+
+    width:100%;
+    text-align:center;
+    margin-bottom:35px;
+
+}
+
+.related-header h2{
+
+    display:block;
+    width:100%;
+    font-size:40px;
+    font-weight:900;
+    color:#fff;
+    margin:0;
+
+}
+
+.view-all{
+
+    color:#bdbdbd;
+    text-decoration:none;
+    font-size:15px;
+    transition:.2s;
+
+}
+
+.view-all:hover{
+
+    color:#fff;
+
+}
+
+.related-grid{
+
+    display:grid;
+    grid-template-columns:repeat(4,1fr);
+    gap:22px;
+
+}
+
+.news-card{
+
+    background:#0d0d0d;
+    border-radius:14px;
+    overflow:hidden;
+    border:1px solid rgba(255,255,255,.08);
+    transition:.25s;
+    cursor:pointer;
+
+}
+
+.news-card:hover{
+
+    transform:translateY(-8px);
+    border-color:#444;
+
+}
+
+.news-card img{
+
+    width:100%;
+    height:240px;
+    object-fit:cover;
+    display:block;
+
+}
+
+.card-content{
+
+    padding:24px;
+
+}
+
+.card-category{
+
+    color:#888;
+    font-size:13px;
+    margin-bottom:14px;
+    text-transform:uppercase;
+    letter-spacing:1px;
+
+}
+
+.news-card h3{
+
+    color:#fff;
+    font-size:20px;
+    line-height:1.45;
+    margin-bottom:18px;
+
+}
+
+.card-date{
+
+    color:#666;
+    font-size:13px;
+
+}
+
+/*==================================================
+FOOTER
+==================================================*/
+
+#footer{
+
+    margin-top:80px;
+    background:#000000;
+    border-top:1px solid rgba(255,255,255,.08);
+    padding:35px 0 20px;
+
+}
+
+#footer .container{
+
+    width:1200px;
+    max-width:94%;
+    margin:auto;
+
+}
+
+.footer-top{
+
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    margin-bottom:30px;
+
+}
+
+.footer-brand h2{
+
+    font-size:26px;
+    font-weight:900;
+    margin-bottom:6px;
+    color:#fff;
+
+}
+
+.footer-brand p{
+
+    color:#777;
+    font-size:14px;
+
+}
+
+.footer-social{
+
+    display:flex;
+    gap:12px;
+
+}
+
+.footer-social a{
+
+    width:42px;
+    height:42px;
+    border-radius:10px;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    text-decoration:none;
+    color:#bdbdbd;
+    border:1px solid rgba(255,255,255,.08);
+    transition:.2s;
+
+}
+
+.footer-social a:hover{
+
+    color:#fff;
+    border-color:#555;
+    background:#111;
+
+}
+
+.footer-grid{
+
+    display:grid;
+    grid-template-columns:repeat(3,1fr);
+    gap:50px;
+
+    padding:28px 0;
+
+    border-top:1px solid rgba(255,255,255,.05);
+    border-bottom:1px solid rgba(255,255,255,.05);
+
+}
+
+.footer-grid h4{
+
+    color:#fff;
+    margin-bottom:15px;
+    font-size:16px;
+
+}
+
+.footer-grid ul{
+
+    list-style:none;
+
+}
+
+.footer-grid li{
+
+    margin-bottom:10px;
+    color:#888;
+    line-height:1.6;
+
+}
+
+.footer-grid a{
+
+    color:#888;
+    text-decoration:none;
+    transition:.2s;
+
+}
+
+.footer-grid a:hover{
+
+    color:#fff;
+
+}
+
+.footer-bottom{
+
+    margin-top:18px;
+
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+
+    font-size:13px;
+
+    color:#666;
+
+}
+
+.footer-bottom div{
+
+    display:flex;
+    gap:20px;
+
+}
+
+.footer-bottom a{
+
+    color:#666;
+    text-decoration:none;
+    transition:.2s;
+
+}
+
+.footer-bottom a:hover{
+
+    color:#fff;
+
+}
+
+/*==================================================
+RESPONSIVE
+==================================================*/
+
+@media(max-width:1000px){
+
+.related-grid{
+
+grid-template-columns:repeat(2,1fr);
+
+}
+
+.footer-grid{
+
+grid-template-columns:1fr;
+
+}
+
+.footer-top{
+
+flex-direction:column;
+gap:20px;
+
+}
+
+.footer-bottom{
+
+flex-direction:column;
+gap:15px;
+
+}
+
+}
+
+@media(max-width:700px){
+
+.related-grid{
+
+grid-template-columns:1fr;
+
+}
+
+.related-header{
+
+    width:100%;
+    text-align:center;
+    margin-bottom:35px;
+
+}
+
+.related-header h2{
+
+    display:block;
+    width:100%;
+    font-size:40px;
+    font-weight:900;
+    color:#fff;
+    margin:0;
+
+}
+
+.news-card img{
+
+height:210px;
+
+}
+
+}
+
+/*========================*/
+/* BREADCRUMBS */
+/*========================*/
+
+.breadcrumbs{
+
+    width:560px;
+
+    max-width:90%;
+
+    margin:0 auto 22px;
+
+    display:flex;
+
+    align-items:center;
+
+    gap:10px;
+
+    font-size:15px;
+
+    font-weight:700;
+
+    padding-top: 30px;
+
+}
+
+.breadcrumbs a{
+
+    color:#d6d6d6;
+
+    text-decoration:none;
+
+    transition:.2s;
+
+}
+
+.breadcrumbs a:hover{
+
+    color:#fff;
+
+}
+
+.breadcrumbs span{
+
+    color:#8d8d8d;
+
+}
+
+.current{
+
+    color:#fff;
+
+}
+
+/*========================*/
+/* HEADER */
+/*========================*/
+
+.news-header{
+
+    display:flex;
+
+    justify-content:center;
+
+    padding-bottom:60px;
+
+}
+
+.hero{
+
+    width:560px;
+
+}
+
+.hero h1{
+
+    font-size:70px;
+
+    line-height:.93;
+
+    color:#ff5348;
+
+    font-weight:900;
+
+    letter-spacing:-2px;
+
+    margin-bottom:30px;
+
+}
+
+.date{
+
+    color:#979797;
+
+    font-size:13px;
+
+    margin-bottom:30px;
+
+}
+
+.hero p{
+
+    font-size:18px;
+
+    line-height:1.8;
+
+    color:#f1f1f1;
+
+    margin-bottom:26px;
+
+}
+
+.hero strong{
+
+    color:#fff;
+
+}
+
+/*========================*/
+/* RED BANNER */
+/*========================*/
+
+/*========================*/
+/* BANNER */
+/*========================*/
+
+.banner{
+
+    width:100vw;
+    margin:30px calc(50% - 50vw) 70px;
+
+}
+
+.banner img{
+    width:100%;
+    display:block;
+    border-radius:0;
+}
+
+/*========================*/
+/* IMAGE */
+/*========================*/
+
+.image-block{
+
+    display:flex;
+
+    justify-content:center;
+
+}
+
+.image-block img{
+
+    width:1000px;
+
+    max-width:92%;
+
+    border-radius:16px;
+
+    display:block;
+
+}
+
+/*========================*/
+/* ARTICLE */
+/*========================*/
+
+.article{
+
+    width:560px;
+
+    max-width:90%;
+
+    margin:45px auto 100px;
+
+}
+
+.article h3{
+
+    font-size:38px;
+
+    margin-bottom:20px;
+
+    color:#fff;
+
+}
+
+.article p{
+
+    font-size:18px;
+
+    line-height:1.8;
+
+    color:#f0f0f0;
+
+    margin-bottom:30px;
+
+}
+
+/*========================*/
+/* GALLERY */
+/*========================*/
+
+.gallery{
+
+    width:1000px;
+
+    max-width:92%;
+
+    margin:0 auto 90px;
+
+    display:grid;
+
+    grid-template-columns:repeat(3,1fr);
+
+    gap:20px;
+
+}
+
+.gallery img{
+
+    width:100%;
+
+    border-radius:12px;
+
+    display:block;
+
+}
+
+/*========================*/
+/* FOOTER */
+/*========================*/
+
+.footer{
+
+    padding:70px 0;
+
+    text-align:center;
+
+    border-top:1px solid rgba(255,255,255,.08);
+
+}
+
+.footer p{
+
+    color:#777;
+
+    font-size:14px;
+
+}
+
+/*========================*/
+
+::selection{
+
+    background:#ff5348;
+
+    color:#fff;
+
+}
+
+/*========================*/
+
+::-webkit-scrollbar{
+
+    width:10px;
+
+}
+
+::-webkit-scrollbar-track{
+
+    background:#0b0b0b;
+
+}
+
+::-webkit-scrollbar-thumb{
+
+    background:#444;
+
+    border-radius:20px;
+
+}
+
+::-webkit-scrollbar-thumb:hover{
+
+    background:#666;
+
+}
+
+/*========================*/
+/* ANIMATION */
+/*========================*/
+
+.hero,
+.banner,
+.image-block,
+.gallery,
+.article{
+
+    animation:fade .8s ease;
+
+}
+
+@keyframes fade{
+
+from{
+
+opacity:0;
+
+transform:translateY(20px);
+
+}
+
+to{
+
+opacity:1;
+
+transform:translateY(0);
+
+}
+
+}
+
+/*========================*/
+/* RESPONSIVE */
+/*========================*/
+
+@media(max-width:1100px){
+
+.banner h2{
+
+font-size:55px;
+
+letter-spacing:7px;
+
+}
+
+.hero h1{
+
+font-size:56px;
+
+}
+
+}
+
+@media(max-width:768px){
+
+.video-wrapper{
+
+width:95%;
+
+}
+
+.hero{
+
+width:90%;
+
+}
+
+.article{
+
+width:90%;
+
+}
+
+.hero h1{
+
+font-size:44px;
+
+}
+
+.banner h2{
+
+font-size:36px;
+
+height:90px;
+
+letter-spacing:5px;
+
+}
+
+.gallery{
+
+grid-template-columns:1fr;
+
+}
+
+}
+
+@media(max-width:500px){
+
+.hero h1{
+
+font-size:34px;
+
+}
+
+.hero p{
+
+font-size:16px;
+
+}
+
+.article p{
+
+font-size:16px;
+
+}
+
+.banner h2{
+
+font-size:22px;
+
+letter-spacing:3px;
+
+height:70px;
+
+}
+
+.breadcrumbs{
+
+font-size:13px;
+
+}
+
+}
+</style>
+
+<body>
+
+<div class="background"></div>
+
+<!-- ================= VIDEO ================= 
+
+<section class="video-section">
+
+    <div class="video-wrapper">
+
+        <iframe
+            src="https://www.youtube.com/embed/E6WyHm6E74Q"
+            title="Trailer"
+            allowfullscreen>
+        </iframe>
+
+    </div>
+
+</section> -->
+
+
+<section>
+    <div class="tett"></div>
+</section>
+
+<!-- ================= BREADCRUMBS ================= -->
+
+<div class="breadcrumbs">
+
+    <a href="#">Новости</a>
+
+    <span>/</span>
+
+    <a href="#">Разработка</a>
+
+    <span>/</span>
+
+    <span class="current">REGUILTY</span>
+
+</div>
+
+<!--NAVBAR-->
+
+<header class="navbar">
+
+    <div class="nav-container">
+
+        <a href="index.html" class="logo">
+            <img src="/images/TTF.png" alt="TTFBB">
+        </a>
+
+        <nav>
+
+            <ul class="nav-menu">
+
+                <li>
+                    <a href="newswire.html">
+                        НОВОСТНАЯ ЛЕНТА
+                    </a>
+                </li>
+
+                <li>
+                    <a href="videos.html">
+                        ВИДЕОРОЛИКИ
+                    </a>
+                </li>
+
+                <li>
+                    <a href="schedule.html">
+                        РАСПИСАНИЕ
+                    </a>
+                </li>
+
+                <li>
+                    <a href="character.html">
+                        ПРОФИЛЬ
+                    </a>
+                </li>
+
+            </ul>
+
+        </nav>
+
+    </div>
+
+</header>
+
+<!-- ================= HEADER ================= -->
+
+<header class="news-header">
+
+    <article class="hero">
+
+        <h1>
+
+            Разработка<br>
+
+            Игры:<br>
+
+            REGUILTY
+
+        </h1>
+
+        <div class="date">
+
+            18 июля 2026г.
+
+        </div>
+
+        <p>
+
+            Мы рады сообщить о начале разработки нашего нового проекта — игры «REGUILTY». 
+            Этот амбициозный проект станет уникальным экспериментом в жанре roguelite, где каждый шаг игрока будет влиять на развитие сюжета и игрового мира. 
+            Мы стремимся создать не просто игру, а целую вселенную, полную опасностей, тайн и возможностей для реиграбельности.
+
+        </p>
+
+        <p>
+
+        <strong>REGUILTY</strong> — это динамичный roguelite-экшен, в котором игрокам предстоит взять на себя роль главного героя, оказавшегося в мире высоких технологий и морального выбора. 
+        Каждое прохождение будет уникальным благодаря процедурной генерации уровней и событий, а принятые решения оставят след на характере персонажа и его способностях. Геймплей строится на сочетании интенсивных боёв, тактических решений и постоянного развития. Смерть не станет концом — она откроет новые пути для улучшений, позволяя герою становиться сильнее с каждой неудачей. 
+        Как отмечают разработчики современных roguelite-проектов, "каждое поражение делает героя сильнее благодаря постоянным апгрейдам"
+
+        </p>
+
+    </article>
+
+</header>
+
+<!-- ================= BANNER ================= -->
+
+<section class="banner">
+
+    <img src="/images/both fools and non-fools love.png">
+
+</section>
+
+<!-- ================= IMAGE ================= -->
+
+<section class="image-block">
+
+    <img src="/images/reguilty.png" alt="Kortz Center">
+
+</section>
+
+<!-- ================= ARTICLE ================= -->
+
+<section class="article">
+
+    <p>
+
+       <strong>Процедурная генерация:</strong> Каждый забег — это новый вызов. Уровни, враги и награды будут меняться, не давая игроку расслабиться.
+
+    </p>
+
+    <p>
+
+        <strong>Глубокая система прокачки:</strong> Персонаж развивается не только в ходе одного забега, но и между ними. Открывайте новые способности, улучшайте характеристики и создавайте уникальные билды. 
+        Вдохновляясь лучшими представителями жанра, мы реализуем систему, где "каждый новый забег — это уникальный опыт" благодаря разнообразным улучшениям 
+
+    </p>
+
+    <p>
+
+        <strong>Атмосфера и стиль: REGUILTY</strong> предложит мрачную и стильную эстетику, сочетающую элементы киберпанка и постапокалипсиса. 
+        Мы уделяем особое внимание визуальному ряду и музыкальному сопровождению, чтобы полностью погрузить игрока в этот мир.
+
+    </p>
+
+    <p>
+
+        <strong>Сюжет и выбор:</strong> В центре истории — борьба с системой и собственными принципами. 
+        Ваши решения будут влиять на развитие сюжета и открывать доступ к новым фракциям и концовкам.
+
+    </p>
+    
+    <p>
+
+        <strong>НАЧАЛО РАЗРАБОТКИ - 27 июля 2026г.</strong>
+
+    </p>
+
+</section>
+
+<!-- ================= GALLERY ================= -->
+
+<section class="gallery">
+
+    <img src="img/1.webp" alt="">
+    <img src="img/2.webp" alt="">
+    <img src="img/3.webp" alt="">
+
+</section>
+
+
+<!-- ================= RELATED NEWS ================= -->
+
+<section class="related-news">
+
+    <div class="related-header">
+
+         <!-- <h2>Похожие статьи</h2>
+
+    </div>
+
+    <div class="related-grid">
+
+        <article class="news-card">
+
+            <img src="img/news1.webp" alt="">
+
+            <div class="card-content">
+
+                <div class="card-category">
+                    GTA Online
+                </div>
+
+                <h3>
+                    Подписчики GTA+ получат новый Grotti Veleno GT
+                    на неделю раньше
+                </h3>
+
+                <span class="card-date">
+                    14 июля 2026 г.
+                </span>
+
+            </div>
+
+        </article>
+
+        <article class="news-card">
+
+            <img src="img/news2.webp" alt="">
+
+            <div class="card-content">
+
+                <div class="card-category">
+                    GTA Online
+                </div>
+
+                <h3>
+                    The Kortz Center Heist —
+                    уже доступно в GTA Online
+                </h3>
+
+                <span class="card-date">
+                    9 июля 2026 г.
+                </span>
+
+            </div>
+
+        </article>
+
+        <article class="news-card">
+
+            <img src="img/news3.webp" alt="">
+
+            <div class="card-content">
+
+                <div class="card-category">
+                    GTA Online
+                </div>
+
+                <h3>
+                    В День независимости получайте
+                    двойные выплаты GTA$
+                </h3>
+
+                <span class="card-date">
+                    2 июля 2026 г.
+                </span>
+
+            </div>
+
+        </article>
+
+        <article class="news-card">
+
+            <img src="img/news4.webp" alt="">
+
+            <div class="card-content">
+
+                <div class="card-category">
+                    GTA Online
+                </div>
+
+                <h3>
+                    Новые испытания и коллекции
+                    произведений искусства
+                </h3>
+
+                <span class="card-date">
+                    18 июня 2026 г.
+                </span>
+
+            </div>
+
+        </article>
+
+    </div> -->
+
+</section>
+
+<footer id="footer">
+
+    <div class="container">
+
+        <div class="footer-top">
+
+            <div class="footer-brand">
+
+                <h2>TTFBB COMPANY</h2>
+
+                <p>Два брата в увлекательных приключениях.</p>
+
+            </div>
+
+            <div class="footer-social">
+
+                <a href="https://www.youtube.com/@n1kolayrl" target="_blank">
+                    <i class="fa-brands fa-youtube"></i>
+                </a>
+
+                <a href="https://t.me/nesoqiton" target="_blank">
+                    <i class="fa-brands fa-telegram"></i>
+                </a>
+
+                <a href="#">
+                    <i class="fa-brands fa-instagram"></i>
+                </a>
+
+            </div>
+
+        </div>
+
+        <div class="footer-grid">
+
+            <div>
+
+                <h4>Навигация</h4>
+
+                <ul>
+
+                    <li><a href="index.html">Главная</a></li>
+
+                    <li><a href="newswire.html">Новости</a></li>
+
+                    <li><a href="videos.html">Видео</a></li>
+
+                </ul>
+
+            </div>
+
+            <div>
+
+                <h4>Контакты</h4>
+
+                <ul>
+
+                    <li>Никита<br>+375 (29) 959-00-97</li>
+
+                    <li>Евгений<br>+375 (25) 791-40-26</li>
+
+                </ul>
+
+            </div>
+
+            <div>
+
+                <h4>Telegram</h4>
+
+                <ul>
+
+                    <li>
+                        <a href="https://t.me/nesoqiton">
+                            @nesoqiton
+                        </a>
+                    </li>
+
+                    <li>
+                        <a href="https://t.me/">
+                            Nickname not found
+                        </a>
+                    </li>
+
+                </ul>
+
+            </div>
+
+        </div>
+
+        <div class="footer-bottom">
+
+            <span>
+                © 2025–2026 TTFBB COMPANY
+            </span>
+
+            <div>
+
+                <a href="privacy.html">
+                    Политика конфиденциальности
+                </a>
+
+                <a href="#">
+                    Условия использования
+                </a>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</footer>
+
+</body>
+
+<script>
+
+let lastScroll = 0;
+
+const navbar = document.querySelector(".navbar");
+
+window.addEventListener("scroll", () => {
+
+    const currentScroll = window.pageYOffset;
+
+    if(currentScroll <= 0){
+
+        navbar.classList.remove("hide");
+        return;
+
+    }
+
+    if(currentScroll > lastScroll){
+
+        navbar.classList.add("hide");
+
+    }else{
+
+        navbar.classList.remove("hide");
+
+    }
+
+    lastScroll = currentScroll;
+
+});
+
+window.addEventListener("scroll", () => {
+
+    if(window.scrollY > 20){
+
+        navbar.classList.add("scrolled");
+
+    }else{
+
+        navbar.classList.remove("scrolled");
+
+    }
+
+});
+
+</script>
+</html>
+
+</body>
+
+</html>

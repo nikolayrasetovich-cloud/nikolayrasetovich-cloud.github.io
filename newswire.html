@@ -66,7 +66,7 @@
                     <button class="news-filter-btn" data-filter="update">Обновления</button>
                     <button class="news-filter-btn" data-filter="live">Прямые эфиры</button>
                     <button class="news-filter-btn" data-filter="event">События</button>
-                    <button class="news-filter-btn" data-filter="weeklyresults">Итоги недели</button>
+                    <button class="news-filter-btn" data-filter="weeklyresults">Разработка</button>
                 </div>
             </div>
         </div>
@@ -138,6 +138,17 @@
         // ===== ДАННЫЕ НОВОСТЕЙ =====
         const newsData = [
             {
+                id: 4,
+                title: "РАЗРАБОТКА REGUILTY",
+                excerpt: "С 27 июля 2026 будет начата разработка REGUILTY.",
+                date: "18.07.2026",
+                category: "Разработка",
+                type: "working",
+                image: "/images/reguilty.png",
+                author: "TTFBB COMPANY",
+                url: "newswire/reguilty"
+            },
+            {
                 id: 3,
                 title: "Летнее обновление сайта",
                 excerpt: "Был полностью изменен интерфейс сайта.",
@@ -194,7 +205,7 @@
                 'update': { label: 'Обновление', cls: 'update' },
                 'live': { label: 'Прямой эфир', cls: 'live' },
                 'event': { label: 'Событие', cls: 'event' },
-                'weeklyresults': { label: 'Еженедельные итоги', cls: 'update' }
+                'working': { label: 'Разработка', cls: 'working' }
             };
             return map[type] || { label: 'Новость', cls: 'update' };
         }

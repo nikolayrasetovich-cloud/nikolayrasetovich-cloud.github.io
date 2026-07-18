@@ -3,89 +3,945 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Новогоднее обновление сайта | Блог братьев</title>
+    <title>TTFBB COMPANY</title>
     <link rel="icon" href="images/logo.png" type="images/logo.png">
-    <link rel="stylesheet" href="/styles/style.css">
-    <link rel="stylesheet" href="/styles/news-style.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700;800&family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
     <style>
-        
+        /* ===== ОБЩИЕ ПЕРЕМЕННЫЕ ===== */
+        :root {
+            --bg-primary: #0d0d0d;
+            --bg-card: #1a1a1a;
+            --bg-card-hover: #222;
+            --text-primary: #f0f0f0;
+            --text-secondary: #a0a0a0;
+            --text-light: #e2e8f0;
+            --border-color: #2a2a2a;
+            --accent: #4cc9f0;
+            --accent-dark: #3a8fa8;
+            --gradient: linear-gradient(135deg, #4361ee, #3a0ca3);
+            --radius: 12px;
+            --radius-lg: 16px;
+            --radius-xl: 20px;
+            --shadow: 0 8px 24px rgba(0,0,0,0.4);
+            --shadow-lg: 0 12px 40px rgba(0,0,0,0.5);
+            --shadow-xl: 0 20px 60px rgba(0,0,0,0.6);
+            --transition: 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        /* ===== СБРОС ===== */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background: var(--bg-primary);
+            color: var(--text-primary);
+            line-height: 1.6;
+            padding-top: 80px;
+            -webkit-font-smoothing: antialiased;
+            overflow-x: hidden;
+        }
+
+        a {
+            text-decoration: none;
+            color: inherit;
+        }
+
+        .container {
+            max-width: 1240px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* ===== АНИМИРОВАННЫЙ ФОН ===== */
+        .animated-background {
+            position: fixed;
+            inset: 0;
+            z-index: 0;
+            pointer-events: none;
+            overflow: hidden;
+        }
+
+        .gradient-bg {
+            position: absolute;
+            inset: 0;
+            background: radial-gradient(ellipse at 30% 50%, rgba(67,97,238,0.08) 0%, transparent 70%),
+                        radial-gradient(ellipse at 70% 80%, rgba(58,12,163,0.06) 0%, transparent 60%);
+        }
+
+        .particles {
+            position: absolute;
+            inset: 0;
+        }
+
+        .particle {
+            position: absolute;
+            border-radius: 50%;
+            background: radial-gradient(circle, rgba(255,255,255,0.04) 0%, transparent 70%);
+            animation: floatParticle 30s ease-in-out infinite alternate;
+            will-change: transform;
+        }
+
+        @keyframes floatParticle {
+            0%   { transform: translate(0, 0) scale(1); }
+            100% { transform: translate(40px, -40px) scale(1.2); }
+        }
+
+        /* ===== NAVBAR ===== */
+        #header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            z-index: 1000;
+            background: rgba(13,13,13,0.92);
+            backdrop-filter: blur(12px);
+            border-bottom: 1px solid var(--border-color);
+            transition: transform 0.4s ease, background 0.3s ease;
+        }
+
+        #header.header-hidden {
+            transform: translateY(-100%);
+        }
+
+        .header-content {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            height: 70px;
+            gap: 20px;
+        }
+
+        .logo-link {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            flex-shrink: 0;
+            text-decoration: none;
+            max-width: 100%;
+        }
+
+        .logo-icon-container {
+            width: 44px;
+            min-width: 44px;
+            height: 44px;
+            border-radius: 50%;
+            background: var(--gradient);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #fff;
+            font-size: 1.2rem;
+            flex-shrink: 0;
+        }
+
+        .logo-text {
+            display: flex;
+            flex-direction: column;
+            min-width: 0;
+            overflow: hidden;
+        }
+
+        .logo-text h1 {
+            font-size: 1.4rem;
+            font-weight: 800;
+            letter-spacing: -0.5px;
+            line-height: 1.2;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+
+        .logo-subtitle {
+            font-size: 0.7rem;
+            color: var(--text-secondary);
+            letter-spacing: 2px;
+            font-weight: 500;
+            text-transform: uppercase;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+
+        .nav-list {
+            display: flex;
+            list-style: none;
+            gap: 8px;
+            margin: 0;
+            padding: 0;
+        }
+
+        .nav-link {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            padding: 8px 18px;
+            border-radius: 30px;
+            font-size: 0.9rem;
+            font-weight: 500;
+            color: var(--text-secondary);
+            transition: var(--transition);
+            white-space: nowrap;
+            text-decoration: none;
+        }
+
+        .nav-link:hover,
+        .nav-link.active {
+            color: #fff;
+            background: rgba(255,255,255,0.06);
+        }
+
+        .nav-icon {
+            font-size: 0.9rem;
+            flex-shrink: 0;
+        }
+
+        .mobile-menu-btn {
+            display: none;
+            flex-direction: column;
+            gap: 5px;
+            background: none;
+            border: none;
+            cursor: pointer;
+            padding: 4px;
+            flex-shrink: 0;
+            margin-left: auto;
+        }
+
+        .menu-line {
+            width: 26px;
+            height: 2.5px;
+            background: var(--text-primary);
+            border-radius: 4px;
+            transition: var(--transition);
+        }
+
+        .mobile-menu-overlay {
+            display: none;
+            position: fixed;
+            inset: 0;
+            background: rgba(0,0,0,0.5);
+            z-index: 998;
+        }
+
+        /* ===== СТРАНИЦА НОВОСТИ ===== */
+        .news-page {
+            position: relative;
+            z-index: 1;
+            min-height: 100vh;
+        }
+
+        /* ===== HERO ===== */
+        .news-hero {
+            padding: 40px 0 30px;
+            position: relative;
+            text-align: center;
+        }
+
+        .news-hero-content {
+            max-width: 1100px;
+            margin: 0 auto;
+            background: var(--bg-card);
+            border-radius: var(--radius-xl);
+            padding: 50px 40px;
+            border: 1px solid var(--border-color);
+            transition: var(--transition);
+        }
+
+        .news-hero-content:hover {
+            border-color: rgba(76,201,240,0.3);
+        }
+
+        .news-hero-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            background: var(--gradient);
+            color: #fff;
+            padding: 8px 22px;
+            border-radius: 30px;
+            font-size: 0.85rem;
+            font-weight: 600;
+            margin-bottom: 20px;
+            animation: pulseBadge 2s ease-in-out infinite;
+        }
+
+        @keyframes pulseBadge {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+        }
+
+        .news-hero-badge i {
+            font-size: 0.9rem;
+        }
+
+        .news-hero h1 {
+            font-size: 3rem;
+            font-weight: 800;
+            letter-spacing: -1px;
+            margin-bottom: 16px;
+            background: var(--gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .news-hero-description {
+            font-size: 1.15rem;
+            color: var(--text-secondary);
+            max-width: 600px;
+            margin: 0 auto 32px;
+            line-height: 1.7;
+        }
+
+        .news-meta {
+            display: flex;
+            justify-content: center;
+            gap: 16px;
+            flex-wrap: wrap;
+        }
+
+        .news-meta-item {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            padding: 8px 18px;
+            background: rgba(255,255,255,0.04);
+            border-radius: var(--radius);
+            font-size: 0.85rem;
+            color: var(--text-secondary);
+            border: 1px solid var(--border-color);
+        }
+
+        .news-meta-item i {
+            color: var(--accent);
+        }
+
+        /* ===== КОНТЕНТ ===== */
+        .news-content-section {
+            padding: 20px 0 60px;
+        }
+
+        .news-container {
+            max-width: 1100px;
+            margin: 0 auto;
+            background: var(--bg-card);
+            border-radius: var(--radius-xl);
+            padding: 50px;
+            border: 1px solid var(--border-color);
+            transition: var(--transition);
+        }
+
+        .news-container:hover {
+            border-color: rgba(76,201,240,0.3);
+        }
+
+        /* ===== ТЕКСТ НОВОСТИ ===== */
+        .news-body {
+            font-size: 1.1rem;
+            line-height: 1.8;
+            color: var(--text-primary);
+        }
+
+        .news-body p {
+            margin-bottom: 20px;
+            color: var(--text-secondary);
+        }
+
+        .news-body h2 {
+            font-size: 2rem;
+            font-weight: 700;
+            margin: 40px 0 20px;
+            padding-left: 20px;
+            position: relative;
+        }
+
+        .news-body h2:before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 0;
+            height: 100%;
+            width: 4px;
+            background: var(--gradient);
+            border-radius: 2px;
+        }
+
+        .news-body h3 {
+            font-size: 1.4rem;
+            font-weight: 600;
+            margin: 32px 0 16px;
+            color: var(--accent);
+        }
+
+        .news-body ul,
+        .news-body ol {
+            margin: 20px 0;
+            padding-left: 28px;
+        }
+
+        .news-body li {
+            margin-bottom: 10px;
+            color: var(--text-secondary);
+            position: relative;
+        }
+
+        .news-body ul li:before {
+            content: '';
+            position: absolute;
+            left: -20px;
+            top: 10px;
+            width: 6px;
+            height: 6px;
+            background: var(--accent);
+            border-radius: 50%;
+        }
+
+        /* ===== YOUTUBE ПЛЕЕР - ПОЛНАЯ ШИРИНА ===== */
+        .news-youtube-player {
+            margin: 32px 0;
+            border-radius: var(--radius-lg);
+            overflow: hidden;
+            border: 1px solid var(--border-color);
+            background: var(--bg-primary);
+            transition: var(--transition);
+        }
+
+        .news-youtube-player:hover {
+            border-color: rgba(76,201,240,0.3);
+        }
+
+        .youtube-container {
+            position: relative;
+            width: 100%;
+            padding-bottom: 56.25%; /* Соотношение 16:9 */
+            height: 0;
+            background: #000;
+        }
+
+        .youtube-container iframe {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            border: none;
+        }
+
+        .youtube-description {
+            padding: 14px 20px;
+            border-top: 1px solid var(--border-color);
+            background: rgba(255,255,255,0.02);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+
+        .youtube-description p {
+            margin: 0;
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .youtube-description i {
+            color: #ff0000;
+            font-size: 1.2rem;
+        }
+
+        .youtube-description .youtube-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 8px 20px;
+            background: #ff0000;
+            color: #fff;
+            border-radius: 30px;
+            font-weight: 600;
+            font-size: 0.85rem;
+            transition: var(--transition);
+        }
+
+        .youtube-description .youtube-link:hover {
+            transform: scale(1.05);
+            box-shadow: 0 4px 20px rgba(255,0,0,0.3);
+        }
+
+        /* ===== ФУТЕР НОВОСТИ ===== */
+        .news-footer {
+            margin-top: 48px;
+            padding-top: 40px;
+            border-top: 1px solid var(--border-color);
+            text-align: center;
+        }
+
+        .news-footer h2 {
+            font-size: 2rem;
+            font-weight: 700;
+            margin-bottom: 16px;
+        }
+
+        .news-footer p {
+            color: var(--text-secondary);
+            max-width: 600px;
+            margin: 0 auto 24px;
+        }
+
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            padding: 14px 32px;
+            border-radius: 30px;
+            background: var(--gradient);
+            color: #fff;
+            font-weight: 600;
+            border: none;
+            cursor: pointer;
+            transition: var(--transition);
+            text-decoration: none;
+        }
+
+        .btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 30px rgba(67,97,238,0.35);
+        }
+
+        /* ===== НАВИГАЦИЯ ===== */
+        .news-navigation {
+            display: flex;
+            justify-content: space-between;
+            gap: 16px;
+            margin-top: 50px;
+            padding-top: 40px;
+            border-top: 1px solid var(--border-color);
+        }
+
+        .news-nav-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            padding: 14px 28px;
+            background: rgba(255,255,255,0.04);
+            border: 1px solid var(--border-color);
+            border-radius: var(--radius);
+            color: var(--text-secondary);
+            text-decoration: none;
+            font-weight: 600;
+            transition: var(--transition);
+        }
+
+        .news-nav-btn:hover {
+            background: var(--gradient);
+            color: #fff;
+            border-color: transparent;
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(67,97,238,0.3);
+        }
+
+        /* ===== ФУТЕР ===== */
+        #footer {
+            position: relative;
+            z-index: 1;
+            border-top: 1px solid var(--border-color);
+            padding: 50px 0 30px;
+            background: rgba(0,0,0,0.4);
+            margin-top: 20px;
+        }
+
+        .footer-content {
+            display: grid;
+            grid-template-columns: 1fr 2fr;
+            gap: 40px;
+            margin-bottom: 30px;
+        }
+
+        .footer-logo {
+            display: flex;
+            align-items: center;
+            gap: 14px;
+        }
+
+        .footer-logo .logo-icon {
+            width: 44px;
+            height: 44px;
+            border-radius: 50%;
+            background: var(--gradient);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #fff;
+            font-size: 1.2rem;
+        }
+
+        .footer-logo h3 {
+            font-size: 1.2rem;
+            font-weight: 700;
+        }
+
+        .footer-logo p {
+            font-size: 0.85rem;
+            color: var(--text-secondary);
+        }
+
+        .footer-social {
+            display: flex;
+            gap: 12px;
+            margin-top: 14px;
+        }
+
+        .social-link {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: var(--border-color);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--text-secondary);
+            transition: var(--transition);
+        }
+
+        .social-link:hover {
+            color: #fff;
+            background: var(--gradient);
+        }
+
+        .footer-links {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 30px;
+        }
+
+        .footer-column h4 {
+            font-size: 0.9rem;
+            font-weight: 700;
+            margin-bottom: 12px;
+        }
+
+        .footer-column ul {
+            list-style: none;
+        }
+
+        .footer-column ul li {
+            margin-bottom: 6px;
+            font-size: 0.85rem;
+            color: var(--text-secondary);
+        }
+
+        .footer-column ul li a:hover {
+            color: #fff;
+        }
+
+        .footer-bottom {
+            border-top: 1px solid var(--border-color);
+            padding-top: 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 12px;
+            font-size: 0.8rem;
+            color: var(--text-secondary);
+        }
+
+        .footer-links-bottom {
+            display: flex;
+            gap: 20px;
+        }
+
+        .footer-links-bottom a:hover {
+            color: #fff;
+        }
+
+        /* ===== АДАПТИВ ===== */
+        @media (max-width: 992px) {
+            .logo-text h1 {
+                font-size: 1.2rem;
+            }
+            .logo-icon-container {
+                width: 38px;
+                min-width: 38px;
+                height: 38px;
+                font-size: 1rem;
+            }
+            .nav-link {
+                padding: 6px 14px;
+                font-size: 0.85rem;
+            }
+            .nav-text {
+                display: none;
+            }
+            .nav-link .nav-icon {
+                font-size: 1.1rem;
+            }
+
+            .footer-content {
+                grid-template-columns: 1fr;
+                gap: 30px;
+            }
+            .footer-links {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        @media (max-width: 768px) {
+            body { padding-top: 70px; }
+
+            .header-content {
+                height: 64px;
+                gap: 12px;
+            }
+
+            .mobile-menu-btn {
+                display: flex;
+            }
+
+            .main-nav {
+                position: fixed;
+                top: 0;
+                right: -300px;
+                width: 280px;
+                height: 100vh;
+                background: var(--bg-primary);
+                padding: 80px 24px 30px;
+                transition: right 0.35s ease;
+                z-index: 999;
+                border-left: 1px solid var(--border-color);
+                overflow-y: auto;
+            }
+
+            .main-nav.active {
+                right: 0;
+            }
+
+            .mobile-menu-overlay.active {
+                display: block;
+            }
+
+            .nav-list {
+                flex-direction: column;
+                gap: 4px;
+                width: 100%;
+            }
+
+            .nav-link {
+                padding: 12px 16px;
+                border-radius: var(--radius);
+                font-size: 1rem;
+                width: 100%;
+                justify-content: flex-start;
+            }
+
+            .nav-text {
+                display: inline;
+            }
+
+            .mobile-menu-btn.active .menu-line:nth-child(1) {
+                transform: rotate(45deg) translate(5px, 5px);
+            }
+            .mobile-menu-btn.active .menu-line:nth-child(2) {
+                opacity: 0;
+            }
+            .mobile-menu-btn.active .menu-line:nth-child(3) {
+                transform: rotate(-45deg) translate(5px, -5px);
+            }
+
+            .logo-text h1 {
+                font-size: 1.1rem;
+            }
+            .logo-icon-container {
+                width: 34px;
+                min-width: 34px;
+                height: 34px;
+                font-size: 0.9rem;
+            }
+            .logo-subtitle {
+                font-size: 0.6rem;
+                letter-spacing: 1.5px;
+            }
+
+            .news-hero {
+                padding: 20px 0 10px;
+            }
+
+            .news-hero h1 {
+                font-size: 2rem;
+            }
+
+            .news-hero-description {
+                font-size: 1rem;
+            }
+
+            .news-hero-content,
+            .news-container {
+                padding: 30px 20px;
+                border-radius: var(--radius-lg);
+            }
+
+            .news-body h2 {
+                font-size: 1.6rem;
+            }
+            .news-body h3 {
+                font-size: 1.2rem;
+            }
+
+            .news-navigation {
+                flex-direction: column;
+                gap: 12px;
+            }
+
+            .news-nav-btn {
+                justify-content: center;
+            }
+
+            .youtube-description {
+                flex-direction: column;
+                align-items: stretch;
+                text-align: center;
+            }
+
+            .youtube-description .youtube-link {
+                justify-content: center;
+            }
+
+            .footer-links {
+                grid-template-columns: 1fr;
+                gap: 20px;
+            }
+
+            .footer-bottom {
+                flex-direction: column;
+                text-align: center;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .logo-text h1 {
+                font-size: 0.95rem;
+            }
+            .logo-icon-container {
+                width: 30px;
+                min-width: 30px;
+                height: 30px;
+                font-size: 0.8rem;
+            }
+            .logo-subtitle {
+                font-size: 0.5rem;
+                letter-spacing: 1px;
+            }
+            .logo-link {
+                gap: 8px;
+            }
+            .header-content {
+                height: 58px;
+                gap: 8px;
+            }
+
+            .news-hero h1 {
+                font-size: 1.6rem;
+            }
+
+            .news-hero-content,
+            .news-container {
+                padding: 20px 16px;
+                margin: 0 10px;
+                border-radius: var(--radius-lg);
+            }
+
+            .news-meta {
+                flex-direction: column;
+                align-items: stretch;
+                gap: 8px;
+            }
+
+            .news-meta-item {
+                justify-content: center;
+            }
+
+            .news-body {
+                font-size: 1rem;
+            }
+
+            .news-body h2 {
+                font-size: 1.3rem;
+                padding-left: 14px;
+            }
+
+            .news-footer h2 {
+                font-size: 1.5rem;
+            }
+
+            .news-navigation {
+                margin-top: 30px;
+                padding-top: 24px;
+            }
+        }
+
+        @media (max-width: 360px) {
+            .news-hero h1 {
+                font-size: 1.3rem;
+            }
+            .news-hero-content,
+            .news-container {
+                padding: 16px 12px;
+            }
+            .news-body h2 {
+                font-size: 1.1rem;
+            }
+        }
     </style>
 </head>
 <body class="news-page">
-    <!-- Анимированный фон -->
+
+    <!-- ФОН -->
     <div class="animated-background">
         <div class="gradient-bg"></div>
         <div class="particles" id="particles"></div>
     </div>
 
-    <!-- Новогодние элементы -->
-    <div class="snowflakes" id="snowflakes"></div>
-    <div class="snowdrifts"></div>
-
- <!-- Header -->
+    <!-- ===== HEADER ===== -->
     <header id="header">
         <div class="container">
             <div class="header-content">
-                <!-- Логотип -->
                 <a href="index.html" class="logo-link">
-                    <div class="logo">
-                        <div class="logo-icon-container">
-                            <i class="fas fa-users logo-icon"></i>
-                        </div>
-                        <div class="logo-text">
-                            <h1>Братья</h1>
-                            <p class="logo-subtitle">TTFBB COMPANY</p>
-                        </div>
+                    <div class="logo-icon-container">
+                        <i class="fas fa-users"></i>
+                    </div>
+                    <div class="logo-text">
+                        <h1>Братья</h1>
+                        <p class="logo-subtitle">TTFBB COMPANY</p>
                     </div>
                 </a>
 
-                <!-- Кнопка мобильного меню -->
-                <button class="mobile-menu-btn" id="mobileMenuBtn" aria-label="Открыть меню">
+                <button class="mobile-menu-btn" id="mobileMenuBtn" aria-label="Меню">
                     <span class="menu-line"></span>
                     <span class="menu-line"></span>
                     <span class="menu-line"></span>
                 </button>
 
-                <!-- Оверлей для мобильного меню -->
                 <div class="mobile-menu-overlay" id="mobileMenuOverlay"></div>
 
-                <!-- Навигация -->
                 <nav class="main-nav" id="mainNav">
                     <ul class="nav-list">
-                        <li class="nav-item">
-                            <a href="newswire.html" class="nav-link">
-                                <i class="fas fa-newspaper nav-icon"></i>
-                                <span class="nav-text">Новостная лента</span>
-                            </a>
-                        </li>
-                        <li class="nav-item">
-                            <a href="videos.html" class="nav-link">
-                                <i class="fas fa-play-circle nav-icon"></i>
-                                <span class="nav-text">Видеоролики</span>
-                            </a>
-                        </li>
-                        <li class="nav-item">
-                            <a href="schedule.html" class="nav-link">
-                                <i class="fas fa-calendar-alt nav-icon"></i>
-                                <span class="nav-text">Расписание</span>
-                            </a>
-                        </li>
-                        <li class="nav-item">
-                            <a href="character.html" class="nav-link">
-                                <i class="fa-solid fa-user nav-icon"></i>
-                                <span class="nav-text">Профиль</span>
-                            </a>
-                        </li>
+                        <li><a href="newswire.html" class="nav-link"><i class="fas fa-newspaper nav-icon"></i> <span class="nav-text">Новостная лента</span></a></li>
+                        <li><a href="videos.html" class="nav-link"><i class="fas fa-play-circle nav-icon"></i> <span class="nav-text">Видеоролики</span></a></li>
+                        <li><a href="schedule.html" class="nav-link"><i class="fas fa-calendar-alt nav-icon"></i> <span class="nav-text">Расписание</span></a></li>
+                        <li><a href="character.html" class="nav-link"><i class="fas fa-user nav-icon"></i> <span class="nav-text">Профиль</span></a></li>
                     </ul>
                 </nav>
             </div>
         </div>
     </header>
 
-    <!-- Hero Section для новости -->
+    <!-- ===== HERO ===== -->
     <section class="news-hero">
         <div class="container">
             <div class="news-hero-content">
@@ -109,14 +965,13 @@
         </div>
     </section>
 
-    <!-- Контент новости -->
+    <!-- ===== КОНТЕНТ ===== -->
     <section class="news-content-section">
         <div class="container news-container">
-            <!-- Основной текст новости -->
             <div class="news-body">
                 <p>Друзья, мы рады представить вам масштабный стрим за всё время! Очень классные разговоры, друзья и классные игры</p>
-                
-                <!-- YouTube плеер -->
+
+                <!-- ===== YOUTUBE ПЛЕЕР - ПОЛНАЯ ШИРИНА ===== -->
                 <div class="news-youtube-player">
                     <div class="youtube-container">
                         <iframe 
@@ -129,26 +984,30 @@
                     </div>
                     <div class="youtube-description">
                         <p><i class="fas fa-play-circle"></i> Смотрите полную запись стрима на нашем YouTube-канале</p>
+                        <a href="https://www.youtube.com/watch?v=6d-OCpKGNaE" target="_blank" class="youtube-link">
+                            <i class="fab fa-youtube"></i>
+                            Смотреть на YouTube
+                        </a>
                     </div>
                 </div>
-                
+
                 <div class="news-footer">
                     <h2>Что дальше?</h2>
                     <p>Мы продолжаем работать над улучшением сайта и добавляем новые функции. Следите за обновлениями, чтобы быть в курсе всех нововведений!</p>
-                    <a href="newswire.html" class="btn btn-primary">
+                    <a href="newswire.html" class="btn">
                         <span>Все новости</span>
                         <i class="fas fa-newspaper"></i>
                     </a>
                 </div>
             </div>
-            
-            <!-- Навигация -->
+
+            <!-- ===== НАВИГАЦИЯ ===== -->
             <div class="news-navigation">
                 <a href="index.html" class="news-nav-btn">
                     <i class="fas fa-arrow-left"></i>
                     <span>К главной странице</span>
                 </a>
-                <a href="index.html#videos" class="news-nav-btn">
+                <a href="videos.html" class="news-nav-btn">
                     <span>К видеоразделу</span>
                     <i class="fas fa-arrow-right"></i>
                 </a>
@@ -156,61 +1015,52 @@
         </div>
     </section>
 
-    <!-- Footer -->
+    <!-- ===== FOOTER ===== -->
     <footer id="footer">
         <div class="container">
             <div class="footer-content">
-                <div class="footer-main">
-                    <div class="footer-logo">
-                        <i class="fas fa-users logo-icon"></i>
-                        <div>
-                            <h3>Блог братьев</h3>
-                            <p>Два брата и одна девочка в увлекательных приключениях</p>
-                        </div>
-                    </div>
-                    <div class="footer-social">
-                        <a href="https://www.youtube.com/@n1kolayrasetovich" target="_blank" class="social-link youtube">
-                            <i class="fab fa-youtube"></i>
-                        </a>
-                        <a href="https://t.me/nesoqiton" target="_blank" class="social-link telegram">
-                            <i class="fab fa-telegram"></i>
-                        </a>
-                        <a href="#" class="social-link instagram">
-                            <i class="fab fa-instagram"></i>
-                        </a>
+                <div class="footer-logo">
+                    <div class="logo-icon"><i class="fas fa-users"></i></div>
+                    <div>
+                        <h3>TTFBB COMPANY</h3>
+                        <p>Два брата в увлекательных приключениях</p>
                     </div>
                 </div>
-                <div class="footer-links">
-                    <div class="footer-column">
-                        <h4>Разделы</h4>
-                        <ul>
-                    <li><a href="newswire.html" class="nav-link"><span>Новостная лента</span></a></li>
-                    <li><a href="videos.html" class="nav-link"><span>Видеоролики</span></a></li>
-                    <li><a href="schedule.html">Расписание</a></li>
-                            <li><a href="index.html#footer">Контакты</a></li>
-                            <li><a href="#">Архив</a></li>
-                        </ul>
-                    </div>
-                    <div class="footer-column">
-                        <h4>Контакты</h4>
-                        <ul>
-                            <li><i class="fas fa-user"></i> Никита: +375 (29) 959-00-97</li>
-                            <li><i class="fas fa-user"></i> Евгений: +375 (29) 870-23-67</li>
-                            <li><i class="fas fa-user"></i> Ольга: +375 (25) 729-54-17</li>
-                        </ul>
-                    </div>
-                    <div class="footer-column">
-                        <h4>Telegram</h4>
-                        <ul>
-                            <li><a href="https://t.me/nesoqiton" target="_blank">@nesoqiton (Никита)</a></li>
-                            <li><a href="https://t.me/Legendary_7681" target="_blank">@Legendary_7681 (Евгений)</a></li>
-                            <li><a href="https://t.me/thanoslegenda1239" target="_blank">@thanoslegenda1239 (Ольга)</a></li>
-                        </ul>
-                    </div>
+                <div class="footer-social">
+                    <a href="https://www.youtube.com/@n1kolayrasetovich" target="_blank" class="social-link"><i class="fab fa-youtube"></i></a>
+                    <a href="https://t.me/nesoqiton" target="_blank" class="social-link"><i class="fab fa-telegram"></i></a>
+                    <a href="#" class="social-link"><i class="fab fa-instagram"></i></a>
                 </div>
             </div>
+
+            <div class="footer-links">
+                <div class="footer-column">
+                    <h4>Разделы</h4>
+                    <ul>
+                        <li><a href="newswire.html">Новостная лента</a></li>
+                        <li><a href="videos.html">Видеоролики</a></li>
+                        <li><a href="schedule.html">Расписание</a></li>
+                        <li><a href="index.html#footer">Контакты</a></li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h4>Контакты</h4>
+                    <ul>
+                        <li><i class="fas fa-user"></i> Никита: +375 (29) 959-00-97</li>
+                        <li><i class="fas fa-user"></i> Евгений: +375 (29) 870-23-67</li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h4>Telegram</h4>
+                    <ul>
+                        <li><a href="https://t.me/nesoqiton" target="_blank">@nesoqiton (Никита)</a></li>
+                        <li><a href="https://t.me/Legendary_7681" target="_blank">@Legendary_7681 (Евгений)</a></li>
+                    </ul>
+                </div>
+            </div>
+
             <div class="footer-bottom">
-                <p>&copy; 2025 Блог братьев. Все права защищены.</p>
+                <p>&copy; 2025-2026 • TTFBB COMPANY. Все права защищены.</p>
                 <div class="footer-links-bottom">
                     <a href="privacy.html">Политика конфиденциальности</a>
                     <a href="#">Условия использования</a>
@@ -220,139 +1070,56 @@
     </footer>
 
     <script>
-        // Mobile menu toggle
-        document.querySelector('.mobile-menu-btn').addEventListener('click', function () {
-            this.classList.toggle('active');
-            document.querySelector('nav ul').classList.toggle('show');
-        });
+        // ===== МОБИЛЬНОЕ МЕНЮ =====
+        (function mobileMenu() {
+            const btn = document.getElementById('mobileMenuBtn');
+            const nav = document.getElementById('mainNav');
+            const overlay = document.getElementById('mobileMenuOverlay');
 
-        // Header scroll effect
-        window.addEventListener('scroll', function () {
-            const header = document.getElementById('header');
-            if (window.scrollY > 50) {
-                header.style.backdropFilter = 'blur(10px)';
-                header.style.backgroundColor = 'rgba(255, 255, 255, 0.95)';
-            } else {
-                header.style.backdropFilter = 'none';
-                header.style.backgroundColor = 'rgba(255, 255, 255, 0.98)';
+            function toggle() {
+                nav.classList.toggle('active');
+                overlay.classList.toggle('active');
+                btn.classList.toggle('active');
+                document.body.style.overflow = nav.classList.contains('active') ? 'hidden' : '';
             }
-        });
 
-        // Smooth scrolling for anchor links
-        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-            anchor.addEventListener('click', function (e) {
-                e.preventDefault();
-
-                const targetId = this.getAttribute('href');
-                if (targetId === '#') return;
-
-                const targetElement = document.querySelector(targetId);
-                if (targetElement) {
-                    window.scrollTo({
-                        top: targetElement.offsetTop - 100,
-                        behavior: 'smooth'
-                    });
-
-                    // Close mobile menu after clicking a link
-                    const mobileMenu = document.querySelector('nav ul');
-                    const menuBtn = document.querySelector('.mobile-menu-btn');
-                    if (mobileMenu && menuBtn) {
-                        mobileMenu.classList.remove('show');
-                        menuBtn.classList.remove('active');
-                    }
-                }
-            });
-        });
-
-        // Создание частиц для фона
-        function createParticles() {
-            const particlesContainer = document.getElementById('particles');
-            const particleCount = 15;
-            
-            for (let i = 0; i < particleCount; i++) {
-                const particle = document.createElement('div');
-                particle.classList.add('particle');
-                
-                const size = Math.random() * 80 + 40;
-                const left = Math.random() * 100;
-                const top = Math.random() * 100;
-                const animationDuration = Math.random() * 20 + 20;
-                const animationDelay = Math.random() * 5;
-                
-                particle.style.width = `${size}px`;
-                particle.style.height = `${size}px`;
-                particle.style.left = `${left}%`;
-                particle.style.top = `${top}%`;
-                particle.style.animationDuration = `${animationDuration}s`;
-                particle.style.animationDelay = `${animationDelay}s`;
-                particle.style.background = `radial-gradient(circle, rgba(255,255,255,0.1) 0%, rgba(255,255,255,0) 70%)`;
-                
-                particlesContainer.appendChild(particle);
-            }
-        }
-
-        // Создание снежинок
-        function createSnowflakes() {
-            const snowflakesContainer = document.getElementById('snowflakes');
-            const snowflakeCount = 30;
-            
-            for (let i = 0; i < snowflakeCount; i++) {
-                const snowflake = document.createElement('div');
-                snowflake.classList.add('snowflake');
-                
-                const size = Math.random() * 6 + 4;
-                const left = Math.random() * 100;
-                const animationDuration = Math.random() * 10 + 10;
-                const animationDelay = Math.random() * 5;
-                const opacity = Math.random() * 0.6 + 0.4;
-                
-                snowflake.style.width = `${size}px`;
-                snowflake.style.height = `${size}px`;
-                snowflake.style.left = `${left}%`;
-                snowflake.style.animationDuration = `${animationDuration}s`;
-                snowflake.style.animationDelay = `${animationDelay}s`;
-                snowflake.style.opacity = opacity;
-                snowflake.style.background = 'white';
-                snowflake.style.borderRadius = '50%';
-                snowflake.style.boxShadow = '0 0 5px white';
-                
-                snowflakesContainer.appendChild(snowflake);
-            }
-        }
-
-        // Инициализация
-        document.addEventListener('DOMContentLoaded', function() {
-            createSnowflakes();
-            createParticles();
-            
-            // Анимация при загрузке
-            setTimeout(() => {
-                document.body.classList.add('loaded');
-            }, 100);
-            
-            // Анимация карточек при скролле
-            const observerOptions = {
-                threshold: 0.1,
-                rootMargin: '0px 0px -50px 0px'
-            };
-            
-            const observer = new IntersectionObserver((entries) => {
-                entries.forEach(entry => {
-                    if (entry.isIntersecting) {
-                        entry.target.style.opacity = '1';
-                        entry.target.style.transform = 'translateY(0)';
-                    }
+            btn.addEventListener('click', toggle);
+            overlay.addEventListener('click', toggle);
+            document.querySelectorAll('.nav-link').forEach(link => {
+                link.addEventListener('click', () => {
+                    if (window.innerWidth <= 768 && nav.classList.contains('active')) toggle();
                 });
-            }, observerOptions);
-            
-            // Применяем анимацию к карточкам похожих статей
-            document.querySelectorAll('.related-article').forEach(card => {
-                card.style.opacity = '0';
-                card.style.transform = 'translateY(20px)';
-                card.style.transition = 'opacity 0.5s ease, transform 0.5s ease';
-                observer.observe(card);
             });
-        });
+        })();
+
+        // ===== ХЕДЕР ПРИ СКРОЛЛЕ =====
+        (function headerScroll() {
+            const header = document.getElementById('header');
+            let last = 0;
+            window.addEventListener('scroll', () => {
+                const y = window.pageYOffset;
+                if (y > 100 && y > last) header.classList.add('header-hidden');
+                else if (y < last || y <= 100) header.classList.remove('header-hidden');
+                last = y;
+            }, { passive: true });
+        })();
+
+        // ===== ПАРТИКЛЫ =====
+        (function createParticles() {
+            const container = document.getElementById('particles');
+            for (let i = 0; i < 12; i++) {
+                const el = document.createElement('div');
+                el.className = 'particle';
+                const size = 40 + Math.random() * 80;
+                el.style.cssText = `
+                    width:${size}px; height:${size}px;
+                    left:${Math.random()*100}%; top:${Math.random()*100}%;
+                    animation-duration:${20+Math.random()*20}s;
+                    animation-delay:${Math.random()*5}s;
+                `;
+                container.appendChild(el);
+            }
+        })();
     </script>
 </body>
 </html>

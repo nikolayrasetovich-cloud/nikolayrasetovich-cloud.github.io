@@ -326,6 +326,7 @@
         .news-card-badge.live   { background: linear-gradient(135deg, #ff6b6b, #f72585); }
         .news-card-badge.event  { background: linear-gradient(135deg, #4cc9f0, #4361ee); }
         .news-card-badge.update { background: linear-gradient(135deg, #f8961e, #f3722c); }
+        .news-card-badge.working { background: linear-gradient(135deg, #770000, #f32c2c); }
 
         .news-card-content {
             padding: 22px 24px 24px;
