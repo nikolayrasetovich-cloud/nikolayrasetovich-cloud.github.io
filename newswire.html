@@ -67,6 +67,7 @@
                     <button class="news-filter-btn" data-filter="live">Прямые эфиры</button>
                     <button class="news-filter-btn" data-filter="event">События</button>
                     <button class="news-filter-btn" data-filter="working">Разработка</button>
+                    <button class="news-filter-btn" data-filter="music">Музыка</button>
                 </div>
             </div>
         </div>
@@ -138,6 +139,17 @@
         // ===== ДАННЫЕ НОВОСТЕЙ =====
         const newsData = [
             {
+                id: 5,
+                title: "Новый трек: BRIGHT FLASH",
+                excerpt: "Новый релиз трека уже 20 июля.",
+                date: "20.07.2026",
+                category: "Музыка",
+                type: "music",
+                image: "/images/Bright flash - BitemLoco Records.png",
+                author: "BitemLoco Records",
+                url: "newswire/music/brightflash.html"
+            },
+            {
                 id: 4,
                 title: "РАЗРАБОТКА REGUILTY",
                 excerpt: "С 27 июля 2026 будет начата разработка REGUILTY.",
@@ -205,7 +217,8 @@
                 'update': { label: 'Обновление', cls: 'update' },
                 'live': { label: 'Прямой эфир', cls: 'live' },
                 'event': { label: 'Событие', cls: 'event' },
-                'working': { label: 'Разработка', cls: 'working' }
+                'working': { label: 'Разработка', cls: 'working' },
+                'music': { label: 'Музыка', cls: 'music' }
             };
             return map[type] || { label: 'Новость', cls: 'update' };
         }
