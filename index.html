@@ -1,56 +1,38 @@
 <!DOCTYPE html>
 <html lang="ru_RU">
-
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=yes">
     <title>TTFBB COMPANY</title>
-    <link rel="icon" href="images/logo.png" type="images/logo.png">
-    <link rel="stylesheet" href="styles/style.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
-
+    <link rel="icon" href="images/logo.png" type="image/png">
+    <link rel="stylesheet" href="/styles/style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,300..900;1,14..32,300..900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
 </head>
-
 <body>
+    <div class="background"></div>
 
-    <!-- ФОН -->
-    <div class="animated-background">
-        <div class="gradient-bg"></div>
-        <div class="particles" id="particles"></div>
-    </div>
-
-    <!-- ===== HEADER ===== -->
-    <header id="header">
-        <div class="container">
-            <div class="header-content">
-                <a href="index.html" class="logo-link">
-                    <div class="logo-icon-container">
-                        <i class="fas fa-users"></i>
-                    </div>
-                    <div class="logo-text">
-                        <h1>Братья</h1>
-                        <p class="logo-subtitle">TTFBB COMPANY</p>
-                    </div>
-                </a>
-
-                <button class="mobile-menu-btn" id="mobileMenuBtn" aria-label="Меню">
-                    <span class="menu-line"></span>
-                    <span class="menu-line"></span>
-                    <span class="menu-line"></span>
-                </button>
-
-                <div class="mobile-menu-overlay" id="mobileMenuOverlay"></div>
-
-                <nav class="main-nav" id="mainNav">
-                    <ul class="nav-list">
-                        <li><a href="newswire.html" class="nav-link"><i class="fas fa-newspaper nav-icon"></i> Новостная лента</a></li>
-                        <li><a href="videos.html" class="nav-link"><i class="fas fa-play-circle nav-icon"></i> Видеоролики</a></li>
-                        <li><a href="schedule.html" class="nav-link"><i class="fas fa-calendar-alt nav-icon"></i> Расписание</a></li>
-                        <li><a href="character.html" class="nav-link"><i class="fas fa-user nav-icon"></i> Профиль</a></li>
-                    </ul>
-                </nav>
-            </div>
+    <!-- ================= NAVBAR ================= -->
+    <header class="navbar">
+        <div class="nav-container">
+            <a href="index.html" class="logo">
+                <img src="/images/TTF.png" alt="TTFBB">
+            </a>
+            <nav>
+                <ul class="nav-menu">
+                    <li><a href="newswire.html">НОВОСТНАЯ ЛЕНТА</a></li>
+                    <li><a href="videos.html">ВИДЕОРОЛИКИ</a></li>
+                    <li><a href="schedule.html">РАСПИСАНИЕ</a></li>
+                    <li><a href="character.html">ПРОФИЛЬ</a></li>
+                </ul>
+            </nav>
+            <button class="burger" aria-label="Меню">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
         </div>
     </header>
 
@@ -85,74 +67,51 @@
         </div>
     </section>
 
-    <!-- =========================================================== -->
-    <!-- ===== НОВОСТНОЙ БЛОК (4 НОВОСТИ СПРАВА, УВЕЛИЧЕННЫЙ) ===== -->
-    <!-- =========================================================== -->
+    <!-- ===== НОВОСТНОЙ БЛОК ===== -->
     <section class="news-spotlight" id="news">
         <div class="container">
-            
-            <!-- ЛЕВАЯ БОЛЬШАЯ НОВОСТЬ -->
-           <a href="newswire/reguilty.html"> <article class="news-main-card">
-                <!-- Для замены картинки: в style="background-color: #...;" поменяйте на style="background-image: url('ваша-картинка.jpg'); background-size: cover; background-position: center;" -->
-                <div class="news-main-img" style="background-image: url('/images/reguilty.png'); background-size: cover; background-position: center;">
-                </div>
+            <a href="newswire/reguilty.html" class="news-main-card">
+                <div class="news-main-img" style="background-image: url('/images/reguilty.png'); background-size: cover; background-position: center;"></div>
                 <div class="news-main-content">
                     <span class="news-category">TTFBB Company</span>
-                    <h2>РАЗРАБОТКА REGUILTY                                 
-                    </h2>
+                    <h2>РАЗРАБОТКА REGUILTY</h2>
                     <span class="news-date">18 июля 2026г.</span>
                 </div>
-            </article></a>
+            </a>
 
-            <!-- ПРАВАЯ ЛЕНТА НОВОСТЕЙ (4 ШТУКИ) -->
             <div class="news-sidebar">
-                
-                <!-- 1-я новость -->
-                <a href="/newswire/music/brightflash.html"> <article class="news-mini-item">
-                    <div class="news-mini-img" style="background-image: url('/images/Bright\ flash\ -\ BitemLoco\ Records1_1.png'); background-size: cover; background-position: center;">
+                <a href="https://youtube.com/live/4ZD4d7c7ZYA" class="news-mini-item">
+                    <div class="news-mini-img" style="background-image: url('https://i9.ytimg.com/vi/4ZD4d7c7ZYA/mq1.jpg?sqp=CMjfsdMG-oaymwEmCMACELQB8quKqQMa8AEB-AH-CYAC0AWKAgwIABABGFcgWChlMA8=&rs=AOn4CLBwiYLlptaKTTRX0uTQDxCz2HBapA');"></div>
+                    <div class="news-mini-info">
+                        <span class="news-category">ТРАНСЛЯЦИЯ</span>
+                        <h3>🏡 ДОМАШНЯЯ СУЕТАЛОГИЯ</h3>
+                        <span class="news-date">28 июля 2026г.</span>
                     </div>
+                </a>
+                <a href="/newswire/music/brightflash.html" class="news-mini-item">
+                    <div class="news-mini-img" style="background-image: url('/images/Bright%20flash%20-%20BitemLoco%20Records1_1.png');"></div>
                     <div class="news-mini-info">
                         <span class="news-category">МУЗЫКА</span>
                         <h3>BRIGHT FLASH</h3>
                         <span class="news-date">20 июля 2026г.</span>
                     </div>
-                </article></a>
-
-               
-                <!-- 2-я новость -->
-                <a href="newswire/summerupdate120720261644.html"> <article class="news-mini-item">
-                    <div class="news-mini-img" style="background-image: url('/images/ОБНОВА\ ЛЕТНЯЯ\ САЙТА\ \кв\.png'); background-size: cover; background-position: center;">
-                    </div>
+                </a>
+                <a href="newswire/summerupdate120720261644.html" class="news-mini-item">
+                    <div class="news-mini-img" style="background-image: url('/images/ОБНОВА%20ЛЕТНЯЯ%20САЙТА%20кв.png');"></div>
                     <div class="news-mini-info">
                         <span class="news-category">TTFBB COMPANY</span>
                         <h3>ЛЕТНЕЕ ОБНОВЛЕНИЕ САЙТА</h3>
                         <span class="news-date">12 июля 2026г.</span>
                     </div>
-                </article></a> 
-
-                <!-- 3-я новость -->
-                <a href="http://youtu.be/BJIwEr1MoVI"> <article class="news-mini-item">
-                    <div class="news-mini-img" style="background-image: url('/images/GTAкв.png'); background-size: cover; background-position: center;">
-                    </div>
+                </a>
+                <a href="http://youtu.be/BJIwEr1MoVI" class="news-mini-item">
+                    <div class="news-mini-img" style="background-image: url('/images/GTAкв.png');"></div>
                     <div class="news-mini-info">
                         <span class="news-category">ТРАНСЛЯЦИЯ</span>
                         <h3>☠️ БЕЗ СМЕРТЕЙ и ПРОВАЛОВ GTA 3 + ДРУГИЕ ИГРЫ</h3>
                         <span class="news-date">08 июля 2026г.</span>
                     </div>
-                </article></a>
-
-                <!-- 4-я новость -->
-                <a href=""> <article class="news-mini-item">
-                    <div class="news-mini-img" style="background-image: url('/images/ВОЗВРАЩЕНИЕ.jpg'); background-size: cover; background-position: center;">
-                    </div>
-                    <div class="news-mini-info">
-                        <span class="news-category">ТРАНСЛЯЦИЯ</span>
-                        <h3>😎 ВОЗВРАЩЕНИЕ 2026! ПРЕКРАСНЫЕ ВЫХОДНЫЕ ☀️ СТАРЫЕ и ЛЕТНИЕ ДЕЛА 🏝️</h3>
-                        <span class="news-date">26 июня 2026г.</span>
-                    </div>
-                </article></a>
-
-
+                </a>
             </div>
         </div>
     </section>
@@ -166,11 +125,7 @@
                     <p class="section-subtitle">Недавние видео с канала</p>
                 </div>
             </div>
-
-            <div class="video-grid" id="videoGrid">
-                <!-- Видео вставляются через JS -->
-            </div>
-
+            <div class="video-grid" id="videoGrid"></div>
             <div class="all-videos-btn-container">
                 <a href="videos.html" class="btn btn-secondary btn-wide">
                     <span>Все видеоролики</span>
@@ -183,49 +138,44 @@
     <!-- ===== FOOTER ===== -->
     <footer id="footer">
         <div class="container">
-            <div class="footer-content">
-                <div class="footer-logo">
-                    <div class="logo-icon"><i class="fas fa-users"></i></div>
-                    <div>
-                        <h3>TTFBB COMPANY</h3>
-                        <p>Два брата в увлекательных приключениях</p>
-                    </div>
+            <div class="footer-top">
+                <div class="footer-brand">
+                    <h2>TTFBB COMPANY</h2>
+                    <p>Два брата в увлекательных приключениях.</p>
                 </div>
                 <div class="footer-social">
-                    <a href="https://www.youtube.com/@n1kolayrl" target="_blank" class="social-link"><i class="fab fa-youtube"></i></a>
-                    <a href="https://t.me/nesoqiton" target="_blank" class="social-link"><i class="fab fa-telegram"></i></a>
-                    <a href="#" class="social-link"><i class="fab fa-instagram"></i></a>
+                    <a href="https://www.youtube.com/@n1kolayrl" target="_blank"><i class="fa-brands fa-youtube"></i></a>
+                    <a href="https://t.me/nesoqiton" target="_blank"><i class="fa-brands fa-telegram"></i></a>
+                    <a href="#"><i class="fa-brands fa-instagram"></i></a>
                 </div>
             </div>
-
-            <div class="footer-links">
-                <div class="footer-column">
-                    <h4>Разделы</h4>
+            <div class="footer-grid">
+                <div>
+                    <h4>Навигация</h4>
                     <ul>
-                        <li><a href="newswire.html">Новостная лента</a></li>
-                        <li><a href="videos.html">Видеоролики</a></li>
-                        <li><a href="index.html#footer">Контакты</a></li>
+                        <li><a href="index.html">Главная</a></li>
+                        <li><a href="newswire.html">Новости</a></li>
+                        <li><a href="videos.html">Видео</a></li>
                     </ul>
                 </div>
-                <div class="footer-column">
+                <div>
                     <h4>Контакты</h4>
                     <ul>
-                        <li><i class="fas fa-user"></i> Никита: +375 (29) 959-00-97</li>
-                        <li><i class="fas fa-user"></i> Евгений: +375 (25) 791-40-26</li>
+                        <li>Никита<br>+375 (29) 959-00-97</li>
+                        <li>Евгений<br>+375 (25) 791-40-26</li>
                     </ul>
                 </div>
-                <div class="footer-column">
+                <div>
                     <h4>Telegram</h4>
                     <ul>
-                        <li><a href="https://t.me/nesoqiton" target="_blank">@nesoqiton (Никита)</a></li>
-                        <li><a href="https://t.me/" target="_blank">Nickname not found (Евгений)</a></li>
+                        <li><a href="https://t.me/nesoqiton">@nesoqiton</a></li>
+                        <li><a href="https://t.me/">Nickname not found</a></li>
                     </ul>
                 </div>
             </div>
-
             <div class="footer-bottom">
-                <p>&copy; 2025-2026 • TTFBB COMPANY. Все права защищены.</p>
-                <div class="footer-links-bottom">
+                <span>© 2025–2026 TTFBB COMPANY</span>
+                <div>
                     <a href="privacy.html">Политика конфиденциальности</a>
                     <a href="#">Условия использования</a>
                 </div>
@@ -234,10 +184,15 @@
     </footer>
 
     <script>
-        // ===== ДАННЫЕ ВИДЕО =====
         const videos = [
             {
-                id: 1,
+                title: '🏡 ДОМАШНЯЯ СУЕТАЛОГИЯ',
+                description: 'Старые добрые посиделки',
+                thumbnail: 'https://i9.ytimg.com/vi/4ZD4d7c7ZYA/mq1.jpg?sqp=CMjfsdMG-oaymwEmCMACELQB8quKqQMa8AEB-AH-CYAC0AWKAgwIABABGFcgWChlMA8=&rs=AOn4CLBwiYLlptaKTTRX0uTQDxCz2HBapA',
+                videoId: '2eWAaH099-k',
+                date: '28 июля 2026'
+            },
+            {
                 title: '☠️ БЕЗ СМЕРТЕЙ и ПРОВАЛОВ GTA 3 + ДРУГИЕ ИГРЫ',
                 description: 'Проходняк GTA 3 и BRAWL STARS',
                 thumbnail: 'https://img.youtube.com/vi/BJIwEr1MoVI/sddefault.jpg',
@@ -245,27 +200,16 @@
                 date: '08 июля 2026'
             },
             {
-                id: 2,
                 title: '😎 ВОЗВРАЩЕНИЕ 2026! ПРЕКРАСНЫЕ ВЫХОДНЫЕ ☀️ СТАРЫЕ и ЛЕТНИЕ ДЕЛА 🏝️',
                 description: 'Встреча спустя долгое время',
                 thumbnail: '/images/ВОЗВРАЩЕНИЕ.jpg',
                 videoId: 'E6WyHm6E74Q',
                 date: '26 июня 2026'
-            },
-            {
-                id: 3,
-                title: '💣 АТМОСФЕРНОЕ ДАВЛЕНИЕ 😵‍💫',
-                description: 'Клэшечка',
-                thumbnail: 'https://img.youtube.com/vi/2eWAaH099-k/sddefault.jpg',
-                videoId: '2eWAaH099-k',
-                date: '25 декабря 2025'
             }
         ];
 
-        // ===== ОТОБРАЖЕНИЕ ВИДЕО =====
         function renderVideos() {
             const container = document.getElementById('videoGrid');
-
             container.innerHTML = videos.map(v => `
                 <div class="video-card">
                     <div class="video-wrapper">
@@ -276,83 +220,56 @@
                             </button>
                         </div>
                         <div class="video-date-badge">
-                            <i class="fas fa-calendar-alt"></i>
-                            ${v.date}
+                            <i class="fas fa-calendar-alt"></i> ${v.date}
                         </div>
                     </div>
                     <div class="video-card-content">
                         <h3>${v.title}</h3>
                         <p>${v.description}</p>
                         <a href="https://www.youtube.com/watch?v=${v.videoId}" target="_blank" class="watch-btn">
-                            <i class="fab fa-youtube"></i>
-                            Смотреть на YouTube
+                            <i class="fab fa-youtube"></i> Смотреть на YouTube
                         </a>
                     </div>
                 </div>
             `).join('');
 
-            // Обработчики для кнопок Play
             document.querySelectorAll('.video-play-btn').forEach(btn => {
                 btn.addEventListener('click', function(e) {
                     e.stopPropagation();
-                    const videoId = this.dataset.videoId;
-                    window.open(`https://www.youtube.com/watch?v=${videoId}`, '_blank');
+                    window.open(`https://www.youtube.com/watch?v=${this.dataset.videoId}`, '_blank');
                 });
             });
         }
 
-        // ===== МОБИЛЬНОЕ МЕНЮ =====
-        (function mobileMenu() {
-            const btn = document.getElementById('mobileMenuBtn');
-            const nav = document.getElementById('mainNav');
-            const overlay = document.getElementById('mobileMenuOverlay');
+        // Navbar scroll
+        let lastScroll = 0;
+        const navbar = document.querySelector(".navbar");
+        window.addEventListener("scroll", () => {
+            const currentScroll = window.pageYOffset;
+            if (currentScroll <= 0) { navbar.classList.remove("hide"); return; }
+            if (currentScroll > lastScroll) { navbar.classList.add("hide"); }
+            else { navbar.classList.remove("hide"); }
+            lastScroll = currentScroll;
+        });
+        window.addEventListener("scroll", () => {
+            if (window.scrollY > 20) navbar.classList.add("scrolled");
+            else navbar.classList.remove("scrolled");
+        });
 
-            function toggle() {
-                nav.classList.toggle('active');
-                overlay.classList.toggle('active');
-                btn.classList.toggle('active');
-                document.body.style.overflow = nav.classList.contains('active') ? 'hidden' : '';
-            }
-
-            btn.addEventListener('click', toggle);
-            overlay.addEventListener('click', toggle);
-            document.querySelectorAll('.nav-link').forEach(link => {
-                link.addEventListener('click', () => {
-                    if (window.innerWidth <= 768 && nav.classList.contains('active')) toggle();
-                });
+        // Burger
+        const burger = document.querySelector(".burger");
+        const menu = document.querySelector(".nav-menu");
+        burger.addEventListener("click", () => {
+            burger.classList.toggle("active");
+            menu.classList.toggle("active");
+        });
+        document.querySelectorAll(".nav-menu a").forEach(link => {
+            link.addEventListener("click", () => {
+                burger.classList.remove("active");
+                menu.classList.remove("active");
             });
-        })();
+        });
 
-        // ===== ХЕДЕР ПРИ СКРОЛЛЕ =====
-        (function headerScroll() {
-            const header = document.getElementById('header');
-            let last = 0;
-            window.addEventListener('scroll', () => {
-                const y = window.pageYOffset;
-                if (y > 100 && y > last) header.classList.add('header-hidden');
-                else if (y < last || y <= 100) header.classList.remove('header-hidden');
-                last = y;
-            }, { passive: true });
-        })();
-
-        // ===== ПАРТИКЛЫ =====
-        (function createParticles() {
-            const container = document.getElementById('particles');
-            for (let i = 0; i < 12; i++) {
-                const el = document.createElement('div');
-                el.className = 'particle';
-                const size = 40 + Math.random() * 80;
-                el.style.cssText = `
-                    width:${size}px; height:${size}px;
-                    left:${Math.random()*100}%; top:${Math.random()*100}%;
-                    animation-duration:${20+Math.random()*20}s;
-                    animation-delay:${Math.random()*5}s;
-                `;
-                container.appendChild(el);
-            }
-        })();
-
-        // ===== ЗАПУСК =====
         renderVideos();
     </script>
 </body>

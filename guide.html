@@ -1,0 +1,689 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=yes">
+    <title>Гайды · TTFBB COMPANY</title>
+    <link rel="icon" href="images/logo.png" type="image/png">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,300..900;1,14..32,300..900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            padding-top: 82px;
+            font-family: "Inter", sans-serif;
+            background: black;
+            color: #e0e0e0;
+        }
+
+        .background {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(rgba(0, 0, 0, 0.88), rgba(0, 0, 0, 0.88)),
+                url("/images/6cac0d2e6cc7a8508d0e5ef6c09a8ff02de7e946.png") repeat;
+            z-index: -2;
+        }
+
+        /*==========================
+        NAVBAR (идентично вашему коду)
+        ==========================*/
+        .navbar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 82px;
+            display: flex;
+            align-items: center;
+            background: rgba(10, 10, 10, .55);
+            -webkit-backdrop-filter: blur(18px);
+            backdrop-filter: blur(18px);
+            border-bottom: 1px solid rgba(255, 255, 255, .06);
+            transition: transform .35s ease, background .3s ease, backdrop-filter .3s ease;
+            z-index: 1000;
+        }
+
+        .navbar::before {
+            content: "";
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(to bottom, rgba(255, 255, 255, .06), rgba(255, 255, 255, 0));
+            pointer-events: none;
+        }
+
+        .navbar.hide {
+            transform: translateY(-100%);
+        }
+
+        .nav-container {
+            width: 1700px;
+            max-width: 96%;
+            height: 82px;
+            margin: auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            position: relative;
+        }
+
+        .logo img {
+            height: 42px;
+        }
+
+        .nav-menu {
+            display: flex;
+            gap: 46px;
+            list-style: none;
+        }
+
+        .nav-menu a {
+            color: #d7d7d7;
+            text-decoration: none;
+            font-size: 15px;
+            font-weight: 700;
+            letter-spacing: .4px;
+            transition: .2s;
+        }
+
+        .nav-menu a:hover {
+            color: #fff;
+        }
+
+        .nav-right {
+            display: flex;
+            align-items: center;
+            gap: 22px;
+        }
+
+        .download-btn {
+            padding: 11px 22px;
+            border: 1px solid rgba(255, 255, 255, .25);
+            border-radius: 30px;
+            color: #fff;
+            text-decoration: none;
+            font-weight: 700;
+            transition: .2s;
+        }
+
+        .download-btn:hover {
+            background: #fff;
+            color: #000;
+        }
+
+        .search-btn {
+            color: #fff;
+            font-size: 18px;
+            text-decoration: none;
+        }
+
+        .profile img {
+            width: 42px;
+            height: 42px;
+            border-radius: 50%;
+            object-fit: cover;
+        }
+
+        .navbar.scrolled {
+            background: rgba(10, 10, 10, .72);
+            -webkit-backdrop-filter: blur(22px);
+            backdrop-filter: blur(22px);
+        }
+
+        /* Бургер-меню */
+        .burger {
+            display: none;
+            width: 42px;
+            height: 42px;
+            background: none;
+            border: 0;
+            flex-direction: column;
+            justify-content: center;
+            gap: 6px;
+            cursor: pointer;
+        }
+
+        .burger span {
+            width: 25px;
+            height: 2px;
+            background: white;
+            display: block;
+            transition: .3s;
+        }
+
+        /*==========================
+        ОСНОВНОЙ КОНТЕНТ СТРАНИЦЫ ГАЙДОВ
+        ==========================*/
+        .guides-container {
+            width: 1200px;
+            max-width: 94%;
+            margin: 0 auto;
+            padding: 40px 0 80px;
+        }
+
+        .page-header {
+            text-align: center;
+            margin-bottom: 50px;
+        }
+
+        .page-header h1 {
+            font-size: 48px;
+            font-weight: 900;
+            color: #fff;
+            letter-spacing: -1px;
+            margin-bottom: 12px;
+        }
+
+        .page-header .subtitle {
+            color: #aaa;
+            font-size: 18px;
+            font-weight: 400;
+            letter-spacing: 0.3px;
+        }
+
+        /* Сетка гайдов */
+        .guides-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 30px;
+            margin-top: 20px;
+        }
+
+        .guide-card {
+            background: rgba(20, 20, 20, 0.8);
+            backdrop-filter: blur(10px);
+            border-radius: 24px;
+            padding: 28px 24px;
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            transition: all 0.3s ease;
+            display: flex;
+            flex-direction: column;
+            box-shadow: 0 15px 30px rgba(0,0,0,0.5);
+        }
+
+        .guide-card:hover {
+            transform: translateY(-10px);
+            border-color: rgba(255, 255, 255, 0.2);
+            background: rgba(30, 30, 30, 0.9);
+            box-shadow: 0 25px 40px rgba(0,0,0,0.7);
+        }
+
+        .guide-icon {
+            font-size: 36px;
+            color: #fff;
+            margin-bottom: 20px;
+            background: rgba(255,255,255,0.08);
+            width: 60px;
+            height: 60px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 18px;
+        }
+
+        .guide-card h3 {
+            font-size: 24px;
+            font-weight: 700;
+            color: #fff;
+            margin-bottom: 14px;
+        }
+
+        .guide-card p {
+            font-size: 15px;
+            line-height: 1.6;
+            color: #b0b0b0;
+            margin-bottom: 28px;
+            flex-grow: 1;
+        }
+
+        .guide-link {
+            text-decoration: none;
+            color: #fff;
+            font-weight: 600;
+            font-size: 15px;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            background: rgba(255,255,255,0.05);
+            padding: 10px 20px;
+            border-radius: 40px;
+            width: fit-content;
+            transition: 0.2s;
+            border: 1px solid rgba(255,255,255,0.15);
+        }
+
+        .guide-link i {
+            font-size: 14px;
+            transition: transform 0.2s;
+        }
+
+        .guide-link:hover {
+            background: white;
+            color: black;
+            border-color: white;
+        }
+
+        .guide-link:hover i {
+            transform: translateX(4px);
+        }
+
+        /*==========================
+        FOOTER (идентично вашему коду)
+        ==========================*/
+        #footer {
+            margin-top: 80px;
+            background: #000000;
+            border-top: 1px solid rgba(255, 255, 255, .08);
+            padding: 35px 0 20px;
+            position: relative;
+            z-index: 10;
+        }
+
+        #footer .container {
+            width: 1200px;
+            max-width: 94%;
+            margin: auto;
+        }
+
+        .footer-top {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 30px;
+        }
+
+        .footer-brand h2 {
+            font-size: 26px;
+            font-weight: 900;
+            margin-bottom: 6px;
+            color: #fff;
+        }
+
+        .footer-brand p {
+            color: #777;
+            font-size: 14px;
+        }
+
+        .footer-social {
+            display: flex;
+            gap: 12px;
+        }
+
+        .footer-social a {
+            width: 42px;
+            height: 42px;
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-decoration: none;
+            color: #bdbdbd;
+            border: 1px solid rgba(255, 255, 255, .08);
+            transition: .2s;
+        }
+
+        .footer-social a:hover {
+            color: #fff;
+            border-color: #555;
+            background: #111;
+        }
+
+        .footer-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 50px;
+            padding: 28px 0;
+            border-top: 1px solid rgba(255, 255, 255, .05);
+            border-bottom: 1px solid rgba(255, 255, 255, .05);
+        }
+
+        .footer-grid h4 {
+            color: #fff;
+            margin-bottom: 15px;
+            font-size: 16px;
+        }
+
+        .footer-grid ul {
+            list-style: none;
+        }
+
+        .footer-grid li {
+            margin-bottom: 10px;
+            color: #888;
+            line-height: 1.6;
+        }
+
+        .footer-grid a {
+            color: #888;
+            text-decoration: none;
+            transition: .2s;
+        }
+
+        .footer-grid a:hover {
+            color: #fff;
+        }
+
+        .footer-bottom {
+            margin-top: 18px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-size: 13px;
+            color: #666;
+        }
+
+        .footer-bottom div {
+            display: flex;
+            gap: 20px;
+        }
+
+        .footer-bottom a {
+            color: #666;
+            text-decoration: none;
+            transition: .2s;
+        }
+
+        .footer-bottom a:hover {
+            color: #fff;
+        }
+
+        /* Прокрутка и выделение */
+        ::selection {
+            background: #485aff;
+            color: #fff;
+        }
+
+        ::-webkit-scrollbar {
+            width: 10px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: #0b0b0b;
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: #444;
+            border-radius: 20px;
+        }
+
+        ::-webkit-scrollbar-thumb:hover {
+            background: #666;
+        }
+
+        /* Адаптивность */
+        @media(max-width:1000px) {
+            .footer-grid {
+                grid-template-columns: 1fr;
+            }
+            .footer-top {
+                flex-direction: column;
+                gap: 20px;
+            }
+            .footer-bottom {
+                flex-direction: column;
+                gap: 15px;
+            }
+        }
+
+        @media(max-width:768px) {
+            .nav-container {
+                max-width: 90%;
+            }
+            nav {
+                position: absolute;
+                top: 82px;
+                left: 0;
+                width: 100%;
+            }
+            .nav-menu {
+                width: 100%;
+                height: auto;
+                background: rgba(10,10,10,.88);
+                backdrop-filter: blur(25px);
+                -webkit-backdrop-filter: blur(25px);
+                flex-direction: column;
+                align-items: center;
+                gap: 30px;
+                padding: 35px 0;
+                transform: translateY(-150%);
+                transition: .35s ease;
+                border-bottom: 1px solid rgba(255,255,255,.08);
+            }
+            .nav-menu.active {
+                transform: translateY(0);
+            }
+            .burger {
+                display: flex;
+                margin-left: auto;
+            }
+            .logo img {
+                height: 36px;
+            }
+            .page-header h1 {
+                font-size: 36px;
+            }
+        }
+
+        .burger.active span:nth-child(1) {
+            transform: rotate(45deg) translate(5px, 5px);
+        }
+        .burger.active span:nth-child(2) {
+            opacity: 0;
+        }
+        .burger.active span:nth-child(3) {
+            transform: rotate(-45deg) translate(6px, -6px);
+        }
+    </style>
+</head>
+<body>
+    <div class="background"></div>
+
+    <!-- ================= NAVBAR ================= -->
+    <header class="navbar">
+        <div class="nav-container">
+            <a href="index.html" class="logo">
+                <img src="/images/TTF.png" alt="TTFBB">
+            </a>
+            <nav>
+                <ul class="nav-menu">
+                    <li><a href="newswire.html">НОВОСТНАЯ ЛЕНТА</a></li>
+                    <li><a href="videos.html">ВИДЕОРОЛИКИ</a></li>
+                    <li><a href="schedule.html">РАСПИСАНИЕ</a></li>
+                    <li><a href="character.html">ПРОФИЛЬ</a></li>
+                </ul>
+            </nav>
+            <button class="burger" aria-label="Меню">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+        </div>
+    </header>
+
+    <!-- ================= КОНТЕНТ: ГАЙДЫ ================= -->
+    <main class="guides-container">
+        <div class="page-header">
+            <h1>📘 Полезные гайды</h1>
+            <p class="subtitle">Всё, что нужно знать о нашем проекте: от покупок до первых шагов</p>
+        </div>
+
+        <div class="guides-grid">
+            <!-- Гайд 1 -->
+            <div class="guide-card">
+                <div class="guide-icon">
+                    <i class="fa-solid fa-cart-shopping"></i>
+                </div>
+                <h3>Как купить пропуск?</h3>
+                <p>Подробная инструкция по приобретению сезонного пропуска или внутриигровой валюты. Безопасно и быстро.</p>
+                <a href="#" class="guide-link">
+                    Читать <i class="fa-solid fa-arrow-right"></i>
+                </a>
+            </div>
+
+            <!-- Гайд 2 -->
+            <div class="guide-card">
+                <div class="guide-icon">
+                    <i class="fa-solid fa-gamepad"></i>
+                </div>
+                <h3>Первые шаги в игре</h3>
+                <p>С чего начать новичку? Базовые механики, настройка персонажа и первые квесты в мире TTFBB.</p>
+                <a href="#" class="guide-link">
+                    Читать <i class="fa-solid fa-arrow-right"></i>
+                </a>
+            </div>
+
+            <!-- Гайд 3 -->
+            <div class="guide-card">
+                <div class="guide-icon">
+                    <i class="fa-solid fa-gem"></i>
+                </div>
+                <h3>Заработок валюты</h3>
+                <p>Лучшие способы фарма монет и кристаллов. Актуальные методы, ежедневные задания и секретные места.</p>
+                <a href="#" class="guide-link">
+                    Читать <i class="fa-solid fa-arrow-right"></i>
+                </a>
+            </div>
+
+            <!-- Гайд 4 -->
+            <div class="guide-card">
+                <div class="guide-icon">
+                    <i class="fa-solid fa-users"></i>
+                </div>
+                <h3>Мультиплеер и кооператив</h3>
+                <p>Как пригласить друга, создать клан и проходить сложные рейды вместе с братьями по оружию.</p>
+                <a href="#" class="guide-link">
+                    Читать <i class="fa-solid fa-arrow-right"></i>
+                </a>
+            </div>
+
+            <!-- Гайд 5 -->
+            <div class="guide-card">
+                <div class="guide-icon">
+                    <i class="fa-solid fa-wrench"></i>
+                </div>
+                <h3>Крафт и улучшения</h3>
+                <p>Полный гайд по крафту экипировки. Где достать редкие ресурсы и как прокачать снаряжение до максимума.</p>
+                <a href="#" class="guide-link">
+                    Читать <i class="fa-solid fa-arrow-right"></i>
+                </a>
+            </div>
+
+            <!-- Гайд 6 -->
+            <div class="guide-card">
+                <div class="guide-icon">
+                    <i class="fa-solid fa-headset"></i>
+                </div>
+                <h3>Техподдержка и баги</h3>
+                <p>Что делать, если покупка не пришла? Как связаться с поддержкой и решить технические проблемы.</p>
+                <a href="#" class="guide-link">
+                    Читать <i class="fa-solid fa-arrow-right"></i>
+                </a>
+            </div>
+        </div>
+    </main>
+
+    <!-- ================= FOOTER ================= -->
+    <footer id="footer">
+        <div class="container">
+            <div class="footer-top">
+                <div class="footer-brand">
+                    <h2>TTFBB COMPANY</h2>
+                    <p>Два брата в увлекательных приключениях.</p>
+                </div>
+                <div class="footer-social">
+                    <a href="https://www.youtube.com/@n1kolayrl" target="_blank"><i class="fa-brands fa-youtube"></i></a>
+                    <a href="https://t.me/nesoqiton" target="_blank"><i class="fa-brands fa-telegram"></i></a>
+                    <a href="#"><i class="fa-brands fa-instagram"></i></a>
+                </div>
+            </div>
+            <div class="footer-grid">
+                <div>
+                    <h4>Навигация</h4>
+                    <ul>
+                        <li><a href="index.html">Главная</a></li>
+                        <li><a href="newswire.html">Новости</a></li>
+                        <li><a href="videos.html">Видео</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4>Контакты</h4>
+                    <ul>
+                        <li>Никита<br>+375 (29) 959-00-97</li>
+                        <li>Евгений<br>+375 (25) 791-40-26</li>
+                    </ul>
+                </div>
+                <div>
+                    <h4>Telegram</h4>
+                    <ul>
+                        <li><a href="https://t.me/nesoqiton">@nesoqiton</a></li>
+                        <li><a href="https://t.me/">Nickname not found</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <span>© 2025–2026 TTFBB COMPANY</span>
+                <div>
+                    <a href="privacy.html">Политика конфиденциальности</a>
+                    <a href="#">Условия использования</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Скрипты для navbar (идентично вашему коду) -->
+    <script>
+        let lastScroll = 0;
+        const navbar = document.querySelector(".navbar");
+
+        window.addEventListener("scroll", () => {
+            const currentScroll = window.pageYOffset;
+            if (currentScroll <= 0) {
+                navbar.classList.remove("hide");
+                return;
+            }
+            if (currentScroll > lastScroll) {
+                navbar.classList.add("hide");
+            } else {
+                navbar.classList.remove("hide");
+            }
+            lastScroll = currentScroll;
+        });
+
+        window.addEventListener("scroll", () => {
+            if (window.scrollY > 20) {
+                navbar.classList.add("scrolled");
+            } else {
+                navbar.classList.remove("scrolled");
+            }
+        });
+
+        const burger = document.querySelector(".burger");
+        const menu = document.querySelector(".nav-menu");
+
+        burger.addEventListener("click", () => {
+            burger.classList.toggle("active");
+            menu.classList.toggle("active");
+        });
+
+        document.querySelectorAll(".nav-menu a").forEach(link => {
+            link.addEventListener("click", () => {
+                burger.classList.remove("active");
+                menu.classList.remove("active");
+            });
+        });
+    </script>
+</body>
+</html>
