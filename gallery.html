@@ -1,13 +1,17 @@
 <!DOCTYPE html>
 <html lang="ru">
+
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
-    <title>Фотогалерея — TTFBB COMPANY</title>
-    <link rel="icon" href="images/logo.png" type="images/logo.png">
+    <meta name="viewport"
+        content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=yes, viewport-fit=cover">
+    <title>TTFBB COMPANY</title>
+    <link rel="icon" href="images/logo.png" type="image/png">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,300..900;1,14..32,300..900&display=swap"
+        rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
     <style>
         * {
@@ -16,384 +20,563 @@
             box-sizing: border-box;
         }
 
-        html {
-            scroll-behavior: smooth;
-        }
-
         body {
-            padding-top: 82px;
-            font-family: "Inter", sans-serif;
-            background: black;
-            color: #fff;
-            -webkit-tap-highlight-color: transparent;
+            font-family: 'Inter', sans-serif;
+            background: #000;
+            color: #f0f0f5;
+            line-height: 1.5;
+            min-height: 100vh;
+            overflow-x: hidden;
         }
 
         .background {
-            background: linear-gradient(rgba(0, 0, 0, .82), rgba(0, 0, 0, .82)),
-                url("/images/6cac0d2e6cc7a8508d0e5ef6c09a8ff02de7e946.png") repeat;
             position: fixed;
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
+            background: #000;
             z-index: -1;
         }
 
-        /* NAVBAR */
         .navbar {
             position: fixed;
             top: 0;
-            left: 0;
             width: 100%;
-            height: 82px;
-            display: flex;
-            align-items: center;
-            background: rgba(10, 10, 10, .55);
-            -webkit-backdrop-filter: blur(18px);
-            backdrop-filter: blur(18px);
-            border-bottom: 1px solid rgba(255, 255, 255, .06);
-            transition: transform .35s ease, background .3s ease;
-            z-index: 1000;
+            z-index: 100;
+            backdrop-filter: blur(12px);
+            background: rgba(0, 0, 0, 0.85);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+            transition: transform 0.3s, background 0.3s;
         }
 
         .navbar.hide {
             transform: translateY(-100%);
         }
 
+        .navbar.scrolled {
+            background: rgba(0, 0, 0, 0.95);
+        }
+
         .nav-container {
-            width: 1700px;
-            max-width: 96%;
-            height: 82px;
-            margin: auto;
+            max-width: 1300px;
+            margin: 0 auto;
             display: flex;
-            justify-content: space-between;
             align-items: center;
+            justify-content: space-between;
+            padding: 0.8rem 1.5rem;
         }
 
         .logo img {
-            height: 42px;
+            height: 40px;
+            filter: none;
         }
 
         .nav-menu {
             display: flex;
-            gap: 46px;
+            gap: 2rem;
             list-style: none;
+            font-weight: 500;
+            letter-spacing: 0.5px;
         }
 
         .nav-menu a {
-            color: #d7d7d7;
             text-decoration: none;
-            font-size: 15px;
-            font-weight: 700;
-            letter-spacing: .4px;
-            transition: .2s;
-            padding: 5px 0;
+            color: #ddd;
+            font-size: 0.9rem;
+            transition: 0.3s;
+            padding: 0.3rem 0;
         }
 
-        .nav-menu a.active-page {
-            background: linear-gradient(135deg, #a855f7, #7c3aed);
+        .nav-menu a:hover {
+            color: #ff5e7e;
+        }
+
+        .burger {
+            display: none;
+            flex-direction: column;
+            gap: 5px;
+            background: none;
+            border: none;
+            cursor: pointer;
+        }
+
+        .burger span {
+            width: 26px;
+            height: 2.5px;
+            background: #fff;
+            border-radius: 3px;
+            transition: 0.3s;
+        }
+
+        @media (max-width: 768px) {
+            .nav-menu {
+                position: fixed;
+                top: 70px;
+                right: -100%;
+                flex-direction: column;
+                background: rgba(0, 0, 0, 0.95);
+                backdrop-filter: blur(20px);
+                width: 260px;
+                padding: 2rem;
+                border-radius: 0 0 0 20px;
+                gap: 1.8rem;
+                transition: 0.4s;
+                border-left: 1px solid rgba(255, 255, 255, 0.1);
+            }
+
+            .nav-menu.active {
+                right: 0;
+            }
+
+            .burger {
+                display: flex;
+            }
+        }
+
+        .hero {
+            padding: 140px 1.5rem 60px;
+            text-align: center;
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        .hero-title {
+            font-size: clamp(2.2rem, 6vw, 4rem);
+            font-weight: 800;
+            line-height: 1.2;
+        }
+
+        .accent {
+            background: linear-gradient(135deg, #ff5e7e, #ff8c5a);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
-            background-clip: text;
-            font-weight: 800;
         }
 
-        .navbar.scrolled {
-            background: rgba(10, 10, 10, .72);
-            -webkit-backdrop-filter: blur(22px);
-            backdrop-filter: blur(22px);
+        .hero-description {
+            color: #b0b0c0;
+            margin: 1.5rem 0;
+            font-size: 1.1rem;
         }
 
-        /* GALLERY */
-        .gallery-page {
-            width: 1200px;
-            max-width: 94%;
-            margin: 40px auto 80px;
+        .gallery-section {
+            padding: 2rem 1.5rem 4rem;
+            max-width: 1300px;
+            margin: 0 auto;
         }
 
-        .page-title {
-            font-size: 48px;
-            font-weight: 900;
-            text-align: center;
-            margin-bottom: 50px;
-            letter-spacing: -1px;
-        }
-
-        /* TABS */
-        .gallery-tabs {
+        .section-header {
+            margin-bottom: 2.5rem;
             display: flex;
-            justify-content: center;
-            gap: 20px;
-            margin-bottom: 50px;
+            align-items: center;
+            justify-content: space-between;
             flex-wrap: wrap;
+            gap: 1rem;
         }
 
-        .tab-btn {
-            padding: 16px 36px;
-            border: 2px solid rgba(255, 255, 255, 0.2);
-            background: rgba(20, 20, 20, 0.8);
-            color: #999;
-            border-radius: 40px;
+        .section-header h2 {
+            font-size: 2.2rem;
             font-weight: 700;
-            font-size: 16px;
-            transition: all 0.3s;
-            font-family: "Inter", sans-serif;
-            user-select: none;
-            -webkit-user-select: none;
-            white-space: nowrap;
-            cursor: pointer;
-            pointer-events: auto;
         }
 
-        .tab-btn.active {
-            background: #ffffff;
-            color: #000000;
-            border-color: #ffffff;
-            box-shadow: 0 4px 20px rgba(255, 255, 255, 0.2);
-            font-weight: 800;
+        .section-subtitle {
+            color: #aaa;
+            margin-top: 0.3rem;
         }
 
-        .tab-content {
-            display: none;
-        }
-
-        .tab-content.active {
-            display: block;
-            animation: fade 0.4s ease;
-        }
-
-        /* ALBUMS */
-        .album-scroll {
+        .view-toggle {
             display: flex;
-            gap: 25px;
-            overflow-x: auto;
-            padding-bottom: 20px;
-            -webkit-overflow-scrolling: touch;
+            gap: 0.5rem;
+            background: rgba(255, 255, 255, 0.05);
+            padding: 0.3rem;
+            border-radius: 40px;
+            backdrop-filter: blur(10px);
+        }
+
+        .toggle-btn {
+            padding: 0.6rem 1.5rem;
+            border-radius: 30px;
+            border: none;
+            background: transparent;
+            color: #ccc;
+            font-weight: 600;
+            font-size: 0.9rem;
+            cursor: pointer;
+            transition: 0.3s;
+            white-space: nowrap;
+        }
+
+        .toggle-btn.active {
+            background: #ff4d6d;
+            color: white;
+            box-shadow: 0 8px 18px rgba(255, 77, 109, 0.3);
+        }
+
+        .albums-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+            gap: 1.8rem;
+            margin-bottom: 2rem;
         }
 
         .album-card {
-            min-width: 300px;
-            max-width: 350px;
-            background: #0d0d0d;
-            border-radius: 18px;
-            border: 1px solid rgba(255, 255, 255, 0.08);
+            background: rgba(20, 20, 20, 0.9);
+            backdrop-filter: blur(12px);
+            border-radius: 24px;
             overflow: hidden;
-            flex-shrink: 0;
-        }
-
-        .album-header {
-            padding: 20px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            flex-wrap: wrap;
-            gap: 10px;
-            border-bottom: 1px solid rgba(255, 255, 255, 0.06);
-        }
-
-        .album-header h3 {
-            font-size: 18px;
-            font-weight: 700;
-        }
-
-        .album-download-all {
-            background: none;
-            border: 1px solid rgba(255, 255, 255, 0.25);
-            color: #fff;
-            padding: 8px 16px;
-            border-radius: 20px;
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            transition: transform 0.3s, border-color 0.3s;
             cursor: pointer;
-            font-size: 13px;
-            font-weight: 600;
+            position: relative;
+        }
+
+        .album-card:hover {
+            transform: translateY(-5px);
+            border-color: #ff5e7e;
+        }
+
+        .album-thumb {
+            height: 180px;
+            background-size: cover;
+            background-position: center;
+        }
+
+        .album-info {
+            padding: 1.2rem;
+        }
+
+        .album-info h3 {
+            font-size: 1.3rem;
+            margin-bottom: 0.3rem;
+        }
+
+        .album-count {
+            color: #aaa;
+            font-size: 0.9rem;
+        }
+
+        .download-album-btn {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            background: rgba(0, 0, 0, 0.7);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            color: white;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
             display: flex;
             align-items: center;
-            gap: 6px;
-            font-family: "Inter", sans-serif;
-        }
-
-        .album-images {
-            display: grid;
-            grid-template-columns: repeat(2, 1fr);
-            gap: 8px;
-            padding: 15px;
-        }
-
-        .album-images img {
-            width: 100%;
-            aspect-ratio: 1/1;
-            object-fit: cover;
-            border-radius: 10px;
+            justify-content: center;
             cursor: pointer;
-            background: #111;
+            transition: 0.3s;
+            backdrop-filter: blur(5px);
+            z-index: 5;
         }
 
-        /* ALL PHOTOS */
-        .all-photos-grid {
+        .download-album-btn:hover {
+            background: #ff4d6d;
+            border-color: #ff4d6d;
+        }
+
+        .photo-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-            gap: 18px;
+            grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+            gap: 1rem;
+            margin: 1.8rem 0;
         }
 
         .photo-item {
-            position: relative;
-            border-radius: 14px;
-            overflow: hidden;
-            border: 1px solid rgba(255, 255, 255, 0.08);
-            background: #0a0a0a;
-        }
-
-        .photo-item img {
-            width: 100%;
-            height: auto;
-            display: block;
+            aspect-ratio: 1/1;
+            border-radius: 18px;
+            background-size: cover;
+            background-position: center;
+            transition: 0.3s;
             cursor: pointer;
+            border: 2px solid transparent;
         }
 
-        .photo-download {
-            position: absolute;
-            bottom: 15px;
-            right: 15px;
-            background: rgba(0, 0, 0, 0.8);
-            backdrop-filter: blur(8px);
+        .photo-item:hover {
+            border-color: #ff5e7e;
+            transform: scale(1.02);
+        }
+
+        .gallery-controls {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 1rem;
+            margin: 2rem 0 1rem;
+            flex-wrap: wrap;
+        }
+
+        .ctrl-btn {
+            background: rgba(255, 255, 255, 0.06);
+            border: 1px solid rgba(255, 255, 255, 0.2);
             color: #fff;
-            border: 1px solid rgba(255, 255, 255, 0.3);
-            padding: 8px 14px;
-            border-radius: 20px;
-            font-size: 13px;
-            font-weight: 600;
-            cursor: pointer;
-            display: none;
-            gap: 5px;
-            z-index: 10;
-            font-family: "Inter", sans-serif;
-        }
-
-        .photo-item.active .photo-download {
+            font-size: 1.3rem;
+            width: 48px;
+            height: 48px;
+            border-radius: 30px;
             display: flex;
             align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: 0.25s;
+            backdrop-filter: blur(8px);
+            -webkit-tap-highlight-color: transparent;
+            user-select: none;
         }
 
-        /* MODAL */
-        .modal-overlay {
+        .ctrl-btn:active {
+            background: #ff4d6d;
+            border-color: #ff4d6d;
+            transform: scale(0.94);
+        }
+
+        .ctrl-btn:disabled {
+            opacity: 0.4;
+            pointer-events: none;
+        }
+
+        .page-indicator {
+            background: rgba(255, 255, 255, 0.05);
+            padding: 0.5rem 1.3rem;
+            border-radius: 30px;
+            font-weight: 600;
+            backdrop-filter: blur(8px);
+        }
+
+        .back-to-albums {
+            background: transparent;
+            border: 1px solid rgba(255, 255, 255, 0.25);
+            color: #ccc;
+            width: 48px;
+            height: 48px;
+            border-radius: 30px;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: 0.25s;
+            backdrop-filter: blur(8px);
+            margin-right: 0.5rem;
+        }
+
+        .back-to-albums:active {
+            background: #ff4d6d;
+            border-color: #ff4d6d;
+            transform: scale(0.94);
+        }
+
+        .download-current-album {
+            background: rgba(255, 255, 255, 0.1);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            color: #fff;
+            padding: 0.5rem 1.2rem;
+            border-radius: 25px;
+            cursor: pointer;
+            font-weight: 500;
+            transition: 0.3s;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .download-current-album:hover {
+            background: #ff4d6d;
+            border-color: #ff4d6d;
+        }
+
+        .lightbox-overlay {
             position: fixed;
             top: 0;
             left: 0;
-            width: 100vw;
-            height: 100vh;
+            width: 100%;
+            height: 100%;
             background: rgba(0, 0, 0, 0.95);
-            display: none;
+            backdrop-filter: blur(10px);
+            z-index: 999;
+            display: flex;
             align-items: center;
             justify-content: center;
-            z-index: 2000;
         }
 
-        .modal-overlay.active {
-            display: flex;
-        }
-
-        .modal-container {
+        .lightbox-content {
             position: relative;
-            max-width: 90vw;
-            max-height: 90vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            max-width: 90%;
+            max-height: 85%;
         }
 
-        .modal-content {
-            max-width: 90vw;
-            max-height: 85vh;
-            border-radius: 16px;
+        .lightbox-img {
+            max-width: 100%;
+            max-height: 80vh;
+            border-radius: 20px;
+            box-shadow: 0 25px 50px rgba(0, 0, 0, 0.7);
             object-fit: contain;
         }
 
-        .modal-close {
+        .lightbox-close {
             position: absolute;
-            top: -45px;
-            right: 0;
-            color: #fff;
-            font-size: 36px;
-            cursor: pointer;
-            background: none;
-            border: none;
-        }
-
-        .modal-download {
-            position: absolute;
-            bottom: -55px;
-            right: 0;
+            top: 20px;
+            right: 25px;
             background: rgba(255, 255, 255, 0.15);
-            color: #fff;
-            border: 1px solid rgba(255, 255, 255, 0.3);
-            padding: 12px 24px;
-            border-radius: 30px;
-            font-size: 14px;
-            font-weight: 600;
+            border: none;
+            color: white;
+            font-size: 2rem;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
             cursor: pointer;
+            backdrop-filter: blur(8px);
             display: flex;
             align-items: center;
-            gap: 8px;
-            font-family: "Inter", sans-serif;
+            justify-content: center;
+            z-index: 1000;
         }
 
-        /* FOOTER */
-        #footer {
-            margin-top: 80px;
-            background: #000000;
-            border-top: 1px solid rgba(255, 255, 255, .08);
-            padding: 35px 0 20px;
+        .lightbox-nav {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            background: rgba(255, 255, 255, 0.1);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            color: white;
+            font-size: 1.8rem;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            cursor: pointer;
+            backdrop-filter: blur(8px);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 1000;
         }
 
-        #footer .container {
-            width: 1200px;
-            max-width: 94%;
-            margin: auto;
+        .lightbox-prev {
+            left: 20px;
+        }
+
+        .lightbox-next {
+            right: 20px;
+        }
+
+        .lightbox-counter {
+            position: absolute;
+            bottom: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: rgba(0, 0, 0, 0.7);
+            color: white;
+            padding: 0.5rem 1.5rem;
+            border-radius: 30px;
+            backdrop-filter: blur(8px);
+        }
+
+        .lightbox-download {
+            position: absolute;
+            bottom: 20px;
+            right: 25px;
+            background: rgba(255, 255, 255, 0.15);
+            border: none;
+            color: white;
+            font-size: 1.2rem;
+            width: 45px;
+            height: 45px;
+            border-radius: 50%;
+            cursor: pointer;
+            backdrop-filter: blur(8px);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 1000;
+        }
+
+        @media (max-width: 768px) {
+            .lightbox-nav {
+                width: 40px;
+                height: 40px;
+                font-size: 1.4rem;
+            }
+
+            .lightbox-prev {
+                left: 10px;
+            }
+
+            .lightbox-next {
+                right: 10px;
+            }
+
+            .lightbox-close {
+                top: 15px;
+                right: 15px;
+                width: 40px;
+                height: 40px;
+                font-size: 1.5rem;
+            }
+
+            .lightbox-download {
+                bottom: 15px;
+                right: 15px;
+                width: 38px;
+                height: 38px;
+                font-size: 1rem;
+            }
+        }
+
+        footer {
+            background: #000;
+            backdrop-filter: blur(15px);
+            padding: 2rem 1.5rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.05);
+            margin-top: 2rem;
+            color: #aaa;
+        }
+
+        .footer-container {
+            max-width: 1300px;
+            margin: 0 auto;
         }
 
         .footer-top {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            margin-bottom: 30px;
+            flex-wrap: wrap;
+            gap: 1rem;
+            margin-bottom: 1.5rem;
         }
 
         .footer-brand h2 {
-            font-size: 26px;
-            font-weight: 900;
+            font-size: 1.5rem;
             color: #fff;
         }
 
-        .footer-brand p {
-            color: #777;
-            font-size: 14px;
-        }
-
-        .footer-social {
-            display: flex;
-            gap: 12px;
-        }
-
         .footer-social a {
-            width: 42px;
-            height: 42px;
-            border-radius: 10px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            text-decoration: none;
-            color: #bdbdbd;
-            border: 1px solid rgba(255, 255, 255, .08);
+            color: #ccc;
+            font-size: 1.4rem;
+            margin-left: 1rem;
+            transition: 0.3s;
+        }
+
+        .footer-social a:hover {
+            color: #ff5e7e;
         }
 
         .footer-grid {
             display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 50px;
-            padding: 28px 0;
-            border-top: 1px solid rgba(255, 255, 255, .05);
-            border-bottom: 1px solid rgba(255, 255, 255, .05);
+            grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+            gap: 2rem;
+            margin-bottom: 1.5rem;
         }
 
         .footer-grid h4 {
             color: #fff;
-            margin-bottom: 15px;
+            margin-bottom: 0.8rem;
         }
 
         .footer-grid ul {
@@ -401,215 +584,92 @@
         }
 
         .footer-grid li {
-            margin-bottom: 10px;
-            color: #888;
+            margin-bottom: 0.4rem;
+            font-size: 0.9rem;
         }
 
         .footer-grid a {
-            color: #888;
+            color: #aaa;
             text-decoration: none;
         }
 
         .footer-bottom {
-            margin-top: 18px;
             display: flex;
             justify-content: space-between;
-            color: #666;
-            font-size: 13px;
-        }
-
-        .footer-bottom div {
-            display: flex;
-            gap: 20px;
+            flex-wrap: wrap;
+            gap: 1rem;
+            font-size: 0.85rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.08);
+            padding-top: 1.2rem;
         }
 
         .footer-bottom a {
-            color: #666;
+            color: #aaa;
             text-decoration: none;
+            margin-left: 1.2rem;
         }
 
-        /* BURGER */
-        .burger {
-            display: none;
-            width: 42px;
-            height: 42px;
-            background: none;
-            border: 0;
-            flex-direction: column;
-            justify-content: center;
-            gap: 6px;
-            cursor: pointer;
-        }
+        @media (max-width: 500px) {
+            .photo-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
 
-        .burger span {
-            width: 25px;
-            height: 2px;
-            background: white;
-            display: block;
-            transition: .3s;
-        }
-
-        @media(max-width:768px) {
-            .burger {
-                display: flex;
-                margin-left: auto;
-            }
-            nav {
-                position: absolute;
-                top: 82px;
-                left: 0;
-                width: 100%;
-            }
-            .nav-menu {
-                width: 100%;
-                background: rgba(10, 10, 10, .95);
-                backdrop-filter: blur(25px);
-                flex-direction: column;
-                align-items: center;
-                gap: 30px;
-                padding: 35px 0;
-                transform: translateY(-150%);
-                transition: .35s ease;
-                border-bottom: 1px solid rgba(255, 255, 255, .08);
-            }
-            .nav-menu.active {
-                transform: translateY(0);
-            }
-            .footer-grid {
-                grid-template-columns: 1fr;
-            }
-            .footer-top {
-                flex-direction: column;
-                gap: 20px;
-            }
             .footer-bottom {
                 flex-direction: column;
-                gap: 15px;
+                align-items: flex-start;
             }
-            .page-title {
-                font-size: 32px;
-            }
-            .all-photos-grid {
-                grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
-                gap: 10px;
-            }
-        }
-
-        .burger.active span:nth-child(1) {
-            transform: rotate(45deg) translate(5px, 5px);
-        }
-        .burger.active span:nth-child(2) {
-            opacity: 0;
-        }
-        .burger.active span:nth-child(3) {
-            transform: rotate(-45deg) translate(6px, -6px);
-        }
-
-        @keyframes fade {
-            from { opacity: 0; transform: translateY(15px); }
-            to { opacity: 1; transform: translateY(0); }
         }
     </style>
 </head>
+
 <body>
     <div class="background"></div>
 
-    <!-- NAVBAR -->
     <header class="navbar" id="navbar">
         <div class="nav-container">
-            <a href="index.html" class="logo">
-                <img src="/images/TTF.png" alt="TTFBB">
-            </a>
-            <button class="burger" id="burgerBtn">
-                <span></span><span></span><span></span>
-            </button>
+            <a href="index.html" class="logo"><img src="images/TTF.png" alt="TTFBB"></a>
             <nav>
                 <ul class="nav-menu" id="navMenu">
                     <li><a href="newswire.html">НОВОСТНАЯ ЛЕНТА</a></li>
                     <li><a href="videos.html">ВИДЕОРОЛИКИ</a></li>
-                    <li><a href="gallery.html" class="active-page">ФОТОГАЛЕРЕЯ</a></li>
+                    <li><a href="#" style="color:#ff5e7e; font-weight:600;">ФОТОГАЛЕРЕЯ</a></li>
                     <li><a href="schedule.html">РАСПИСАНИЕ</a></li>
                     <li><a href="character.html">ПРОФИЛЬ</a></li>
                 </ul>
             </nav>
+            <button class="burger" id="burgerBtn"><span></span><span></span><span></span></button>
         </div>
     </header>
 
-    <!-- MODAL -->
-    <div class="modal-overlay" id="modalOverlay">
-        <div class="modal-container">
-            <button class="modal-close" id="modalClose">&times;</button>
-            <img src="" alt="" class="modal-content" id="modalImage">
-            <button class="modal-download" id="modalDownload">
-                <i class="fas fa-download"></i> Скачать
-            </button>
-        </div>
-    </div>
+    <section class="hero">
+        <h2 class="hero-title"><span class="accent">ВОСПОМИНАНИЯ ТУТ</span></h2>
+        <p class="hero-description">Самые лучшие и классные фотографии приключений лучших братьев.</p>
+    </section>
 
-    <!-- GALLERY -->
-    <main class="gallery-page">
-        <h1 class="page-title">Фотогалерея</h1>
-
-        <div class="gallery-tabs">
-            <button class="tab-btn active" id="tabAlbums">Альбомы по дате</button>
-            <button class="tab-btn" id="tabAll">Все фотографии</button>
-        </div>
-
-        <div class="tab-content active" id="contentAlbums">
-            <div class="album-scroll">
-                <div class="album-card" data-date="2026-07-20">
-                    <div class="album-header">
-                        <h3>20 июля 2026</h3>
-                        <button class="album-download-all"><i class="fas fa-download"></i> Скачать всё</button>
-                    </div>
-                    <div class="album-images">
-                        <img src="/images/ВОЗВРАЩЕНИЕ.jpg" alt="Возвращение" data-full="/images/ВОЗВРАЩЕНИЕ.jpg">
-                        <img src="/images/ДОМАШНИЕ И УЛИЧНЫЕ ПРИКЛЮЧЕНИЯ.png" alt="Приключения" data-full="/images/ДОМАШНИЕ И УЛИЧНЫЕ ПРИКЛЮЧЕНИЯ.png">
-                        <img src="/images/ДОМАШНИЙ АРЕСТ.png" alt="Арест" data-full="/images/ДОМАШНИЙ АРЕСТ.png">
-                        <img src="/images/Итоги недели 08-14 декабря 2025.png" alt="Итоги" data-full="/images/Итоги недели 08-14 декабря 2025.png">
-                    </div>
-                </div>
-
-                <div class="album-card" data-date="2026-06-15">
-                    <div class="album-header">
-                        <h3>15 июня 2026</h3>
-                        <button class="album-download-all"><i class="fas fa-download"></i> Скачать всё</button>
-                    </div>
-                    <div class="album-images">
-                        <img src="/images/НАВОДИМ СУЕТУ НА РАЙОНЕ.png" alt="Суета" data-full="/images/НАВОДИМ СУЕТУ НА РАЙОНЕ.png">
-                        <img src="/images/ОБНОВА ЛЕТНЯЯ САЙТА.png" alt="Обнова" data-full="/images/ОБНОВА ЛЕТНЯЯ САЙТА.png">
-                        <img src="/images/ОНЛАЙН ИГРЫ.jpg" alt="Игры" data-full="/images/ОНЛАЙН ИГРЫ.jpg">
-                    </div>
-                </div>
-
-                <div class="album-card" data-date="2026-05-01">
-                    <div class="album-header">
-                        <h3>1 мая 2026</h3>
-                        <button class="album-download-all"><i class="fas fa-download"></i> Скачать всё</button>
-                    </div>
-                    <div class="album-images">
-                        <img src="/images/ЭКШЕН УЖЕ СЕГОДНЯ.png" alt="Экшен" data-full="/images/ЭКШЕН УЖЕ СЕГОДНЯ.png">
-                        <img src="/images/missions/36.jpg" alt="Миссия" data-full="/images/missions/36.jpg">
-                    </div>
-                </div>
+    <section class="gallery-section">
+        <div class="section-header">
+            <div>
+                <h2>📸 Фотогалерея</h2>
+                <p class="section-subtitle">Выберите альбом или смотрите все снимки</p>
+            </div>
+            <div class="view-toggle" id="viewToggle">
+                <button class="toggle-btn active" data-view="albums">Альбомы</button>
+                <button class="toggle-btn" data-view="allPhotos">Все фотографии</button>
             </div>
         </div>
+        <div id="galleryContainer"></div>
+    </section>
 
-        <div class="tab-content" id="contentAll">
-            <div class="all-photos-grid" id="allPhotosGrid"></div>
-        </div>
-    </main>
-
-    <!-- FOOTER -->
-    <footer id="footer">
-        <div class="container">
+    <footer>
+        <div class="footer-container">
             <div class="footer-top">
                 <div class="footer-brand">
                     <h2>TTFBB COMPANY</h2>
                     <p>Два брата в увлекательных приключениях.</p>
                 </div>
                 <div class="footer-social">
-                    <a href="https://www.youtube.com/@n1kolayrl" target="_blank"><i class="fa-brands fa-youtube"></i></a>
+                    <a href="https://www.youtube.com/@n1kolayrl" target="_blank"><i
+                            class="fa-brands fa-youtube"></i></a>
                     <a href="https://t.me/nesoqiton" target="_blank"><i class="fa-brands fa-telegram"></i></a>
                     <a href="#"><i class="fa-brands fa-instagram"></i></a>
                 </div>
@@ -621,7 +681,6 @@
                         <li><a href="index.html">Главная</a></li>
                         <li><a href="newswire.html">Новости</a></li>
                         <li><a href="videos.html">Видео</a></li>
-                        <li><a href="gallery.html">Фотогалерея</a></li>
                     </ul>
                 </div>
                 <div>
@@ -639,200 +698,1057 @@
                     </ul>
                 </div>
             </div>
-            <div class="footer-bottom">
-                <span>© 2025–2026 TTFBB COMPANY</span>
-                <div>
-                    <a href="privacy.html">Политика конфиденциальности</a>
-                    <a href="#">Условия использования</a>
-                </div>
+            <div class="footer-bottom"><span>© 2025–2026 TTFBB COMPANY</span>
+                <div><a href="privacy.html">Политика конфиденциальности</a><a href="#">Условия использования</a></div>
             </div>
         </div>
     </footer>
 
     <script>
-        // NAVBAR SCROLL
-        let lastScroll = 0;
-        const navbar = document.getElementById('navbar');
-        
-        window.addEventListener('scroll', function() {
-            const currentScroll = window.pageYOffset;
-            
-            if (currentScroll <= 0) {
-                navbar.classList.remove('hide');
-            } else if (currentScroll > lastScroll && currentScroll > 82) {
-                navbar.classList.add('hide');
-            } else {
-                navbar.classList.remove('hide');
-            }
-            
-            lastScroll = currentScroll;
-            
-            if (currentScroll > 20) {
-                navbar.classList.add('scrolled');
-            } else {
-                navbar.classList.remove('scrolled');
-            }
-        });
 
-        // BURGER MENU
+        const albums = [
+            {
+                id: 'start',
+                title: 'НАЧАЛО ПУТИ',
+                thumb: 'gallery/start/cover.jpg', // обложка альбома
+                photos: [
+                    'gallery/start/IMG_20241224_152011.jpg',
+                    'gallery/start/IMG_20241224_152024.jpg',
+                    'gallery/start/IMG_20241224_152028.jpg',
+                    'gallery/start/2025-02-01 15-35-42.jpg',
+                    'gallery/start/2025-02-01 15-35-44.jpg',
+                    'gallery/start/2025-02-01 15-35-44_1755539342.jpg',
+                    'gallery/start/2025-02-01 15-35-48.jpg',
+                    'gallery/start/2025-02-01 15-35-49.jpg',
+                    'gallery/start/2025-02-01 15-35-56.jpg',
+                    'gallery/start/2025-02-01 15-36-00.jpg',
+                    'gallery/start/2025-02-01 15-36-15.jpg',
+                    'gallery/start/2025-02-01 15-36-18.jpg',
+                    'gallery/start/IMG_20250201_153551.jpg',
+                    'gallery/start/IMG_20250201_153605.jpg',   
+                ]
+            },
+            {
+                id: 'school',
+                title: 'ШКОЛА или ПРОГУЛЫ?',
+                thumb: 'gallery/school/cover.jpg', // обложка альбома
+                photos: [
+                    'gallery/school/1/2025-03-19 13-44-24.jpg', 
+                    'gallery/school/1/2025-03-19 13-44-25.jpg', 
+                    'gallery/school/1/2025-03-19 13-44-26.jpg', 
+                    'gallery/school/1/2025-03-19 13-44-49.jpg', 
+                    'gallery/school/1/2025-03-19 13-44-50.jpg', 
+                    'gallery/school/1/2025-03-19 13-45-15.jpg', 
+                    'gallery/school/3/IMG_20250319_134247.jpg',
+                    'gallery/school/1/2025-04-17 09-31-07.jpg',
+                    'gallery/school/1/2025-04-17 09-31-23.jpg',
+                    'gallery/school/1/2025-04-17 09-31-37.jpg',
+                    'gallery/school/1/2025-04-17 09-32-58.jpg',
+                    'gallery/school/1/2025-04-17 09-33-11.jpg',
+                    'gallery/school/1/2025-04-17 09-33-16.jpg',
+                    'gallery/school/1/2025-04-17 09-38-03.jpg',
+                    'gallery/school/1/2025-04-17 09-42-20.jpg',
+                    'gallery/school/1/2025-04-17 09-42-38.jpg',
+                    'gallery/school/1/2025-04-17 09-42-43.jpg',
+                    'gallery/school/1/2025-04-17 09-42-53.jpg',
+                    'gallery/school/1/2025-04-17 09-43-59.jpg',
+                    'gallery/school/1/2025-04-17 09-44-00.jpg',
+                    'gallery/school/1/2025-04-17 09-44-01.jpg',
+                    'gallery/school/1/2025-04-17 09-44-27.jpg',
+                    'gallery/school/1/2025-04-17 09-45-28.jpg',
+                    'gallery/school/1/2025-04-17 09-45-45.jpg',
+                    'gallery/school/1/2025-04-17 09-45-59.jpg',
+                    'gallery/school/4/IMG_20250417_093131.jpg',
+                    'gallery/school/4/IMG_20250417_093254.jpg',
+                    'gallery/school/4/IMG_20250417_093105.jpg',
+                    'gallery/school/4/IMG_20250417_093319.jpg',
+                    'gallery/school/4/IMG_20250417_093328.jpg',
+                    'gallery/school/4/IMG_20250417_093800.jpg',
+                    'gallery/school/4/IMG_20250417_093817.jpg',
+                    'gallery/school/4/IMG_20250417_093911.jpg',
+                    'gallery/school/4/IMG_20250417_093924.jpg',
+                    'gallery/school/4/IMG_20250417_094021.jpg',
+                    'gallery/school/4/IMG_20250417_094022.jpg',
+                    'gallery/school/4/IMG_20250417_094037.jpg',
+                    'gallery/school/4/IMG_20250417_094041.jpg',
+                    'gallery/school/4/IMG_20250417_094054.jpg',
+                    'gallery/school/4/IMG_20250417_094059.jpg',
+                    'gallery/school/4/IMG_20250417_094104.jpg',
+                    'gallery/school/4/IMG_20250417_094139.jpg',
+                    'gallery/school/4/IMG_20250417_094149.jpg',
+                    'gallery/school/5/IMG_20250417_094200.jpg',
+                    'gallery/school/5/IMG_20250417_094355.jpg',
+                    'gallery/school/5/IMG_20250417_094411.jpg',
+                    'gallery/school/5/IMG_20250417_094417.jpg',
+                    'gallery/school/5/IMG_20250417_094530.jpg',
+                    'gallery/school/5/IMG_20250417_094538.jpg',
+                    'gallery/school/5/IMG_20250417_094548.jpg',
+                    'gallery/school/5/IMG_20250417_094553.jpg',
+                    'gallery/school/5/IMG_20250417_094605.jpg',
+                    'gallery/school/5/IMG_20250417_094732.jpg',
+                    'gallery/school/5/IMG_20250417_094736.jpg',
+                    'gallery/school/5/IMG_20250417_095708.jpg',
+                    'gallery/school/5/IMG_20250417_095709_1.jpg',
+                    'gallery/school/5/IMG_20250417_095717_1.jpg',
+                    'gallery/school/5/IMG_20250417_095718_1.jpg',
+                    'gallery/school/5/IMG_20250417_095719.jpg',
+                    'gallery/school/5/IMG_20250417_095719_1.jpg',
+                    'gallery/school/5/IMG_20250417_095720.jpg',
+                    'gallery/school/5/IMG_20250417_095720_1.jpg',
+                    'gallery/school/5/IMG_20250417_095755.jpg',
+                    'gallery/school/5/IMG_20250417_095756.jpg',
+                    'gallery/school/5/IMG_20250417_095756_1.jpg',
+                    'gallery/school/5/IMG_20250417_095756_2.jpg',
+                    'gallery/school/5/IMG_20250417_095757_1.jpg',
+                    'gallery/school/5/IMG_20250417_095758.jpg',
+                    'gallery/school/5/IMG_20250417_095758_1.jpg',
+                    'gallery/school/5/IMG_20250417_095759.jpg',
+                    'gallery/school/6/IMG_20250417_095759_1.jpg',
+                    'gallery/school/6/IMG_20250417_095802.jpg',
+                    'gallery/school/6/IMG_20250417_095802_1.jpg',
+                    'gallery/school/6/IMG_20250417_095803.jpg',
+                    'gallery/school/6/IMG_20250417_095803_1.jpg',
+                    'gallery/school/6/IMG_20250417_095804_1.jpg',
+                    'gallery/school/6/IMG_20250417_112349.jpg',
+                    'gallery/school/6/IMG_20250417_112429.jpg',
+                    'gallery/school/6/IMG_20250417_112434.jpg',
+                    'gallery/school/6/IMG_20250417_112435.jpg',
+                    'gallery/school/6/IMG_20250417_112445.jpg',
+                    'gallery/school/6/IMG_20250417_112448.jpg',
+                    'gallery/school/6/IMG_20250417_112504.jpg',
+                    'gallery/school/6/IMG_20250417_112532.jpg',
+                    'gallery/school/1/2025-04-17 09-57-09.jpg',
+                    'gallery/school/1/2025-04-17 09-57-16.jpg',
+                    'gallery/school/1/2025-04-17 09-58-04.jpg',
+                    'gallery/school/1/2025-04-17 10-23-15.jpg',
+                    'gallery/school/2/2025-04-17 10-23-24.jpg',
+                    'gallery/school/2/2025-04-17 10-23-36.jpg',
+                    'gallery/school/6/IMG_20250417_132420.jpg',
+                    'gallery/school/6/IMG_20250417_132529.jpg',
+                    'gallery/school/6/IMG_20250418_110506.jpg',
+                    'gallery/school/6/IMG_20250418_110509.jpg',
+                    'gallery/school/6/IMG_20250418_110525.jpg',
+                    'gallery/school/6/IMG_20250418_110526_1.jpg',
+                    'gallery/school/6/IMG_20250418_110501.jpg',
+                    'gallery/school/2/2025-04-18 11-05-28.jpg',
+                    'gallery/school/2/2025-04-18 11-05-29.jpg',
+                    'gallery/school/2/2025-04-18 11-14-04.jpg',
+                    'gallery/school/2/2025-04-18 11-14-05_1755351165.jpg',
+                    'gallery/school/2/2025-04-18 11-48-51.jpg',
+                    'gallery/school/2/2025-04-18 11-48-57.jpg',
+                    'gallery/school/6/IMG_20250418_114809.jpg',
+                    'gallery/school/6/IMG_20250418_114919.jpg',
+                    'gallery/school/6/IMG_20250418_114922.jpg',
+                    'gallery/school/6/IMG_20250418_114923.jpg',
+                    'gallery/school/6/IMG_20250418_114931.jpg',
+                    'gallery/school/6/IMG_20250418_115631.jpg',
+                    'gallery/school/6/IMG_20250418_115631_1.jpg',
+                    'gallery/school/6/IMG_20250418_115633.jpg',
+                    'gallery/school/6/IMG_20250418_115633_1.jpg',
+                    'gallery/school/6/IMG_20250418_115638.jpg',
+                    'gallery/school/6/IMG_20250421_102609.jpg',
+                    'gallery/school/6/IMG_20250421_102611.jpg',
+                    'gallery/school/6/IMG_20250421_102612.jpg',
+                    'gallery/school/6/IMG_20250421_102615.jpg',
+                    'gallery/school/7/IMG_20250421_102630.jpg',
+                    'gallery/school/7/IMG_20250421_102633.jpg',
+                    'gallery/school/7/IMG_20250421_103620.jpg',
+                    'gallery/school/7/IMG_20250421_103625_1.jpg',
+                    'gallery/school/7/IMG_20250421_115138.jpg',
+                    'gallery/school/7/IMG_20250421_115142.jpg',
+                    'gallery/school/7/IMG_20250426_123915.jpg',
+                    'gallery/school/7/IMG_20250426_142327.jpg',
+                    'gallery/school/7/IMG_20250426_142330.jpg',
+                    'gallery/school/7/IMG_20250426_142341.jpg',
+                    'gallery/school/7/IMG_20250426_142350.jpg',
+                    'gallery/school/7/IMG_20250426_142350_1.jpg',
+                    'gallery/school/7/IMG_20250426_142350_2.jpg',
+                    'gallery/school/7/IMG_20250426_142352.jpg',
+                    'gallery/school/7/IMG_20250426_142352_1.jpg',
+                    'gallery/school/7/IMG_20250426_142353.jpg',
+                    'gallery/school/7/IMG_20250426_142354.jpg',
+                    'gallery/school/7/IMG_20250426_142409.jpg',
+                    'gallery/school/7/IMG_20250426_142411.jpg',
+                    'gallery/school/7/IMG_20250426_142412_1.jpg',
+                    'gallery/school/7/IMG_20250426_142429.jpg',
+                    'gallery/school/7/IMG_20250427_135702_129.jpg',
+                    'gallery/school/2/2025-04-18 11-49-02.jpg',
+                    'gallery/school/2/2025-04-18 11-49-14.jpg',
+                    'gallery/school/2/2025-04-18 11-49-34.jpg',
+                    'gallery/school/2/2025-04-18 11-56-24.jpg',
+                    'gallery/school/2/2025-04-18 11-56-25.jpg',
+                    'gallery/school/2/2025-04-18 11-56-25_1755351108.jpg',
+                    'gallery/school/2/2025-04-18 11-56-26.jpg',
+                    'gallery/school/2/2025-04-18 11-56-30.jpg',
+                    'gallery/school/2/2025-04-18 11-56-34.jpg',
+                    'gallery/school/2/2025-04-18 11-56-35.jpg',
+                    'gallery/school/2/2025-04-18 11-56-36.jpg',
+                    'gallery/school/2/2025-04-18 11-56-37.jpg',
+                    'gallery/school/2/2025-04-18 11-56-37_1755351081.jpg',
+                    'gallery/school/2/2025-04-18 11-56-37_1755351086.jpg',
+                    'gallery/school/2/2025-04-18 12-00-01.jpg',
+                    'gallery/school/2/2025-05-02 10-55-16.jpg',
+                    'gallery/school/2/2025-05-02 10-55-17.jpg',
+                    'gallery/school/2/2025-05-02 10-55-18.jpg',
+                    'gallery/school/2/2025-05-02 10-55-23.jpg',
+                    'gallery/school/2/2025-05-02 10-55-26.jpg',
+                    'gallery/school/2/2025-05-02 10-55-28.jpg',
+                    'gallery/school/2/2025-05-02 10-55-35.jpg',
+                    'gallery/school/2/2025-05-02 10-55-37.jpg',
+                    'gallery/school/2/2025-05-02 10-55-39.jpg',
+                    'gallery/school/2/2025-05-02 10-55-40.jpg',
+                    'gallery/school/2/2025-05-02 10-55-45.jpg',
+                    'gallery/school/2/2025-05-02 10-55-47.jpg',
+                    'gallery/school/2/2025-05-02 10-55-51.jpg',
+                    'gallery/school/2/2025-05-02 10-55-53.jpg',
+                    'gallery/school/2/2025-05-02 10-55-54.jpg',
+                    'gallery/school/3/2025-05-02 10-55-54_1755350931.jpg',
+                    'gallery/school/3/2025-05-02 10-55-55.jpg',
+                    'gallery/school/3/2025-05-02 10-55-56.jpg',
+                    'gallery/school/3/2025-05-02 10-55-57.jpg',
+                    'gallery/school/3/2025-05-02 10-56-02.jpg',
+                    'gallery/school/3/2025-05-02 10-56-03.jpg',
+                    'gallery/school/3/2025-05-02 10-56-03_1755350902.jpg',
+                    'gallery/school/3/2025-05-02 10-56-04.jpg',
+                    'gallery/school/3/2025-05-02 10-56-05.jpg',
+                    'gallery/school/3/IMG_20250306_181410.jpg',
+                    'gallery/school/3/IMG_20250306_181427.jpg',
+                    'gallery/school/3/IMG_20250306_181441.jpg',
+                    'gallery/school/3/IMG_20250306_181446.jpg',
+                    'gallery/school/3/IMG_20250306_181452.jpg',
+                    'gallery/school/3/IMG_20250306_181516.jpg',
+                    'gallery/school/3/IMG_20250306_181517.jpg',
+                    'gallery/school/3/IMG_20250306_181522.jpg',
+                    'gallery/school/3/IMG_20250306_181530.jpg',
+                    'gallery/school/3/IMG_20250306_181545.jpg',
+                    'gallery/school/3/IMG_20250306_181601.jpg',
+                    'gallery/school/3/IMG_20250306_181603.jpg',
+                    'gallery/school/3/IMG_20250313_142323.jpg',
+                    'gallery/school/3/IMG_20250313_142334.jpg',
+                    'gallery/school/3/IMG_20250410_130718.jpg',
+                    'gallery/school/3/IMG_20250410_130721.jpg',
+                    'gallery/school/3/IMG_20250410_130728.jpg',
+                    'gallery/school/3/IMG_20250410_130732.jpg',
+                    'gallery/school/3/IMG_20250410_130749.jpg',
+                    'gallery/school/3/IMG_20250410_130752.jpg',
+                    'gallery/school/3/IMG_20250410_130755.jpg',
+                    'gallery/school/3/IMG_20250410_130801.jpg',
+                    'gallery/school/3/IMG_20250410_130805.jpg',
+                    'gallery/school/3/IMG_20250410_130841.jpg',
+                    'gallery/school/3/IMG_20250410_130923.jpg',
+                    'gallery/school/3/IMG_20250410_130925.jpg',
+                    'gallery/school/3/IMG_20250410_130925_1.jpg',
+                    'gallery/school/3/IMG_20250410_130926_1.jpg',
+                    'gallery/school/3/IMG_20250410_130926.jpg',
+                    'gallery/school/4/IMG_20250410_130928.jpg',
+                    'gallery/school/4/IMG_20250410_130932.jpg',
+                    'gallery/school/4/IMG_20250410_130933.jpg',
+                    'gallery/school/4/IMG_20250410_145455.jpg',
+                    'gallery/school/4/IMG_20250410_145503.jpg'
+                ]
+            },
+
+            {
+                id: 'journey',
+                title: 'ПУТЕШЕСТВИЕ',
+                thumb: 'gallery/journey/cover.jpg', // обложка альбома
+                photos: [
+                    'gallery/journey/1/IMG_20250305_175140.jpg',
+                    'gallery/journey/1/IMG_20250305_175143.jpg',
+                    'gallery/journey/1/IMG_20250305_175205.jpg',
+                    'gallery/journey/1/IMG_20250305_175213.jpg',
+                    'gallery/journey/1/2025-03-08 13-49-47.jpg',
+                    'gallery/journey/1/2025-03-08 13-51-07.jpg',
+                    'gallery/journey/1/2025-03-08 13-51-13.jpg',
+                    'gallery/journey/1/2025-03-08 13-51-21.jpg',
+                    'gallery/journey/1/IMG_20250308_134940.jpg',
+                    'gallery/journey/1/IMG_20250308_135117.jpg',
+                    'gallery/journey/1/IMG_20250308_135123.jpg',
+                    'gallery/journey/1/2025-03-16 14-20-47.jpg',
+                    'gallery/journey/1/2025-03-16 14-20-51.jpg',
+                    'gallery/journey/1/2025-03-16 14-20-56.jpg',
+                    'gallery/journey/1/2025-03-16 14-20-58.jpg',
+                    'gallery/journey/1/2025-03-16 14-21-00.jpg',
+                    'gallery/journey/1/2025-03-16 14-21-06.jpg',
+                    'gallery/journey/1/IMG_20250316_142039.jpg',
+                    'gallery/journey/1/IMG_20250316_142042.jpg',
+                    'gallery/journey/1/IMG_20250316_142045.jpg',
+                    'gallery/journey/1/IMG_20250316_142055.jpg',
+                    'gallery/journey/1/IMG_20250316_142103.jpg',
+                    'gallery/journey/1/IMG_20250316_142107.jpg',
+                    'gallery/journey/1/2025-03-20 17-51-04.jpg',
+                    'gallery/journey/1/2025-03-20 17-51-09.jpg',
+                    'gallery/journey/1/2025-03-20 17-51-16.jpg',
+                    'gallery/journey/1/2025-03-20 17-51-24.jpg',
+                    'gallery/journey/1/2025-03-20 17-51-41.jpg',
+                    'gallery/journey/1/2025-03-20 17-51-27.jpg',
+                    'gallery/journey/1/2025-03-20 17-51-47.jpg',
+                    'gallery/journey/1/2025-03-20 17-52-03.jpg',
+                    'gallery/journey/1/2025-03-20 17-52-08.jpg',
+                    'gallery/journey/1/IMG_20250320_175207.jpg',
+                    'gallery/journey/1/2025-05-03 20-58-53.jpg',
+                    'gallery/journey/1/2025-05-03 20-58-56.jpg',
+                    'gallery/journey/1/2025-09-06 16-02-29.jpg',
+                    'gallery/journey/1/2025-09-06 16-02-35.jpg',
+                    'gallery/journey/1/2025-09-06 16-02-39.jpg',
+                    'gallery/journey/1/2025-09-07 17-00-08.jpg',
+                    'gallery/journey/2/2025-06-09 16-38-21.jpg',
+                    'gallery/journey/2/2025-06-09 16-38-22.jpg',
+                    'gallery/journey/2/2025-06-09 16-38-22_1755350649.jpg',
+                    'gallery/journey/2/2025-06-09 16-38-23.jpg',
+                    'gallery/journey/2/2025-06-09 16-38-30.jpg',
+                    'gallery/journey/2/2025-06-09 16-38-30_1755350633.jpg',
+                    'gallery/journey/2/2025-06-09 16-38-33_1755350625.jpg',
+                    'gallery/journey/2/2025-06-09 16-38-35.jpg',
+                    'gallery/journey/2/2025-06-09 16-38-37.jpg',
+                    'gallery/journey/2/2025-06-09 16-38-41.jpg',
+                    'gallery/journey/2/2025-06-09 16-38-46.jpg',
+                    'gallery/journey/2/2025-06-09 16-51-37.jpg',
+                    'gallery/journey/2/2025-06-09 16-51-42.jpg',
+                    'gallery/journey/2/2025-06-09 16-51-45.jpg',
+                    'gallery/journey/2/2025-08-18 14-20-38.jpg',
+                    'gallery/journey/2/2025-08-18 14-20-41.jpg',
+                    'gallery/journey/2/2025-08-18 14-20-43.jpg',
+                    'gallery/journey/2/2025-08-18 14-20-45.jpg',
+                    'gallery/journey/2/2025-08-18 14-20-48.jpg',
+                    'gallery/journey/2/2025-08-18 14-20-50.jpg',
+                    'gallery/journey/2/2025-08-18 14-21-14.jpg',
+                    'gallery/journey/2/2025-08-18 14-21-17.jpg',
+                    'gallery/journey/2/2025-08-18 14-21-20.jpg',
+                    'gallery/journey/2/2025-08-18 14-21-21.jpg',
+                    'gallery/journey/2/2025-08-18 14-21-25.jpg',
+                    'gallery/journey/2/2025-08-18 14-21-26.jpg',
+                    'gallery/journey/2/2025-08-18 14-21-29.jpg',
+                    'gallery/journey/2/2025-09-16 14-20-11.jpg',
+                    'gallery/journey/2/2025-09-16 14-20-18.jpg',
+                    'gallery/journey/2/2025-09-16 14-20-26.jpg',
+                    'gallery/journey/2/2025-09-16 14-20-34.jpg',
+                    'gallery/journey/2/2025-09-16 14-20-38.jpg',
+                    'gallery/journey/2/2025-09-16 14-20-40.jpg',
+                    'gallery/journey/2/2025-09-20 15-11-34.jpg',
+                    'gallery/journey/2/2025-09-20 15-11-44.jpg',
+                    'gallery/journey/2/2025-09-20 15-12-46.jpg',
+                    'gallery/journey/2/2025-09-20 15-12-48.jpg',
+                    'gallery/journey/2/2025-09-20 15-13-02.jpg',
+                ]
+            },
+
+            {
+                id: 'sport',
+                title: 'СПОРТ',
+                thumb: 'gallery/sport/cover.jpg', // обложка альбома
+                photos: [
+                    'gallery/sport/1/2025-04-15 17-41-46.jpg',
+                    'gallery/sport/1/2025-04-15 17-41-54.jpg',
+                    'gallery/sport/1/2025-04-15 17-41-57.jpg',
+                    'gallery/sport/1/2025-04-15 17-42-04.jpg',
+                    'gallery/sport/1/2025-04-15 17-42-12.jpg',
+                    'gallery/sport/1/2025-04-15 17-42-15.jpg',
+                    'gallery/sport/1/2025-04-15 17-42-26.jpg',
+                    'gallery/sport/1/2025-04-15 17-42-34.jpg',
+                    'gallery/sport/1/2025-04-15 17-42-36_1755539156.jpg',
+                    'gallery/sport/1/2025-04-15 17-44-06.jpg',
+                    'gallery/sport/1/2025-04-15 17-44-09.jpg',
+                    'gallery/sport/1/2025-04-15 17-44-15.jpg',
+                    'gallery/sport/1/2025-04-15 17-44-18.jpg',
+                    'gallery/sport/1/2025-04-15 17-45-03.jpg',
+                    'gallery/sport/1/2025-04-15 17-44-51.jpg',
+                    'gallery/sport/1/2025-04-15 17-45-04.jpg',
+                    'gallery/sport/1/2025-04-15 17-45-05.jpg',
+                    'gallery/sport/1/2025-04-15 17-45-07.jpg',
+                    'gallery/sport/1/2025-04-15 17-45-08.jpg',
+                    'gallery/sport/1/2025-04-15 17-45-09.jpg',
+                    'gallery/sport/1/2025-04-15 17-45-11.jpg',
+                    'gallery/sport/1/2025-04-15 17-46-40.jpg',
+                    'gallery/sport/1/2025-04-15 17-46-40_1755539087.jpg',
+                    'gallery/sport/1/2025-04-15 17-46-43.jpg',
+                    'gallery/sport/1/2025-04-15 17-46-44.jpg',
+                    'gallery/sport/1/2025-04-15 17-46-45_1755539071.jpg',
+                    'gallery/sport/1/2025-04-15 17-46-46_1755539064.jpg',
+                    'gallery/sport/1/2025-04-15 17-46-47.jpg',
+                    'gallery/sport/1/2025-04-15 17-46-48.jpg',
+                    'gallery/sport/2/2025-04-15 17-46-48_1755539052.jpg',
+                    'gallery/sport/2/2025-04-15 17-46-48_1755539054.jpg',
+                    'gallery/sport/2/2025-04-15 17-46-49_1755539046.jpg',
+                    'gallery/sport/2/2025-04-15 17-46-50_1755539041.jpg',
+                    'gallery/sport/2/2025-04-15 17-46-51_1755539036.jpg',
+                    'gallery/sport/2/2025-04-15 17-46-53.jpg',
+                    'gallery/sport/2/2025-04-15 17-46-54_1755539025.jpg',
+                    'gallery/sport/2/2025-04-15 17-46-55.jpg',
+                    'gallery/sport/2/2025-04-15 17-46-56.jpg',
+                    'gallery/sport/2/2025-04-15 17-46-58_1755539012.jpg',
+                    'gallery/sport/2/2025-04-15 17-46-58.jpg',
+                    'gallery/sport/2/2025-04-15 17-47-07.jpg',
+                    'gallery/sport/2/2025-04-15 17-47-15.jpg',
+                    'gallery/sport/2/2025-04-15 17-47-09.jpg',
+                    'gallery/sport/2/2025-04-15 17-47-16.jpg',
+                    'gallery/sport/2/2025-04-15 17-47-17_1755538989.jpg',
+                    'gallery/sport/2/2025-04-15 17-47-19_1755538978.jpg',
+                    'gallery/sport/2/2025-04-15 17-47-23.jpg',
+                    'gallery/sport/2/2025-04-15 17-47-24_1755538962.jpg',
+                    'gallery/sport/2/2025-04-15 17-47-26_1755538948.jpg',
+                    'gallery/sport/2/2025-04-15 17-47-28.jpg',
+                    'gallery/sport/2/2025-04-15 17-47-28_1755538934.jpg',
+                    'gallery/sport/2/2025-04-15 17-47-30.jpg',
+                    'gallery/sport/2/2025-04-15 17-47-32.jpg',
+                    'gallery/sport/3/2025-04-15 17-47-33.jpg',
+                    'gallery/sport/3/2025-04-15 17-47-40.jpg',
+                    'gallery/sport/3/2025-04-15 17-47-41_1755538885.jpg',
+                    'gallery/sport/3/2025-04-15 17-47-42_1755538879.jpg',
+                    'gallery/sport/3/2025-04-15 17-47-50.jpg',
+                    'gallery/sport/3/2025-04-15 17-47-53.jpg',
+                    'gallery/sport/3/2025-04-15 17-47-54.jpg',
+                    'gallery/sport/3/2025-04-15 17-47-55.jpg',
+                    'gallery/sport/3/2025-04-15 17-47-55_1755538849.jpg',
+                    'gallery/sport/3/2025-04-15 17-47-56.jpg',
+                    'gallery/sport/3/2025-04-15 17-47-57.jpg',
+                    'gallery/sport/3/2025-04-15 17-47-57_1755538837.jpg',
+                    'gallery/sport/3/2025-04-15 17-47-58_1755538831.jpg',
+                    'gallery/sport/3/2025-04-15 17-48-00.jpg',
+                    'gallery/sport/3/2025-04-15 17-48-02.jpg',
+                    'gallery/sport/3/2025-04-15 17-48-02_1755538823.jpg',
+                    'gallery/sport/3/2025-04-15 17-51-33.jpg',
+                    'gallery/sport/3/2025-04-15 17-51-33_1755538816.jpg',
+                    'gallery/sport/3/2025-04-15 17-51-36.jpg',
+                    'gallery/sport/3/2025-04-15 17-51-37.jpg',
+                    'gallery/sport/3/2025-04-15 17-51-38.jpg',
+                    'gallery/sport/3/2025-04-15 17-51-39.jpg',
+                    'gallery/sport/3/2025-04-15 17-51-41.jpg',
+                    'gallery/sport/3/2025-04-15 17-51-44.jpg',
+                    'gallery/sport/3/2025-04-15 17-51-45.jpg',
+                    'gallery/sport/3/2025-04-15 17-51-45_1755538769.jpg',
+                    'gallery/sport/4/2025-04-15 17-51-46_1755538763.jpg',
+                    'gallery/sport/4/2025-04-15 17-51-47.jpg',
+                    'gallery/sport/4/2025-04-15 17-51-48_1755538753.jpg',
+                    'gallery/sport/4/2025-04-15 17-51-49_1755538747.jpg',
+                    'gallery/sport/4/2025-04-15 17-51-54.jpg',
+                    'gallery/sport/4/2025-04-15 17-51-54_1755538728.jpg',
+                    'gallery/sport/4/2025-04-15 17-51-55.jpg',
+                    'gallery/sport/4/2025-04-15 17-51-55_1755538723.jpg',
+                    'gallery/sport/4/2025-04-15 17-51-56.jpg',
+                    'gallery/sport/4/2025-04-15 17-51-56_1755538717.jpg',
+                    'gallery/sport/4/2025-04-15 17-51-57.jpg',
+                    'gallery/sport/4/2025-04-15 17-51-58.jpg',
+                    'gallery/sport/4/2025-04-15 17-51-58_1755538708.jpg',
+                    'gallery/sport/4/2025-04-15 17-53-49.jpg',
+                    'gallery/sport/4/2025-04-15 17-53-50.jpg',
+                    'gallery/sport/4/2025-04-15 17-53-51.jpg',
+                    'gallery/sport/4/2025-04-15 17-53-53.jpg',
+                    'gallery/sport/4/2025-04-15 17-53-54.jpg',
+                    'gallery/sport/4/2025-04-15 17-53-58.jpg',
+                    'gallery/sport/4/2025-04-15 17-53-59_1755538679.jpg',
+                    'gallery/sport/4/2025-04-15 17-54-01.jpg',
+                    'gallery/sport/4/2025-04-15 17-54-01_1755538672.jpg',
+                    'gallery/sport/4/2025-04-15 17-54-02.jpg',
+                    'gallery/sport/4/2025-04-15 17-54-02_1755538667.jpg',
+                    'gallery/sport/4/2025-04-15 17-54-04.jpg',
+                    'gallery/sport/4/2025-04-15 17-54-06.jpg',
+                    'gallery/sport/4/2025-04-15 17-54-08.jpg',
+                    'gallery/sport/4/2025-04-15 17-54-09.jpg',
+                    'gallery/sport/4/2025-04-15 17-54-09_1755538621.jpg',
+                    'gallery/sport/4/2025-04-15 17-56-10.jpg',
+                    'gallery/sport/4/2025-04-15 17-56-11.jpg',
+                    'gallery/sport/5/2025-04-15 17-56-14.jpg',
+                    'gallery/sport/5/2025-04-15 17-56-15.jpg',
+                    'gallery/sport/5/2025-04-15 17-56-15_1755538587.jpg',
+                    'gallery/sport/5/2025-04-15 17-56-16.jpg',
+                    'gallery/sport/5/2025-04-15 17-56-16_1755538580.jpg',
+                    'gallery/sport/5/2025-04-15 17-56-16_1755538582.jpg',
+                    'gallery/sport/5/2025-04-15 17-56-17.jpg',
+                    'gallery/sport/5/2025-04-15 17-56-17_1755538573.jpg',
+                    'gallery/sport/5/2025-04-15 17-56-18.jpg',
+                    'gallery/sport/5/2025-04-15 17-56-19.jpg',
+                    'gallery/sport/5/2025-04-15 17-56-19_1755538565.jpg',
+                    'gallery/sport/5/2025-04-15 17-56-23.jpg',
+                    'gallery/sport/5/2025-04-15 17-56-24_1755538553.jpg',
+                    'gallery/sport/5/2025-04-15 17-56-24_1755538556.jpg',
+                    'gallery/sport/5/2025-04-15 17-56-25_1755538548.jpg',
+                    'gallery/sport/5/2025-04-15 17-56-26_1755538542.jpg',
+                    'gallery/sport/5/2025-04-15 17-56-27.jpg',
+                    'gallery/sport/5/2025-04-15 17-56-28.jpg',
+                    'gallery/sport/5/2025-04-15 17-56-29.jpg',
+                    'gallery/sport/5/IMG_20250415_173848.jpg',
+                    'gallery/sport/5/IMG_20250415_173852.jpg',
+                    'gallery/sport/5/IMG_20250415_174407.jpg',
+                    'gallery/sport/5/IMG_20250415_174410.jpg',
+                    'gallery/sport/5/IMG_20250415_174412.jpg',
+                    'gallery/sport/5/IMG_20250415_174416.jpg',
+                    'gallery/sport/5/IMG_20250415_174417.jpg',
+                    'gallery/sport/5/IMG_20250415_174419.jpg',
+                    'gallery/sport/6/IMG_20250415_174444.jpg',
+                    'gallery/sport/6/IMG_20250415_174457.jpg',
+                    'gallery/sport/6/IMG_20250415_174502.jpg',
+                    'gallery/sport/6/IMG_20250415_174636.jpg',
+                    'gallery/sport/6/IMG_20250415_174639.jpg',
+                    'gallery/sport/6/IMG_20250415_174637.jpg',
+                    'gallery/sport/6/IMG_20250415_174652_1.jpg',
+                    'gallery/sport/6/IMG_20250415_174713.jpg',
+                    'gallery/sport/6/IMG_20250415_174801.jpg',
+                    'gallery/sport/6/IMG_20250415_174803.jpg',
+                    'gallery/sport/6/IMG_20250415_175346.jpg',
+                    'gallery/sport/6/IMG_20250415_175346_1.jpg',
+                    'gallery/sport/6/IMG_20250415_175347_1.jpg',
+                    'gallery/sport/6/IMG_20250415_175408.jpg',
+                    'gallery/sport/6/IMG_20250415_175409_2.jpg',
+                    'gallery/sport/6/IMG_20250415_175411.jpg',
+                    'gallery/sport/6/IMG_20250415_175411_1.jpg',
+                    'gallery/sport/6/IMG_20250415_175622.jpg',
+                    'gallery/sport/6/IMG_20250415_175622_1.jpg',
+                    'gallery/sport/6/IMG_20250415_175628_1.jpg',
+                ]
+            },
+            
+            {
+                id: 'olya',
+                title: 'ОЛЬГА?',
+                thumb: 'gallery/olya/cover.jpg', // обложка альбома
+                photos: [
+                  'gallery/olya/1/2025-06-09 16-51-50.jpg',
+                  'gallery/olya/1/2025-06-09 16-51-51.jpg',  
+                  'gallery/olya/1/2025-06-09 16-51-52.jpg',  
+                  'gallery/olya/1/2025-09-06 15-50-17.jpg',  
+                  'gallery/olya/1/2025-09-06 15-50-33.jpg',  
+                  'gallery/olya/1/2025-09-06 15-50-44.jpg',  
+                  'gallery/olya/1/2025-09-06 15-50-47.jpg',  
+                  'gallery/olya/1/2025-09-06 15-51-16.jpg',  
+                  'gallery/olya/1/2025-09-06 15-51-25.jpg',  
+                  'gallery/olya/1/2025-09-06 15-51-54.jpg',  
+                  'gallery/olya/1/2025-09-06 15-52-17.jpg',  
+                  'gallery/olya/1/2025-09-06 15-52-57.jpg',    
+                  'gallery/olya/1/2025-09-06 15-53-21.jpg',  
+                  'gallery/olya/1/2025-09-06 15-53-26.jpg',  
+                  'gallery/olya/1/2025-09-06 15-53-41.jpg',  
+                  'gallery/olya/1/2025-09-06 15-53-53.jpg',  
+                  'gallery/olya/1/2025-09-06 15-53-57.jpg',  
+                  'gallery/olya/1/2025-09-06 15-54-02.jpg',  
+                  'gallery/olya/1/2025-09-06 15-54-09.jpg',  
+                  'gallery/olya/1/2025-09-06 15-54-10.jpg',  
+                  'gallery/olya/2/2025-09-06 15-54-11.jpg', 
+                  'gallery/olya/2/2025-09-06 15-54-35.jpg', 
+                  'gallery/olya/2/2025-09-06 15-54-37.jpg', 
+                  'gallery/olya/2/2025-09-06 15-54-40.jpg', 
+                  'gallery/olya/2/2025-09-06 15-54-45.jpg', 
+                  'gallery/olya/2/2025-09-06 15-54-48.jpg', 
+                  'gallery/olya/2/2025-09-06 15-55-20.jpg', 
+                  'gallery/olya/2/2025-09-06 15-55-30.jpg', 
+                  'gallery/olya/2/2025-09-06 15-55-37.jpg', 
+                  'gallery/olya/2/2025-09-06 15-56-00.jpg', 
+                  'gallery/olya/2/2025-09-06 15-56-08.jpg', 
+                  'gallery/olya/2/2025-09-06 15-56-18.jpg', 
+                  'gallery/olya/2/2025-09-06 15-56-22.jpg', 
+                  'gallery/olya/2/2025-09-06 15-56-28.jpg', 
+                  'gallery/olya/2/2025-09-06 15-56-37.jpg', 
+                  'gallery/olya/2/2025-09-06 15-56-40.jpg', 
+                  'gallery/olya/2/2025-09-06 15-56-42.jpg', 
+                  'gallery/olya/2/2025-09-06 15-56-43.jpg', 
+                  'gallery/olya/2/2025-09-06 15-57-02.jpg',  
+                  'gallery/olya/2/2025-09-06 15-57-05.jpg',  
+                  'gallery/olya/2/2025-09-06 15-57-08.jpg',  
+                  'gallery/olya/2/2025-09-06 15-57-10.jpg',  
+                  'gallery/olya/2/2025-09-06 15-57-12_1758653522.jpg',  
+                  'gallery/olya/2/2025-09-06 15-57-35.jpg',  
+                  'gallery/olya/2/2025-09-06 15-57-43.jpg',  
+                  'gallery/olya/2/2025-09-06 15-57-48.jpg',
+                  'gallery/olya/2/2025-09-06 15-57-49.jpg',
+                  'gallery/olya/2/2025-09-06 15-57-50.jpg',
+                  'gallery/olya/2/2025-09-06 15-57-54.jpg',
+                  'gallery/olya/2/2025-09-06 15-57-55.jpg',
+                  'gallery/olya/3/2025-09-06 15-57-57.jpg',
+                  'gallery/olya/3/2025-09-06 15-58-03.jpg',
+                  'gallery/olya/3/2025-09-06 15-58-04_1758653446.jpg',
+                  'gallery/olya/3/2025-09-06 16-00-49_1758653432.jpg',
+                  'gallery/olya/3/2025-09-06 16-00-52.jpg',
+                  'gallery/olya/3/2025-09-06 16-00-52_1758653413.jpg',
+                  'gallery/olya/3/2025-09-06 16-00-54_1758653406.jpg',
+                  'gallery/olya/3/2025-09-06 16-00-58.jpg',
+                  'gallery/olya/3/2025-09-06 16-00-59.jpg',
+                  'gallery/olya/3/2025-09-06 16-01-11.jpg',
+                  'gallery/olya/3/2025-09-06 16-01-12.jpg',
+                  'gallery/olya/3/2025-09-06 16-01-14.jpg',
+                  'gallery/olya/3/2025-09-06 16-01-16.jpg',
+                  'gallery/olya/3/2025-09-06 16-01-16_1758653384.jpg',
+                  'gallery/olya/3/2025-09-06 16-01-17.jpg',
+                  'gallery/olya/3/2025-09-06 16-01-26.jpg',
+                  'gallery/olya/3/2025-09-06 16-01-27.jpg',
+                  'gallery/olya/3/2025-09-06 16-01-30.jpg',
+                  'gallery/olya/3/2025-09-06 16-01-32.jpg',
+                  'gallery/olya/3/2025-09-06 16-01-32_1758653370.jpg',
+                  'gallery/olya/3/2025-09-06 16-01-37.jpg',
+                  'gallery/olya/3/2025-09-06 16-01-38.jpg',
+                  'gallery/olya/3/2025-09-06 16-01-40.jpg',
+                  'gallery/olya/3/2025-09-06 16-01-43.jpg',
+                  'gallery/olya/3/2025-09-06 16-01-45.jpg',
+                  'gallery/olya/3/2025-09-06 16-01-50.jpg',
+                  'gallery/olya/3/2025-09-06 16-01-52.jpg',
+                  'gallery/olya/3/2025-09-06 16-01-54.jpg',
+                  'gallery/olya/3/2025-09-06 16-02-02.jpg',
+                  'gallery/olya/3/2025-09-06 16-02-06.jpg',
+                  'gallery/olya/3/2025-09-06 16-02-08.jpg',
+                  'gallery/olya/3/2025-09-06 16-02-09.jpg',
+                  'gallery/olya/3/2025-09-06 16-02-12.jpg',
+                  'gallery/olya/3/2025-09-06 16-02-14.jpg',
+                  'gallery/olya/3/2025-09-06 16-03-31.jpg',
+                  'gallery/olya/3/2025-09-06 16-03-38.jpg',
+                  'gallery/olya/3/2025-09-06 16-03-42.jpg',
+                ]
+            },
+            {
+                id: 'house',
+                title: 'ДОМАШНИЕ ПОСИДЕЛКИ',
+                thumb: 'gallery/house/cover.jpg', // обложка альбома
+                photos: [
+                   'gallery/house/1/IMG_20250329_094651.jpg',
+                   'gallery/house/1/IMG_20250329_094653.jpg', 
+                   'gallery/house/1/IMG_20250329_094705.jpg', 
+                   'gallery/house/1/IMG_20250329_094709.jpg', 
+                   'gallery/house/1/IMG_20250329_094714.jpg', 
+                   'gallery/house/1/IMG_20250329_094716.jpg', 
+                   'gallery/house/1/IMG_20250329_104016.jpg', 
+                   'gallery/house/1/IMG_20250329_104018.jpg', 
+                   'gallery/house/1/IMG_20250329_104023.jpg', 
+                   'gallery/house/1/IMG_20250329_104031.jpg', 
+                   'gallery/house/1/IMG_20250329_104032.jpg', 
+                   'gallery/house/1/IMG_20250329_104039.jpg', 
+                   'gallery/house/1/IMG_20250329_104041.jpg', 
+                   'gallery/house/1/IMG_20250329_104042.jpg', 
+                   'gallery/house/1/IMG_20250329_104047.jpg', 
+                   'gallery/house/1/IMG_20250329_104050.jpg', 
+                   'gallery/house/1/IMG_20250401_123812.jpg', 
+                   'gallery/house/1/IMG_20250401_123814.jpg', 
+                   'gallery/house/1/IMG_20250401_123817.jpg', 
+                   'gallery/house/1/IMG_20250401_132135.jpg', 
+                   'gallery/house/1/IMG_20250401_132141.jpg', 
+                   'gallery/house/1/IMG_20250401_132143.jpg', 
+                   'gallery/house/1/IMG_20250401_132146.jpg', 
+                   'gallery/house/1/IMG_20250401_132148.jpg', 
+                   'gallery/house/1/IMG_20250401_132149.jpg', 
+                   'gallery/house/1/IMG_20250401_132154.jpg', 
+                   'gallery/house/1/IMG_20250401_132157.jpg', 
+                   'gallery/house/1/IMG_20250401_132202.jpg', 
+                   'gallery/house/1/IMG_20250401_132209.jpg', 
+                   'gallery/house/1/IMG_20250401_132216.jpg', 
+                   'gallery/house/1/IMG_20250401_132219.jpg', 
+                   'gallery/house/1/IMG_20250401_132222.jpg', 
+                   'gallery/house/1/IMG_20250401_132227.jpg', 
+                   'gallery/house/1/IMG_20250401_132236.jpg', 
+                   'gallery/house/1/IMG_20250401_132237.jpg', 
+                   'gallery/house/1/IMG_20250401_132241.jpg',
+                   'gallery/house/1/IMG_20250401_132754.jpg',
+                   'gallery/house/2/2025-04-24 10-31-55.jpg',
+                   'gallery/house/2/2025-04-24 10-31-59.jpg',
+                   'gallery/house/2/2025-04-24 10-32-13.jpg',
+                   'gallery/house/2/IMG_20250424_103152.jpg',
+                   'gallery/house/2/IMG_20250424_103201.jpg',
+                   'gallery/house/2/IMG_20250424_103210.jpg',
+                   'gallery/house/2/IMG_20250424_103216.jpg',
+                   'gallery/house/2/IMG_20250424_103219.jpg',
+                   'gallery/house/2/2025-05-02 10-53-14.jpg',
+                   'gallery/house/2/2025-05-02 10-53-15.jpg',
+                   'gallery/house/2/2025-05-02 10-53-16.jpg',
+                   'gallery/house/2/2025-05-02 10-53-36.jpg',
+                   'gallery/house/2/2025-05-02 10-53-37.jpg',
+                   'gallery/house/2/2025-05-02 10-53-38.jpg',
+                   'gallery/house/2/2025-05-02 10-53-38_1755351033.jpg',
+                   'gallery/house/2/2025-05-02 10-53-39.jpg',
+                   'gallery/house/2/2025-05-02 10-53-40.jpg',
+                   'gallery/house/2/2025-05-02 10-53-40_1755351022.jpg',
+                   'gallery/house/2/2025-05-02 10-53-42.jpg',
+                   'gallery/house/2/2025-05-02 10-53-42_1755351015.jpg',
+                   'gallery/house/2/2025-05-02 11-12-19.jpg',
+                   'gallery/house/2/2025-05-02 12-18-48.jpg',
+                   'gallery/house/2/2025-05-04 14-40-58.jpg',
+                   'gallery/house/2/2025-05-02 13-56-35.jpg',
+                   'gallery/house/2/2025-05-02 13-56-37.jpg',
+                   'gallery/house/2/2025-05-02 13-56-39.jpg',
+                   'gallery/house/2/2025-05-02 13-56-46.jpg',
+                   'gallery/house/2/2025-05-02 13-57-05.jpg',
+                   'gallery/house/2/2025-05-02 13-57-05_1755350823.jpg',
+                   'gallery/house/2/2025-05-02 13-57-19.jpg',
+                   'gallery/house/2/2025-05-06 09-23-05.jpg',
+                   'gallery/house/2/2025-05-06 09-23-10.jpg',
+                   'gallery/house/2/2025-05-06 09-23-13.jpg',
+                   'gallery/house/2/2025-05-06 09-23-17.jpg',
+                   'gallery/house/2/2025-05-06 09-23-23.jpg',
+                   'gallery/house/2/2025-05-06 09-55-38.jpg',
+                   'gallery/house/2/2025-05-06 09-55-39.jpg',
+                   'gallery/house/2/2025-05-06 09-55-40.jpg',
+                   'gallery/house/2/2025-05-06 09-55-44.jpg',
+                   'gallery/house/2/2025-05-06 09-56-27.jpg',
+                   'gallery/house/2/2025-05-06 09-56-30.jpg',
+                   'gallery/house/2/2025-05-06 09-56-32.jpg',
+                   'gallery/house/2/2025-05-06 09-56-34.jpg',
+                   'gallery/house/2/2025-05-06 09-56-36.jpg',
+                ]
+            },
+            {
+                id: 'funny',
+                title: 'ВЕСЕЛЬЕ',
+                thumb: 'gallery/funny/cover.jpg', // обложка альбома
+                photos: [
+                    'gallery/funny/1/2025-04-15 18-11-13.jpg',
+                    'gallery/funny/1/2025-04-15 18-11-14.jpg',
+                    'gallery/funny/1/2025-04-15 18-11-14_1755538526.jpg',
+                    'gallery/funny/1/2025-04-15 18-11-15.jpg',
+                    'gallery/funny/1/2025-04-15 18-11-15_1755538521.jpg',
+                    'gallery/funny/1/2025-04-15 18-11-16.jpg',
+                    'gallery/funny/1/2025-04-15 18-11-20.jpg',
+                    'gallery/funny/1/2025-04-15 18-11-20_1755538510.jpg',
+                    'gallery/funny/1/2025-04-15 18-11-20_1755538513.jpg',
+                    'gallery/funny/1/2025-04-15 18-11-22.jpg',
+                    'gallery/funny/1/2025-04-15 18-11-23.jpg',
+                    'gallery/funny/1/2025-04-15 18-11-23_1755538502.jpg',
+                    'gallery/funny/1/2025-04-15 18-11-25.jpg',
+                    'gallery/funny/1/2025-04-15 18-11-26.jpg',
+                    'gallery/funny/1/2025-04-15 18-11-27.jpg',
+                    'gallery/funny/1/2025-04-15 18-11-28.jpg',
+                    'gallery/funny/1/2025-04-15 18-11-29.jpg',
+                    'gallery/funny/1/2025-04-15 18-11-30.jpg',
+                    'gallery/funny/1/2025-04-15 18-11-30_1755538483.jpg',
+                    'gallery/funny/1/2025-04-15 18-11-31.jpg',
+                    'gallery/funny/1/2025-04-15 18-11-32.jpg',
+                    'gallery/funny/1/2025-04-15 18-11-32_1755538475.jpg',
+                    'gallery/funny/1/2025-04-15 18-11-33.jpg',
+                    'gallery/funny/1/2025-04-15 18-12-27.jpg',
+                    'gallery/funny/1/2025-04-15 18-12-28.jpg',
+                    'gallery/funny/1/2025-04-15 18-12-28_1755538462.jpg',
+                    'gallery/funny/1/2025-04-15 18-12-29.jpg',
+                    'gallery/funny/1/2025-04-15 18-12-30.jpg',
+                    'gallery/funny/1/2025-04-15 18-12-33.jpg',
+                    'gallery/funny/1/2025-04-15 18-12-37.jpg',
+                    'gallery/funny/1/2025-04-15 18-12-37_1755538437.jpg',
+                    'gallery/funny/1/2025-04-15 18-12-38.jpg',
+                    'gallery/funny/1/2025-04-15 18-12-38_1755538429.jpg',
+                    'gallery/funny/1/2025-04-15 18-12-39.jpg',
+                    'gallery/funny/1/2025-04-15 18-12-39_1755427287.jpg',
+                    'gallery/funny/1/2025-04-15 18-12-40.jpg',
+                    'gallery/funny/1/2025-04-15 18-12-40_1755427283.jpg',
+                    'gallery/funny/1/2025-04-15 18-12-41.jpg',
+                    'gallery/funny/1/2025-04-15 18-12-41_1755427257.jpg',
+                    'gallery/funny/1/2025-04-15 18-12-42.jpg',
+                    'gallery/funny/1/2025-04-15 18-12-42_1755427227.jpg',
+                    'gallery/funny/1/2025-04-15 18-12-43.jpg',
+                    'gallery/funny/1/2025-04-15 18-12-43_1755427214.jpg',
+                    'gallery/funny/1/2025-04-15 18-12-43_1755427216.jpg',
+                    'gallery/funny/1/2025-04-15 18-12-44.jpg',
+                    'gallery/funny/1/2025-04-15 18-12-45.jpg',
+                    'gallery/funny/2/2025-04-15 18-12-45_1755427203.jpg',
+                    'gallery/funny/2/2025-04-15 18-12-46.jpg',
+                    'gallery/funny/2/2025-04-15 18-12-47.jpg',
+                    'gallery/funny/2/2025-04-15 18-12-47_1755427194.jpg',
+                    'gallery/funny/2/2025-04-15 18-12-49.jpg',
+                    'gallery/funny/2/2025-04-15 18-12-50.jpg',
+                    'gallery/funny/2/2025-04-15 18-12-51.jpg',
+                    'gallery/funny/2/2025-04-15 18-12-51_1755427185.jpg',
+                    'gallery/funny/2/2025-04-15 18-16-59.jpg',
+                    'gallery/funny/2/2025-04-15 18-16-59_1755427177.jpg',
+                    'gallery/funny/2/2025-04-15 18-17-01.jpg',
+                    'gallery/funny/2/2025-04-15 18-17-01_1755427172.jpg',
+                    'gallery/funny/2/2025-04-15 18-17-06.jpg',
+                    'gallery/funny/2/2025-04-15 18-17-07.jpg',
+                    'gallery/funny/2/2025-04-15 18-17-07_1755427150.jpg',
+                    'gallery/funny/2/2025-04-15 18-17-08.jpg',
+                    'gallery/funny/2/2025-04-15 18-17-09.jpg',
+                    'gallery/funny/2/2025-04-15 18-17-09_1755427143.jpg',
+                    'gallery/funny/2/2025-04-15 18-17-10.jpg',
+                    'gallery/funny/2/2025-04-15 18-17-10_1755427138.jpg',
+                    'gallery/funny/2/2025-04-15 18-17-11.jpg',
+                    'gallery/funny/2/2025-04-15 18-17-11_1755427113.jpg',
+                    'gallery/funny/2/2025-04-15 18-17-15.jpg',
+                    'gallery/funny/2/2025-04-15 18-17-15_1755427095.jpg',
+                    'gallery/funny/2/2025-04-15 18-17-15_1755427097.jpg',
+                    'gallery/funny/2/2025-04-15 18-17-16.jpg',
+                    'gallery/funny/2/2025-04-15 18-17-16_1755427087.jpg',
+                    'gallery/funny/2/2025-04-15 18-17-17.jpg',
+                    'gallery/funny/2/2025-04-15 18-17-17_1755427052.jpg',
+                    'gallery/funny/2/2025-04-15 18-17-17_1755427071.jpg',
+                    'gallery/funny/2/2025-04-15 18-17-18.jpg',
+                    'gallery/funny/2/2025-04-15 18-17-18_1755423716.jpg',
+                    'gallery/funny/2/2025-04-15 18-17-19.jpg',
+                    'gallery/funny/2/2025-04-15 18-17-19_1755423711.jpg',
+                    'gallery/funny/2/2025-04-15 18-17-20.jpg',
+                    'gallery/funny/2/2025-04-15 18-17-20_1755423688.jpg',
+                    'gallery/funny/2/2025-04-15 18-17-20_1755423691.jpg',
+                    'gallery/funny/2/2025-04-15 18-17-21.jpg',
+                    'gallery/funny/2/2025-04-15 18-19-37.jpg',
+                    'gallery/funny/2/2025-04-15 18-19-39.jpg',
+                    'gallery/funny/2/2025-04-15 18-19-40_1755362293.jpg',
+                    'gallery/funny/2/2025-04-15 18-19-41.jpg',
+                    'gallery/funny/2/2025-04-15 18-19-43.jpg',
+                    'gallery/funny/2/2025-04-15 18-19-45.jpg',
+                    'gallery/funny/2/2025-04-15 18-20-05.jpg',
+                    'gallery/funny/2/2025-04-15 18-20-06.jpg',
+                    'gallery/funny/2/2025-04-15 18-20-07.jpg',
+                    'gallery/funny/2/2025-04-15 18-20-15.jpg',
+                    'gallery/funny/2/2025-04-15 18-20-17.jpg',
+                    'gallery/funny/3/2025-04-15 18-20-17_1755351383.jpg',
+                    'gallery/funny/3/IMG_20250415_181118.jpg',
+                    'gallery/funny/3/IMG_20250415_181131.jpg',
+                    'gallery/funny/3/IMG_20250415_181233.jpg',
+                    'gallery/funny/3/IMG_20250415_181234.jpg',
+                    'gallery/funny/3/IMG_20250415_181238_2.jpg',
+                    'gallery/funny/3/IMG_20250415_181706.jpg',
+                    'gallery/funny/3/IMG_20250415_181714.jpg',
+                    'gallery/funny/3/IMG_20250415_181939.jpg',
+                    'gallery/funny/3/IMG_20250415_182001_1.jpg',
+                    'gallery/funny/3/2025-05-20 14-46-40.jpg',
+                    'gallery/funny/3/2025-05-20 14-46-43.jpg',
+                    'gallery/funny/3/2025-05-20 14-46-46.jpg',
+                    'gallery/funny/3/2025-05-20 14-46-54.jpg',
+                    'gallery/funny/3/2025-05-20 14-48-40.jpg',
+                    'gallery/funny/3/2025-05-20 14-48-41_1755350699.jpg',
+                    'gallery/funny/3/2025-05-20 14-48-44.jpg',
+                    'gallery/funny/3/2025-05-20 14-48-45.jpg',
+                    'gallery/funny/3/2025-05-20 14-48-48.jpg',
+                    'gallery/funny/3/2025-05-20 14-48-48_1755350664.jpg',
+                ]
+            },
+            {
+                id: 'river',
+                title: 'РЕЧКА',
+                thumb: 'gallery/river/cover.jpg', // обложка альбома
+                photos: [
+                ]
+            },
+        ];
+
+        const ITEMS_PER_PAGE = 6;
+        let currentView = 'albums';
+        let currentAlbumId = null;
+        let currentPage = 0;
+        let currentPhotos = [];
+
+        const container = document.getElementById('galleryContainer');
+        const navbar = document.getElementById('navbar');
         const burgerBtn = document.getElementById('burgerBtn');
         const navMenu = document.getElementById('navMenu');
-        
-        burgerBtn.onclick = function() {
-            burgerBtn.classList.toggle('active');
-            navMenu.classList.toggle('active');
-        };
-        
-        const navLinks = document.querySelectorAll('.nav-menu a');
-        navLinks.forEach(function(link) {
-            link.onclick = function() {
-                burgerBtn.classList.remove('active');
-                navMenu.classList.remove('active');
-            };
-        });
+        const viewToggle = document.getElementById('viewToggle');
 
-        // DOWNLOAD
-        function downloadImage(url, filename) {
-            const link = document.createElement('a');
-            link.href = url;
-            link.download = filename || 'image';
-            link.target = '_blank';
-            document.body.appendChild(link);
-            link.click();
-            document.body.removeChild(link);
+        function getPhotosForAlbum(albumId) {
+            const album = albums.find(a => a.id === albumId);
+            return album ? album.photos.map(src => ({ src })) : [];
         }
 
-        // MODAL
-        const modalOverlay = document.getElementById('modalOverlay');
-        const modalImage = document.getElementById('modalImage');
-        const modalClose = document.getElementById('modalClose');
-        const modalDownload = document.getElementById('modalDownload');
-        let currentSrc = '';
-
-        function openModal(img) {
-            currentSrc = img.getAttribute('data-full') || img.src;
-            modalImage.src = currentSrc;
-            modalImage.alt = img.alt;
-            modalOverlay.classList.add('active');
-            document.body.style.overflow = 'hidden';
-        }
-
-        function closeModal() {
-            modalOverlay.classList.remove('active');
-            document.body.style.overflow = '';
-            modalImage.src = '';
-            currentSrc = '';
-        }
-
-        modalClose.onclick = closeModal;
-        modalOverlay.onclick = function(e) {
-            if (e.target === modalOverlay) closeModal();
-        };
-        modalDownload.onclick = function() {
-            if (currentSrc) downloadImage(currentSrc, modalImage.alt || 'photo');
-        };
-
-        // TABS - ИСПОЛЬЗУЕМ onclick ДЛЯ НАДЁЖНОСТИ
-        const tabAlbums = document.getElementById('tabAlbums');
-        const tabAll = document.getElementById('tabAll');
-        const contentAlbums = document.getElementById('contentAlbums');
-        const contentAll = document.getElementById('contentAll');
-
-        tabAlbums.onclick = function() {
-            tabAlbums.classList.add('active');
-            tabAll.classList.remove('active');
-            contentAlbums.classList.add('active');
-            contentAll.classList.remove('active');
-        };
-
-        tabAll.onclick = function() {
-            tabAll.classList.add('active');
-            tabAlbums.classList.remove('active');
-            contentAll.classList.add('active');
-            contentAlbums.classList.remove('active');
-        };
-
-        // LOAD GALLERY
-        const allGrid = document.getElementById('allPhotosGrid');
-        const albumCards = document.querySelectorAll('.album-card');
-        const allPhotos = [];
-
-        albumCards.forEach(function(card) {
-            const date = card.getAttribute('data-date');
-            const imgs = card.querySelectorAll('.album-images img');
-            
-            imgs.forEach(function(img) {
-                allPhotos.push({
-                    src: img.src,
-                    fullSrc: img.getAttribute('data-full') || img.src,
-                    alt: img.alt,
-                    date: date
-                });
-                
-                img.onclick = function() {
-                    openModal(this);
-                };
+        function getAllPhotos() {
+            let all = [];
+            albums.forEach(album => {
+                album.photos.forEach(src => all.push({ src }));
             });
-        });
+            return all;
+        }
 
-        allPhotos.sort(function(a, b) {
-            return new Date(b.date) - new Date(a.date);
-        });
+        async function downloadImage(url, filename) {
+            try {
+                const response = await fetch(url);
+                const blob = await response.blob();
+                const link = document.createElement('a');
+                link.href = URL.createObjectURL(blob);
+                link.download = filename;
+                document.body.appendChild(link);
+                link.click();
+                document.body.removeChild(link);
+                URL.revokeObjectURL(link.href);
+            } catch (error) {
+                window.open(url, '_blank');
+            }
+        }
 
-        allGrid.innerHTML = '';
+        async function downloadAllPhotos(photos, albumTitle) {
+            for (let i = 0; i < photos.length; i++) {
+                const ext = photos[i].src.split('.').pop().split('?')[0] || 'jpg';
+                await downloadImage(photos[i].src, `${albumTitle}_${i + 1}.${ext}`);
+                if (i < photos.length - 1) await new Promise(r => setTimeout(r, 500));
+            }
+            alert(`✅ Скачано ${photos.length} фотографий`);
+        }
 
-        allPhotos.forEach(function(photo) {
-            const div = document.createElement('div');
-            div.className = 'photo-item';
-            
-            const img = document.createElement('img');
-            img.src = photo.src;
-            img.alt = photo.alt;
-            img.setAttribute('data-full', photo.fullSrc);
-            
-            const btn = document.createElement('button');
-            btn.className = 'photo-download';
-            btn.innerHTML = '<i class="fas fa-download"></i> Скачать';
-            
-            div.appendChild(img);
-            div.appendChild(btn);
-            
-            img.onclick = function(e) {
-                e.stopPropagation();
-                openModal(this);
-            };
-            
-            btn.onclick = function(e) {
-                e.stopPropagation();
-                downloadImage(photo.fullSrc, photo.alt);
-            };
-            
-            div.onclick = function(e) {
-                if (e.target === btn || e.target.closest('.photo-download')) return;
-                if (e.target === img) return;
-                
-                const allActive = document.querySelectorAll('.photo-item.active');
-                allActive.forEach(function(item) {
-                    if (item !== div) item.classList.remove('active');
+        function renderAlbums() {
+            currentView = 'albums';
+            let html = '<div class="albums-grid">';
+            albums.forEach(album => {
+                html += `
+          <div class="album-card" data-album-id="${album.id}">
+            <div class="album-thumb" style="background-image: url('${album.thumb}');">
+              <button class="download-album-btn" data-album-id="${album.id}" title="Скачать альбом">
+                <i class="fas fa-download"></i>
+              </button>
+            </div>
+            <div class="album-info">
+              <h3>${album.title}</h3>
+              <div class="album-count"><i class="far fa-images"></i> ${album.photos.length} фото</div>
+            </div>
+          </div>`;
+            });
+            html += '</div>';
+            container.innerHTML = html;
+
+            document.querySelectorAll('.album-card').forEach(card => {
+                card.addEventListener('click', function (e) {
+                    if (!e.target.closest('.download-album-btn')) openAlbum(this.dataset.albumId);
                 });
-                div.classList.toggle('active');
-            };
-            
-            allGrid.appendChild(div);
+            });
+
+            document.querySelectorAll('.download-album-btn').forEach(btn => {
+                btn.addEventListener('click', function (e) {
+                    e.stopPropagation();
+                    const albumId = this.dataset.albumId;
+                    const album = albums.find(a => a.id === albumId);
+                    if (album.photos.length === 0) { alert('В альбоме нет фото'); return; }
+                    if (confirm(`Скачать все ${album.photos.length} фото из "${album.title}"?`)) {
+                        downloadAllPhotos(album.photos.map(src => ({ src })), album.title);
+                    }
+                });
+            });
+        }
+
+        function openAlbum(albumId) {
+            currentAlbumId = albumId;
+            currentPhotos = getPhotosForAlbum(albumId);
+            currentPage = 0;
+            currentView = 'albumPhotos';
+            renderPhotoGrid();
+        }
+
+        function showAllPhotos() {
+            currentPhotos = getAllPhotos();
+            currentPage = 0;
+            currentView = 'allPhotos';
+            renderPhotoGrid();
+        }
+
+        function renderPhotoGrid() {
+            if (!currentPhotos.length) {
+                container.innerHTML = '<p style="color:#aaa; text-align:center; padding:2rem;">В этом альбоме пока нет фотографий.</p>';
+                return;
+            }
+
+            const totalPages = Math.ceil(currentPhotos.length / ITEMS_PER_PAGE);
+            const start = currentPage * ITEMS_PER_PAGE;
+            const end = start + ITEMS_PER_PAGE;
+            const pagePhotos = currentPhotos.slice(start, end);
+
+            let html = '';
+            if (currentView === 'albumPhotos') {
+                const album = albums.find(a => a.id === currentAlbumId) || { title: 'Альбом' };
+                html += `<div style="display:flex; align-items:center; gap:1rem; margin-bottom:1.8rem; flex-wrap:wrap;">
+            <button class="back-to-albums" id="backToAlbumsBtn"><i class="fas fa-arrow-left"></i></button>
+            <h3 style="font-size:1.6rem;">${album.title}</h3>
+            <button class="download-current-album" id="downloadCurrentAlbumBtn"><i class="fas fa-download"></i> Скачать альбом</button>
+        </div>`;
+            } else {
+                html += `<div style="margin-bottom:1.5rem;"><h3 style="font-size:1.5rem;">Все фотографии</h3></div>`;
+            }
+
+            html += '<div class="photo-grid">';
+            pagePhotos.forEach((photo, idx) => {
+                html += `<div class="photo-item" style="background-image: url('${photo.src}');" data-index="${start + idx}" data-src="${photo.src}"></div>`;
+            });
+            html += '</div>';
+
+            html += `<div class="gallery-controls">
+        <button class="ctrl-btn" id="prevPageBtn" ${currentPage === 0 ? 'disabled' : ''}><i class="fas fa-chevron-left"></i></button>
+        <span class="page-indicator">${currentPage + 1} / ${totalPages}</span>
+        <button class="ctrl-btn" id="nextPageBtn" ${currentPage >= totalPages - 1 ? 'disabled' : ''}><i class="fas fa-chevron-right"></i></button>
+    </div>`;
+
+            container.innerHTML = html;
+
+            document.getElementById('backToAlbumsBtn')?.addEventListener('click', () => { renderAlbums(); setActiveToggle('albums'); });
+            document.getElementById('downloadCurrentAlbumBtn')?.addEventListener('click', () => {
+                const album = albums.find(a => a.id === currentAlbumId);
+                if (currentPhotos.length === 0) { alert('В альбоме нет фото'); return; }
+                if (confirm(`Скачать все ${currentPhotos.length} фото из "${album.title}"?`)) {
+                    downloadAllPhotos(currentPhotos, album.title);
+                }
+            });
+            document.getElementById('prevPageBtn')?.addEventListener('click', () => { if (currentPage > 0) { currentPage--; renderPhotoGrid(); } });
+            document.getElementById('nextPageBtn')?.addEventListener('click', () => { if (currentPage < totalPages - 1) { currentPage++; renderPhotoGrid(); } });
+
+            document.querySelectorAll('.photo-item').forEach(item => {
+                item.addEventListener('click', function () { openLightbox(parseInt(this.dataset.index)); });
+            });
+        }
+
+        function openLightbox(index) {
+            const existing = document.querySelector('.lightbox-overlay');
+            if (existing) existing.remove();
+
+            const totalImages = currentPhotos.length;
+            const overlay = document.createElement('div');
+            overlay.className = 'lightbox-overlay';
+            overlay.innerHTML = `
+        <div class="lightbox-content">
+            <img class="lightbox-img" src="${currentPhotos[index].src}" alt="Фото">
+            <button class="lightbox-nav lightbox-prev"><i class="fas fa-chevron-left"></i></button>
+            <button class="lightbox-nav lightbox-next"><i class="fas fa-chevron-right"></i></button>
+        </div>
+        <button class="lightbox-close"><i class="fas fa-times"></i></button>
+        <div class="lightbox-counter">${index + 1} / ${totalImages}</div>
+        <button class="lightbox-download" title="Скачать фото"><i class="fas fa-download"></i></button>
+    `;
+            document.body.appendChild(overlay);
+
+            let currentIndex = index;
+            const img = overlay.querySelector('.lightbox-img');
+            const counter = overlay.querySelector('.lightbox-counter');
+            const prevBtn = overlay.querySelector('.lightbox-prev');
+            const nextBtn = overlay.querySelector('.lightbox-next');
+
+            function updateImage() {
+                img.src = currentPhotos[currentIndex].src;
+                counter.textContent = `${currentIndex + 1} / ${totalImages}`;
+                prevBtn.style.opacity = currentIndex === 0 ? '0.4' : '1';
+                prevBtn.style.pointerEvents = currentIndex === 0 ? 'none' : 'auto';
+                nextBtn.style.opacity = currentIndex === totalImages - 1 ? '0.4' : '1';
+                nextBtn.style.pointerEvents = currentIndex === totalImages - 1 ? 'none' : 'auto';
+            }
+
+            updateImage();
+
+            overlay.querySelector('.lightbox-download').addEventListener('click', () => {
+                const ext = currentPhotos[currentIndex].src.split('.').pop().split('?')[0] || 'jpg';
+                downloadImage(currentPhotos[currentIndex].src, `photo_${currentIndex + 1}.${ext}`);
+            });
+
+            prevBtn.addEventListener('click', (e) => { e.stopPropagation(); if (currentIndex > 0) { currentIndex--; updateImage(); } });
+            nextBtn.addEventListener('click', (e) => { e.stopPropagation(); if (currentIndex < totalImages - 1) { currentIndex++; updateImage(); } });
+
+            const close = () => overlay.remove();
+            overlay.querySelector('.lightbox-close').addEventListener('click', close);
+            overlay.addEventListener('click', (e) => { if (e.target === overlay) close(); });
+
+            document.addEventListener('keydown', function handler(e) {
+                if (e.key === 'Escape') { close(); document.removeEventListener('keydown', handler); }
+                if (e.key === 'ArrowLeft' && currentIndex > 0) { currentIndex--; updateImage(); }
+                if (e.key === 'ArrowRight' && currentIndex < totalImages - 1) { currentIndex++; updateImage(); }
+            });
+        }
+
+        function setActiveToggle(view) {
+            viewToggle.querySelectorAll('.toggle-btn').forEach(btn => btn.classList.toggle('active', btn.dataset.view === view));
+        }
+
+        viewToggle.addEventListener('click', (e) => {
+            if (e.target.classList.contains('toggle-btn')) {
+                const view = e.target.dataset.view;
+                if (view === 'albums') { renderAlbums(); setActiveToggle('albums'); }
+                else { showAllPhotos(); setActiveToggle('allPhotos'); }
+            }
         });
 
-        // DOWNLOAD ALL
-        document.querySelectorAll('.album-download-all').forEach(function(btn) {
-            btn.onclick = function(e) {
-                e.stopPropagation();
-                const imgs = this.closest('.album-card').querySelectorAll('.album-images img');
-                imgs.forEach(function(img, index) {
-                    setTimeout(function() {
-                        downloadImage(img.getAttribute('data-full') || img.src, 'photo_' + (index + 1));
-                    }, index * 500);
-                });
-            };
+        let lastScroll = 0;
+        window.addEventListener("scroll", () => {
+            const currentScroll = window.pageYOffset;
+            if (currentScroll <= 0) navbar.classList.remove("hide");
+            else navbar.classList.toggle("hide", currentScroll > lastScroll);
+            navbar.classList.toggle("scrolled", window.scrollY > 20);
+            lastScroll = currentScroll;
         });
+
+        burgerBtn.addEventListener("click", () => { burgerBtn.classList.toggle("active"); navMenu.classList.toggle("active"); });
+        document.querySelectorAll(".nav-menu a").forEach(link => link.addEventListener("click", () => { burgerBtn.classList.remove("active"); navMenu.classList.remove("active"); }));
+
+        renderAlbums();
     </script>
 </body>
+
 </html>
