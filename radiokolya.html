@@ -1,5839 +1,2857 @@
-<!doctype html>
-<html lang="ru_RU">
+<!DOCTYPE html>
+<html lang="ru">
 
 <head>
 
-  <meta charset="utf-8">
+  <meta charset="UTF-8">
 
-  <meta
-    name="viewport"
-    content="width=device-width,initial-scale=1"
-  >
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-  <meta
-    name="theme-color"
-    content="#ffffff"
-  >
-
-  <link
-    rel="icon"
-    href="images/LOGORADIOKOLYA.png"
-    type="image/png"
-  >
+  <meta name="theme-color" content="#ffffff">
 
   <title>Радио Коля</title>
 
-  <script src="https://cdn.jsdelivr.net/npm/jsmediatags@3.9.7/dist/jsmediatags.min.js"></script>
+
+  <!-- =====================================================
+         MONTSERRAT
+    ====================================================== -->
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="icon" href="images/LOGORADIOKOLYA.png" type="image/png">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800;900&display=swap"
+    rel="stylesheet">
 
 
   <style>
+    /* =====================================================
+           VARIABLES
+        ====================================================== */
 
-    :root{
-      --bg:#f6f7fb;
-      --card:rgba(255,255,255,.92);
-      --text:#172033;
-      --muted:#7d8494;
-      --line:#e8ebf1;
-      --accent:#ff334b;
-      --accent2:#ff6a59;
-      --shadow:0 20px 60px rgba(24,34,60,.10);
+    :root {
+
+      --red: #e52b32;
+      --red-dark: #c91f26;
+      --red-light: #fff0f1;
+
+      --black: #111216;
+      --text: #17181c;
+      --muted: #85878e;
+
+      --bg: #f4f5f7;
+      --white: #ffffff;
+
+      --line: #e8e9ec;
+
+      --green: #28ad5a;
+
+      --shadow-small:
+        0 6px 24px rgba(20, 20, 30, .055);
+
+      --shadow:
+        0 18px 50px rgba(20, 20, 30, .075);
+
+      --radius: 22px;
     }
 
 
-    *{
-      box-sizing:border-box;
+    /* =====================================================
+           RESET
+        ====================================================== */
+
+    * {
+      box-sizing: border-box;
     }
 
 
     html,
-    body{
-      margin:0;
-      min-height:100%;
+    body {
+
+      width: 100%;
+      height: 100%;
+
+      margin: 0;
+      padding: 0;
     }
 
 
-    body{
+    body {
 
-      background:
+      background: var(--bg);
 
-        radial-gradient(
-          circle at 8% 4%,
-          rgba(255,85,110,.08),
-          transparent 28%
-        ),
-
-        radial-gradient(
-          circle at 92% 16%,
-          rgba(130,150,255,.10),
-          transparent 30%
-        ),
-
-        linear-gradient(
-          135deg,
-          #fbfcff 0%,
-          #f1f4fa 100%
-        );
-
-      color:var(--text);
+      color: var(--text);
 
       font-family:
-        Inter,
-        system-ui,
-        -apple-system,
-        BlinkMacSystemFont,
-        "Segoe UI",
+        "Montserrat",
+        Arial,
         sans-serif;
+
+      font-weight: 700;
+
+      overflow: hidden;
     }
 
 
     button,
-    input{
-      font:inherit;
+    input,
+    textarea,
+    select {
+
+      font-family:
+        "Montserrat",
+        Arial,
+        sans-serif;
     }
 
 
-    button{
-      cursor:pointer;
+    button {
+
+      border: 0;
+
+      cursor: pointer;
+
+      font-family:
+        "Montserrat",
+        Arial,
+        sans-serif;
+
+      font-weight: 900;
     }
 
 
-    .app{
+    * {
 
-      width:min(
-        1450px,
-        calc(100% - 48px)
-      );
+      scrollbar-width: thin;
 
-      margin:auto;
-
-      padding:
-        24px
-        0
-        100px;
+      scrollbar-color:
+        #d5d6da transparent;
     }
 
 
-    /* ================= HEADER ================= */
+    /* =====================================================
+           APP
+        ====================================================== */
 
+    .app {
 
-    header{
+      width: min(1700px,
+          calc(100vw - 28px));
 
-      display:flex;
+      height: 100vh;
 
-      align-items:center;
+      margin: 0 auto;
 
-      justify-content:space-between;
+      padding: 14px 0;
 
-      margin-bottom:18px;
+      display: grid;
 
-      padding:0 4px;
+      grid-template-columns:
+        235px minmax(0, 1fr);
 
-      gap:12px;
+      gap: 24px;
     }
 
 
-    .logo{
+    /* =====================================================
+           SIDEBAR
+        ====================================================== */
 
-      display:flex;
+    .sidebar {
 
-      align-items:center;
+      height:
+        calc(100vh - 28px);
 
-      gap:12px;
+      position: sticky;
+
+      top: 14px;
+
+      display: flex;
+
+      flex-direction: column;
     }
 
 
-    .logo-mark{
+    /* =====================================================
+           LOGO
+        ====================================================== */
 
-      width:54px;
-      height:54px;
+    .logo {
 
-      border-radius:15px;
+      display: flex;
 
-      display:grid;
+      align-items: center;
 
-      place-items:center;
+      margin-bottom: 30px;
+    }
 
-      color:#fff;
 
-      font-weight:900;
+    .logo-mark {
 
-      font-size:24px;
+      width: 60px;
+      height: 60px;
+
+      display: flex;
+
+      align-items: center;
+      justify-content: center;
+
+      border-radius: 18px;
+
+      background: var(--red);
+
+      color: white;
+
+      font-size: 19px;
+
+      font-weight: 900;
+
+      letter-spacing: -1px;
+
+      box-shadow:
+        0 10px 25px rgba(229, 43, 50, .2);
+    }
+
+
+    .logo-name {
+
+      margin-left: 11px;
+
+      display: flex;
+
+      flex-direction: column;
+    }
+
+
+    .logo-name small {
+
+      color: #96989e;
+
+      font-size: 10px;
+
+      font-weight: 800;
+
+      text-transform: uppercase;
+
+      letter-spacing: .1em;
+    }
+
+
+    .logo-name strong {
+
+      margin-top: 2px;
+
+      font-size: 21px;
+
+      font-weight: 900;
+
+      letter-spacing: -.06em;
+    }
+
+
+    /* =====================================================
+           NAVIGATION
+        ====================================================== */
+
+    .navigation {
+
+      display: flex;
+
+      flex-direction: column;
+
+      gap: 7px;
+    }
+
+
+    .nav-button {
+
+      width: 100%;
+      height: 54px;
+
+      display: flex;
+
+      align-items: center;
+
+      gap: 14px;
+
+      padding: 0 15px;
+
+      border-radius: 14px;
+
+      background: transparent;
+
+      color: #777980;
+
+      font-size: 15px;
+
+      font-weight: 900;
+
+      text-align: left;
+
+      transition:
+        background .18s ease,
+        color .18s ease,
+        transform .18s ease;
+    }
+
+
+    .nav-button:hover {
+
+      background: white;
+
+      color: var(--text);
+
+      transform:
+        translateX(2px);
+    }
+
+
+    .nav-button.active {
 
       background:
-        linear-gradient(
-          135deg,
-          #ff334b,
-          #ef172f
-        );
+        var(--red-light);
 
-      box-shadow:
-        0 12px 30px rgba(255,51,75,.22);
+      color: var(--red);
     }
 
 
-    .logo h1{
+    .nav-icon {
 
-      margin:0;
+      width: 24px;
 
-      font-size:24px;
+      display: flex;
 
-      letter-spacing:.1px;
+      justify-content: center;
+      align-items: center;
+
+      font-size: 20px;
+
+      font-weight: 900;
     }
 
 
-    .logo p{
+    /* =====================================================
+           SIDEBAR BOTTOM
+        ====================================================== */
 
-      margin:
-        2px
-        0
-        0;
+    .sidebar-bottom {
 
-      font-size:12px;
-
-      color:#ff334b;
-
-      font-weight:800;
+      margin-top: auto;
     }
 
 
-    .profile-button{
+    .live-mini {
 
-      width:auto;
+      padding: 18px;
 
-      min-width:58px;
-
-      padding:
-        0
-        17px;
-
-      height:44px;
-
-      border-radius:999px;
+      background: white;
 
       border:
-        1px solid
-        var(--line);
+        1px solid var(--line);
 
-      font-size:18px;
-
-      background:#fff;
+      border-radius: 19px;
 
       box-shadow:
-        0 8px 26px
-        rgba(25,35,55,.08);
-
-      transition:.2s;
+        var(--shadow-small);
     }
 
 
-    .profile-button:hover{
+    .live-mini-top {
+
+      display: flex;
+
+      align-items: center;
+
+      gap: 8px;
+
+      color: #999ba1;
+
+      font-size: 10px;
+
+      font-weight: 900;
+
+      text-transform: uppercase;
+
+      letter-spacing: .09em;
+    }
+
+
+    .live-mini-title {
+
+      margin-top: 11px;
+
+      font-size: 16px;
+
+      font-weight: 900;
+    }
+
+
+    .live-mini-subtitle {
+
+      margin-top: 4px;
+
+      color: var(--muted);
+
+      font-size: 12px;
+
+      font-weight: 700;
+    }
+
+
+    .live-dot {
+
+      width: 6px;
+      height: 6px;
+
+      flex:
+        0 0 6px;
+
+      border-radius: 50%;
+
+      background: var(--green);
+
+      box-shadow:
+        0 0 0 4px rgba(40, 173, 90, .1);
+
+      animation:
+        livePulse 1.7s infinite;
+    }
+
+
+    @keyframes livePulse {
+
+      0%,
+      100% {
+
+        box-shadow:
+          0 0 0 3px rgba(40, 173, 90, .1);
+      }
+
+      50% {
+
+        box-shadow:
+          0 0 0 7px rgba(40, 173, 90, .02);
+      }
+    }
+
+
+    /* =====================================================
+           MAIN
+        ====================================================== */
+
+    .main {
+
+      min-width: 0;
+      min-height: 0;
+
+      display: flex;
+
+      flex-direction: column;
+    }
+
+
+    /* =====================================================
+           TOP BAR
+        ====================================================== */
+
+    .topbar {
+
+      width: 100%;
+
+      height: 76px;
+
+      min-height: 76px;
+
+      margin-bottom: 16px;
+
+      padding:
+        0 12px 0 20px;
+
+      display: flex;
+
+      align-items: center;
+
+      justify-content:
+        space-between;
+
+      background:
+        rgba(255, 255, 255, .94);
+
+      border:
+        1px solid #eeeeef;
+
+      border-radius: 20px;
+
+      box-shadow:
+        var(--shadow-small);
+    }
+
+
+    .top-brand {
+
+      display: flex;
+
+      align-items: center;
+
+      gap: 13px;
+    }
+
+
+    .top-brand-icon {
+
+      width: 48px;
+      height: 48px;
+
+      display: flex;
+
+      align-items: center;
+      justify-content: center;
+
+      border-radius: 13px;
+
+      background: var(--red);
+
+      color: white;
+
+      font-size: 15px;
+
+      font-weight: 900;
+    }
+
+
+    .top-brand-text {
+
+      display: flex;
+
+      flex-direction: column;
+    }
+
+
+    .top-brand-text strong {
+
+      font-size: 15px;
+
+      font-weight: 900;
+    }
+
+
+    .top-brand-text span {
+
+      margin-top: 4px;
+
+      color: var(--muted);
+
+      font-size: 11px;
+
+      font-weight: 700;
+    }
+
+
+    .top-actions {
+
+      display: flex;
+
+      align-items: center;
+
+      gap: 8px;
+    }
+
+
+    .icon-button {
+
+      width: 50px;
+      height: 50px;
+
+      display: flex;
+
+      align-items: center;
+      justify-content: center;
+
+      border-radius: 13px;
+
+      background: transparent;
+
+      color: #6c6e75;
+
+      font-size: 20px;
+
+      font-weight: 900;
+
+      transition: .18s;
+    }
+
+
+    .icon-button:hover {
+
+      background: #f2f3f5;
+
+      color: var(--text);
+    }
+
+
+    .pause-button {
+
+      font-size: 23px;
+
+      font-weight: 900;
+    }
+
+
+    .pause-button:disabled {
+
+      opacity: .35;
+
+      cursor:
+        not-allowed;
+    }
+
+
+    .top-live {
+
+      height: 50px;
+
+      padding:
+        0 19px;
+
+      display: flex;
+
+      align-items: center;
+
+      gap: 10px;
+
+      border-radius: 13px;
+
+      background: var(--red);
+
+      color: white;
+
+      font-size: 13px;
+
+      font-weight: 900;
+
+      box-shadow:
+        0 8px 20px rgba(229, 43, 50, .18);
+    }
+
+
+    /* =====================================================
+           PAGES
+        ====================================================== */
+
+    .page-section {
+
+      display: none;
+
+      min-height: 0;
+    }
+
+
+    .page-section.active {
+
+      display: flex;
+
+      flex-direction: column;
+    }
+
+
+    /* =====================================================
+           HERO
+        ====================================================== */
+
+    .hero {
+
+      width: 100%;
+
+      height: 440px;
+
+      min-height: 440px;
+
+      flex-shrink: 0;
+
+      position: relative;
+
+      overflow: hidden;
+
+      padding:
+        50px 58px;
+
+      background:
+
+        radial-gradient(circle at 85% 20%,
+          rgba(229, 43, 50, .09),
+          transparent 31%),
+
+        radial-gradient(circle at 65% 110%,
+          rgba(229, 43, 50, .055),
+          transparent 34%),
+
+        #fff;
+
+      border:
+        1px solid #eeeeef;
+
+      border-radius: 30px;
+
+      box-shadow:
+        var(--shadow);
+    }
+
+
+    .hero::before {
+
+      content: "";
+
+      position: absolute;
+
+      width: 360px;
+      height: 360px;
+
+      right: -180px;
+      top: -210px;
+
+      border-radius: 50%;
+
+      background: var(--red);
+
+      opacity: .045;
+    }
+
+
+    .hero::after {
+
+      content: "";
+
+      position: absolute;
+
+      width: 220px;
+      height: 220px;
+
+      right: 200px;
+      bottom: -180px;
+
+      border-radius: 50%;
+
+      background: var(--red);
+
+      opacity: .04;
+    }
+
+
+    .hero-content {
+
+      position: relative;
+
+      z-index: 5;
+
+      max-width: 650px;
+    }
+
+
+    .eyebrow {
+
+      display: inline-flex;
+
+      align-items: center;
+
+      gap: 9px;
+
+      padding:
+        10px 14px;
+
+      border-radius: 100px;
+
+      background:
+        var(--red-light);
+
+      color: var(--red);
+
+      font-size: 11px;
+
+      font-weight: 900;
+
+      text-transform: uppercase;
+
+      letter-spacing: .09em;
+    }
+
+
+    .hero h1 {
+
+      margin:
+        21px 0 15px;
+
+      font-size:
+        clamp(68px,
+          5.7vw,
+          95px);
+
+      line-height: .88;
+
+      font-weight: 900;
+
+      letter-spacing: -.07em;
+    }
+
+
+    .hero h1 span {
+
+      color: var(--red);
+    }
+
+
+    .hero-description {
+
+      max-width: 560px;
+
+      color: var(--muted);
+
+      font-size: 16px;
+
+      line-height: 1.65;
+
+      font-weight: 600;
+    }
+
+
+    .hero-player {
+
+      margin-top: 28px;
+
+      display: flex;
+
+      align-items: center;
+
+      gap: 15px;
+    }
+
+
+    .big-play {
+
+      width: 68px;
+      height: 68px;
+
+      display: flex;
+
+      align-items: center;
+      justify-content: center;
+
+      border-radius: 18px;
+
+      background: var(--red);
+
+      color: white;
+
+      font-size: 24px;
+
+      font-weight: 900;
+
+      box-shadow:
+        0 11px 25px rgba(229, 43, 50, .23);
+
+      transition: .2s;
+    }
+
+
+    .big-play:hover {
 
       transform:
         translateY(-2px);
 
       box-shadow:
-        0 12px 30px
-        rgba(30,42,70,.13);
+        0 15px 30px rgba(229, 43, 50, .28);
     }
 
 
-    .profile-button.admin{
+    .hero-player-info {
 
-      background:#fff1f0;
+      display: flex;
 
-      border-color:#efaaa6;
+      flex-direction: column;
+
+      gap: 5px;
+
+      min-width: 0;
     }
 
 
-    /* ================= MAIN ================= */
+    .hero-player-info small {
+
+      color: #999ba0;
+
+      font-size: 10px;
+
+      font-weight: 900;
+
+      text-transform: uppercase;
+
+      letter-spacing: .09em;
+    }
 
 
-    .dashboard-grid{
+    .hero-player-info strong {
 
-      display:grid;
+      max-width: 430px;
+
+      overflow: hidden;
+
+      white-space: nowrap;
+
+      text-overflow: ellipsis;
+
+      font-size: 17px;
+
+      font-weight: 900;
+    }
+
+
+    /* =====================================================
+           VISUALIZER
+        ====================================================== */
+
+    .visualizer {
+
+      position: absolute;
+
+      z-index: 3;
+
+      right: 52px;
+      bottom: 30px;
+
+      width: 380px;
+      height: 250px;
+
+      display: flex;
+
+      align-items: flex-end;
+
+      justify-content: center;
+
+      gap: 7px;
+    }
+
+
+    .bar {
+
+      width: 10px;
+
+      min-height: 18px;
+
+      border-radius:
+        10px 10px 3px 3px;
+
+      background: var(--red);
+
+      opacity: .7;
+
+      transform-origin: bottom;
+
+      animation:
+        equalizer 1.1s ease-in-out infinite alternate;
+    }
+
+
+    .bar:nth-child(1) {
+      height: 35%;
+      animation-delay: -.2s;
+    }
+
+    .bar:nth-child(2) {
+      height: 65%;
+      animation-delay: -.7s;
+    }
+
+    .bar:nth-child(3) {
+      height: 45%;
+      animation-delay: -.4s;
+    }
+
+    .bar:nth-child(4) {
+      height: 78%;
+      animation-delay: -.9s;
+    }
+
+    .bar:nth-child(5) {
+      height: 52%;
+      animation-delay: -.3s;
+    }
+
+    .bar:nth-child(6) {
+      height: 93%;
+      animation-delay: -.8s;
+    }
+
+    .bar:nth-child(7) {
+      height: 48%;
+      animation-delay: -.1s;
+    }
+
+    .bar:nth-child(8) {
+      height: 73%;
+      animation-delay: -.6s;
+    }
+
+    .bar:nth-child(9) {
+      height: 42%;
+      animation-delay: -.3s;
+    }
+
+    .bar:nth-child(10) {
+      height: 84%;
+      animation-delay: -.9s;
+    }
+
+    .bar:nth-child(11) {
+      height: 54%;
+      animation-delay: -.4s;
+    }
+
+    .bar:nth-child(12) {
+      height: 72%;
+      animation-delay: -.2s;
+    }
+
+    .bar:nth-child(13) {
+      height: 43%;
+      animation-delay: -.6s;
+    }
+
+    .bar:nth-child(14) {
+      height: 64%;
+      animation-delay: -.1s;
+    }
+
+    .bar:nth-child(15) {
+      height: 38%;
+      animation-delay: -.8s;
+    }
+
+
+    @keyframes equalizer {
+
+      from {
+        transform:
+          scaleY(.35);
+      }
+
+      to {
+        transform:
+          scaleY(1);
+      }
+    }
+
+
+    body:not(.playing) .bar {
+
+      animation-play-state:
+        paused;
+
+      transform:
+        scaleY(.35);
+    }
+
+
+    /* =====================================================
+           DASHBOARD
+        ====================================================== */
+
+    .dashboard {
+
+      width: 100%;
+
+      height: 250px;
+
+      min-height: 250px;
+
+      display: grid;
 
       grid-template-columns:
-        minmax(0,1.65fr)
-        minmax(360px,.95fr);
+        minmax(0, 1fr) minmax(0, 1fr);
 
-      gap:18px;
+      gap: 16px;
 
-      align-items:stretch;
+      margin-top: 16px;
     }
 
 
-    .panel{
+    /* =====================================================
+           CARDS
+        ====================================================== */
 
-      background:
-        rgba(255,255,255,.9);
+    .card-panel {
+
+      min-width: 0;
+      min-height: 0;
+
+      padding: 24px;
+
+      background: white;
 
       border:
-        1px solid
-        rgba(255,255,255,.92);
+        1px solid var(--line);
+
+      border-radius: 22px;
 
       box-shadow:
-        var(--shadow);
-
-      border-radius:22px;
+        var(--shadow-small);
     }
 
 
-    /* ================= PLAYER ================= */
+    .card-heading {
 
+      height: 22px;
 
-    .player-card{
+      display: flex;
 
-      padding:
-        26px
-        28px
-        20px;
+      align-items: center;
 
-      min-height:430px;
+      justify-content:
+        space-between;
 
-      position:relative;
-
-      overflow:hidden;
+      margin-bottom: 13px;
     }
 
 
-    .player-card:after{
+    .card-heading h2 {
 
-      content:"";
+      margin: 0;
 
-      position:absolute;
+      font-size: 17px;
 
-      width:340px;
-      height:340px;
+      font-weight: 900;
 
-      border-radius:50%;
+      letter-spacing: -.045em;
+    }
 
-      right:-180px;
-      top:-180px;
+
+    .card-heading>span {
+
+      color: #999ba1;
+
+      font-size: 12px;
+
+      font-weight: 900;
+
+      text-transform: uppercase;
+
+      letter-spacing: .09em;
+    }
+
+
+    .live-status {
+
+      display: flex;
+
+      align-items: center;
+
+      gap: 6px;
+
+      color:
+        var(--green) !important;
+    }
+
+
+    .live-status i {
+
+      width: 6px;
+      height: 6px;
+
+      border-radius: 50%;
 
       background:
-        radial-gradient(
-          circle,
-          rgba(255,76,99,.10),
-          transparent 65%
-        );
-
-      pointer-events:none;
+        var(--green);
     }
 
 
-    .live-badge{
+    /* =====================================================
+           CURRENT TRACK
+        ====================================================== */
 
-      display:inline-flex;
+    .current-track {
 
-      align-items:center;
+      height: 84px;
 
-      gap:7px;
+      display: flex;
 
-      padding:
-        5px
-        10px;
+      align-items: center;
 
-      border-radius:999px;
+      gap: 13px;
 
-      background:#ff334b;
-
-      color:#fff;
-
-      font-size:11px;
-
-      font-weight:900;
-
-      letter-spacing:.4px;
-    }
-
-
-    .live-badge span{
-
-      width:7px;
-      height:7px;
-
-      border-radius:50%;
-
-      background:#fff;
-
-      animation:pulse 1.5s infinite;
-    }
-
-
-    @keyframes pulse{
-
-      0%{
-        opacity:1;
-      }
-
-      50%{
-        opacity:.3;
-      }
-
-      100%{
-        opacity:1;
-      }
-
-    }
-
-
-    .player-main{
-
-      display:flex;
-
-      gap:30px;
-
-      align-items:center;
-
-      margin-top:10px;
-    }
-
-
-    .cover{
-
-      width:315px;
-      height:280px;
-
-      flex:none;
-
-      border-radius:22px;
+      padding: 9px;
 
       background:
-        linear-gradient(
-          145deg,
-          #e53935,
-          #ff8a80
-        );
+        #f8f8fa;
 
-      background-size:cover;
+      border-radius: 14px;
+    }
 
-      background-position:center;
+
+    .album {
+
+      width: 62px;
+      height: 62px;
+
+      flex:
+        0 0 62px;
+
+      display: flex;
+
+      align-items: center;
+      justify-content: center;
+
+      overflow: hidden;
+
+      border-radius: 13px;
+
+      background:
+        linear-gradient(135deg,
+          #e52b32,
+          #ff7077);
+
+      color: white;
+
+      font-size: 24px;
 
       box-shadow:
-        0 18px 42px
-        rgba(26,31,55,.18);
-
-      color:#fff;
-
-      display:grid;
-
-      place-items:center;
-
-      font-size:60px;
-
-      font-weight:900;
-
-      overflow:hidden;
+        0 7px 16px rgba(229, 43, 50, .18);
     }
 
 
-    .cover.has-image{
+    .album img {
 
-      color:transparent;
+      width: 100%;
+      height: 100%;
+
+      display: block;
+
+      object-fit: cover;
     }
 
 
-    .player-info{
+    .track-info {
 
-      min-width:0;
+      min-width: 0;
 
-      flex:1;
+      flex: 1;
+
+      display: flex;
+
+      flex-direction: column;
+
+      gap: 3px;
     }
 
 
-    .airline{
+    .track-info small {
 
-      color:#ff334b;
+      color: var(--red);
 
-      font-weight:800;
+      font-size: 8px;
 
-      font-size:13px;
+      font-weight: 900;
 
-      margin-bottom:12px;
+      letter-spacing: .1em;
     }
 
 
-    .wave{
+    .track-info strong {
 
-      letter-spacing:-3px;
+      display: block;
 
-      margin-right:7px;
+      overflow: hidden;
+
+      white-space: nowrap;
+
+      text-overflow: ellipsis;
+
+      font-size: 14px;
+
+      font-weight: 900;
     }
 
 
-    .station{
+    .track-info span {
 
-      font-size:32px;
+      display: block;
 
-      font-weight:900;
+      overflow: hidden;
 
-      letter-spacing:-.8px;
+      white-space: nowrap;
 
-      margin-bottom:8px;
+      text-overflow: ellipsis;
+
+      color: var(--muted);
+
+      font-size: 11px;
+
+      font-weight: 600;
     }
 
 
-    .online-row{
-
-      display:flex;
-
-      align-items:center;
-
-      gap:8px;
-
-      margin-top:17px;
-
-      font-size:12px;
-
-      color:var(--muted);
-    }
-
-
-    .online-row b{
-
-      background:#e9f9f1;
-
-      color:#27a36b;
+    .track-time {
 
       padding:
-        6px
-        10px;
+        7px 9px;
 
-      border-radius:999px;
-    }
-
-
-    .online-dot{
-
-      width:7px;
-      height:7px;
-
-      background:#32c778;
-
-      border-radius:50%;
-
-      box-shadow:
-        0 0 0 4px
-        rgba(50,199,120,.12);
-    }
-
-
-    .current-track{
-
-      margin-top:18px;
-
-      display:grid;
-
-      gap:4px;
-    }
-
-
-    .current-track strong{
-
-      font-size:18px;
-
-      white-space:nowrap;
-
-      overflow:hidden;
-
-      text-overflow:ellipsis;
-    }
-
-
-    .current-track span{
-
-      font-size:13px;
-
-      color:var(--muted);
-
-      white-space:nowrap;
-
-      overflow:hidden;
-
-      text-overflow:ellipsis;
-    }
-
-
-    /* ================= CONTROLS ================= */
-
-
-    .player-controls{
-
-      display:flex;
-
-      align-items:center;
-
-      gap:12px;
-
-      margin-top:20px;
-    }
-
-
-    .play{
-
-      width:64px;
-      height:64px;
-
-      border-radius:50%;
-
-      border:0;
+      border-radius: 8px;
 
       background:
-        linear-gradient(
-          135deg,
-          #ff334b,
-          #ff6a3d
-        );
+        #eaf9ef;
 
-      box-shadow:
-        0 14px 30px
-        rgba(255,51,75,.26);
+      color:
+        var(--green);
 
-      font-size:20px;
+      font-size: 9px;
 
-      color:#fff;
+      font-weight: 900;
 
-      transition:.2s;
+      white-space: nowrap;
     }
 
 
-    .play:hover{
+    /* =====================================================
+           VOLUME
+        ====================================================== */
 
-      transform:
-        scale(1.04);
+    .volume-row {
+
+      height: 22px;
+
+      margin-top: 11px;
+
+      display: flex;
+
+      align-items: center;
+
+      gap: 9px;
     }
 
 
-    .volume-line{
+    .volume-icon {
 
-      display:flex;
-
-      align-items:center;
-
-      gap:10px;
-
-      margin-top:15px;
-
-      color:#6f7686;
+      font-size: 12px;
     }
 
 
-    .volume-line input{
+    #volume {
 
-      width:130px;
+      flex: 1;
 
-      accent-color:#ff334b;
+      width: 100%;
+
+      height: 4px;
+
+      appearance: none;
+
+      outline: none;
+
+      border-radius: 100px;
+
+      background: #e5e6e9;
     }
 
 
-    /* ================= AIR HISTORY ================= */
+    #volume::-webkit-slider-thumb {
 
+      appearance: none;
 
-    .history-panel{
+      width: 12px;
+      height: 12px;
 
-      padding:
-        20px
-        18px;
-
-      min-height:430px;
-
-      max-height:430px;
-
-      display:flex;
-
-      flex-direction:column;
-
-      overflow:hidden;
-    }
-
-
-    .history-head{
-
-      display:flex;
-
-      justify-content:space-between;
-
-      align-items:center;
-
-      gap:10px;
-
-      margin-bottom:10px;
-
-      flex:none;
-    }
-
-
-    .history-title{
-
-      font-size:20px;
-
-      font-weight:900;
-
-      letter-spacing:-.3px;
-    }
-
-
-    .history-title span{
-
-      color:#ff334b;
-
-      margin-right:8px;
-    }
-
-
-    /*
-       ВАЖНО:
-
-       История теперь ограничена по высоте.
-       Больше пяти элементов туда никогда
-       не попадёт.
-
-       Если высота всё-таки будет превышена,
-       появляется прокрутка внутри блока.
-    */
-
-    .history-list{
-
-      display:grid;
-
-      gap:0;
-
-      overflow-y:auto;
-
-      overflow-x:hidden;
-
-      padding-right:4px;
-
-      min-height:0;
-
-      flex:1;
-
-      scrollbar-width:thin;
-
-      scrollbar-color:
-        #d7dce7
-        transparent;
-    }
-
-
-    .history-list::-webkit-scrollbar{
-
-      width:6px;
-    }
-
-
-    .history-list::-webkit-scrollbar-track{
-
-      background:transparent;
-    }
-
-
-    .history-list::-webkit-scrollbar-thumb{
-
-      background:#d7dce7;
-
-      border-radius:999px;
-    }
-
-
-    .history-item{
-
-      display:flex;
-
-      align-items:center;
-
-      gap:12px;
-
-      padding:
-        11px
-        8px;
-
-      border:0;
-
-      border-bottom:
-        1px solid
-        #edf0f4;
-
-      border-radius:0;
-
-      background:transparent;
-
-      min-width:0;
-    }
-
-
-    .history-item:last-child{
-
-      border-bottom:0;
-    }
-
-
-    .history-icon{
-
-      width:46px;
-      height:46px;
-
-      border-radius:12px;
-
-      display:grid;
-
-      place-items:center;
+      border-radius: 50%;
 
       background:
-        linear-gradient(
-          145deg,
-          #f2f4f8,
-          #e8ebf1
-        );
+        var(--red);
 
-      font-size:18px;
+      cursor: pointer;
 
-      color:#5f697c;
-
-      flex:none;
-
-      background-size:cover;
-
-      background-position:center;
-
-      overflow:hidden;
+      box-shadow:
+        0 2px 7px rgba(229, 43, 50, .25);
     }
 
 
-    .history-main{
+    #volume::-moz-range-thumb {
 
-      min-width:0;
+      width: 12px;
+      height: 12px;
 
-      flex:1;
+      border: 0;
+
+      border-radius: 50%;
+
+      background:
+        var(--red);
+
+      cursor: pointer;
     }
 
 
-    .history-main strong{
+    .volume-value {
 
-      display:block;
+      width: 40px;
 
-      white-space:nowrap;
+      color: #888a90;
 
-      overflow:hidden;
+      font-size: 11px;
 
-      text-overflow:ellipsis;
+      font-weight: 800;
 
-      font-size:13px;
+      text-align: right;
     }
 
 
-    .history-main span{
+    /* =====================================================
+           RECENT
+        ====================================================== */
 
-      display:block;
+    .recent-list {
 
-      color:var(--muted);
+      display: flex;
 
-      font-size:11px;
+      flex-direction: column;
 
-      margin-top:4px;
-
-      white-space:nowrap;
-
-      overflow:hidden;
-
-      text-overflow:ellipsis;
+      gap: 2px;
     }
 
 
-    .history-time{
+    .recent-item {
 
-      font-weight:700;
+      min-height: 34px;
 
-      font-size:11px;
+      display: flex;
 
-      white-space:nowrap;
+      align-items: center;
 
-      color:#697184;
+      gap: 8px;
+
+      padding: 2px 6px;
+
+      border-radius: 8px;
+
+      transition: .15s;
     }
 
 
-    .history-empty{
+    .recent-item:hover {
 
-      padding:
-        28px
-        10px;
+      background: #f7f7f8;
+    }
 
-      text-align:center;
 
-      color:var(--muted);
+    .recent-number {
+
+      width: 22px;
+
+      color: #b1b3b8;
+
+      font-size: 11px;
+
+      font-weight: 900;
+
+      text-align: center;
+    }
+
+
+    .recent-cover {
+
+      width: 34px;
+      height: 34px;
+
+      flex:
+        0 0 34px;
+
+      display: flex;
+
+      align-items: center;
+      justify-content: center;
+
+      border-radius: 7px;
+
+      background:
+        var(--red-light);
+
+      color:
+        var(--red);
+
+      font-size: 12px;
+    }
+
+
+    .recent-name {
+
+      min-width: 0;
+
+      flex: 1;
+
+      display: flex;
+
+      flex-direction: column;
+
+      gap: 1px;
+    }
+
+
+    .recent-name strong {
+
+      overflow: hidden;
+
+      white-space: nowrap;
+
+      text-overflow: ellipsis;
+
+      font-size: 11px;
+
+      font-weight: 800;
+    }
+
+
+    .recent-name span {
+
+      overflow: hidden;
+
+      white-space: nowrap;
+
+      text-overflow: ellipsis;
+
+      color: #999ba1;
+
+      font-size: 8px;
+
+      font-weight: 600;
+    }
+
+
+    .recent-time {
+
+      color: #aaa;
+
+      font-size: 8px;
+
+      font-weight: 800;
+    }
+
+
+    /* =====================================================
+           OTHER PAGES
+        ====================================================== */
+
+    .section-card {
+
+      width: 100%;
+
+      min-height: 0;
+
+      padding: 30px;
+
+      background: white;
 
       border:
-        1px dashed
-        #d9dee9;
+        1px solid var(--line);
 
-      border-radius:15px;
+      border-radius: 23px;
 
-      font-size:12px;
-
-      margin-top:10px;
+      box-shadow:
+        var(--shadow-small);
     }
 
 
-    /* ================= ADMIN ================= */
+    .section-card h1 {
+
+      margin: 0;
+
+      font-size: 34px;
+
+      line-height: 1;
+
+      font-weight: 900;
+
+      letter-spacing: -.065em;
+    }
 
 
-    .admin-section{
+    .section-description {
+
+      max-width: 650px;
 
       margin:
-        20px
-        0
-        0;
+        13px 0 23px;
+
+      color: var(--muted);
+
+      font-size: 13px;
+
+      line-height: 1.7;
+
+      font-weight: 600;
     }
 
 
-    .section-head{
+    .upload-label {
 
-      display:flex;
+      display: inline-flex;
 
-      justify-content:space-between;
+      align-items: center;
 
-      align-items:end;
-
-      margin-bottom:12px;
-
-      gap:12px;
-    }
-
-
-    .section-head h2{
-
-      margin:0;
-
-      font-size:20px;
-    }
-
-
-    .section-head p{
-
-      margin:
-        4px
-        0
-        0;
-
-      color:var(--muted);
-
-      font-size:12px;
-    }
-
-
-    .search{
-
-      border:
-        1px solid
-        var(--line);
-
-      background:#fff;
-
-      border-radius:12px;
+      gap: 8px;
 
       padding:
-        10px
-        12px;
+        12px 15px;
 
-      width:260px;
+      border-radius: 11px;
 
-      outline:none;
-    }
+      background:
+        var(--red);
 
+      color: white;
 
-    .search:focus{
+      font-size: 12px;
 
-      border-color:#ff334b;
+      font-weight: 900;
+
+      cursor: pointer;
 
       box-shadow:
-        0 0 0 3px
-        rgba(255,51,75,.08);
+        0 8px 18px rgba(229, 43, 50, .17);
+
+      transition: .18s;
     }
 
 
-    .library{
-
-      padding:18px;
-    }
-
-
-    .tracks{
-
-      display:grid;
-
-      gap:8px;
-    }
-
-
-    .track-row{
-
-      display:flex;
-
-      align-items:center;
-
-      gap:12px;
-
-      padding:12px;
-
-      border:
-        1px solid
-        var(--line);
-
-      border-radius:15px;
-
-      background:#fff;
-    }
-
-
-    .track-row.active{
-
-      border-color:#efaaa6;
-
-      background:#fff8f7;
-    }
-
-
-    .num{
-
-      width:30px;
-
-      text-align:center;
-
-      color:var(--muted);
-
-      font-size:12px;
-    }
-
-
-    .track-mini-cover{
-
-      width:42px;
-      height:42px;
-
-      flex:none;
-
-      border-radius:10px;
+    .upload-label:hover {
 
       background:
-        linear-gradient(
-          145deg,
-          #e53935,
-          #ff8a80
-        );
-
-      background-size:cover;
-
-      background-position:center;
-    }
-
-
-    .play-mini{
-
-      width:37px;
-      height:37px;
-
-      border-radius:11px;
-
-      border:
-        1px solid
-        var(--line);
-
-      background:#f7f8fb;
-
-      display:grid;
-
-      place-items:center;
-    }
-
-
-    .track-name{
-
-      min-width:0;
-
-      flex:1;
-    }
-
-
-    .track-name strong{
-
-      display:block;
-
-      white-space:nowrap;
-
-      overflow:hidden;
-
-      text-overflow:ellipsis;
-    }
-
-
-    .track-name span{
-
-      font-size:11px;
-
-      color:var(--muted);
-    }
-
-
-    .delete{
-
-      border:0;
-
-      background:#fff0f0;
-
-      color:#d52f2f;
-
-      border-radius:9px;
-
-      padding:
-        8px
-        10px;
-
-      font-weight:600;
-    }
-
-
-    .empty{
-
-      padding:35px;
-
-      text-align:center;
-
-      color:var(--muted);
-
-      border:
-        1px dashed
-        #d9dee9;
-
-      border-radius:17px;
-    }
-
-
-    .add-library{
-
-      margin-top:12px;
-
-      width:100%;
-
-      padding:14px;
-
-      border:
-        1px dashed
-        #cfd6e4;
-
-      border-radius:16px;
-
-      text-align:center;
-
-      color:var(--muted);
-
-      background:#fafbfe;
-
-      cursor:pointer;
-    }
-
-
-    .add-library:hover{
-
-      background:#f5f7fb;
-    }
-
-
-    .add-library b{
-
-      color:var(--text);
-    }
-
-
-    #fileInput{
-
-      display:none;
-    }
-
-
-    /* ================= IMAGE SLIDER ================= */
-
-
-    .ad-section{
-
-      margin-top:20px;
-    }
-
-
-    .ad-viewport{
-
-      position:relative;
-
-      overflow:hidden;
-
-      width:100%;
-
-      aspect-ratio:32 / 9;
-
-      border-radius:22px;
-
-      background:#111;
-
-      box-shadow:
-        0 20px 65px
-        rgba(20,29,52,.16);
-    }
-
-
-    .ad-track{
-
-      display:flex;
-
-      width:100%;
-      height:100%;
-
-      transition:
-        transform
-        .65s
-        cubic-bezier(.22,.61,.36,1);
-    }
-
-
-    .ad-slide{
-
-      min-width:100%;
-
-      width:100%;
-      height:100%;
-
-      position:relative;
-
-      overflow:hidden;
-
-      background:#111;
-    }
-
-
-    .ad-slide img{
-
-      display:block;
-
-      width:100%;
-      height:100%;
-
-      object-fit:cover;
-
-      object-position:center;
-    }
-
-
-    .ad-arrow{
-
-      position:absolute;
-
-      top:50%;
+        var(--red-dark);
 
       transform:
-        translateY(-50%);
-
-      width:48px;
-      height:48px;
-
-      border:
-        1px solid
-        rgba(255,255,255,.3);
-
-      border-radius:50%;
-
-      background:
-        rgba(4,12,32,.42);
-
-      backdrop-filter:blur(10px);
-
-      color:#fff;
-
-      font-size:30px;
-
-      display:grid;
-
-      place-items:center;
-
-      z-index:3;
-
-      cursor:pointer;
-
-      transition:.2s;
+        translateY(-1px);
     }
 
 
-    .ad-arrow:hover{
+    .upload-label input {
 
-      background:
-        rgba(4,12,32,.7);
-
-      transform:
-        translateY(-50%)
-        scale(1.04);
+      display: none;
     }
 
 
-    .ad-prev{
+    .uploaded-list {
 
-      left:20px;
+      margin-top: 22px;
+
+      display: flex;
+
+      flex-direction: column;
+
+      gap: 5px;
     }
 
 
-    .ad-next{
+    .uploaded-track {
 
-      right:20px;
-    }
+      min-height: 44px;
 
+      display: flex;
 
-    .ad-dots{
+      align-items: center;
 
-      position:absolute;
-
-      left:50%;
-      bottom:17px;
-
-      transform:
-        translateX(-50%);
-
-      display:flex;
-
-      gap:7px;
-
-      z-index:4;
+      gap: 10px;
 
       padding:
-        7px
-        10px;
+        10px 12px;
 
-      border-radius:999px;
-
-      background:
-        rgba(5,12,30,.28);
-
-      backdrop-filter:blur(8px);
-    }
-
-
-    .ad-dot{
-
-      width:8px;
-      height:8px;
-
-      border:0;
-
-      padding:0;
-
-      border-radius:50%;
+      border-radius: 11px;
 
       background:
-        rgba(255,255,255,.45);
+        #f7f7f8;
 
-      cursor:pointer;
+      font-size: 12px;
 
-      transition:.25s;
+      font-weight: 800;
+
+      cursor: pointer;
     }
 
 
-    .ad-dot.active{
+    /* =====================================================
+           RESPONSIVE
+        ====================================================== */
 
-      width:24px;
+    @media (max-width: 1050px) {
 
-      border-radius:6px;
+      .app {
 
-      background:#fff;
-    }
-
-
-    /* ================= MINI PLAYER ================= */
-
-
-    .bottom{
-
-      position:fixed;
-
-      bottom:12px;
-      left:50%;
-
-      transform:
-        translateX(-50%);
-
-      width:min(
-        900px,
-        calc(100% - 20px)
-      );
-
-      display:flex;
-
-      align-items:center;
-
-      gap:12px;
-
-      padding:
-        11px
-        13px;
-
-      background:
-        rgba(255,255,255,.94);
-
-      backdrop-filter:blur(18px);
-
-      border:
-        1px solid
-        var(--line);
-
-      border-radius:18px;
-
-      box-shadow:
-        0 16px 50px
-        #18233a24;
-
-      z-index:10;
-    }
-
-
-    .circle{
-
-      width:43px;
-      height:43px;
-
-      border-radius:13px;
-
-      border:
-        1px solid
-        var(--line);
-
-      background:#f8f9fc;
-
-      display:grid;
-
-      place-items:center;
-
-      font-size:18px;
-
-      flex:none;
-    }
-
-
-    .bottom-info{
-
-      min-width:0;
-
-      flex:1;
-    }
-
-
-    .bottom-info strong,
-    .bottom-info span{
-
-      display:block;
-
-      white-space:nowrap;
-
-      overflow:hidden;
-
-      text-overflow:ellipsis;
-    }
-
-
-    .bottom-info span{
-
-      font-size:11px;
-
-      color:var(--muted);
-
-      margin-top:2px;
-    }
-
-
-    /* ================= TOAST ================= */
-
-
-    .toast{
-
-      position:fixed;
-
-      top:20px;
-      left:50%;
-
-      transform:
-        translate(-50%,-15px);
-
-      opacity:0;
-
-      transition:.25s;
-
-      background:#171b26;
-
-      color:#fff;
-
-      padding:
-        10px
-        15px;
-
-      border-radius:12px;
-
-      font-size:13px;
-
-      z-index:100;
-    }
-
-
-    .toast.show{
-
-      opacity:1;
-
-      transform:
-        translate(-50%,0);
-    }
-
-
-    /* ================= LOGIN ================= */
-
-
-    .modal{
-
-      position:fixed;
-
-      inset:0;
-
-      background:
-        rgba(20,25,40,.45);
-
-      backdrop-filter:blur(8px);
-
-      display:none;
-
-      align-items:center;
-
-      justify-content:center;
-
-      padding:20px;
-
-      z-index:50;
-    }
-
-
-    .modal.show{
-
-      display:flex;
-    }
-
-
-    .login-box{
-
-      width:min(
-        390px,
-        100%
-      );
-
-      background:#fff;
-
-      border-radius:24px;
-
-      padding:25px;
-
-      box-shadow:
-        0 25px 80px
-        rgba(20,30,50,.25);
-    }
-
-
-    .login-top{
-
-      display:flex;
-
-      align-items:center;
-
-      justify-content:space-between;
-
-      margin-bottom:20px;
-    }
-
-
-    .login-title{
-
-      font-size:22px;
-
-      font-weight:900;
-    }
-
-
-    .close{
-
-      width:36px;
-      height:36px;
-
-      border-radius:10px;
-
-      border:
-        1px solid
-        var(--line);
-
-      background:#f7f8fb;
-
-      font-size:18px;
-    }
-
-
-    .field{
-
-      margin-bottom:14px;
-    }
-
-
-    .field label{
-
-      display:block;
-
-      margin-bottom:6px;
-
-      font-size:12px;
-
-      color:var(--muted);
-
-      font-weight:700;
-    }
-
-
-    .field input{
-
-      width:100%;
-
-      border:
-        1px solid
-        var(--line);
-
-      border-radius:12px;
-
-      padding:
-        12px
-        13px;
-
-      outline:none;
-    }
-
-
-    .field input:focus{
-
-      border-color:#e53935;
-
-      box-shadow:
-        0 0 0 3px
-        #e5393515;
-    }
-
-
-    .login-submit{
-
-      width:100%;
-
-      margin-top:5px;
-
-      padding:13px;
-
-      border:0;
-
-      border-radius:12px;
-
-      color:#fff;
-
-      background:
-        linear-gradient(
-          135deg,
-          #ff334b,
-          #ff6a59
-        );
-
-      font-weight:800;
-    }
-
-
-    .login-error{
-
-      display:none;
-
-      color:#d52f2f;
-
-      background:#fff0f0;
-
-      border-radius:10px;
-
-      padding:
-        9px
-        11px;
-
-      font-size:12px;
-
-      margin-bottom:12px;
-    }
-
-
-    .login-error.show{
-
-      display:block;
-    }
-
-
-    .admin-panel-info{
-
-      margin-top:12px;
-
-      padding:10px;
-
-      border-radius:10px;
-
-      background:#f5f7fb;
-
-      color:var(--muted);
-
-      font-size:11px;
-
-      text-align:center;
-    }
-
-
-    /* ================= MOBILE ================= */
-
-
-    @media(max-width:980px){
-
-      .dashboard-grid{
-
-        grid-template-columns:1fr;
+        grid-template-columns:
+          190px minmax(0, 1fr);
       }
 
 
-      .player-main{
+      .hero {
 
-        gap:22px;
+        padding: 42px;
       }
 
 
-      .cover{
+      .visualizer {
 
-        width:270px;
+        right: 30px;
 
-        height:250px;
+        width: 300px;
       }
-
     }
 
 
-    @media(max-width:680px){
+    @media (max-width: 800px) {
 
-      .app{
+      body {
+
+        overflow: auto;
+      }
+
+
+      .app {
 
         width:
-          min(
-            100% - 20px,
-            1450px
-          );
+          calc(100vw - 20px);
 
-        padding-top:16px;
+        height: auto;
+
+        min-height: 100vh;
+
+        grid-template-columns:
+          1fr;
       }
 
 
-      .logo h1{
+      .sidebar {
 
-        font-size:19px;
+        display: none;
       }
 
 
-      .logo-mark{
+      .hero {
 
-        width:46px;
-        height:46px;
+        height: auto;
+
+        min-height: 520px;
+
+        padding:
+          34px 28px;
       }
 
 
-      .player-card{
+      .hero h1 {
 
-        padding:18px;
+        font-size:
+          clamp(58px,
+            14vw,
+            84px);
       }
 
 
-      .player-main{
+      .visualizer {
 
-        flex-direction:column;
+        position: relative;
 
-        align-items:stretch;
+        right: auto;
+
+        bottom: auto;
+
+        width: 100%;
+
+        height: 170px;
+
+        margin-top: 28px;
       }
 
 
-      .cover{
+      .dashboard {
 
-        width:100%;
+        height: auto;
 
-        height:auto;
+        min-height: 0;
 
-        aspect-ratio:1.18;
+        grid-template-columns:
+          1fr;
       }
 
 
-      .station{
+      .topbar {
 
-        font-size:27px;
+        padding-left: 14px;
       }
 
 
-      .history-panel{
+      .top-brand-text span {
 
-        min-height:360px;
-
-        max-height:360px;
+        display: none;
       }
-
-
-      .history-head{
-
-        align-items:flex-start;
-      }
-
-
-      .ad-viewport{
-
-        border-radius:17px;
-      }
-
-
-      .ad-arrow{
-
-        width:36px;
-
-        height:36px;
-
-        font-size:23px;
-      }
-
-
-      .ad-prev{
-
-        left:9px;
-      }
-
-
-      .ad-next{
-
-        right:9px;
-      }
-
-
-      .ad-dots{
-
-        bottom:9px;
-      }
-
-
-      .admin-section .section-head{
-
-        align-items:stretch;
-
-        flex-direction:column;
-      }
-
-
-      .search{
-
-        width:100%;
-      }
-
     }
 
+
+    @media (max-width: 600px) {
+
+      .top-live {
+
+        padding:
+          0 11px;
+      }
+
+
+      .hero {
+
+        min-height: 500px;
+      }
+
+
+      .hero h1 {
+
+        font-size: 44px;
+      }
+
+
+      .hero-description {
+
+        max-width: 300px;
+
+        font-size: 14px;
+      }
+
+
+      .visualizer {
+
+        width: 220px;
+
+        opacity: .14;
+      }
+
+
+      .track-time {
+
+        display: none;
+      }
+
+
+      .top-actions {
+
+        gap: 4px;
+      }
+
+
+      .icon-button {
+
+        width: 42px;
+        height: 42px;
+      }
+
+
+      .top-live {
+
+        height: 42px;
+
+        font-size: 10px;
+      }
+    }
   </style>
 
 </head>
 
 
-<body>
+<body class="accessibility-mode">
 
 
-<div class="app">
+  <!-- =====================================================
+         APP
+    ====================================================== -->
+
+  <div class="app">
 
 
-  <!-- ================= HEADER ================= -->
+    <!-- =================================================
+             SIDEBAR
+        ================================================== -->
 
-
-  <header>
-
-    <div class="logo">
-
-      <div class="logo-mark">
-        К
-      </div>
+    <aside class="sidebar">
 
       <div>
 
-        <h1>
-          <strong>РАДИО КОЛЯ</strong>
-        </h1>
+        <div class="logo">
 
-      </div>
+          <div class="logo-mark">
+            РК
+          </div>
 
-    </div>
+          <div class="logo-name">
 
+            <small>
+              онлайн
+            </small>
 
-    <button
-      class="profile-button"
-      id="profileButton"
-      title="Войти как администратор"
-    >
-      👤
-    </button>
+            <strong>
+              РАДИО КОЛЯ
+            </strong>
 
-  </header>
-
-
-  <main>
-
-
-    <!-- ================= DASHBOARD ================= -->
-
-
-    <div class="dashboard-grid">
-
-
-      <!-- ================= LIVE PLAYER ================= -->
-
-
-      <section
-        class="panel player-card"
-      >
-
-        <div class="live-badge">
-
-          <span></span>
-
-          LIVE
+          </div>
 
         </div>
 
 
-        <div class="player-main">
+        <nav class="navigation">
 
 
-          <div
-            class="cover"
-            id="cover"
-            style="background-image:url('radio-kolia-cover.png')"
-          >
-            К
+          <button class="nav-button active" data-page="home">
+
+            <span class="nav-icon">
+              ⌂
+            </span>
+
+            <span>
+              Главное
+            </span>
+
+          </button>
+
+
+          <button class="nav-button" data-page="playlist">
+
+            <span class="nav-icon">
+              ♫
+            </span>
+
+            <span>
+              Плейлист
+            </span>
+
+          </button>
+
+
+          <button class="nav-button" data-page="ads">
+
+            <span class="nav-icon">
+              ▣
+            </span>
+
+            <span>
+              Реклама
+            </span>
+
+          </button>
+
+
+          <button class="nav-button" data-page="about">
+
+            <span class="nav-icon">
+              i
+            </span>
+
+            <span>
+              О нас
+            </span>
+
+          </button>
+
+
+        </nav>
+
+      </div>
+
+
+      <div class="sidebar-bottom">
+
+        <div class="live-mini">
+
+          <div class="live-mini-top">
+
+            <span class="live-dot"></span>
+
+            Прямой эфир
+
           </div>
 
 
-          <div class="player-info">
+          <div class="live-mini-title">
+            Радио Коля
+          </div>
 
 
-            <div class="airline">
+          <div class="live-mini-subtitle">
+            Музыка без остановки
+          </div>
 
-              <span class="wave">
-                ◉
+        </div>
+
+      </div>
+
+    </aside>
+
+
+    <!-- =================================================
+             MAIN
+        ================================================== -->
+
+    <main class="main">
+
+
+      <!-- TOPBAR -->
+
+      <header class="topbar">
+
+
+        <div class="top-brand">
+
+          <div class="top-brand-icon">
+            РК
+          </div>
+
+
+          <div class="top-brand-text">
+
+            <strong>
+              Радио Коля
+            </strong>
+
+            <span>
+              Онлайн радио
+            </span>
+
+          </div>
+
+        </div>
+
+
+        <div class="top-actions">
+
+
+          <button class="icon-button" id="historyButton" title="Последние треки">
+            ☷
+          </button>
+
+
+          <button class="icon-button" id="muteButton" title="Звук" aria-label="Звук">
+            🔊
+          </button>
+
+
+          <button class="icon-button pause-button" id="pauseButton" title="Пауза" aria-label="Пауза">
+            Ⅱ
+          </button>
+
+
+          <button class="top-live" id="topPlay">
+
+            <span class="live-dot"></span>
+
+            В ЭФИРЕ
+
+          </button>
+
+        </div>
+
+      </header>
+
+
+      <!-- =================================================
+                 HOME
+            ================================================== -->
+
+      <section id="page-home" class="page-section active">
+
+
+        <!-- HERO -->
+
+        <section class="hero">
+
+
+          <div class="hero-content">
+
+
+            <div class="eyebrow">
+
+              <span class="live-dot"></span>
+
+              Прямой эфир
+
+            </div>
+
+
+            <h1>
+
+              РАДИО <span>КОЛЯ</span>
+
+            </h1>
+
+
+            <div class="hero-description">
+
+              Твоя музыка.
+              Твой ритм.
+              Твоё радио.
+
+              <br>
+
+              Слушай Радио Коля
+              онлайн где угодно.
+
+            </div>
+
+
+            <div class="hero-player">
+
+
+              <button class="big-play" id="bigPlay" title="Включить радио">
+                ▶
+              </button>
+
+
+              <div class="hero-player-info">
+
+                <small>
+                  Сейчас играет
+                </small>
+
+
+                <!-- CASTHOST: TITLE -->
+
+                <strong id="heroTrack" data-ch-stream="1083" data-field="title">
+                  Радио Коля
+                </strong>
+
+              </div>
+
+            </div>
+
+
+          </div>
+
+
+          <!-- VISUALIZER -->
+
+          <div class="visualizer">
+
+            <span class="bar"></span>
+            <span class="bar"></span>
+            <span class="bar"></span>
+            <span class="bar"></span>
+            <span class="bar"></span>
+            <span class="bar"></span>
+            <span class="bar"></span>
+            <span class="bar"></span>
+            <span class="bar"></span>
+            <span class="bar"></span>
+            <span class="bar"></span>
+            <span class="bar"></span>
+            <span class="bar"></span>
+            <span class="bar"></span>
+            <span class="bar"></span>
+
+          </div>
+
+
+        </section>
+
+
+        <!-- DASHBOARD -->
+
+        <div class="dashboard">
+
+
+          <!-- CURRENT TRACK -->
+
+          <section class="card-panel">
+
+
+            <div class="card-heading">
+
+              <h2>
+                Сейчас в эфире
+              </h2>
+
+
+              <span class="live-status">
+
+                <i></i>
+
+                LIVE
+
               </span>
-
-              Сейчас в эфире
-
-            </div>
-
-
-            <div class="station">
-              РАДИО КОЛЯ
-            </div>
-
-
-            <div class="online-row">
-
-              <span class="online-dot"></span>
-
-              <b>Онлайн</b>
 
             </div>
 
 
             <div class="current-track">
 
-              <strong id="trackTitle">
-                Эфир ещё не запущен
-              </strong>
 
-              <span id="artist">
-                Ожидание трансляции
+              <!-- ALBUM ART -->
+
+              <div class="album">
+
+                <span id="albumPlaceholder">
+                  ♫
+                </span>
+
+
+                <img id="albumArt" data-ch-stream="1083" data-field="art" alt="" style="
+                                        display:none;
+                                    ">
+
+              </div>
+
+
+              <div class="track-info">
+
+
+                <small>
+                  РАДИО КОЛЯ
+                </small>
+
+
+                <!-- CASTHOST: TITLE -->
+
+                <strong id="currentTrack" data-ch-stream="1083" data-field="title">
+                  Эфир радио
+                </strong>
+
+
+                <!-- CASTHOST: ARTIST -->
+
+                <span id="currentArtist" data-ch-stream="1083" data-field="artist">
+                  Онлайн трансляция
+                </span>
+
+              </div>
+
+
+              <div class="track-time">
+                ПРЯМОЙ ЭФИР
+              </div>
+
+            </div>
+
+
+            <!-- VOLUME -->
+
+            <div class="volume-row">
+
+
+              <span class="volume-icon">
+                🔊
+              </span>
+
+
+              <input id="volume" type="range" min="0" max="1" step="0.01" value="1">
+
+
+              <span class="volume-value" id="volumeValue">
+                100%
               </span>
 
             </div>
 
 
-            <div class="player-controls">
+          </section>
 
-              <button
-                class="play"
-                id="play"
-                title="Включить / выключить звук"
-              >
-                ▶
-              </button>
+
+          <!-- RECENT -->
+
+          <section class="card-panel">
+
+
+            <div class="card-heading">
+
+              <h2>
+                Последние треки
+              </h2>
+
+
+              <span>
+                5 последних
+              </span>
+
+            </div>
+
+
+            <div class="recent-list" id="recentList">
+
+
+              <div class="recent-item">
+
+
+                <div class="recent-number">
+                  01
+                </div>
+
+
+                <div class="recent-cover">
+                  ♫
+                </div>
+
+
+                <div class="recent-name">
+
+                  <strong>
+                    История пока пуста
+                  </strong>
+
+
+                  <span>
+                    Здесь появятся последние треки
+                  </span>
+
+                </div>
+
+
+                <div class="recent-time">
+                  —
+                </div>
+
+
+              </div>
+
 
             </div>
 
 
-          </div>
+          </section>
+
 
         </div>
 
-
-        <div class="volume-line">
-
-          <span>🔊</span>
-
-          <input
-            id="volume"
-            type="range"
-            min="0"
-            max="1"
-            step=".01"
-            value=".8"
-          >
-
-        </div>
 
       </section>
 
 
-      <!-- ================= РАНЕЕ В ЭФИРЕ ================= -->
+      <!-- =================================================
+                 PLAYLIST
+            ================================================== -->
+
+      <section id="page-playlist" class="page-section">
 
 
-      <section
-        class="panel history-panel"
-        id="historySection"
-      >
-
-        <div class="history-head">
-
-          <div>
-
-            <div class="history-title">
-
-              <span>◔</span>
-
-              РАНЕЕ В ЭФИРЕ
-
-            </div>
-
-          </div>
-
-        </div>
+        <div class="section-card">
 
 
-        <div
-          class="history-list"
-          id="historyList"
-        ></div>
-
-      </section>
-
-    </div>
+          <h1>
+            Плейлист
+          </h1>
 
 
-    <!-- ================= ADMIN LIBRARY ================= -->
+          <p class="section-description">
 
+            Здесь будет отображаться
+            плейлист Радио Коля.
 
-    <section
-      class="admin-section"
-      id="adminSection"
-      style="display:none;"
-    >
+            <br>
 
-      <div class="section-head">
+            Источник музыки —
+            RadioBOSS через CastHost.
 
-        <div>
-
-          <h2>
-            Музыкальная библиотека
-          </h2>
-
-          <p>
-            Управление эфиром доступно администратору.
           </p>
 
-        </div>
 
+          <div class="uploaded-list" id="uploadedList">
 
-        <input
-          class="search"
-          id="search"
-          placeholder="Поиск по трекам…"
-        >
+            <div class="uploaded-track">
 
-      </div>
+              <span>
+                Плейлист загружается из эфира
+              </span>
 
-
-      <div class="panel library">
-
-
-        <div
-          class="empty"
-          id="empty"
-          style="display:none;"
-        >
-
-          🎵 Пока нет песен.
-
-          <br><br>
-
-          <button
-            class="login-submit"
-            id="emptyAdd"
-          >
-            Добавить MP3 / WAV
-          </button>
-
-        </div>
-
-
-        <div
-          class="tracks"
-          id="tracks"
-        ></div>
-
-
-        <div
-          class="add-library"
-          id="addLibrary"
-        >
-
-          <b>＋ Добавить песни</b>
-
-          <br>
-
-          MP3, WAV, OGG или M4A
-
-        </div>
-
-
-      </div>
-
-    </section>
-
-
-    <!-- ================= IMAGE SLIDER ================= -->
-
-
-    <section
-      class="ad-section"
-      aria-label="Баннеры"
-    >
-
-      <div class="ad-viewport">
-
-
-        <div
-          class="ad-track"
-          id="adTrack"
-        >
-
-          <div class="ad-slide">
-
-            <img
-              src="/images/РЕКЛАМА - Радио Коля.png"
-              alt="Баннер 1"
-            >
+            </div>
 
           </div>
 
 
-          <div class="ad-slide">
+        </div>
 
-            <img
-              src="radio-kolia-ad-banner-2.png"
-              alt="Баннер 2"
-            >
+
+      </section>
+
+
+      <!-- =================================================
+                 ADS
+            ================================================== -->
+
+      <section id="page-ads" class="page-section">
+
+
+        <div class="section-card">
+
+
+          <h1>
+            Реклама
+          </h1>
+
+
+          <p class="section-description">
+
+            Размещение рекламы
+            на Радио Коля.
+
+            <br>
+
+            Здесь можно разместить
+            информацию для рекламодателей,
+            рекламный баннер или
+            рекламный аудиоролик.
+
+          </p>
+
+
+          <div style="
+                            padding:30px;
+                            border-radius:18px;
+                            background:#fff0f1;
+                            color:#e52b32;
+                            font-size:14px;
+                            font-weight:900;
+                        ">
+
+            РЕКЛАМА НА РАДИО КОЛЯ
 
           </div>
 
 
-          <div class="ad-slide">
+        </div>
 
-            <img
-              src="radio-kolia-ad-banner-3.png"
-              alt="Баннер 3"
-            >
 
-          </div>
+      </section>
+
+
+      <!-- =================================================
+                 ABOUT
+            ================================================== -->
+
+      <section id="page-about" class="page-section">
+
+
+        <div class="section-card">
+
+
+          <h1>
+            О нас
+          </h1>
+
+
+          <p class="section-description">
+
+            <strong>
+              Радио Коля
+            </strong>
+            — интернет-радио
+            с музыкой онлайн.
+
+            <br><br>
+
+            Здесь можно слушать музыку
+            прямо из браузера,
+            следить за текущим треком
+            и историей эфира.
+
+          </p>
+
 
         </div>
 
 
-        <button
-          class="ad-arrow ad-prev"
-          id="adPrev"
-          type="button"
-          aria-label="Предыдущий баннер"
-        >
-          ‹
-        </button>
+      </section>
 
 
-        <button
-          class="ad-arrow ad-next"
-          id="adNext"
-          type="button"
-          aria-label="Следующий баннер"
-        >
-          ›
-        </button>
+    </main>
 
-
-        <div
-          class="ad-dots"
-          id="adDots"
-        >
-
-          <button
-            class="ad-dot active"
-            type="button"
-            aria-label="Баннер 1"
-          ></button>
-
-          <button
-            class="ad-dot"
-            type="button"
-            aria-label="Баннер 2"
-          ></button>
-
-          <button
-            class="ad-dot"
-            type="button"
-            aria-label="Баннер 3"
-          ></button>
-
-        </div>
-
-
-      </div>
-
-    </section>
-
-
-  </main>
-
-</div>
-
-
-<!-- ================= MINI PLAYER ================= -->
-
-
-<div class="bottom">
-
-  <button
-    class="circle"
-    id="miniPlay"
-  >
-    ▶
-  </button>
-
-
-  <div class="bottom-info">
-
-    <strong id="miniTitle">
-      РАДИО КОЛЯ
-    </strong>
-
-    <span id="miniArtist">
-      Прямой эфир
-    </span>
 
   </div>
 
 
-  <button
-    class="circle"
-    id="mute"
-    title="Звук"
-  >
-    🔊
-  </button>
+  <!-- =====================================================
+         AUDIO
+    ====================================================== -->
 
-</div>
+  <audio id="audio" preload="none"></audio>
 
 
-<!-- ================= FILE INPUT ================= -->
+  <!-- =====================================================
+         JAVASCRIPT
+    ====================================================== -->
 
+  <script>
 
-<input
-  id="fileInput"
-  type="file"
-  accept="audio/*"
-  multiple
->
+    /* =====================================================
+       CASTHOST STREAM
+    ====================================================== */
 
+    const LIVE_STREAM_URL =
+      "https://mini-territory-spanking-refuse.trycloudflare.com/radio";
 
-<!-- ================= AUDIO ================= -->
 
+    /* =====================================================
+       ELEMENTS
+    ====================================================== */
 
-<audio
-  id="audio"
-  preload="auto"
-></audio>
+    const audio =
+      document.getElementById("audio");
 
 
-<!-- ================= TOAST ================= -->
+    const bigPlay =
+      document.getElementById("bigPlay");
 
 
-<div
-  class="toast"
-  id="toast"
-></div>
+    const topPlay =
+      document.getElementById("topPlay");
 
 
-<!-- ================= LOGIN MODAL ================= -->
+    const muteButton =
+      document.getElementById("muteButton");
 
 
-<div
-  class="modal"
-  id="loginModal"
->
+    const pauseButton =
+      document.getElementById("pauseButton");
 
 
-  <div class="login-box">
+    const volume =
+      document.getElementById("volume");
 
 
-    <div class="login-top">
+    const volumeValue =
+      document.getElementById("volumeValue");
 
-      <div class="login-title">
-        Администратор
-      </div>
 
+    const historyButton =
+      document.getElementById("historyButton");
 
-      <button
-        class="close"
-        id="closeLogin"
-      >
-        ×
-      </button>
 
-    </div>
+    const albumArt =
+      document.getElementById("albumArt");
 
 
-    <div
-      class="login-error"
-      id="loginError"
-    >
-      Неверное имя или пароль.
-    </div>
-
-
-    <div class="field">
-
-      <label>
-        Имя администратора
-      </label>
-
-
-      <input
-        id="adminName"
-        type="text"
-        autocomplete="username"
-        placeholder="Введите имя"
-      >
-
-    </div>
-
-
-    <div class="field">
-
-      <label>
-        Пароль
-      </label>
-
-
-      <input
-        id="adminPassword"
-        type="password"
-        autocomplete="current-password"
-        placeholder="Введите пароль"
-      >
-
-    </div>
-
-
-    <button
-      class="login-submit"
-      id="loginSubmit"
-    >
-      Войти
-    </button>
-
-
-    <div class="admin-panel-info">
-
-      Доступ к библиотеке и управлению эфиром
-      имеют только администраторы.
-
-    </div>
-
-
-  </div>
-
-</div>
-
-
-
-<script>
-
-
-(function(){
-
-  "use strict";
-
-
-  /* ============================================================
-     АДМИНИСТРАТОР
-     ============================================================ */
-
-
-  const ADMIN_NAME =
-    "nesoqiton";
-
-
-  const ADMIN_PASSWORD =
-    "rooCPOTu12r";
-
-
-  /* ============================================================
-     ОСНОВНЫЕ ПЕРЕМЕННЫЕ
-     ============================================================ */
-
-
-  let isAdmin =
-    false;
-
-
-  let tracks =
-    [];
-
-
-  let current =
-    -1;
-
-
-  let audioBlobUrls =
-    {};
-
-
-  let radioStarted =
-    false;
-
-
-  let silentMode =
-    false;
-
-
-  let liveState = {
-
-    currentTrack:0,
-
-    startedAt:0
-
-  };
-
-
-  /*
-     Флаг нужен, чтобы не допустить
-     повторную обработку окончания
-     одного и того же трека.
-  */
-
-  let finishingTrack =
-    false;
-
-
-  /* ============================================================
-     РАНЕЕ В ЭФИРЕ
-     ============================================================ */
-
-
-  const AIR_HISTORY_KEY =
-    "radioKoliaAirHistory";
-
-
-  /*
-     Максимальное количество записей.
-  */
-
-  const MAX_HISTORY =
-    5;
-
-
-  let airHistory =
-    [];
-
-
-  function getTodayKey(){
-
-    const now =
-      new Date();
-
-
-    const year =
-      now.getFullYear();
-
-
-    const month =
-      String(
-        now.getMonth() + 1
-      ).padStart(
-        2,
-        "0"
+    const albumPlaceholder =
+      document.getElementById(
+        "albumPlaceholder"
       );
 
 
-    const day =
-      String(
-        now.getDate()
-      ).padStart(
-        2,
-        "0"
-      );
+    /* =====================================================
+       STATE
+    ====================================================== */
+
+    let isPlaying = false;
 
 
-    return (
-      year +
-      "-" +
-      month +
-      "-" +
-      day
-    );
+    /* =====================================================
+       PLAY RADIO
+    ====================================================== */
 
-  }
+    function playRadio() {
 
+      if (!LIVE_STREAM_URL) {
 
-  /* ============================================================
-     ЗАГРУЗКА ИСТОРИИ
-     ============================================================ */
-
-
-  function loadAirHistory(){
-
-    try{
-
-      const saved =
-        localStorage.getItem(
-          AIR_HISTORY_KEY
+        console.error(
+          "LIVE_STREAM_URL не указан."
         );
 
-
-      airHistory =
-        saved
-          ? JSON.parse(saved)
-          : [];
-
-
-      if(
-        !Array.isArray(
-          airHistory
-        )
-      ){
-
-        airHistory = [];
+        return;
 
       }
 
-    }catch(e){
 
-      airHistory = [];
+      if (
+        audio.src !==
+        LIVE_STREAM_URL
+      ) {
+
+        audio.src =
+          LIVE_STREAM_URL;
+
+      }
+
+
+      audio.play()
+
+        .then(() => {
+
+          setPlaying(true);
+
+        })
+
+        .catch(
+          function (error) {
+
+            console.error(
+              "Не удалось запустить поток:",
+              error
+            );
+
+          }
+        );
 
     }
 
 
-    const today =
-      getTodayKey();
+    /* =====================================================
+       PAUSE
+    ====================================================== */
+
+    function pauseRadio() {
+
+      audio.pause();
+
+      setPlaying(false);
+
+    }
 
 
-    /*
-       Только сегодняшний эфир.
-    */
+    /* =====================================================
+       TOGGLE
+    ====================================================== */
 
-    airHistory =
-      airHistory.filter(
-        function(item){
+    function toggleRadio() {
 
-          return (
-            item.date === today
+      if (audio.paused) {
+
+        playRadio();
+
+      } else {
+
+        pauseRadio();
+
+      }
+
+    }
+
+
+    /* =====================================================
+       BUTTONS
+    ====================================================== */
+
+    bigPlay.addEventListener(
+      "click",
+      toggleRadio
+    );
+
+
+    topPlay.addEventListener(
+      "click",
+      toggleRadio
+    );
+
+
+    pauseButton.addEventListener(
+      "click",
+      pauseRadio
+    );
+
+
+    /* =====================================================
+       PLAYING STATE
+    ====================================================== */
+
+    function setPlaying(
+      playing
+    ) {
+
+      isPlaying =
+        playing;
+
+
+      document.body.classList.toggle(
+        "playing",
+        playing
+      );
+
+
+      bigPlay.textContent =
+        playing
+          ? "Ⅱ"
+          : "▶";
+
+
+      topPlay.innerHTML =
+        playing
+
+          ?
+
+          `
+                    <span class="live-dot"></span>
+                    ИГРАЕТ
+                `
+
+          :
+
+          `
+                    <span class="live-dot"></span>
+                    В ЭФИРЕ
+                `;
+
+
+      pauseButton.disabled =
+        !playing;
+
+    }
+
+
+    /* =====================================================
+       AUDIO EVENTS
+    ====================================================== */
+
+    audio.addEventListener(
+      "play",
+      function () {
+
+        setPlaying(true);
+
+      }
+    );
+
+
+    audio.addEventListener(
+      "pause",
+      function () {
+
+        setPlaying(false);
+
+      }
+    );
+
+
+    audio.addEventListener(
+      "error",
+      function (event) {
+
+        console.error(
+          "Ошибка аудиопотока:",
+          event
+        );
+
+        setPlaying(false);
+
+      }
+    );
+
+
+    /* =====================================================
+       VOLUME
+    ====================================================== */
+
+    audio.volume = 1;
+
+    pauseButton.disabled = true;
+
+
+    volume.addEventListener(
+      "input",
+      function () {
+
+        const value =
+          Number(
+            volume.value
           );
 
-        }
+
+        audio.volume =
+          value;
+
+
+        audio.muted =
+          false;
+
+
+        muteButton.textContent =
+          "🔊";
+
+
+        volumeValue.textContent =
+          Math.round(
+            value * 100
+          ) + "%";
+
+      }
+    );
+
+
+    /* =====================================================
+       MUTE
+    ====================================================== */
+
+    muteButton.addEventListener(
+      "click",
+      function () {
+
+        audio.muted =
+          !audio.muted;
+
+
+        muteButton.textContent =
+          audio.muted
+            ? "🔇"
+            : "🔊";
+
+      }
+    );
+
+
+    /* =====================================================
+       NAVIGATION
+    ====================================================== */
+
+    const navButtons =
+      document.querySelectorAll(
+        ".nav-button"
       );
 
 
-    /*
-       Дополнительная защита:
-       никогда больше 5 записей.
-    */
-
-    airHistory =
-      airHistory.slice(
-        0,
-        MAX_HISTORY
+    const sections =
+      document.querySelectorAll(
+        ".page-section"
       );
 
 
-    saveAirHistory();
+    navButtons.forEach(
+      function (button) {
 
-    renderAirHistory();
+        button.addEventListener(
+          "click",
+          function () {
 
-  }
-
-
-  function saveAirHistory(){
-
-    try{
-
-      localStorage.setItem(
-        AIR_HISTORY_KEY,
-        JSON.stringify(
-          airHistory
-        )
-      );
-
-    }catch(e){}
-
-  }
+            const page =
+              button.dataset.page;
 
 
-  /* ============================================================
-     ДОБАВЛЕНИЕ В ИСТОРИЮ
-     ============================================================ */
+            navButtons.forEach(
+              function (item) {
 
-
-  function addAirHistory(track){
-
-    if(!track){
-
-      return;
-
-    }
-
-
-    const today =
-      getTodayKey();
-
-
-    const last =
-      airHistory[0];
-
-
-    /*
-       Защита от повторного добавления.
-    */
-
-    if(
-      last &&
-      last.date === today &&
-      last.name === (
-        track.name ||
-        "Без названия"
-      )
-    ){
-
-      return;
-
-    }
-
-
-    airHistory.unshift({
-
-      name:
-        track.name ||
-        "Без названия",
-
-
-      artist:
-        track.artist ||
-        "РАДИО КОЛЯ",
-
-
-      cover:
-        track.cover ||
-        null,
-
-
-      date:
-        today,
-
-
-      time:
-        new Date().toLocaleTimeString(
-          "ru-RU",
-          {
-            hour:"2-digit",
-            minute:"2-digit"
-          }
-        )
-
-    });
-
-
-    /*
-       ОЧЕНЬ ВАЖНО:
-
-       Оставляем только последние 5.
-       Поэтому блок никогда не растёт
-       бесконечно.
-    */
-
-    airHistory =
-      airHistory.slice(
-        0,
-        MAX_HISTORY
-      );
-
-
-    saveAirHistory();
-
-    renderAirHistory();
-
-  }
-
-
-  /* ============================================================
-     ВОССТАНОВЛЕНИЕ ОБЛОЖЕК
-     ============================================================ */
-
-
-  function restoreHistoryCovers(){
-
-    if(
-      !airHistory.length ||
-      !tracks.length
-    ){
-
-      return;
-
-    }
-
-
-    let changed =
-      false;
-
-
-    airHistory =
-      airHistory.map(
-        function(historyItem){
-
-          if(
-            historyItem.cover
-          ){
-
-            return historyItem;
-
-          }
-
-
-          const found =
-            tracks.find(
-              function(track){
-
-                return (
-                  track.name ===
-                  historyItem.name
+                item.classList.remove(
+                  "active"
                 );
 
               }
             );
 
 
-          if(
-            found &&
-            found.cover
-          ){
-
-            changed =
-              true;
-
-
-            return {
-
-              ...historyItem,
-
-              cover:
-                found.cover
-
-            };
-
-          }
-
-
-          return historyItem;
-
-        }
-      );
-
-
-    if(changed){
-
-      saveAirHistory();
-
-      renderAirHistory();
-
-    }
-
-  }
-
-
-  /* ============================================================
-     РЕНДЕР ИСТОРИИ
-     ============================================================ */
-
-
-  function renderAirHistory(){
-
-    const list =
-      document.getElementById(
-        "historyList"
-      );
-
-
-    if(!list){
-
-      return;
-
-    }
-
-
-    /*
-       Всегда держим максимум 5.
-    */
-
-    airHistory =
-      airHistory.slice(
-        0,
-        MAX_HISTORY
-      );
-
-
-    if(!airHistory.length){
-
-      list.innerHTML = `
-
-        <div class="history-empty">
-
-          📻 Сегодня эфир ещё не успел
-          завершить ни одного трека.
-
-        </div>
-
-      `;
-
-      return;
-
-    }
-
-
-    list.innerHTML =
-      airHistory.map(
-        function(item){
-
-          let historyCover;
-
-
-          if(
-            item.cover
-          ){
-
-            /*
-               encodeURI не трогаем,
-               потому что здесь могут быть
-               data:image URL.
-            */
-
-            historyCover = `
-
-              <div
-                class="history-icon"
-                style="
-                  background-image:url('${item.cover}');
-                  background-size:cover;
-                  background-position:center;
-                "
-              ></div>
-
-            `;
-
-          }else{
-
-            historyCover = `
-
-              <div class="history-icon">
-                🎵
-              </div>
-
-            `;
-
-          }
-
-
-          return `
-
-            <div class="history-item">
-
-              ${historyCover}
-
-              <div class="history-main">
-
-                <strong>
-                  ${escapeHtml(
-                    item.name
-                  )}
-                </strong>
-
-                <span>
-                  ${escapeHtml(
-                    item.artist
-                  )}
-                  • трек завершён
-                </span>
-
-              </div>
-
-              <div class="history-time">
-
-                ${escapeHtml(
-                  item.time
-                )}
-
-              </div>
-
-            </div>
-
-          `;
-
-        }
-      ).join("");
-
-  }
-
-
-  /* ============================================================
-     DOM
-     ============================================================ */
-
-
-  const audio =
-    document.getElementById(
-      "audio"
-    );
-
-
-  const fileInput =
-    document.getElementById(
-      "fileInput"
-    );
-
-
-  const tracksEl =
-    document.getElementById(
-      "tracks"
-    );
-
-
-  const profileButton =
-    document.getElementById(
-      "profileButton"
-    );
-
-
-  const adminSection =
-    document.getElementById(
-      "adminSection"
-    );
-
-
-  const loginModal =
-    document.getElementById(
-      "loginModal"
-    );
-
-
-  const loginError =
-    document.getElementById(
-      "loginError"
-    );
-
-
-  const adminName =
-    document.getElementById(
-      "adminName"
-    );
-
-
-  const adminPassword =
-    document.getElementById(
-      "adminPassword"
-    );
-
-
-  /* ============================================================
-     UTILS
-     ============================================================ */
-
-
-  function toast(text){
-
-    const element =
-      document.getElementById(
-        "toast"
-      );
-
-
-    element.textContent =
-      text;
-
-
-    element.classList.add(
-      "show"
-    );
-
-
-    clearTimeout(
-      window.radioToastTimer
-    );
-
-
-    window.radioToastTimer =
-      setTimeout(
-        function(){
-
-          element.classList.remove(
-            "show"
-          );
-
-        },
-        2200
-      );
-
-  }
-
-
-  function escapeHtml(text){
-
-    return String(text).replace(
-      /[&<>"']/g,
-      function(char){
-
-        return {
-
-          "&":"&amp;",
-          "<":"&lt;",
-          ">":"&gt;",
-          '"':"&quot;",
-          "'":"&#039;"
-
-        }[char];
-
-      }
-    );
-
-  }
-
-
-  /* ============================================================
-     LIVE STATE
-     ============================================================ */
-
-
-  function saveLiveState(){
-
-    try{
-
-      localStorage.setItem(
-        "radioKoliaLiveState",
-        JSON.stringify(
-          liveState
-        )
-      );
-
-    }catch(e){}
-
-  }
-
-
-  function loadLiveState(){
-
-    try{
-
-      const saved =
-        localStorage.getItem(
-          "radioKoliaLiveState"
-        );
-
-
-      if(!saved){
-
-        return;
-
-      }
-
-
-      const data =
-        JSON.parse(saved);
-
-
-      if(
-        typeof data.currentTrack ===
-          "number" &&
-        typeof data.startedAt ===
-          "number"
-      ){
-
-        liveState =
-          data;
-
-      }
-
-    }catch(e){}
-
-  }
-
-
-  /* ============================================================
-     INDEXED DB
-     ============================================================ */
-
-
-  const DB_NAME =
-    "RadioKoliaDatabase";
-
-
-  const DB_VERSION =
-    1;
-
-
-  const STORE_NAME =
-    "tracks";
-
-
-  let db =
-    null;
-
-
-  function openDatabase(){
-
-    return new Promise(
-      function(resolve,reject){
-
-        const request =
-          indexedDB.open(
-            DB_NAME,
-            DB_VERSION
-          );
-
-
-        request.onupgradeneeded =
-          function(event){
-
-            const database =
-              event.target.result;
-
-
-            if(
-              !database.objectStoreNames
-                .contains(
-                  STORE_NAME
-                )
-            ){
-
-              database.createObjectStore(
-                STORE_NAME,
-                {
-                  keyPath:"id",
-                  autoIncrement:true
-                }
-              );
-
-            }
-
-          };
-
-
-        request.onsuccess =
-          function(event){
-
-            db =
-              event.target.result;
-
-            resolve(db);
-
-          };
-
-
-        request.onerror =
-          function(){
-
-            reject(
-              request.error
-            );
-
-          };
-
-      }
-    );
-
-  }
-
-
-  function getAllTracksFromDB(){
-
-    return new Promise(
-      function(resolve,reject){
-
-        if(!db){
-
-          resolve([]);
-
-          return;
-
-        }
-
-
-        const transaction =
-          db.transaction(
-            STORE_NAME,
-            "readonly"
-          );
-
-
-        const store =
-          transaction.objectStore(
-            STORE_NAME
-          );
-
-
-        const request =
-          store.getAll();
-
-
-        request.onsuccess =
-          function(){
-
-            resolve(
-              request.result || []
-            );
-
-          };
-
-
-        request.onerror =
-          function(){
-
-            reject(
-              request.error
-            );
-
-          };
-
-      }
-    );
-
-  }
-
-
-  function addTrackToDB(track){
-
-    return new Promise(
-      function(resolve,reject){
-
-        const transaction =
-          db.transaction(
-            STORE_NAME,
-            "readwrite"
-          );
-
-
-        const store =
-          transaction.objectStore(
-            STORE_NAME
-          );
-
-
-        const request =
-          store.add(track);
-
-
-        request.onsuccess =
-          function(){
-
-            resolve(
-              request.result
-            );
-
-          };
-
-
-        request.onerror =
-          function(){
-
-            reject(
-              request.error
-            );
-
-          };
-
-      }
-    );
-
-  }
-
-
-  function deleteTrackFromDB(id){
-
-    return new Promise(
-      function(resolve,reject){
-
-        const transaction =
-          db.transaction(
-            STORE_NAME,
-            "readwrite"
-          );
-
-
-        const store =
-          transaction.objectStore(
-            STORE_NAME
-          );
-
-
-        const request =
-          store.delete(id);
-
-
-        request.onsuccess =
-          function(){
-
-            resolve();
-
-          };
-
-
-        request.onerror =
-          function(){
-
-            reject(
-              request.error
-            );
-
-          };
-
-      }
-    );
-
-  }
-
-
-  /* ============================================================
-     АВТОРИЗАЦИЯ
-     ============================================================ */
-
-
-  function checkAdmin(){
-
-    try{
-
-      isAdmin =
-        sessionStorage.getItem(
-          "radioKoliaAdmin"
-        ) === "true";
-
-    }catch(e){
-
-      isAdmin =
-        false;
-
-    }
-
-  }
-
-
-  function updateAdminUI(){
-
-    if(isAdmin){
-
-      profileButton.textContent =
-        "👑";
-
-
-      profileButton.classList.add(
-        "admin"
-      );
-
-
-      profileButton.title =
-        "Вы вошли как администратор";
-
-
-      adminSection.style.display =
-        "block";
-
-
-      renderTracks();
-
-    }else{
-
-      profileButton.textContent =
-        "👤";
-
-
-      profileButton.classList.remove(
-        "admin"
-      );
-
-
-      profileButton.title =
-        "Войти как администратор";
-
-
-      adminSection.style.display =
-        "none";
-
-    }
-
-  }
-
-
-  function openLogin(){
-
-    if(isAdmin){
-
-      const logout =
-        confirm(
-          "Вы уже вошли как администратор.\n\nВыйти?"
-        );
-
-
-      if(logout){
-
-        isAdmin =
-          false;
-
-
-        sessionStorage.removeItem(
-          "radioKoliaAdmin"
-        );
-
-
-        updateAdminUI();
-
-
-        toast(
-          "Вы вышли из режима администратора"
-        );
-
-      }
-
-
-      return;
-
-    }
-
-
-    loginError.classList.remove(
-      "show"
-    );
-
-
-    adminName.value =
-      "";
-
-
-    adminPassword.value =
-      "";
-
-
-    loginModal.classList.add(
-      "show"
-    );
-
-
-    setTimeout(
-      function(){
-
-        adminName.focus();
-
-      },
-      100
-    );
-
-  }
-
-
-  function closeLogin(){
-
-    loginModal.classList.remove(
-      "show"
-    );
-
-  }
-
-
-  function login(){
-
-    const name =
-      adminName.value.trim();
-
-
-    const password =
-      adminPassword.value;
-
-
-    if(
-      name === ADMIN_NAME &&
-      password === ADMIN_PASSWORD
-    ){
-
-      isAdmin =
-        true;
-
-
-      sessionStorage.setItem(
-        "radioKoliaAdmin",
-        "true"
-      );
-
-
-      closeLogin();
-
-
-      updateAdminUI();
-
-
-      toast(
-        "👑 Вы вошли как администратор"
-      );
-
-    }else{
-
-      loginError.classList.add(
-        "show"
-      );
-
-    }
-
-  }
-
-
-  /* ============================================================
-     ОБЛОЖКА ИЗ MP3
-     ============================================================ */
-
-
-  function loadCoverFromFile(
-    file,
-    callback
-  ){
-
-    if(
-      typeof jsmediatags ===
-      "undefined"
-    ){
-
-      callback(null);
-
-      return;
-
-    }
-
-
-    try{
-
-      jsmediatags.read(
-        file,
-        {
-
-          onSuccess:function(tag){
-
-            try{
-
-              const picture =
-                tag.tags.picture;
-
-
-              if(!picture){
-
-                callback(null);
-
-                return;
+            sections.forEach(
+              function (section) {
+
+                section.classList.remove(
+                  "active"
+                );
 
               }
-
-
-              let base64 =
-                "";
-
-
-              const bytes =
-                picture.data;
-
-
-              for(
-                let i=0;
-                i<bytes.length;
-                i++
-              ){
-
-                base64 +=
-                  String.fromCharCode(
-                    bytes[i]
-                  );
-
-              }
-
-
-              const imageUrl =
-                "data:" +
-                picture.format +
-                ";base64," +
-                btoa(base64);
-
-
-              callback(
-                imageUrl
-              );
-
-            }catch(e){
-
-              callback(null);
-
-            }
-
-          },
-
-
-          onError:function(){
-
-            callback(null);
-
-          }
-
-        }
-      );
-
-    }catch(e){
-
-      callback(null);
-
-    }
-
-  }
-
-
-  /* ============================================================
-     ДОБАВЛЕНИЕ ФАЙЛОВ
-     ============================================================ */
-
-
-  async function addFiles(fileList){
-
-    if(!isAdmin){
-
-      toast(
-        "Только администратор"
-      );
-
-      return;
-
-    }
-
-
-    const files =
-      Array.from(
-        fileList || []
-      ).filter(
-        function(file){
-
-          return file.type.startsWith(
-            "audio/"
-          );
-
-        }
-      );
-
-
-    if(!files.length){
-
-      toast(
-        "Аудиофайлы не найдены"
-      );
-
-      return;
-
-    }
-
-
-    let added =
-      0;
-
-
-    for(
-      const file of files
-    ){
-
-      let cover =
-        null;
-
-
-      await new Promise(
-        function(resolve){
-
-          loadCoverFromFile(
-            file,
-            function(result){
-
-              cover =
-                result;
-
-              resolve();
-
-            }
-          );
-
-        }
-      );
-
-
-      const track = {
-
-        name:
-          file.name.replace(
-            /\.[^.]+$/,
-            ""
-          ),
-
-
-        artist:
-          "РАДИО КОЛЯ",
-
-
-        type:
-          file.type ||
-          "audio",
-
-
-        size:
-          file.size,
-
-
-        blob:
-          file,
-
-
-        cover:
-          cover,
-
-
-        createdAt:
-          Date.now()
-
-      };
-
-
-      try{
-
-        await addTrackToDB(
-          track
-        );
-
-
-        added++;
-
-      }catch(e){
-
-        console.error(e);
-
-      }
-
-    }
-
-
-    /*
-       ВАЖНО:
-
-       loadTracks(false) НЕ вызывает
-       восстановление эфира.
-
-       Поэтому добавление новых песен
-       не переключает текущий трек.
-    */
-
-    await loadTracks(
-      false
-    );
-
-
-    /*
-       Если эфир был остановлен
-       из-за пустого плейлиста —
-       запускаем его с первого
-       добавленного трека.
-    */
-
-    if(
-      !radioStarted &&
-      tracks.length > 0
-    ){
-
-      liveState.currentTrack =
-        0;
-
-
-      liveState.startedAt =
-        Date.now();
-
-
-      saveLiveState();
-
-
-      radioStarted =
-        true;
-
-
-      setTrack(
-        0,
-        0
-      );
-
-
-      audio.play()
-        .catch(
-          function(){
-
-            updatePlayButtons();
-
-          }
-        );
-
-    }
-
-
-    toast(
-      "✅ Добавлено треков: " +
-      added
-    );
-
-  }
-
-
-  /* ============================================================
-     ЗАГРУЗКА ТРЕКОВ
-     ============================================================
-
-     restoreAfterLoad = true
-
-     используется при старте сайта.
-
-     false используется при обычном
-     добавлении/удалении треков, чтобы
-     не сбивать текущий эфир.
-  */
-
-
-  async function loadTracks(
-    restoreAfterLoad = true
-  ){
-
-    try{
-
-      /*
-         Освобождаем старые Blob URL.
-      */
-
-      Object.keys(
-        audioBlobUrls
-      ).forEach(
-        function(key){
-
-          try{
-
-            URL.revokeObjectURL(
-              audioBlobUrls[key]
             );
 
-          }catch(e){}
 
-        }
-      );
-
-
-      audioBlobUrls =
-        {};
-
-
-      const result =
-        await getAllTracksFromDB();
-
-
-      tracks =
-        result.sort(
-          function(a,b){
-
-            return (
-              a.createdAt -
-              b.createdAt
+            button.classList.add(
+              "active"
             );
 
-          }
-        );
 
-
-      tracks.forEach(
-        function(track,index){
-
-          if(track.blob){
-
-            audioBlobUrls[index] =
-              URL.createObjectURL(
-                track.blob
-              );
-
-          }
-
-        }
-      );
-
-
-      /*
-         Если после удаления индекс
-         оказался за пределами массива,
-         корректируем его.
-      */
-
-      if(
-        current >= tracks.length
-      ){
-
-        current =
-          tracks.length - 1;
-
-      }
-
-
-      renderTracks();
-
-
-      restoreHistoryCovers();
-
-
-      if(
-        restoreAfterLoad &&
-        tracks.length > 0
-      ){
-
-        loadLiveState();
-
-        restoreLive();
-
-      }
-
-    }catch(e){
-
-      console.error(e);
-
-
-      toast(
-        "Не удалось загрузить библиотеку"
-      );
-
-    }
-
-  }
-
-
-  /* ============================================================
-     РЕНДЕР БИБЛИОТЕКИ
-     ============================================================ */
-
-
-  function renderTracks(){
-
-    if(!isAdmin){
-
-      return;
-
-    }
-
-
-    const search =
-      document
-        .getElementById("search")
-        .value
-        .toLowerCase()
-        .trim();
-
-
-    tracksEl.innerHTML =
-      "";
-
-
-    const visible =
-      tracks
-        .map(
-          function(track,index){
-
-            return {
-
-              track:track,
-
-              index:index
-
-            };
-
-          }
-        )
-        .filter(
-          function(item){
-
-            return item.track.name
-              .toLowerCase()
-              .includes(search);
-
-          }
-        );
-
-
-    document.getElementById(
-      "empty"
-    ).style.display =
-      tracks.length
-        ? "none"
-        : "block";
-
-
-    visible.forEach(
-      function(item,visibleIndex){
-
-        const track =
-          item.track;
-
-
-        const index =
-          item.index;
-
-
-        const row =
-          document.createElement(
-            "div"
-          );
-
-
-        row.className =
-          "track-row" +
-          (
-            index === current
-              ? " active"
-              : ""
-          );
-
-
-        const coverStyle =
-          track.cover
-            ? `style="background-image:url('${track.cover}')"`
-            : "";
-
-
-        row.innerHTML = `
-
-          <div class="num">
-
-            ${visibleIndex + 1}
-
-          </div>
-
-
-          <div
-            class="track-mini-cover"
-            ${coverStyle}
-          ></div>
-
-
-          <button
-            class="play-mini"
-            title="Эфирный трек"
-          >
-            ▶
-          </button>
-
-
-          <div class="track-name">
-
-            <strong>
-
-              ${escapeHtml(
-                track.name
-              )}
-
-            </strong>
-
-
-            <span>
-
-              ${escapeHtml(
-                track.artist ||
-                "РАДИО КОЛЯ"
-              )}
-
-              •
-
-              ${
-                Math.round(
-                  (track.size || 0)
-                  /1024
-                  /1024
-                  *10
-                ) / 10
-              }
-
-              MB
-
-            </span>
-
-          </div>
-
-
-          <button
-            class="delete"
-            title="Удалить"
-          >
-            Удалить
-          </button>
-
-        `;
-
-
-        row.querySelector(
-          ".play-mini"
-        ).onclick =
-          function(){
-
-            if(
-              index === current
-            ){
-
-              toast(
-                "🔴 Это текущий трек прямого эфира"
-              );
-
-            }else{
-
-              toast(
-                "Нельзя переключать треки во время эфира"
-              );
-
-            }
-
-          };
-
-
-        row.querySelector(
-          ".delete"
-        ).onclick =
-          async function(){
-
-            if(!isAdmin){
-
-              return;
-
-            }
-
-
-            const yes =
-              confirm(
-                "Удалить трек «" +
-                track.name +
-                "»?"
-              );
-
-
-            if(!yes){
-
-              return;
-
-            }
-
-
-            await deleteTrack(
-              index
-            );
-
-          };
-
-
-        tracksEl.appendChild(
-          row
-        );
-
-      }
-    );
-
-  }
-
-
-  /* ============================================================
-     УДАЛЕНИЕ ТРЕКА АДМИНИСТРАТОРОМ
-     ============================================================
-
-     ГЛАВНОЕ ИЗМЕНЕНИЕ:
-
-     Удаление трека НИКОГДА не переключает
-     текущий эфир.
-
-     Если удаляем трек ДО текущего,
-     индекс текущего уменьшается на 1.
-
-     Сам текущий трек удалить нельзя.
-  */
-
-
-  async function deleteTrack(index){
-
-    if(!isAdmin){
-
-      return;
-
-    }
-
-
-    const track =
-      tracks[index];
-
-
-    if(!track){
-
-      return;
-
-    }
-
-
-    /*
-       Текущий трек вручную удалить нельзя.
-    */
-
-    if(
-      index === current
-    ){
-
-      toast(
-        "❌ Нельзя удалить текущий трек эфира"
-      );
-
-      return;
-
-    }
-
-
-    try{
-
-      await deleteTrackFromDB(
-        track.id
-      );
-
-
-      /*
-         Освобождаем Blob URL.
-      */
-
-      if(
-        audioBlobUrls[index]
-      ){
-
-        URL.revokeObjectURL(
-          audioBlobUrls[index]
-        );
-
-      }
-
-
-      /*
-         Если удалён трек ДО текущего,
-         текущий индекс должен сдвинуться
-         назад.
-
-         Например:
-
-         A
-         B ← текущий
-         C
-
-         удалили A
-
-         B ← текущий
-
-         Индекс B был 1,
-         теперь становится 0.
-      */
-
-      if(
-        index < current
-      ){
-
-        current--;
-
-        liveState.currentTrack =
-          current;
-
-        saveLiveState();
-
-      }
-
-
-      /*
-         Загружаем библиотеку БЕЗ
-         restoreLive().
-
-         Это ключевой момент:
-         удаление не запускает
-         восстановление и не переключает
-         аудио.
-      */
-
-      await loadTracks(
-        false
-      );
-
-
-      /*
-         Если библиотека вдруг стала
-         пустой, останавливаем эфир.
-      */
-
-      if(
-        tracks.length === 0
-      ){
-
-        stopRadioBecauseEmpty();
-
-      }
-
-
-      toast(
-        "🗑 Трек удалён"
-      );
-
-    }catch(e){
-
-      console.error(e);
-
-
-      toast(
-        "Ошибка удаления"
-      );
-
-    }
-
-  }
-
-
-  /* ============================================================
-     УСТАНОВКА ТРЕКА
-     ============================================================ */
-
-
-  function setTrack(
-    index,
-    position
-  ){
-
-    if(!tracks[index]){
-
-      return;
-
-    }
-
-
-    current =
-      index;
-
-
-    const track =
-      tracks[index];
-
-
-    const url =
-      audioBlobUrls[index];
-
-
-    if(!url){
-
-      return;
-
-    }
-
-
-    audio.src =
-      url;
-
-
-    audio.preload =
-      "auto";
-
-
-    function setPosition(){
-
-      try{
-
-        if(
-          Number.isFinite(position) &&
-          position >= 0 &&
-          Number.isFinite(
-            audio.duration
-          )
-        ){
-
-          if(
-            position <
-            audio.duration
-          ){
-
-            audio.currentTime =
-              position;
-
-          }
-
-        }
-
-      }catch(e){}
-
-    }
-
-
-    if(
-      audio.readyState >= 1
-    ){
-
-      setPosition();
-
-    }else{
-
-      audio.addEventListener(
-        "loadedmetadata",
-        setPosition,
-        {
-          once:true
-        }
-      );
-
-    }
-
-
-    updateTrackUI();
-
-    renderTracks();
-
-  }
-
-
-  /* ============================================================
-     TRACK UI
-     ============================================================ */
-
-
-  function updateTrackUI(){
-
-    if(
-      current < 0 ||
-      !tracks[current]
-    ){
-
-      document.getElementById(
-        "trackTitle"
-      ).textContent =
-        "Эфир ещё не запущен";
-
-
-      document.getElementById(
-        "artist"
-      ).textContent =
-        "Ожидание трансляции";
-
-
-      document.getElementById(
-        "miniTitle"
-      ).textContent =
-        "РАДИО КОЛЯ";
-
-
-      document.getElementById(
-        "miniArtist"
-      ).textContent =
-        "Ожидание трека";
-
-
-      const cover =
-        document.getElementById(
-          "cover"
-        );
-
-
-      cover.style.backgroundImage =
-        "url('radio-kolia-cover.png')";
-
-
-      cover.classList.remove(
-        "has-image"
-      );
-
-
-      cover.textContent =
-        "К";
-
-
-      updatePlayButtons();
-
-
-      return;
-
-    }
-
-
-    const track =
-      tracks[current];
-
-
-    document.getElementById(
-      "trackTitle"
-    ).textContent =
-      track.name;
-
-
-    document.getElementById(
-      "artist"
-    ).textContent =
-      track.artist ||
-      "РАДИО КОЛЯ • прямой эфир";
-
-
-    document.getElementById(
-      "miniTitle"
-    ).textContent =
-      track.name;
-
-
-    document.getElementById(
-      "miniArtist"
-    ).textContent =
-      "РАДИО КОЛЯ • LIVE";
-
-
-    const cover =
-      document.getElementById(
-        "cover"
-      );
-
-
-    if(track.cover){
-
-      cover.style.backgroundImage =
-        `url("${track.cover}")`;
-
-
-      cover.classList.add(
-        "has-image"
-      );
-
-
-      cover.textContent =
-        "";
-
-    }else{
-
-      cover.style.backgroundImage =
-        "";
-
-
-      cover.classList.remove(
-        "has-image"
-      );
-
-
-      cover.textContent =
-        "К";
-
-    }
-
-  }
-
-
-  /* ============================================================
-     START LIVE
-     ============================================================ */
-
-
-  function startLive(){
-
-    if(!tracks.length){
-
-      toast(
-        "Сначала администратор должен добавить песни"
-      );
-
-      return;
-
-    }
-
-
-    if(!liveState.startedAt){
-
-      liveState.currentTrack =
-        0;
-
-
-      liveState.startedAt =
-        Date.now();
-
-
-      saveLiveState();
-
-    }
-
-
-    radioStarted =
-      true;
-
-
-    restoreLive();
-
-  }
-
-
-  /* ============================================================
-     RESTORE LIVE
-     ============================================================ */
-
-
-  async function restoreLive(){
-
-    if(!tracks.length){
-
-      stopRadioBecauseEmpty();
-
-      return;
-
-    }
-
-
-    loadLiveState();
-
-
-    if(
-      liveState.currentTrack < 0 ||
-      liveState.currentTrack >= tracks.length ||
-      !liveState.startedAt
-    ){
-
-      liveState.currentTrack =
-        0;
-
-
-      liveState.startedAt =
-        Date.now();
-
-
-      saveLiveState();
-
-    }
-
-
-    let index =
-      liveState.currentTrack;
-
-
-    let elapsed =
-      (
-        Date.now() -
-        liveState.startedAt
-      ) / 1000;
-
-
-    let safety =
-      0;
-
-
-    /*
-       Если сайт был закрыт надолго
-       и текущий трек уже должен был
-       закончиться, ищем актуальный.
-
-       В отличие от старой версии,
-       здесь НЕ удаляем треки при
-       восстановлении страницы.
-    */
-
-    while(
-      tracks[index] &&
-      Number.isFinite(
-        tracks[index].duration
-      ) &&
-      elapsed >=
-        tracks[index].duration &&
-      safety < tracks.length + 2
-    ){
-
-      elapsed -=
-        tracks[index].duration;
-
-
-      index++;
-
-
-      if(
-        index >= tracks.length
-      ){
-
-        index =
-          0;
-
-      }
-
-
-      liveState.currentTrack =
-        index;
-
-
-      liveState.startedAt =
-        Date.now() -
-        elapsed * 1000;
-
-
-      safety++;
-
-    }
-
-
-    current =
-      index;
-
-
-    radioStarted =
-      true;
-
-
-    finishingTrack =
-      false;
-
-
-    setTrack(
-      index,
-      Math.max(
-        0,
-        elapsed
-      )
-    );
-
-
-    saveLiveState();
-
-
-    try{
-
-      await audio.play();
-
-
-      silentMode =
-        false;
-
-
-      updatePlayButtons();
-
-    }catch(e){
-
-      updatePlayButtons();
-
-    }
-
-  }
-
-
-  /* ============================================================
-     АВТОМАТИЧЕСКОЕ УДАЛЕНИЕ ЗАВЕРШИВШЕГОСЯ ТРЕКА
-     ============================================================
-
-     Здесь находится основная новая логика.
-
-     Когда audio вызывает "ended":
-
-       1. Добавляем трек в историю.
-       2. Удаляем его из IndexedDB.
-       3. Удаляем его из массива tracks.
-       4. Если больше треков нет —
-          останавливаем эфир.
-       5. Если треки есть —
-          запускаем следующий.
-  */
-
-
-  async function finishCurrentTrack(){
-
-    /*
-       Защита от двойного вызова.
-    */
-
-    if(finishingTrack){
-
-      return;
-
-    }
-
-
-    finishingTrack =
-      true;
-
-
-    const finishedIndex =
-      current;
-
-
-    const finishedTrack =
-      tracks[finishedIndex];
-
-
-    if(!finishedTrack){
-
-      finishingTrack =
-        false;
-
-      return;
-
-    }
-
-
-    /*
-       Сохраняем в "РАНЕЕ В ЭФИРЕ"
-       ДО удаления из библиотеки.
-    */
-
-    addAirHistory(
-      finishedTrack
-    );
-
-
-    /*
-       Запоминаем ID.
-    */
-
-    const finishedId =
-      finishedTrack.id;
-
-
-    try{
-
-      /*
-         Удаляем физически из IndexedDB.
-      */
-
-      await deleteTrackFromDB(
-        finishedId
-      );
-
-    }catch(e){
-
-      console.error(e);
-
-      /*
-         Даже если IndexedDB временно
-         не ответила, продолжаем работу
-         с текущей сессией.
-      */
-
-    }
-
-
-    /*
-       Освобождаем Blob URL.
-    */
-
-    if(
-      audioBlobUrls[finishedIndex]
-    ){
-
-      try{
-
-        URL.revokeObjectURL(
-          audioBlobUrls[finishedIndex]
-        );
-
-      }catch(e){}
-
-    }
-
-
-    /*
-       Удаляем трек из массива.
-
-       После этого следующий трек
-       автоматически занимает тот же индекс.
-    */
-
-    tracks.splice(
-      finishedIndex,
-      1
-    );
-
-
-    /*
-       Пересоздаём Blob URL индексы,
-       чтобы они снова совпадали
-       с tracks.
-    */
-
-    const oldUrls =
-      audioBlobUrls;
-
-
-    audioBlobUrls =
-      {};
-
-
-    tracks.forEach(
-      function(track,index){
-
-        /*
-           Если Blob уже существует,
-           создаём новый URL только для
-           оставшихся файлов.
-
-           IndexedDB загрузка здесь не нужна:
-           Blob всё ещё находится в памяти.
-        */
-
-        if(
-          track.blob
-        ){
-
-          try{
-
-            audioBlobUrls[index] =
-              URL.createObjectURL(
-                track.blob
-              );
-
-          }catch(e){}
-
-        }
-
-      }
-    );
-
-
-    /*
-       Старые URL, которые относятся
-       к оставшимся трекам, освобождаем.
-    */
-
-    Object.keys(
-      oldUrls
-    ).forEach(
-      function(key){
-
-        /*
-           Текущий удалённый URL уже
-           был освобождён выше.
-
-           Остальные тоже можно
-           освободить — новые URL
-           уже созданы.
-        */
-
-        if(
-          oldUrls[key] &&
-          Number(key) !== finishedIndex
-        ){
-
-          try{
-
-            URL.revokeObjectURL(
-              oldUrls[key]
-            );
-
-          }catch(e){}
-
-        }
-
-      }
-    );
-
-
-    /*
-       Теперь проверяем:
-       остался ли хоть один трек.
-    */
-
-    if(
-      tracks.length === 0
-    ){
-
-      /*
-         Плейлист закончился.
-
-         Эфир останавливается
-         до появления нового трека.
-      */
-
-      stopRadioBecauseEmpty();
-
-
-      if(isAdmin){
-
-        renderTracks();
-
-      }
-
-
-      toast(
-        "📻 Плейлист закончился. Эфир ожидает новый трек."
-      );
-
-
-      finishingTrack =
-        false;
-
-
-      return;
-
-    }
-
-
-    /*
-       После удаления текущего трека
-       следующий трек теперь находится
-       на том же индексе.
-
-       Например:
-
-       A ← завершился
-       B
-       C
-
-       после удаления:
-
-       B ← индекс 0
-       C ← индекс 1
-
-       Поэтому current остаётся 0.
-    */
-
-    if(
-      finishedIndex >= tracks.length
-    ){
-
-      current =
-        0;
-
-    }else{
-
-      current =
-        finishedIndex;
-
-    }
-
-
-    liveState.currentTrack =
-      current;
-
-
-    liveState.startedAt =
-      Date.now();
-
-
-    radioStarted =
-      true;
-
-
-    saveLiveState();
-
-
-    renderTracks();
-
-
-    /*
-       Запускаем следующий трек.
-    */
-
-    setTrack(
-      current,
-      0
-    );
-
-
-    try{
-
-      await audio.play();
-
-      silentMode =
-        false;
-
-      updatePlayButtons();
-
-    }catch(e){
-
-      updatePlayButtons();
-
-      toast(
-        "Нажмите ▶, чтобы продолжить эфир"
-      );
-
-    }
-
-
-    finishingTrack =
-      false;
-
-  }
-
-
-  /* ============================================================
-     ОСТАНОВКА ЭФИРА ПРИ ПУСТОМ ПЛЕЙЛИСТЕ
-     ============================================================ */
-
-
-  function stopRadioBecauseEmpty(){
-
-    radioStarted =
-      false;
-
-
-    current =
-      -1;
-
-
-    finishingTrack =
-      false;
-
-
-    liveState = {
-
-      currentTrack:0,
-
-      startedAt:0
-
-    };
-
-
-    saveLiveState();
-
-
-    try{
-
-      audio.pause();
-
-    }catch(e){}
-
-
-    audio.removeAttribute(
-      "src"
-    );
-
-
-    audio.load();
-
-
-    silentMode =
-      false;
-
-
-    audio.muted =
-      false;
-
-
-    updateTrackUI();
-
-
-    updatePlayButtons();
-
-
-    if(isAdmin){
-
-      renderTracks();
-
-    }
-
-  }
-
-
-  /* ============================================================
-     NEXT TRACK
-     ============================================================
-
-     Теперь ручного переключения
-     больше нет.
-
-     Все переходы происходят через
-     finishCurrentTrack().
-  */
-
-
-  function nextTrack(){
-
-    finishCurrentTrack();
-
-  }
-
-
-  /* ============================================================
-     PLAY / SILENT MODE
-     ============================================================ */
-
-
-  function togglePause(){
-
-    /*
-       Это не настоящая пауза эфира.
-       Выключается только звук.
-    */
-
-    if(!radioStarted){
-
-      if(tracks.length){
-
-        /*
-           Если эфир остановился после
-           полного удаления плейлиста,
-           начинаем с первого трека.
-        */
-
-        liveState.currentTrack =
-          0;
-
-
-        liveState.startedAt =
-          Date.now();
-
-
-        saveLiveState();
-
-
-        radioStarted =
-          true;
-
-
-        setTrack(
-          0,
-          0
-        );
-
-
-        audio.play()
-          .catch(
-            function(){}
-          );
-
-      }else{
-
-        toast(
-          "Эфир пока не запущен"
-        );
-
-      }
-
-
-      return;
-
-    }
-
-
-    if(audio.paused){
-
-      audio.play()
-        .catch(
-          function(){}
-        );
-
-    }
-
-
-    silentMode =
-      !silentMode;
-
-
-    if(silentMode){
-
-      audio.dataset.previousVolume =
-        audio.volume;
-
-
-      audio.muted =
-        true;
-
-    }else{
-
-      audio.muted =
-        false;
-
-
-      const previous =
-        parseFloat(
-          audio.dataset.previousVolume
-        );
-
-
-      audio.volume =
-        Number.isFinite(previous)
-          ? previous
-          : parseFloat(
+            const target =
               document.getElementById(
-                "volume"
-              ).value
-            );
+                "page-" + page
+              );
 
-    }
 
+            if (target) {
 
-    updatePlayButtons();
-
-  }
-
-
-  /* ============================================================
-     PLAY BUTTONS
-     ============================================================ */
-
-
-  function updatePlayButtons(){
-
-    const text =
-      radioStarted
-        ? (
-            silentMode
-              ? "▶"
-              : "❚❚"
-          )
-        : "▶";
-
-
-    document.getElementById(
-      "play"
-    ).textContent =
-      text;
-
-
-    document.getElementById(
-      "miniPlay"
-    ).textContent =
-      text;
-
-  }
-
-
-  /* ============================================================
-     MUTE
-     ============================================================ */
-
-
-  function toggleMute(){
-
-    audio.muted =
-      !audio.muted;
-
-
-    document.getElementById(
-      "mute"
-    ).textContent =
-      audio.muted
-        ? "🔇"
-        : "🔊";
-
-  }
-
-
-  /* ============================================================
-     AUDIO
-     ============================================================ */
-
-
-  audio.addEventListener(
-    "ended",
-    function(){
-
-      /*
-         Именно здесь начинается
-         автоматическое удаление.
-      */
-
-      finishCurrentTrack();
-
-    }
-  );
-
-
-  audio.addEventListener(
-    "error",
-    function(){
-
-      /*
-         Не удаляем трек автоматически
-         при ошибке загрузки.
-
-         Автоматическое удаление происходит
-         только после нормального "ended".
-      */
-
-      toast(
-        "Ошибка воспроизведения трека"
-      );
-
-    }
-  );
-
-
-  audio.addEventListener(
-    "loadedmetadata",
-    function(){
-
-      if(
-        current >= 0 &&
-        tracks[current]
-      ){
-
-        tracks[current].duration =
-          audio.duration;
-
-      }
-
-    }
-  );
-
-
-  /* ============================================================
-     VOLUME
-     ============================================================ */
-
-
-  document.getElementById(
-    "volume"
-  ).addEventListener(
-    "input",
-    function(event){
-
-      const value =
-        parseFloat(
-          event.target.value
-        );
-
-
-      audio.volume =
-        value;
-
-
-      audio.dataset.previousVolume =
-        value;
-
-
-      if(value > 0){
-
-        audio.muted =
-          false;
-
-
-        document.getElementById(
-          "mute"
-        ).textContent =
-          "🔊";
-
-      }
-
-    }
-  );
-
-
-  /* ============================================================
-     PROFILE / LOGIN
-     ============================================================ */
-
-
-  profileButton.onclick =
-    openLogin;
-
-
-  document.getElementById(
-    "closeLogin"
-  ).onclick =
-    closeLogin;
-
-
-  document.getElementById(
-    "loginSubmit"
-  ).onclick =
-    login;
-
-
-  adminPassword.addEventListener(
-    "keydown",
-    function(event){
-
-      if(
-        event.key === "Enter"
-      ){
-
-        login();
-
-      }
-
-    }
-  );
-
-
-  adminName.addEventListener(
-    "keydown",
-    function(event){
-
-      if(
-        event.key === "Enter"
-      ){
-
-        adminPassword.focus();
-
-      }
-
-    }
-  );
-
-
-  loginModal.addEventListener(
-    "click",
-    function(event){
-
-      if(
-        event.target === loginModal
-      ){
-
-        closeLogin();
-
-      }
-
-    }
-  );
-
-
-  /* ============================================================
-     PLAYER BUTTONS
-     ============================================================ */
-
-
-  document.getElementById(
-    "play"
-  ).onclick =
-    togglePause;
-
-
-  document.getElementById(
-    "miniPlay"
-  ).onclick =
-    togglePause;
-
-
-  document.getElementById(
-    "mute"
-  ).onclick =
-    toggleMute;
-
-
-  /* ============================================================
-     ADD LIBRARY
-     ============================================================ */
-
-
-  document.getElementById(
-    "addLibrary"
-  ).onclick =
-    function(){
-
-      if(!isAdmin){
-
-        return;
-
-      }
-
-
-      fileInput.click();
-
-    };
-
-
-  document.getElementById(
-    "emptyAdd"
-  ).onclick =
-    function(){
-
-      if(!isAdmin){
-
-        return;
-
-      }
-
-
-      fileInput.click();
-
-    };
-
-
-  fileInput.onchange =
-    function(event){
-
-      addFiles(
-        event.target.files
-      );
-
-
-      fileInput.value =
-        "";
-
-    };
-
-
-  /* ============================================================
-     SEARCH
-     ============================================================ */
-
-
-  document.getElementById(
-    "search"
-  ).oninput =
-    renderTracks;
-
-
-  /* ============================================================
-     VISIBILITY
-     ============================================================ */
-
-
-  document.addEventListener(
-    "visibilitychange",
-    function(){
-
-      if(
-        !document.hidden &&
-        radioStarted
-      ){
-
-        /*
-           При возвращении на страницу
-           восстанавливаем позицию эфира.
-        */
-
-        restoreLive();
-
-      }
-
-    }
-  );
-
-
-  /* ============================================================
-     PERIODIC SYNC
-     ============================================================ */
-
-
-  setInterval(
-    function(){
-
-      if(
-        radioStarted &&
-        current >= 0
-      ){
-
-        saveLiveState();
-
-      }
-
-    },
-    5000
-  );
-
-
-  /* ============================================================
-     MIDNIGHT RESET
-     ============================================================ */
-
-
-  setInterval(
-    function(){
-
-      const today =
-        getTodayKey();
-
-
-      const changed =
-        airHistory.some(
-          function(item){
-
-            return (
-              item.date !== today
-            );
-
-          }
-        );
-
-
-      if(changed){
-
-        airHistory =
-          airHistory.filter(
-            function(item){
-
-              return (
-                item.date === today
+              target.classList.add(
+                "active"
               );
 
             }
-          );
-
-
-        /*
-           Защита максимум 5.
-        */
-
-        airHistory =
-          airHistory.slice(
-            0,
-            MAX_HISTORY
-          );
-
-
-        saveAirHistory();
-
-        renderAirHistory();
-
-      }
-
-    },
-    60000
-  );
-
-
-  /* ============================================================
-     AD SLIDER
-     ============================================================ */
-
-
-  (function(){
-
-    const track =
-      document.getElementById(
-        "adTrack"
-      );
-
-
-    const dots =
-      [
-        ...document.querySelectorAll(
-          ".ad-dot"
-        )
-      ];
-
-
-    const prev =
-      document.getElementById(
-        "adPrev"
-      );
-
-
-    const next =
-      document.getElementById(
-        "adNext"
-      );
-
-
-    let index =
-      0;
-
-
-    let timer =
-      null;
-
-
-    function show(i){
-
-      index =
-        (i + dots.length) %
-        dots.length;
-
-
-      if(track){
-
-        track.style.transform =
-          `translateX(-${index * 100}%)`;
-
-      }
-
-
-      dots.forEach(
-        function(dot,n){
-
-          dot.classList.toggle(
-            "active",
-            n === index
-          );
-
-        }
-      );
-
-    }
-
-
-    function restart(){
-
-      clearInterval(
-        timer
-      );
-
-
-      timer =
-        setInterval(
-          function(){
-
-            show(
-              index + 1
-            );
-
-          },
-          6000
-        );
-
-    }
-
-
-    prev.addEventListener(
-      "click",
-      function(){
-
-        show(
-          index - 1
-        );
-
-
-        restart();
-
-      }
-    );
-
-
-    next.addEventListener(
-      "click",
-      function(){
-
-        show(
-          index + 1
-        );
-
-
-        restart();
-
-      }
-    );
-
-
-    dots.forEach(
-      function(dot,i){
-
-        dot.addEventListener(
-          "click",
-          function(){
-
-            show(i);
-
-            restart();
 
           }
         );
@@ -5842,108 +2860,125 @@
     );
 
 
-    show(0);
+    /* =====================================================
+       HISTORY BUTTON
+    ====================================================== */
 
-    restart();
+    historyButton.addEventListener(
+      "click",
+      function () {
 
-  })();
-
-
-  /* ============================================================
-     INITIALIZATION
-     ============================================================ */
-
-
-  async function init(){
-
-    checkAdmin();
-
-    updateAdminUI();
+        const homeButton =
+          document.querySelector(
+            '[data-page="home"]'
+          );
 
 
-    /*
-       Сначала загружаем историю.
-    */
+        if (homeButton) {
 
-    loadAirHistory();
+          homeButton.click();
 
-
-    try{
-
-      await openDatabase();
-
-
-      /*
-         При первой загрузке разрешаем
-         восстановить эфир.
-      */
-
-      await loadTracks(
-        true
-      );
-
-
-      await restoreHistoryCovers();
-
-    }catch(e){
-
-      console.error(e);
-
-
-      toast(
-        "Браузер не поддерживает сохранение библиотеки"
-      );
-
-    }
-
-
-    /*
-       Если библиотека существует,
-       но loadTracks по какой-то причине
-       не восстановил эфир.
-    */
-
-    if(
-      tracks.length > 0 &&
-      !radioStarted
-    ){
-
-      loadLiveState();
-
-
-      if(
-        liveState.startedAt
-      ){
-
-        radioStarted =
-          true;
-
-
-        restoreLive();
+        }
 
       }
-
-    }
-
-
-    updateTrackUI();
-
-    updatePlayButtons();
-
-  }
+    );
 
 
-  /* ============================================================
-     START
-     ============================================================ */
+    /* =====================================================
+       KEYBOARD
+    ====================================================== */
+
+    document.addEventListener(
+      "keydown",
+      function (event) {
 
 
-  init();
+        if (
+          event.code === "Space"
+          &&
+          event.target.tagName !==
+          "INPUT"
+          &&
+          event.target.tagName !==
+          "TEXTAREA"
+        ) {
+
+          event.preventDefault();
+
+          toggleRadio();
+
+        }
 
 
-})();
+        if (
+          event.key.toLowerCase()
+          === "m"
+        ) {
 
-</script>
+          audio.muted =
+            !audio.muted;
+
+
+          muteButton.textContent =
+            audio.muted
+              ? "🔇"
+              : "🔊";
+
+        }
+
+      }
+    );
+
+
+    /* =====================================================
+       ALBUM ART
+    ====================================================== */
+
+    albumArt.addEventListener(
+      "load",
+      function () {
+
+        if (
+          albumArt.naturalWidth > 0
+        ) {
+
+          albumArt.style.display =
+            "block";
+
+
+          albumPlaceholder.style.display =
+            "none";
+
+        }
+
+      }
+    );
+
+
+    albumArt.addEventListener(
+      "error",
+      function () {
+
+        albumArt.style.display =
+          "none";
+
+
+        albumPlaceholder.style.display =
+          "block";
+
+      }
+    );
+
+
+    /* =====================================================
+       INITIALIZATION
+    ====================================================== */
+
+    setPlaying(false);
+
+  </script>
+
+
 
 </body>
 
