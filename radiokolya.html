@@ -29,9 +29,11 @@
 
     <style>
         :root {
-            --red: #e52b32;
-            --red-dark: #c91f26;
-            --red-light: #fff0f1;
+            --red: #7c3aed;
+            --purple-dark: #5b21b6;
+            --purple-light: #f3e8ff;
+            --red-dark: #5b21b6;
+            --red-light: #f3e8ff;
             --black: #111216;
             --text: #17181c;
             --muted: #85878e;
@@ -127,15 +129,20 @@
             justify-content: center;
 
             border-radius: 18px;
-            background: var(--red);
             color: white;
 
             font-size: 19px;
             font-weight: 900;
             letter-spacing: -1px;
+        }
 
-            box-shadow:
-                0 10px 25px rgba(229, 43, 50, .2);
+        .logo-mark img,
+        .top-brand-icon img {
+            width: 100%;
+            height: 100%;
+            display: block;
+            object-fit: contain;
+            border-radius: inherit;
         }
 
         .logo-name {
@@ -259,7 +266,7 @@
             flex: 0 0 6px;
 
             border-radius: 50%;
-            background: var(--green);
+            background: var(--black);
 
             box-shadow:
                 0 0 0 4px rgba(40, 173, 90, .1);
@@ -330,7 +337,6 @@
             justify-content: center;
 
             border-radius: 13px;
-            background: var(--red);
             color: white;
 
             font-size: 15px;
@@ -427,14 +433,14 @@
             gap: 9px;
 
             border-radius: 14px;
-            background: var(--red);
+            background: linear-gradient(135deg, #7c3aed, #c084fc);
             color: white;
 
             font-size: 12px;
             font-weight: 900;
 
             box-shadow:
-                0 8px 20px rgba(229, 43, 50, .18);
+                0 8px 20px rgba(124, 58, 237, .18);
 
             transition:
                 transform .2s ease,
@@ -448,7 +454,7 @@
             transform: translateY(-1px);
 
             box-shadow:
-                0 12px 25px rgba(229, 43, 50, .25);
+                0 12px 25px rgba(124, 58, 237, .25);
         }
 
         .top-live:active {
@@ -490,12 +496,12 @@
             background:
                 radial-gradient(
                     circle at 85% 20%,
-                    rgba(229, 43, 50, .09),
+                    rgba(124, 58, 237, .09),
                     transparent 31%
                 ),
                 radial-gradient(
                     circle at 65% 110%,
-                    rgba(229, 43, 50, .055),
+                    rgba(124, 58, 237, .055),
                     transparent 34%
                 ),
                 #fff;
@@ -556,7 +562,6 @@
             border-radius: 100px;
 
             background: var(--red-light);
-            color: var(--red);
 
             font-size: 11px;
             font-weight: 900;
@@ -611,14 +616,14 @@
 
             border-radius: 20px;
 
-            background: var(--red);
+            background: linear-gradient(135deg, #7c3aed, #c084fc);
             color: white;
 
             font-size: 23px;
             font-weight: 900;
 
             box-shadow:
-                0 12px 28px rgba(229, 43, 50, .24);
+                0 12px 28px rgba(124, 58, 237, .24);
 
             transition:
                 transform .2s ease,
@@ -632,7 +637,7 @@
             transform: translateY(-3px);
 
             box-shadow:
-                0 17px 34px rgba(229, 43, 50, .3);
+                0 17px 34px rgba(124, 58, 237, .30);
         }
 
         .big-play:active {
@@ -798,6 +803,39 @@
             transform: scaleY(.35);
         }
 
+        /* Красный цвет, когда эфир не запущен */
+        body.not-live .eyebrow,
+        body.not-live .live-status,
+        body.not-live .live-mini-top,
+        body.not-live .track-info small,
+        body.not-live .hero h1 span {
+            color: #e52b32 !important;
+        }
+
+        body.not-live .live-dot,
+        body.not-live .live-status i {
+            background: #e52b32 !important;
+            box-shadow: 0 0 0 4px rgba(229, 43, 50, .10) !important;
+        }
+
+        body.not-live .bar {
+            background: #e52b32;
+        }
+
+        body.not-live .track-time {
+            background: #fff0f1;
+            color: #e52b32;
+        }
+
+        body.not-live .volume-icon {
+            color: #e52b32;
+        }
+
+        body.not-live #volume::-webkit-slider-thumb,
+        body.not-live #volume::-moz-range-thumb {
+            background: #e52b32;
+        }
+
         /* =========================================================
            DASHBOARD
            ========================================================= */
@@ -859,7 +897,7 @@
             align-items: center;
             gap: 6px;
 
-            color: var(--green) !important;
+            color: var(--black) !important;
         }
 
         .live-status i {
@@ -867,7 +905,7 @@
             height: 6px;
 
             border-radius: 50%;
-            background: var(--green);
+            background: var(--black);
         }
 
         /* =========================================================
@@ -901,17 +939,13 @@
             border-radius: 13px;
 
             background:
-                linear-gradient(
-                    135deg,
-                    #e52b32,
-                    #ff7077
-                );
+                linear-gradient(135deg, #7c3aed, #c084fc);
 
             color: white;
             font-size: 24px;
 
             box-shadow:
-                0 7px 16px rgba(229, 43, 50, .18);
+                0 7px 16px rgba(124, 58, 237, .18);
         }
 
         .album img {
@@ -1030,7 +1064,7 @@
             cursor: pointer;
 
             box-shadow:
-                0 2px 6px rgba(229, 43, 50, .25);
+                0 2px 6px rgba(124, 58, 237, .25);
         }
 
         #volume::-moz-range-thumb {
@@ -1045,7 +1079,7 @@
             cursor: pointer;
 
             box-shadow:
-                0 2px 6px rgba(229, 43, 50, .25);
+                0 2px 6px rgba(124, 58, 237, .25);
         }
 
         .volume-value {
@@ -1193,6 +1227,10 @@
         }
 
         @media (max-width: 600px) {
+            .volume-row {
+                display: none;
+            }
+
             .top-actions {
                 gap: 4px;
             }
@@ -1295,6 +1333,30 @@
                 width: 35px;
             }
         }
+    
+        /* FINAL OFF-AIR OVERRIDE */
+        body.not-live .live-status,
+        body.not-live .live-mini-top,
+        body.not-live #sidebarLiveStatus,
+        body.not-live #heroLiveText,
+        body.not-live #cardLiveText {
+            color: #e52b32 !important;
+        }
+
+        body.not-live #sidebarLiveDot,
+        body.not-live #heroLiveDot,
+        body.not-live #cardLiveDot,
+        body.not-live .live-dot,
+        body.not-live .live-status i {
+            background-color: #e52b32 !important;
+            border-color: #e52b32 !important;
+            box-shadow: 0 0 0 4px rgba(229,43,50,.12) !important;
+        }
+
+        body.not-live .bar {
+            background-color: #e52b32 !important;
+        }
+
     </style>
 </head>
 
@@ -1311,7 +1373,7 @@
             <div class="logo">
 
                 <div class="logo-mark">
-                    РК
+                    <img src="images/LOGORADIOKOLYA.png" alt="Радио Коля">
                 </div>
 
                 <div class="logo-name">
@@ -1392,9 +1454,9 @@
 
                 <div class="live-mini-top">
 
-                    <span class="live-dot"></span>
+                    <span class="live-dot" id="sidebarLiveDot"></span>
 
-                    Прямой эфир
+                    <span id="sidebarLiveStatus">Не в эфире</span>
 
                 </div>
 
@@ -1403,7 +1465,7 @@
                 </div>
 
                 <div class="live-mini-subtitle">
-                    Музыка без остановки
+                    Душевное радио
                 </div>
 
             </div>
@@ -1424,7 +1486,7 @@
             <div class="top-brand">
 
                 <div class="top-brand-icon">
-                    РК
+                    <img src="images/LOGORADIOKOLYA.png" alt="Радио Коля">
                 </div>
 
                 <div class="top-brand-text">
@@ -1501,11 +1563,11 @@
 
                 <div class="hero-content">
 
-                    <div class="eyebrow">
+                    <div class="eyebrow" id="heroLiveStatus">
 
-                        <span class="live-dot"></span>
+                        <span class="live-dot" id="heroLiveDot"></span>
 
-                        Прямой эфир
+                        <span id="heroLiveText">Не в эфире</span>
 
                     </div>
 
@@ -1598,11 +1660,11 @@
                             Сейчас в эфире
                         </h2>
 
-                        <span class="live-status">
+                        <span class="live-status" id="cardLiveStatus">
 
-                            <i></i>
+                            <i id="cardLiveDot"></i>
 
-                            LIVE
+                            <span id="cardLiveText">Не в эфире</span>
 
                         </span>
 
@@ -1701,13 +1763,7 @@
                     Плейлист
                 </h1>
 
-                <p class="section-description">
 
-                    Здесь отображается текущая
-                    информация, полученная
-                    от RadioBOSS через Icecast.
-
-                </p>
 
                 <div
                     class="uploaded-list"
@@ -1818,7 +1874,7 @@
 
 <audio
     id="audio"
-    preload="none"
+    preload="auto"
 ></audio>
 
 
@@ -1836,7 +1892,7 @@
 */
 
 const ICECAST_URL =
-    "https://enjoyed-drums-parade-cakes.trycloudflare.com";
+    "https://aims-cells-span-organizing.trycloudflare.com";
 
 
 /*
@@ -1905,6 +1961,13 @@ const albumArt =
 const albumPlaceholder =
     document.getElementById("albumPlaceholder");
 
+const sidebarLiveStatus = document.getElementById("sidebarLiveStatus");
+const heroLiveText = document.getElementById("heroLiveText");
+const cardLiveText = document.getElementById("cardLiveText");
+const sidebarLiveDot = document.getElementById("sidebarLiveDot");
+const heroLiveDot = document.getElementById("heroLiveDot");
+const cardLiveDot = document.getElementById("cardLiveDot");
+
 
 /* =========================================================
    STATE
@@ -1921,40 +1984,33 @@ let currentSongKey = "";
 function playRadio() {
 
     if (!LIVE_STREAM_URL) {
-
-        console.error(
-            "LIVE_STREAM_URL не указан"
-        );
-
+        console.error("LIVE_STREAM_URL не указан");
         return;
     }
 
-
+    /*
+        Быстрый запуск:
+        поток подгружается заранее через preload=auto.
+    */
     if (audio.src !== LIVE_STREAM_URL) {
-
-        audio.src =
-            LIVE_STREAM_URL;
-
+        audio.src = LIVE_STREAM_URL;
+        audio.preload = "auto";
+        audio.load();
     }
-
 
     audio.play()
         .then(function () {
-
             setPlaying(true);
 
+            /* Сразу обновляем метаданные, не ждём 5 секунд. */
+            loadIcecastInfo();
         })
         .catch(function (error) {
-
-            console.error(
-                "Не удалось запустить радио:",
-                error
-            );
-
+            console.error("Не удалось запустить радио:", error);
+            setPlaying(false);
         });
 
 }
-
 
 function pauseRadio() {
 
@@ -2007,7 +2063,7 @@ pauseButton.addEventListener(
 function setPlaying(playing) {
 
     isPlaying = playing;
-
+    updateLiveStatus(playing);
 
     document.body.classList.toggle(
         "playing",
@@ -2550,6 +2606,59 @@ function tryAlbumArt(
 }
 
 
+
+        function setOffAirVisual(isLive) {
+            const red = "#e52b32";
+
+            document.body.classList.toggle("not-live", !isLive);
+
+            const textElements = [
+                sidebarLiveStatus,
+                heroLiveText,
+                cardLiveText
+            ];
+
+            const dotElements = [
+                sidebarLiveDot,
+                heroLiveDot,
+                cardLiveDot
+            ];
+
+            textElements.forEach(function (el) {
+                if (!el) return;
+                el.style.setProperty(
+                    "color",
+                    isLive ? "" : red,
+                    "important"
+                );
+            });
+
+            dotElements.forEach(function (el) {
+                if (!el) return;
+                el.style.setProperty(
+                    "background-color",
+                    isLive ? "" : red,
+                    "important"
+                );
+                el.style.setProperty(
+                    "box-shadow",
+                    isLive ? "" : "0 0 0 4px rgba(229,43,50,.12)",
+                    "important"
+                );
+            });
+
+            /* Все элементы со статусом LIVE/эфира. */
+            document.querySelectorAll(
+                ".live-status, .live-mini-top, #heroLiveText, #cardLiveText, #sidebarLiveStatus"
+            ).forEach(function (el) {
+                el.style.setProperty(
+                    "color",
+                    isLive ? "" : red,
+                    "important"
+                );
+            });
+        }
+
 /* =========================================================
    ICECAST STATUS
    ========================================================= */
@@ -2602,6 +2711,8 @@ async function loadIcecastInfo() {
             "Не удалось получить данные Icecast:",
             error
         );
+        updateLiveStatus(false);
+        setOffAirVisual(false);
 
     }
 
@@ -2650,6 +2761,8 @@ function processIcecastData(
         console.warn(
             "Icecast source не найден"
         );
+        updateLiveStatus(false);
+        setOffAirVisual(false);
 
         return;
 
@@ -2714,10 +2827,15 @@ function processIcecastData(
             "Icecast не передал название трека",
             source
         );
+        updateLiveStatus(false);
+        setOffAirVisual(false);
 
         return;
 
     }
+
+    updateLiveStatus(true);
+    setOffAirVisual(true);
 
 
     updateCurrentTrack(
@@ -2734,6 +2852,14 @@ function processIcecastData(
 
 loadIcecastInfo();
 
+/*
+    Предзагрузка аудиопотока сразу после открытия страницы.
+    Это сокращает задержку после нажатия Play.
+*/
+if (LIVE_STREAM_URL) {
+    audio.src = LIVE_STREAM_URL;
+    audio.preload = "auto";
+}
 
 setInterval(
     loadIcecastInfo,
@@ -2748,6 +2874,8 @@ setInterval(
 audio.volume = 0.5;
 
 setPlaying(false);
+updateLiveStatus(false);
+        setOffAirVisual(false);
 
 updateVolumeIcon();
 
