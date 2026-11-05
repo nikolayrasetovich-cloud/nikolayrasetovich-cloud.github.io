@@ -4,109 +4,109 @@
       "title": "Туманы",
       "artist": "Макс Барских",
       "src": "/music/Audio/Макс Барских Туманы.mp3",
-      "cover": "/music/covers/МАКС БАРСКИХ - ТУМАНЫ.jpg"
+      "cover": "music/covers/МАКС БАРСКИХ - ТУМАНЫ.jpg"
     },
     {
       "title": "Мало половин",
       "artist": "Ольга Бузова",
       "src": "/music/Audio/Ольга Бузова Мало Половин.mp3",
-      "cover": "/music/covers/ОЛЬГА БУЗ - МАЛО ПОЛОВИН.jpg"
+      "cover": "music/covers/ОЛЬГА БУЗ - МАЛО ПОЛОВИН.jpg"
     },
     {
       "title": "You are the only one",
       "artist": "Сергей Лазарев",
       "src": "/music/Audio/Сергей Лазарев You Are The Only One.mp3",
-      "cover": "/music/covers/ЛАЗАРЕВ - You are the only one.jpg"
+      "cover": "music/covers/ЛАЗАРЕВ - You are the only one.jpg"
     },
     {
       "title": "Дарья",
       "artist": "Белый день, Лена Василёк",
       "src": "/music/Audio/Группа Белый День Дарья.mp3",
-      "cover": "/music/covers/БЕЛЫЙ ДЕНЬ - ДАРЬЯ.jpg"
+      "cover": "music/covers/БЕЛЫЙ ДЕНЬ - ДАРЬЯ.jpg"
     },
     {
       "title": "В последний раз",
       "artist": "Веселые ребята",
       "src": "/music/Audio/Ансамбль Весёлые Ребята В Последний Раз.mp3",
-      "cover": "/music/covers/В последний раз.jpg"
+      "cover": "music/covers/В последний раз.jpg"
     },
     {
       "title": "Попытка №5",
       "artist": "ВИА Гра",
       "src": "/music/Audio/Виа Гра Попытка № 5.mp3",
-      "cover": "/music/covers/Попытка№5.jpg"
+      "cover": "music/covers/Попытка№5.jpg"
     },
     {
       "title": "Self Aware",
       "artist": "Temper City",
       "src": "/music/Audio/Temper City Self Aware.mp3",
-      "cover": "/music/covers/Self Aware.jpg"
+      "cover": "music/covers/Self Aware.jpg"
     },
     {
       "title": "Dai Dai",
       "artist": "Shakira",
       "src": "/music/Audio/Shakira Dai Dai (feat. Burna Boy).mp3",
-      "cover": "/music/covers/DAI DAI.jpg"
+      "cover": "music/covers/DAI DAI.jpg"
     },
     {
       "title": "Body Talk",
       "artist": "Alle Farben",
       "src": "/music/Audio/Alle Farben Body Talk (Feat. René Miller).mp3",
-      "cover": "/music/covers/Body Talk.jpg"
+      "cover": "music/covers/Body Talk.jpg"
     },
     {
       "title": "Капитал",
       "artist": "Ляпис Трубецкой",
       "src": "/music/Audio/Ляпис Трубецкой Капитал.mp3",
-      "cover": "/music/covers/Капитал.jpg"
+      "cover": "music/covers/Капитал.jpg"
     },
     {
       "title": "Косил Ясь Конюшину",
       "artist": "Песняры",
       "src": "/music/Audio/Песняры Косил Ясь Конюшину.mp3",
-      "cover": "/music/covers/Конюшина.jpg"
+      "cover": "music/covers/Конюшина.jpg"
     },
     {
       "title": "Так красиво",
       "artist": "Сергей Лазарев",
       "src": "/music/Audio/Сергей Лазарев Так Красиво.mp3",
-      "cover": "/music/covers/Так красиво.jpg"
+      "cover": "music/covers/Так красиво.jpg"
     },
     {
       "title": "It's My Life",
       "artist": "Мари Краймбрери, Дима Билан",
       "src": "/music/Audio/Мари Краймбрери It’S My Life (feat. Дима Билан).mp3",
-      "cover": "/music/covers/It's My Life.jpg"
+      "cover": "music/covers/It's My Life.jpg"
     },
     {
       "title": "GAZ",
       "artist": "Zivert",
       "src": "/music/Audio/Zivert Gaz.mp3",
-      "cover": "/music/covers/GAZ.jpg"
+      "cover": "music/covers/GAZ.jpg"
     },
     {
       "title": "Тону",
       "artist": "Hollyflame",
       "src": "/music/Audio/Hollyflame Тону.mp3",
-      "cover": "/music/covers/Тону.jpg"
+      "cover": "music/covers/Тону.jpg"
     },
     {
       "title": "Прованс",
       "artist": "Ёлка",
       "src": "/music/Audio/Ёлка Прованс.mp3",
-      "cover": "/music/covers/Прованс.jpg"
+      "cover": "music/covers/Прованс.jpg"
     },
     {
       "title": "Юность",
       "artist": "Dabro ",
       "src": "/music/Audio/Dabro Юность.mp3",
-      "cover": "/music/covers/Юность.jpg"
+      "cover": "music/covers/Юность.jpg"
     },
     {
       "title": "Любимка",
       "artist": "Niletto ",
       "src": "/music/Audio/Niletto Любимка.mp3",
-      "cover": "/music/covers/Любимка.jpg"
+      "cover": "music/covers/Любимка.jpg"
     }
   ]
 }
