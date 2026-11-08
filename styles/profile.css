@@ -1,1815 +1,577 @@
-/* =============================
-   СТРАНИЦА ПРОФИЛЯ
-   ============================= */
 
-/* Основные стили страницы */
-
-@font-face {
-    font-family: 'RDR-Line'; /* Имя, которое вы будете использовать */
-    src: url('fonts/RDR2-fonts.woff2') format('woff2');
-    font-weight: normal; /* Обычное начертание */
-    font-style: normal; /* Обычный стиль */
-}
+/* =================================
+   TTFBB COMPANY — PROFILE PAGE
+================================= */
 
 .profile-page {
-    padding: 140px 0 80px;
-    min-height: 100vh;
-    background-image: url(https://s.rsg.sc/sc/images/games/RDR2/bg.jpg);
+  width: min(1100px, calc(100% - 40px));
+  margin: 70px auto;
+  color: #f5f5f5;
+  font-family: 'Inter', sans-serif;
+  min-height: 75vh;
 }
+
+/* Шапка профиля */
 
 .profile-header {
-    text-align: center;
-    margin-bottom: 50px;
-    position: relative;
+  display: flex;
+  align-items: center;
+  gap: 35px;
+  padding: 40px;
+  background: linear-gradient(135deg, #1d1d20, #111113);
+  border: 1px solid rgba(213, 173, 98, 0.2);
+  border-radius: 22px;
+  box-shadow: 0 15px 45px rgba(0, 0, 0, 0.25);
 }
 
-.profile-back-btn {
-    position: absolute;
-    left: 0;
-    top: 10px;
+.profile-avatar-container {
+  width: 150px;
+  height: 150px;
+  flex-shrink: 0;
+  border-radius: 50%;
+  padding: 4px;
+  background: linear-gradient(135deg, #f0d18b, #a77a36);
+  box-shadow: 0 0 30px rgba(213, 173, 98, 0.15);
 }
 
-.page-title {
-    font-size: 3rem;
-    margin-bottom: 15px;
-    background: linear-gradient(135deg, #fff, #8a4baf);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
+#profileAvatar {
+  display: block;
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  object-fit: cover;
+  background: #29292d;
 }
 
-.page-subtitle {
-    color: var(--text-secondary);
-    font-size: 1.2rem;
-    max-width: 600px;
-    margin: 0 auto;
+.profile-info {
+  flex: 1;
+  min-width: 0;
 }
 
-/* Макет профиля */
-.profile-content {
-    display: grid;
-    grid-template-columns: 300px 1fr;
-    gap: 30px;
+#profileDisplayName {
+  margin: 0 0 10px;
+  font-size: clamp(26px, 4vw, 38px);
+  font-weight: 800;
+  color: #fff;
+  overflow-wrap: anywhere;
 }
 
-@media (max-width: 1024px) {
-    .profile-content {
-        grid-template-columns: 1fr;
-    }
+#profileUsername {
+  margin: 0 0 18px;
+  color: #d5ad62;
+  font-size: 15px;
+  font-weight: 600;
 }
 
-/* Боковая панель */
-.profile-sidebar {
-    display: flex;
+#profileDescription,
+#profileBio {
+  color: #aaa;
+  font-size: 14px;
+  line-height: 1.7;
+  overflow-wrap: anywhere;
+}
+
+#editProfileBtn {
+  margin-top: 15px;
+  padding: 12px 20px;
+  border: 1px solid #d5ad62;
+  border-radius: 9px;
+  background: #d5ad62;
+  color: #171717;
+  font-size: 13px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: 0.2s ease;
+}
+
+#editProfileBtn:hover {
+  background: #edcc8b;
+  transform: translateY(-2px);
+}
+
+/* Статистика */
+
+.profile-statistics {
+  margin-top: 35px;
+}
+
+.profile-statistics h2 {
+  margin: 0 0 20px;
+  font-size: 23px;
+  font-weight: 700;
+  color: #fff;
+}
+
+.profile-stat-card {
+  display: inline-flex;
+  flex-direction: column;
+  gap: 12px;
+  min-width: 180px;
+  margin: 0 12px 12px 0;
+  padding: 25px;
+  background: #1a1a1e;
+  border: 1px solid rgba(255, 255, 255, 0.07);
+  border-radius: 15px;
+  transition: 0.25s ease;
+}
+
+.profile-stat-card:hover {
+  border-color: rgba(213, 173, 98, 0.5);
+  transform: translateY(-4px);
+}
+
+.profile-stat-card span {
+  color: #999;
+  font-size: 13px;
+}
+
+.profile-stat-card strong {
+  color: #d5ad62;
+  font-size: 28px;
+  font-weight: 800;
+}
+
+/* Редактирование профиля */
+
+#profileEditArea {
+  margin-top: 25px;
+}
+
+#profileEditArea form {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  max-width: 550px;
+  padding: 25px;
+  background: #1a1a1e;
+  border: 1px solid rgba(213, 173, 98, 0.2);
+  border-radius: 16px;
+}
+
+#profileEditArea label {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  color: #ccc;
+  font-size: 13px;
+}
+
+#profileEditArea input,
+#profileEditArea textarea {
+  width: 100%;
+  box-sizing: border-box;
+  padding: 13px 14px;
+  border: 1px solid #37373d;
+  border-radius: 9px;
+  outline: none;
+  background: #111114;
+  color: #fff;
+  font: inherit;
+}
+
+#profileEditArea input:focus,
+#profileEditArea textarea:focus {
+  border-color: #d5ad62;
+}
+
+#profileEditArea button {
+  padding: 12px 18px;
+  border: none;
+  border-radius: 9px;
+  background: #d5ad62;
+  color: #171717;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+/* Адаптация для телефона */
+
+@media (max-width: 650px) {
+  .profile-page {
+    width: calc(100% - 24px);
+    margin: 30px auto;
+  }
+
+  .profile-header {
     flex-direction: column;
-    gap: 25px;
-}
-
-/* Карточка пользователя */
-.user-card {
-    background: rgba(255, 255, 255, 0.03);
-    border-radius: var(--radius-xl);
-    padding: 30px;
-    border: 1px solid rgba(255, 255, 255, 0.05);
+    align-items: center;
     text-align: center;
-}
+    padding: 28px 20px;
+    gap: 22px;
+  }
 
-.user-avatar {
-    position: relative;
-    margin-bottom: 20px;
-}
+  .profile-avatar-container {
+    width: 125px;
+    height: 125px;
+  }
 
-.avatar-container {
-    width: 120px;
-    height: 120px;
-    margin: 0 auto 15px;
-    position: relative;
-}
-
-.avatar-img {
+  .profile-info {
     width: 100%;
-    height: 100%;
-    border-radius: 50%;
-    object-fit: cover;
-    border: 3px solid var(--accent);
+  }
+
+  .profile-stat-card {
+    width: 100%;
+    box-sizing: border-box;
+    margin-right: 0;
+  }
 }
 
-.avatar-status {
-    position: absolute;
-    bottom: 10px;
-    right: 10px;
-    width: 20px;
-    height: 20px;
-    border-radius: 50%;
-    background: var(--success);
-    border: 3px solid var(--primary);
-}
+/* Окно редактирования профиля */
 
-.level-badge {
-    display: inline-block;
-    background: var(--gradient);
-    color: white;
-    padding: 6px 15px;
-    border-radius: 20px;
-    font-size: 0.8rem;
-    font-weight: 600;
-}
-
-.user-name {
-    font-size: 1.8rem;
-    margin-bottom: 5px;
-}
-
-.user-title {
-    color: var(--accent);
-    font-size: 1rem;
-    margin-bottom: 20px;
-}
-
-.user-stats {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 15px;
-    margin-top: 20px;
-}
-
-.stat-item {
+.profile-edit-modal {
+    position: fixed;
+    inset: 0;
+    z-index: 10000;
     display: flex;
     align-items: center;
-    gap: 10px;
-    background: rgba(255, 255, 255, 0.03);
-    padding: 12px;
-    border-radius: var(--radius);
+    justify-content: center;
+    padding: 20px;
+    background: rgba(0, 0, 0, 0.78);
+    backdrop-filter: blur(10px);
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity .2s ease, visibility .2s ease;
 }
 
-.stat-item i {
-    color: var(--accent);
-    font-size: 1.2rem;
+.profile-edit-modal.is-open {
+    opacity: 1;
+    visibility: visible;
 }
 
-.stat-value {
-    display: block;
-    font-size: 1.2rem;
+.profile-edit-content {
+    position: relative;
+    width: min(100%, 480px);
+    max-height: 90vh;
+    overflow-y: auto;
+    padding: 32px;
+    box-sizing: border-box;
+    background: #19191d;
+    border: 1px solid rgba(213, 173, 98, .3);
+    border-radius: 20px;
+    box-shadow: 0 25px 80px rgba(0, 0, 0, .5);
+    transform: translateY(15px) scale(.97);
+    transition: transform .2s ease;
+}
+
+.profile-edit-modal.is-open .profile-edit-content {
+    transform: translateY(0) scale(1);
+}
+
+.profile-edit-close {
+    position: absolute;
+    top: 15px;
+    right: 18px;
+    width: 35px;
+    height: 35px;
+    border: none;
+    border-radius: 50%;
+    background: #29292e;
+    color: white;
+    font-size: 24px;
+    cursor: pointer;
+}
+
+.profile-edit-heading span {
+    color: #d5ad62;
+    font-size: 11px;
+    letter-spacing: 3px;
     font-weight: 700;
 }
 
-.stat-label {
-    display: block;
-    font-size: 0.75rem;
-    color: var(--text-secondary);
-}
-
-/* Прогресс уровня */
-.level-progress {
-    background: rgba(255, 255, 255, 0.03);
-    border-radius: var(--radius-lg);
-    padding: 20px;
-    border: 1px solid rgba(255, 255, 255, 0.05);
-}
-
-.progress-header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-bottom: 15px;
-}
-
-.progress-header h3 {
-    font-size: 1.1rem;
-    display: flex;
-    align-items: center;
-    gap: 10px;
-}
-
-.level-text {
-    background: var(--gradient);
+.profile-edit-heading h2 {
+    margin: 12px 0 7px;
     color: white;
-    padding: 4px 12px;
-    border-radius: 15px;
-    font-size: 0.9rem;
-    font-weight: 600;
+    font-size: 23px;
 }
 
-.progress-bar {
-    height: 10px;
-    background: rgba(255, 255, 255, 0.05);
-    border-radius: 5px;
-    overflow: hidden;
-    margin-bottom: 10px;
+.profile-edit-heading p {
+    margin: 0 0 25px;
+    color: #999;
+    font-size: 13px;
 }
 
-.progress-fill {
-    height: 100%;
-    background: var(--gradient);
-    border-radius: 5px;
-    transition: width 0.3s ease;
-}
-
-.progress-stats {
-    display: flex;
-    justify-content: space-between;
-    font-size: 0.85rem;
-    color: var(--text-secondary);
-}
-
-/* Быстрые действия */
-.quick-actions {
-    background: rgba(255, 255, 255, 0.03);
-    border-radius: var(--radius-lg);
-    padding: 20px;
-    border: 1px solid rgba(255, 255, 255, 0.05);
-}
-
-.quick-actions h3 {
-    font-size: 1.1rem;
-    margin-bottom: 20px;
-    display: flex;
-    align-items: center;
-    gap: 10px;
-}
-
-.actions-grid {
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    gap: 10px;
-}
-
-.action-btn {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    gap: 8px;
-    padding: 15px 10px;
-    background: rgba(255, 255, 255, 0.05);
-    border: 1px solid rgba(255, 255, 255, 0.1);
-    border-radius: var(--radius);
-    color: var(--text);
-    cursor: pointer;
-    transition: all 0.3s ease;
-}
-
-.action-btn:hover {
-    background: rgba(138, 75, 175, 0.1);
-    border-color: var(--accent);
-    transform: translateY(-2px);
-}
-
-.action-btn i {
-    font-size: 1.3rem;
-}
-
-.action-btn span {
-    font-size: 0.8rem;
-}
-
-/* Основной контент */
-.profile-main {
-    display: flex;
-    flex-direction: column;
-    gap: 30px;
-}
-
-/* Вкладки */
-.profile-tabs {
-    display: flex;
-    background: rgba(255, 255, 255, 0.03);
-    border-radius: var(--radius-lg);
-    padding: 10px;
-    border: 1px solid rgba(255, 255, 255, 0.05);
-    overflow-x: auto;
-}
-
-.tab-btn {
-    display: flex;
-    align-items: center;
-    gap: 10px;
-    padding: 15px 25px;
-    background: transparent;
-    border: none;
-    color: var(--text-secondary);
-    cursor: pointer;
-    border-radius: var(--radius);
-    font-weight: 600;
-    white-space: nowrap;
-    transition: all 0.3s ease;
-    flex: 1;
-    justify-content: center;
-}
-
-.tab-btn:hover {
-    color: var(--text);
-    background: rgba(255, 255, 255, 0.05);
-}
-
-.tab-btn.active {
-    background: var(--gradient);
-    color: white;
-}
-
-.tab-content {
-    display: none;
-}
-
-.tab-content.active {
-    display: block;
-}
-
-/* Карточки заданий */
-.tasks-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
-    gap: 20px;
-    margin-bottom: 40px;
-}
-
-.task-card {
-    background: rgba(255, 255, 255, 0.03);
-    border-radius: var(--radius-lg);
-    padding: 25px;
-    border: 1px solid rgba(255, 255, 255, 0.05);
-    transition: all 0.3s ease;
-}
-
-.task-card:hover {
-    border-color: rgba(138, 75, 175, 0.3);
-    transform: translateY(-5px);
-    box-shadow: var(--shadow);
-}
-
-.task-card.completed {
-    background: rgba(16, 185, 129, 0.05);
-    border-color: rgba(16, 185, 129, 0.2);
-}
-
-.task-header {
-    display: flex;
-    align-items: flex-start;
-    gap: 15px;
-    margin-bottom: 20px;
-}
-
-.task-icon {
-    width: 50px;
-    height: 50px;
-    border-radius: 12px;
-    background: rgba(138, 75, 175, 0.1);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 1.5rem;
-    color: var(--accent);
-    flex-shrink: 0;
-}
-
-.task-info h3 {
-    font-size: 1.2rem;
-    margin-bottom: 5px;
-}
-
-.task-info p {
-    color: var(--text-secondary);
-    font-size: 0.9rem;
-}
-
-.task-xp {
-    margin-left: auto;
-    background: rgba(138, 75, 175, 0.1);
-    color: var(--accent);
-    padding: 5px 12px;
-    border-radius: 15px;
-    font-weight: 600;
-    font-size: 0.9rem;
-    white-space: nowrap;
-}
-
-.task-progress {
-    margin-bottom: 20px;
-}
-
-.task-progress .progress-bar {
-    height: 8px;
-    margin-bottom: 8px;
-}
-
-.progress-text {
-    display: block;
-    text-align: center;
-    font-size: 0.85rem;
-    color: var(--text-secondary);
-}
-
-.task-footer {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    gap: 10px;
-}
-
-.task-time {
-    color: var(--text-secondary);
-    font-size: 0.85rem;
-    display: flex;
-    align-items: center;
-    gap: 5px;
-}
-
-.task-time.completed {
-    color: var(--success);
-}
-
-.btn-sm {
-    padding: 8px 16px;
-    font-size: 0.85rem;
-}
-
-.btn-success {
-    background: var(--success);
-    color: white;
-}
-
-.btn-success:hover {
-    background: #0da674;
-}
-
-/* =============================
-   ГОРИЗОНТАЛЬНЫЙ МАКЕТ БОКОВОЙ ПАНЕЛИ
-   ============================= */
-
-.profile-sidebar-horizontal {
-    width: 100%;
-    margin-bottom: 30px;
-}
-
-.sidebar-cards-container {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-    gap: 25px;
-}
-
-.user-card {
-    margin-bottom: 0;
-}
-
-.level-progress {
-    height: fit-content;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-}
-
-/* Адаптивность для горизонтального макета */
-@media (max-width: 768px) {
-    .sidebar-cards-container {
-        grid-template-columns: 1fr;
-        gap: 20px;
-    }
-    
-    .level-progress {
-        margin-top: 0;
-    }
-}
-
-@media (max-width: 1024px) {
-    .sidebar-cards-container {
-        grid-template-columns: repeat(2, 1fr);
-    }
-}
-
-@media (min-width: 1200px) {
-    .sidebar-cards-container {
-        grid-template-columns: 350px 1fr;
-    }
-}
-
-/* Обновленные стили для .profile-content */
-.profile-content {
-    display: flex;
-    flex-direction: column;
-    gap: 30px;
-}
-
-.profile-main {
-    background: rgba(255, 255, 255, 0.03);
-    border-radius: var(--radius-xl);
-    padding: 30px;
-    border: 1px solid rgba(255, 255, 255, 0.05);
-    min-height: 400px;
-}
-
-.social-link-profile {
-    text-decoration: none;
-}
-
-/* =============================
-   СТИЛИ ДЛЯ РОЛЕЙ
-   ============================= */
-
-.right-sidebar-column {
-    display: flex;
-    flex-direction: column;
-    gap: 25px;
-}
-
-.user-roles {
-    background: rgba(255, 255, 255, 0.03);
-    border-radius: var(--radius-lg);
-    padding: 20px;
-    border: 1px solid rgba(255, 255, 255, 0.05);
-}
-
-.roles-header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-bottom: 15px;
-}
-
-.roles-header h3 {
-    font-size: 1.1rem;
-    display: flex;
-    align-items: center;
-    gap: 10px;
-}
-
-.roles-count {
-    background: var(--gradient);
-    color: white;
-    padding: 4px 12px;
-    border-radius: 15px;
-    font-size: 0.9rem;
-    font-weight: 600;
-}
-
-.roles-grid {
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    gap: 10px;
-    margin-bottom: 15px;
-}
-
-@media (max-width: 480px) {
-    .roles-grid {
-        grid-template-columns: 1fr;
-    }
-}
-
-.role-card {
-    display: flex;
-    align-items: center;
-    gap: 10px;
-    padding: 12px 15px;
-    background: rgba(255, 255, 255, 0.02);
-    border-radius: var(--radius);
-    border: 1px solid rgba(255, 255, 255, 0.03);
-    position: relative;
-    overflow: hidden;
-    transition: all 0.3s ease;
-}
-
-.role-card.active {
-    background: rgba(138, 75, 175, 0.08);
-    border-color: rgba(138, 75, 175, 0.2);
-}
-
-.role-card:hover {
-    border-color: var(--accent);
-    transform: translateY(-2px);
-}
-
-.role-card i {
-    color: var(--accent);
-    font-size: 1.1rem;
-    width: 20px;
-    text-align: center;
-}
-
-.role-card .fa-crown { color: #FFD700; }
-.role-card .fa-search { color: #4ECDC4; }
-.role-card .fa-home { color: #FF6B6B; }
-.role-card .fa-road { color: #45B7D1; }
-.role-card .fa-beer { color: #F9A825; }
-.role-card .fa-gem { color: #9C27B0; }
-.role-card .fa-campground { color: #8BC34A; }
-.role-card .fa-trophy { color: #FF9800; }
-
-.role-name {
-    flex: 1;
-    font-size: 0.9rem;
-    font-weight: 500;
-}
-
-.role-progress {
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    height: 3px;
-    background: var(--gradient);
-    border-radius: 0 0 var(--radius) var(--radius);
-    transition: width 0.5s ease;
-}
-
-/* Задаем ширину прогресса через data-атрибуты */
-.role-progress[data-progress="100"] { width: 100%; }
-.role-progress[data-progress="95"] { width: 95%; }
-.role-progress[data-progress="90"] { width: 90%; }
-.role-progress[data-progress="85"] { width: 85%; }
-.role-progress[data-progress="80"] { width: 80%; }
-.role-progress[data-progress="75"] { width: 75%; }
-.role-progress[data-progress="70"] { width: 70%; }
-.role-progress[data-progress="65"] { width: 65%; }
-.role-progress[data-progress="60"] { width: 60%; }
-.role-progress[data-progress="55"] { width: 55%; }
-.role-progress[data-progress="50"] { width: 50%; }
-.role-progress[data-progress="45"] { width: 45%; }
-.role-progress[data-progress="40"] { width: 40%; }
-.role-progress[data-progress="35"] { width: 35%; }
-.role-progress[data-progress="30"] { width: 30%; }
-.role-progress[data-progress="25"] { width: 25%; }
-.role-progress[data-progress="20"] { width: 20%; }
-.role-progress[data-progress="15"] { width: 15%; }
-.role-progress[data-progress="10"] { width: 10%; }
-.role-progress[data-progress="5"] { width: 5%; }
-
-.roles-info {
-    padding-top: 15px;
-    border-top: 1px solid rgba(255, 255, 255, 0.05);
-    color: var(--text-secondary);
-    font-size: 0.85rem;
-    display: flex;
-    align-items: center;
-    gap: 8px;
-}
-
-.roles-info i {
-    color: var(--accent);
-}
-
-/* Обновляем стили для горизонтального расположения */
-.sidebar-cards-container {
-    display: grid;
-    grid-template-columns: 350px 1fr;
-    gap: 25px;
-    width: 100%;
-}
-
-@media (max-width: 1024px) {
-    .sidebar-cards-container {
-        grid-template-columns: 300px 1fr;
-    }
-}
-
-@media (max-width: 768px) {
-    .sidebar-cards-container {
-        grid-template-columns: 1fr;
-    }
-}
-
-.user-card {
-    height: fit-content;
-}
-
-.level-progress {
-    margin-bottom: 0;
-}
-
-/* Завершенные задания */
-.completed-tasks {
-    background: rgba(255, 255, 255, 0.03);
-    border-radius: var(--radius-lg);
-    padding: 25px;
-    border: 1px solid rgba(255, 255, 255, 0.05);
-}
-
-.completed-tasks h3 {
-    margin-bottom: 20px;
-    display: flex;
-    align-items: center;
-    gap: 10px;
-}
-
-.tasks-list {
+.profile-edit-content form {
     display: flex;
     flex-direction: column;
     gap: 12px;
 }
 
-.completed-task {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    padding: 15px;
-    background: rgba(255, 255, 255, 0.02);
-    border-radius: var(--radius);
-    border: 1px solid rgba(255, 255, 255, 0.03);
-}
-
-.completed-task i {
-    color: var(--success);
-    font-size: 1.2rem;
-}
-
-.completed-task span {
-    flex: 1;
-    margin-left: 10px;
-}
-
-.task-reward {
-    background: rgba(138, 75, 175, 0.1);
-    color: var(--accent);
-    padding: 4px 10px;
-    border-radius: 12px;
-    font-size: 0.8rem;
+.profile-edit-content form > label {
+    color: #ddd;
+    font-size: 13px;
     font-weight: 600;
 }
 
-.text-success {
-    color: var(--success);
-}
-
-/* Достижения */
-.achievements-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
-    gap: 20px;
-    margin-bottom: 40px;
-}
-
-.achievement-card {
-    background: rgba(255, 255, 255, 0.03);
-    border-radius: var(--radius-lg);
-    padding: 20px;
-    border: 1px solid rgba(255, 255, 255, 0.05);
-    transition: all 0.3s ease;
-}
-
-.achievement-card.unlocked {
-    background: rgba(138, 75, 175, 0.05);
-    border-color: rgba(138, 75, 175, 0.2);
-}
-
-.achievement-card:hover {
-    border-color: rgba(138, 75, 175, 0.3);
-    transform: translateY(-3px);
-}
-
-.achievement-icon {
-    width: 60px;
-    height: 60px;
-    border-radius: 15px;
-    background: rgba(138, 75, 175, 0.1);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 1.8rem;
-    color: var(--accent);
-    margin-bottom: 15px;
-}
-
-.achievement-info h3 {
-    font-size: 1.1rem;
-    margin-bottom: 5px;
-}
-
-.achievement-info p {
-    color: var(--text-secondary);
-    font-size: 0.9rem;
-    margin-bottom: 15px;
-}
-
-.achievement-date {
-    color: var(--accent);
-    font-size: 0.8rem;
-    display: flex;
-    align-items: center;
-    gap: 5px;
-}
-
-.achievement-progress {
-    color: var(--text-secondary);
-    font-size: 0.85rem;
-    margin-top: 15px;
-}
-
-.achievement-stats {
-    background: rgba(255, 255, 255, 0.03);
-    border-radius: var(--radius-lg);
-    padding: 25px;
-    border: 1px solid rgba(255, 255, 255, 0.05);
-}
-
-.stat-card h4 {
-    margin-bottom: 20px;
-    display: flex;
-    align-items: center;
-    gap: 10px;
-}
-
-.stats-grid {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 20px;
-}
-
-.stat-item {
-    text-align: center;
-    padding: 20px;
-    background: rgba(255, 255, 255, 0.02);
-    border-radius: var(--radius);
-    border: 1px solid rgba(255, 255, 255, 0.03);
-}
-
-.stat-number {
-    display: block;
-    font-size: 2rem;
-    font-weight: 700;
-    margin-bottom: 5px;
-    background: linear-gradient(135deg, #fff, #8a4baf);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-}
-
-.stat-label {
-    color: var(--text-secondary);
-    font-size: 0.9rem;
-}
-
-/* Статистика */
-.stats-container {
-    display: flex;
-    flex-direction: column;
-    gap: 30px;
-}
-
-.stats-grid-large {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-    gap: 20px;
-}
-
-.stat-card-large {
-    background: rgba(255, 255, 255, 0.03);
-    border-radius: var(--radius-lg);
-    padding: 25px;
-    border: 1px solid rgba(255, 255, 255, 0.05);
-}
-
-.stat-card-large h3 {
-    display: flex;
-    align-items: center;
-    gap: 10px;
-    margin-bottom: 15px;
-    font-size: 1.2rem;
-}
-
-.stat-number-large {
-    font-size: 3rem;
-    font-weight: 800;
-    margin-bottom: 10px;
-    background: linear-gradient(135deg, #fff, #8a4baf);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-}
-
-.stat-trend {
-    display: inline-flex;
-    align-items: center;
-    gap: 5px;
-    padding: 6px 12px;
-    border-radius: 20px;
-    font-size: 0.9rem;
-    font-weight: 600;
-    margin-top: 10px;
-}
-
-.stat-trend.up {
-    background: rgba(16, 185, 129, 0.1);
-    color: var(--success);
-}
-
-.stat-trend.down {
-    background: rgba(244, 63, 94, 0.1);
-    color: var(--warning);
-}
-
-/* Графики */
-.activity-chart,
-.time-distribution {
-    background: rgba(255, 255, 255, 0.03);
-    border-radius: var(--radius-lg);
-    padding: 25px;
-    border: 1px solid rgba(255, 255, 255, 0.05);
-}
-
-.activity-chart h3,
-.time-distribution h3 {
-    margin-bottom: 20px;
-    display: flex;
-    align-items: center;
-    gap: 10px;
-}
-
-.chart-container,
-.distribution-chart {
-    height: 300px;
-    position: relative;
-}
-
-/* Награды */
-.rewards-container {
-    display: flex;
-    flex-direction: column;
-    gap: 40px;
-}
-
-.rewards-section {
-    background: rgba(255, 255, 255, 0.03);
-    border-radius: var(--radius-lg);
-    padding: 25px;
-    border: 1px solid rgba(255, 255, 255, 0.05);
-}
-
-.rewards-section h3 {
-    margin-bottom: 25px;
-    display: flex;
-    align-items: center;
-    gap: 10px;
-}
-
-.rewards-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-    gap: 20px;
-}
-
-.reward-card {
-    display: flex;
-    align-items: center;
-    gap: 15px;
-    padding: 20px;
-    background: rgba(255, 255, 255, 0.02);
-    border-radius: var(--radius);
-    border: 1px solid rgba(255, 255, 255, 0.03);
-    transition: all 0.3s ease;
-}
-
-.reward-card:hover {
-    border-color: rgba(138, 75, 175, 0.2);
-    transform: translateY(-3px);
-}
-
-.reward-card.obtained {
-    background: rgba(138, 75, 175, 0.05);
-    border-color: rgba(138, 75, 175, 0.2);
-}
-
-.reward-icon {
-    width: 50px;
-    height: 50px;
-    border-radius: 12px;
-    background: rgba(138, 75, 175, 0.1);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 1.5rem;
-    color: var(--accent);
-    flex-shrink: 0;
-}
-
-.reward-icon .premium {
-    color: #ffd700;
-}
-
-.reward-info {
-    flex: 1;
-}
-
-.reward-info h4 {
-    font-size: 1.1rem;
-    margin-bottom: 5px;
-}
-
-.reward-info p {
-    color: var(--text-secondary);
-    font-size: 0.9rem;
-    margin-bottom: 5px;
-}
-
-.obtained-date {
-    color: var(--accent);
-    font-size: 0.8rem;
-}
-
-.reward-status {
-    color: var(--success);
-    font-size: 1.5rem;
-}
-
-/* Валюта */
-.currency-section {
-    background: rgba(255, 255, 255, 0.03);
-    border-radius: var(--radius-lg);
-    padding: 25px;
-    border: 1px solid rgba(255, 255, 255, 0.05);
-}
-
-.currency-section h3 {
-    margin-bottom: 20px;
-    display: flex;
-    align-items: center;
-    gap: 10px;
-}
-
-.currency-card {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    padding: 25px;
-    background: linear-gradient(135deg, rgba(138, 75, 175, 0.1), rgba(109, 40, 217, 0.1));
-    border-radius: var(--radius);
-    border: 1px solid rgba(138, 75, 175, 0.2);
-}
-
-.currency-info {
-    display: flex;
-    align-items: center;
-    gap: 20px;
-}
-
-.currency-icon {
-    width: 60px;
-    height: 60px;
-    border-radius: 15px;
-    background: linear-gradient(135deg, #8a4baf, #6d28d9);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 2rem;
+.profile-edit-content input:not([type="file"]),
+.profile-edit-content textarea {
+    width: 100%;
+    box-sizing: border-box;
+    padding: 13px;
+    border: 1px solid #38383e;
+    border-radius: 9px;
+    outline: none;
+    background: #101013;
     color: white;
+    font: inherit;
 }
 
-.currency-amount {
+.profile-edit-content input:focus,
+.profile-edit-content textarea:focus {
+    border-color: #d5ad62;
+}
+
+.profile-edit-avatar {
     display: flex;
+    flex-direction: column;
     align-items: center;
-    gap: 20px;
+    gap: 12px;
+    margin-bottom: 15px;
 }
 
-.amount {
-    font-size: 2.5rem;
-    font-weight: 700;
-    background: linear-gradient(135deg, #fff, #8a4baf);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-}
-
-/* Адаптивность */
-@media (max-width: 1024px) {
-    .profile-content {
-        grid-template-columns: 1fr;
-    }
-    
-    .profile-sidebar {
-        order: 2;
-    }
-    
-    .profile-main {
-        order: 1;
-    }
-}
-
-@media (max-width: 768px) {
-    .profile-page {
-        padding: 120px 0 60px;
-    }
-    
-    .page-title {
-        font-size: 2.5rem;
-    }
-    
-    .profile-tabs {
-        flex-direction: column;
-    }
-    
-    .tasks-grid {
-        grid-template-columns: 1fr;
-    }
-    
-    .achievements-grid {
-        grid-template-columns: 1fr;
-    }
-    
-    .rewards-grid {
-        grid-template-columns: 1fr;
-    }
-    
-    .stats-grid-large {
-        grid-template-columns: 1fr;
-    }
-    
-    .user-stats {
-        grid-template-columns: 1fr;
-    }
-    
-    .stats-grid {
-        grid-template-columns: 1fr;
-    }
-}
-
-@media (max-width: 480px) {
-    .profile-header {
-        text-align: center;
-    }
-    
-    .profile-back-btn {
-        position: static;
-        margin-bottom: 20px;
-    }
-    
-    .currency-card {
-        flex-direction: column;
-        gap: 20px;
-        text-align: center;
-    }
-    
-    .currency-info {
-        flex-direction: column;
-        text-align: center;
-    }
-}
-
-.coloradmins {
-    color: red;
-    font-weight: bold;
-}
-
-.colorhelpadmins {
-    color: rgb(255, 217, 0);
-    font-weight: bold;
-}
-
-.colorwoman {
-    color: rgb(236, 91, 255);
-    font-weight: bold;
-}
-
-
-/*СТИЛИ ДЛЯ БЛОКА С ЗАДАНИЯМИ*/
-
-.taskjob-main-section {
-   background-image: url(https://s.rsg.sc/sc/images/games/RDR2/bg.jpg); 
-}
-
-@media (min-width: 64em) {
-    .taskjob-story-main {
-        padding: 0 10px;
-    } 
-}
-
-.taskjob-story-main {
-    display: flex;
-    flex-flow: wrap;
-    margin: 0 auto;
-    max-width: 1420px;
-    flex-wrap: wrap;
-}
-
-.taskjob-sector {
-    display: block;
-    padding: 10px;
-    position: relative;
-    width: 100%;
-    box-sizing: inherit;
-    touch-action: manipulation;
-}
-
-.taskjob-title {
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-    align-items: center;
-    box-sizing: inherit;
-    touch-action: manipulation;
-    margin-bottom: 20px;
-    padding: 0 10px;
-}
-
-.taskjob-title-left {
-    font-family: "RDR-Line";
-    font-style: normal;
-    font-size: 1.6rem;
-    font-weight: 1800;
-    line-height: 1.4rem;
-    margin: 0;
-    padding-left: 0px;
-}
-
-.taskjob-title-right {
-    font-family: "RDR-Line";
-    font-style: normal;
-    font-size: 1.8rem;
-    font-weight: 1800;
-    line-height: 1.4rem;
-    margin: 0;
-    padding-right: 15px;
-}
-
-.taskjob-missions {
-    display: flex;
-    flex-direction: row;
-    flex-wrap: wrap;
-    justify-content: flex-start;
-    margin: 0 auto;
-    margin: -10px;
-    margin-bottom: 20px;
-    position: relative;
-    box-sizing: inherit;
-    touch-action: manipulation;
-    width: 100%;
-}
-
-.taskjob-mission-g1 {
-    flex: 0 0 calc(16.666% - 20px); /* 6 элементов в строке на десктопе */
-    margin: 10px;
-    box-sizing: border-box;
-    text-decoration: none;
-    display: block;
-    position: relative;
-}
-
-.image-container {
-    width: 100%;
-    padding-top: 62.5%; /* Соотношение 8:5 (1.6) */
-    position: relative;
-    overflow: hidden;
-    border-radius: 4px;
-}
-
-.taskjob-missions-1-1 {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
+.profile-edit-avatar img {
+    width: 105px;
+    height: 105px;
     object-fit: cover;
-    display: block;
-    border-radius: 4px;
-    transition: transform 0.3s ease;
+    border-radius: 50%;
+    border: 3px solid #d5ad62;
+    background: #29292d;
 }
 
-/* Эффект при наведении */
-.taskjob-mission-g1:hover .taskjob-missions-1-1 {
-    transform: scale(1.03);
+.avatar-upload-label {
+    color: #d5ad62;
+    font-size: 13px;
+    cursor: pointer;
 }
 
-/* Обертка для каждого задания */
-.mission-wrapper {
-    position: relative;
-    width: 100%;
+.avatar-upload-label:hover {
+    color: #f0d18b;
 }
 
-/* Текст над картинкой - ОДНА СТРОКА БЕЗ СОКРАЩЕНИЙ */
-.mission-title-overlay {
-    position: absolute;
-    top: -50px;
-    left: 0;
-    width: 100%;
-    background-image: url(https://img.freepik.com/premium-photo/distressed-white-grunge-texture-overlay_298617-1548.jpg);
-    color: #2f2f2f;
-    font-family: "RDR-Line";
-    font-size: 14px;
+.profile-save-button {
+    margin-top: 12px;
+    padding: 14px;
+    border: none;
+    border-radius: 9px;
+    background: #d5ad62;
+    color: #171717;
+    font-weight: 800;
+    cursor: pointer;
+    transition: .2s ease;
+}
+
+.profile-save-button:hover {
+    background: #edcc8b;
+}
+
+.profile-save-button:disabled {
+    opacity: .6;
+    cursor: wait;
+}
+
+@media (max-width: 500px) {
+    .profile-edit-content {
+        padding: 25px 20px;
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .profile-edit-modal,
+    .profile-edit-content {
+        transition: none;
+    }
+}
+
+/* Обложка профиля */
+.profile-cover-container {
+  width: 100%;
+  height: 240px;
+  overflow: hidden;
+  border-radius: 18px;
+  background: linear-gradient(135deg, #24243e, #302b63, #0f0c29);
+  margin-bottom: 0;
+}
+
+.profile-cover-container img {
+  width: 100%;
+  height: 100%;
+  display: block;
+  object-fit: cover;
+}
+
+.profile-cover-container img[hidden] {
+  display: none;
+}
+
+@media (max-width: 600px) {
+  .profile-cover-container {
+    height: 150px;
+    border-radius: 14px;
+  }
+}
+
+/* Редактор обложки */
+.profile-edit-cover {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    margin: 24px 0;
+}
+
+.profile-cover-upload-label {
     font-weight: 600;
-    padding: 10px 5px;
-    box-sizing: border-box;
-    opacity: 0;
-    visibility: hidden;
-    z-index: 10;
-    border-radius: 4px 4px 0 0;
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-    text-align: center;
-    white-space: nowrap;
-    overflow: visible; /* Важно: разрешаем выход за границы */
-    text-overflow: clip; /* Убираем многоточие */
-    transition: opacity 0.3s ease;
-    line-height: 1.3;
-    /* Гарантируем что текст в одну строку */
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    height: 40px; /* Фиксированная высота */
+    color: #fff;
 }
 
-/* Альтернативный вариант с динамическим размером шрифта */
-.mission-title-overlay.dynamic-font {
-    font-size: calc(12px + 0.2vw); /* Динамический размер шрифта */
-    padding: 10px 3px;
-}
-
-/* Показываем текст при наведении */
-.taskjob-mission-g1:hover .mission-title-overlay {
-    opacity: 1;
-    visibility: visible;
-}
-
-/* АДАПТИВНОСТЬ */
-
-/* Для планшетов (от 769px до 1024px) - 3 элемента в строке */
-@media (max-width: 1024px) and (min-width: 769px) {
-    .taskjob-mission-g1 {
-        flex: 0 0 calc(33.333% - 20px);
-    }
-    
-    .mission-title-overlay {
-        font-size: 13px;
-        padding: 10px 4px;
-        top: -45px;
-        height: 38px;
-    }
-}
-
-/* Для телефонов (от 481px до 768px) - 2 элемента в строке */
-@media (max-width: 768px) and (min-width: 481px) {
-    .taskjob-mission-g1 {
-        flex: 0 0 calc(50% - 20px);
-    }
-    
-    .taskjob-title-left {
-        font-size: 1.4rem;
-        padding-left: 5px;
-    }
-    
-    .taskjob-title-right {
-        font-size: 1.5rem;
-        padding-right: 10px;
-    }
-    
-    /* Уменьшаем отступы между элементами */
-    .taskjob-missions {
-        margin: -8px;
-        margin-bottom: 15px;
-    }
-    
-    .taskjob-mission-g1 {
-        margin: 8px;
-    }
-    
-    /* Настройки для текста на телефонах */
-    .mission-title-overlay {
-        font-size: 12px;
-        padding: 10px 3px;
-        top: -40px;
-        height: 35px;
-        white-space: nowrap; /* Одна строка! */
-        overflow: visible;
-        text-overflow: clip;
-    }
-    
-    /* Если текст очень длинный, уменьшаем отступы */
-    .mission-title-overlay.long-text {
-        padding: 10px 1px;
-        font-size: 11px;
-    }
-}
-
-/* Для маленьких телефонов (до 480px) - 2 элемента в строке */
-@media (max-width: 480px) {
-    .taskjob-mission-g1 {
-        flex: 0 0 calc(50% - 12px);
-        margin: 6px;
-    }
-    
-    .taskjob-title-left {
-        font-size: 1.2rem;
-        padding-left: 5px;
-    }
-    
-    .taskjob-title-right {
-        font-size: 1.3rem;
-        padding-right: 8px;
-    }
-    
-    .taskjob-missions {
-        margin: -6px;
-        margin-bottom: 12px;
-    }
-    
-    .taskjob-sector {
-        padding: 8px 5px;
-    }
-    
-    .taskjob-title {
-        padding: 0 5px;
-        margin-bottom: 15px;
-    }
-    
-    /* Критически важные настройки для текста на маленьких экранах */
-    .mission-title-overlay {
-        font-size: 11px;
-        padding: 8px 2px;
-        top: -35px;
-        height: 32px;
-        white-space: nowrap; /* Одна строка! */
-        overflow: visible; /* Разрешаем выход за пределы */
-        text-overflow: clip; /* Убираем многоточие */
-        min-width: 100%; /* Минимальная ширина */
-    }
-    
-    /* Уменьшаем паддинги для длинного текста */
-    .mission-wrapper {
-        padding-top: 8px;
-    }
-}
-
-/* Для очень маленьких экранов (до 360px) */
-@media (max-width: 360px) {
-    .taskjob-mission-g1 {
-        flex: 0 0 calc(50% - 8px);
-        margin: 4px;
-    }
-    
-    .taskjob-missions {
-        margin: -4px;
-        margin-bottom: 10px;
-    }
-    
-    .taskjob-title-left {
-        font-size: 1.1rem;
-    }
-    
-    .taskjob-title-right {
-        font-size: 1.2rem;
-    }
-    
-    /* Еще более компактный текст */
-    .mission-title-overlay {
-        font-size: 10px;
-        padding: 8px 1px;
-        top: -32px;
-        height: 30px;
-        letter-spacing: -0.2px; /* Слегка уменьшаем межбуквенный интервал */
-    }
-}
-
-/* Для экстремально маленьких экранов (до 320px) */
-@media (max-width: 320px) {
-    .mission-title-overlay {
-        font-size: 9.5px;
-        padding: 7px 1px;
-        top: -30px;
-        height: 28px;
-    }
-    
-    /* Альтернатива: динамический размер шрифта */
-    .mission-title-overlay.dynamic-font {
-        font-size: calc(8px + 0.5vw);
-        padding: 7px 0;
-    }
-}
-
-/* Улучшения для длинных названий */
-/* Можно добавить классы для очень длинных названий в HTML */
-.mission-title-overlay.extra-long {
-    font-size: calc(9px + 0.3vw); /* Динамический размер */
-    letter-spacing: -0.1px;
-    padding: 8px 1px;
-}
-
-/* Если нужно, чтобы текст не выходил за границы блока (альтернативный вариант) */
-.mission-title-overlay.contained {
-    overflow: hidden;
-    text-overflow: ellipsis;
-    white-space: nowrap;
-    padding: 10px 5px;
-}
-
-/* Для конкретных длинных названий можно добавить медиа-запросы */
-@media (max-width: 400px) {
-    /* Специальные настройки для очень длинных названий */
-    .mission-title-overlay[data-title*="Назад пути нет"],
-    .mission-title-overlay[data-title*="Весенние приключения"],
-    .mission-title-overlay[data-title*="Стадионная битва"] {
-        font-size: 9px;
-        padding: 8px 0;
-    }
-}
-
-/* Улучшения для мобильных устройств */
-@media (max-width: 768px) {
-    /* Делаем тапы более заметными */
-    .taskjob-mission-g1:active .taskjob-missions-1-1 {
-        transform: scale(0.98);
-        transition: transform 0.1s ease;
-    }
-    
-    /* Показываем текст при тапе на мобильных */
-    .taskjob-mission-g1:active .mission-title-overlay {
-        opacity: 1;
-        visibility: visible;
-    }
-}
-
-/* Дополнительные классы для очень коротких названий */
-.mission-title-overlay.short {
-    font-size: 14px; /* Можно сделать шрифт больше для коротких названий */
-}
-
-/* Стили для разделителя глав (если используете) */
-.chapter-divider {
+#coverPreview {
     width: 100%;
-    margin: 30px 0;
-    padding: 0 10px;
-    box-sizing: border-box;
+    max-height: 160px;
+    object-fit: cover;
+    border-radius: 12px;
+}
+
+#coverPreview[hidden] {
+    display: none;
+}
+
+/* Расположение обложки на странице профиля */
+.profile-header {
     display: flex;
-    justify-content: center;
-    align-items: center;
-    position: relative;
+    flex-wrap: wrap;
 }
 
-.chapter-divider img {
-    max-width: 100%;
-    height: auto;
-    max-height: 100px;
-    object-fit: contain;
+.profile-cover-container {
+    flex: 0 0 100%;
+    width: 100%;
 }
 
-/* Адаптивность для разделителей */
-@media (max-width: 768px) {
-    .chapter-divider {
-        margin: 20px 0;
-        padding: 0 5px;
-    }
-    
-    .chapter-divider img {
-        max-height: 70px;
-    }
+/* =================================
+   ВЕРХНЯЯ ПАНЕЛЬ ПРОФИЛЯ
+================================= */
+
+.profile-topbar {
+  width: min(1100px, calc(100% - 40px));
+  min-height: 60px;
+  margin: 20px auto 0;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 15px;
+  box-sizing: border-box;
 }
 
-@media (max-width: 480px) {
-    .chapter-divider {
-        margin: 15px 0;
-    }
-    
-    .chapter-divider img {
-        max-height: 50px;
-    }
+/* Кнопка назад */
+
+.profile-back-button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 11px 18px;
+  border: 1px solid rgba(213, 173, 98, 0.4);
+  border-radius: 10px;
+  background: #1a1a1e;
+  color: #d5ad62;
+  font-family: 'Inter', sans-serif;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: 0.2s ease;
+  white-space: nowrap;
 }
 
+.profile-back-button:hover {
+  background: #d5ad62;
+  color: #171717;
+  transform: translateY(-2px);
+}
 
-        /* ===== НОВЫЙ СТИЛЬ ДЛЯ NAVBAR ===== */
-        :root {
-            --bg-primary: #0d0d0d;
-            --bg-card: #1a1a1a;
-            --text-primary: #f0f0f0;
-            --text-secondary: #a0a0a0;
-            --border-color: #2a2a2a;
-            --accent: #4cc9f0;
-            --gradient: linear-gradient(135deg, #4361ee, #3a0ca3);
-            --radius: 12px;
-            --transition: 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-        }
+/* Контейнер авторизации справа */
 
-        #header {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            z-index: 1000;
-            background: rgba(13,13,13,0.92);
-            backdrop-filter: blur(12px);
-            border-bottom: 1px solid var(--border-color);
-            transition: transform 0.4s ease, background 0.3s ease;
-        }
+.profile-topbar .auth-area {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  margin-left: auto;
+  min-width: 0;
+}
 
-        #header.header-hidden {
-            transform: translateY(-100%);
-        }
+/* Колокольчик и мини-аватар */
 
-        .header-content {
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            height: 70px;
-            gap: 20px;
-        }
+.profile-topbar .auth-actions {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 14px;
+}
 
-        .logo-link {
-            display: flex;
-            align-items: center;
-            gap: 12px;
-            flex-shrink: 0;
-            text-decoration: none;
-            max-width: 100%;
-        }
+/* Кнопка уведомлений */
 
-        .logo-icon-container {
-            width: 44px;
-            min-width: 44px;
-            height: 44px;
-            border-radius: 50%;
-            background: var(--gradient);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: #fff;
-            font-size: 1.2rem;
-            flex-shrink: 0;
-        }
+.profile-topbar .notification-bell-button,
+.profile-topbar .auth-avatar-button {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  width: 44px;
+  height: 44px;
+  padding: 0;
+  border-radius: 50%;
+  box-sizing: border-box;
+}
 
-        .logo-text {
-            display: flex;
-            flex-direction: column;
-            min-width: 0;
-            overflow: hidden;
-        }
+/* Мини-аватар */
 
-        .logo-text h1 {
-            font-size: 1.4rem;
-            font-weight: 800;
-            letter-spacing: -0.5px;
-            line-height: 1.2;
-            white-space: nowrap;
-            overflow: hidden;
-            text-overflow: ellipsis;
-        }
+.profile-topbar .auth-avatar-button {
+  overflow: hidden;
+  border: 2px solid #d5ad62;
+  background: #242429;
+  cursor: pointer;
+}
 
-        .logo-subtitle {
-            font-size: 0.7rem;
-            color: var(--text-secondary);
-            letter-spacing: 2px;
-            font-weight: 500;
-            text-transform: uppercase;
-            white-space: nowrap;
-            overflow: hidden;
-            text-overflow: ellipsis;
-        }
+.profile-topbar .auth-avatar-image {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 50%;
+}
 
-        .nav-list {
-            display: flex;
-            list-style: none;
-            gap: 8px;
-            margin: 0;
-            padding: 0;
-        }
+.profile-topbar .auth-avatar-initial {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 100%;
+  color: #d5ad62;
+  font-weight: 800;
+}
 
-        .nav-link {
-            display: flex;
-            align-items: center;
-            gap: 8px;
-            padding: 8px 18px;
-            border-radius: 30px;
-            font-size: 0.9rem;
-            font-weight: 500;
-            color: var(--text-secondary);
-            transition: var(--transition);
-            white-space: nowrap;
-            text-decoration: none;
-        }
+/* Адаптация для телефона */
 
-        .nav-link:hover,
-        .nav-link.active {
-            color: #fff;
-            background: rgba(255,255,255,0.06);
-        }
+@media (max-width: 650px) {
+  .profile-topbar {
+    width: calc(100% - 24px);
+    margin-top: 12px;
+    min-height: 50px;
+  }
 
-        .nav-icon {
-            font-size: 0.9rem;
-            flex-shrink: 0;
-        }
+  .profile-back-button {
+    padding: 9px 12px;
+    font-size: 12px;
+  }
 
-        .mobile-menu-btn {
-            display: none;
-            flex-direction: column;
-            gap: 5px;
-            background: none;
-            border: none;
-            cursor: pointer;
-            padding: 4px;
-            flex-shrink: 0;
-            margin-left: auto;
-        }
+  .profile-topbar .auth-actions {
+    gap: 9px;
+  }
 
-        .menu-line {
-            width: 26px;
-            height: 2.5px;
-            background: var(--text-primary);
-            border-radius: 4px;
-            transition: var(--transition);
-        }
+  .profile-topbar .notification-bell-button,
+  .profile-topbar .auth-avatar-button {
+    width: 40px;
+    height: 40px;
+  }
 
-        .mobile-menu-overlay {
-            display: none;
-            position: fixed;
-            inset: 0;
-            background: rgba(0,0,0,0.5);
-            z-index: 998;
-        }
-
-        @media (max-width: 992px) {
-            .logo-text h1 {
-                font-size: 1.2rem;
-            }
-            .logo-icon-container {
-                width: 38px;
-                min-width: 38px;
-                height: 38px;
-                font-size: 1rem;
-            }
-            .nav-link {
-                padding: 6px 14px;
-                font-size: 0.85rem;
-            }
-            .nav-text {
-                display: none;
-            }
-            .nav-link .nav-icon {
-                font-size: 1.1rem;
-            }
-        }
-
-        @media (max-width: 768px) {
-            body { padding-top: 70px; }
-            .header-content {
-                height: 64px;
-                gap: 12px;
-            }
-            .mobile-menu-btn {
-                display: flex;
-            }
-            .main-nav {
-                position: fixed;
-                top: 0;
-                right: -300px;
-                width: 280px;
-                height: 100vh;
-                background: var(--bg-primary);
-                padding: 80px 24px 30px;
-                transition: right 0.35s ease;
-                z-index: 999;
-                border-left: 1px solid var(--border-color);
-                overflow-y: auto;
-            }
-            .main-nav.active {
-                right: 0;
-            }
-            .mobile-menu-overlay.active {
-                display: block;
-            }
-            .nav-list {
-                flex-direction: column;
-                gap: 4px;
-                width: 100%;
-            }
-            .nav-link {
-                padding: 12px 16px;
-                border-radius: var(--radius);
-                font-size: 1rem;
-                width: 100%;
-                justify-content: flex-start;
-            }
-            .nav-text {
-                display: inline;
-            }
-            .mobile-menu-btn.active .menu-line:nth-child(1) {
-                transform: rotate(45deg) translate(5px, 5px);
-            }
-            .mobile-menu-btn.active .menu-line:nth-child(2) {
-                opacity: 0;
-            }
-            .mobile-menu-btn.active .menu-line:nth-child(3) {
-                transform: rotate(-45deg) translate(5px, -5px);
-            }
-            .logo-text h1 {
-                font-size: 1.1rem;
-            }
-            .logo-icon-container {
-                width: 34px;
-                min-width: 34px;
-                height: 34px;
-                font-size: 0.9rem;
-            }
-            .logo-subtitle {
-                font-size: 0.6rem;
-                letter-spacing: 1.5px;
-            }
-        }
-
-        @media (max-width: 480px) {
-            .logo-text h1 {
-                font-size: 0.95rem;
-            }
-            .logo-icon-container {
-                width: 30px;
-                min-width: 30px;
-                height: 30px;
-                font-size: 0.8rem;
-            }
-            .logo-subtitle {
-                font-size: 0.5rem;
-                letter-spacing: 1px;
-            }
-            .logo-link {
-                gap: 8px;
-            }
-            .header-content {
-                height: 58px;
-                gap: 8px;
-            }
-        }
+  .profile-page {
+    margin-top: 25px;
+  }
+}

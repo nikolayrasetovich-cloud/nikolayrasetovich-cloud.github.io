@@ -691,3 +691,170 @@
                 padding: 18px 20px 20px;
             }
         }
+
+        
+/* ===== FRIENDS SECTION ===== */
+
+.friends-section {
+  width: min(1100px, 92%);
+  margin: 60px auto;
+  color: #fff;
+}
+
+.friends-container {
+  padding: 30px;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 18px;
+  background: rgba(20, 20, 30, 0.85);
+  box-shadow: 0 10px 35px rgba(0, 0, 0, 0.25);
+}
+
+.friends-container h2 {
+  margin: 0 0 25px;
+  font-size: 28px;
+}
+
+.friends-container h3 {
+  margin: 30px 0 15px;
+  font-size: 20px;
+}
+
+.friend-search label {
+  display: block;
+  margin-bottom: 10px;
+  color: #bbb;
+}
+
+.friend-search-row {
+  display: flex;
+  gap: 10px;
+}
+
+.friend-search-row input {
+  flex: 1;
+  min-width: 0;
+  padding: 13px 16px;
+  color: #fff;
+  background: #171722;
+  border: 1px solid #39394b;
+  border-radius: 10px;
+  outline: none;
+}
+
+.friend-search-row input:focus {
+  border-color: #8b5cf6;
+}
+
+.friends-container button {
+  padding: 11px 17px;
+  color: #fff;
+  background: #7045d8;
+  border: none;
+  border-radius: 9px;
+  cursor: pointer;
+  transition: 0.2s;
+}
+
+.friends-container button:hover {
+  background: #875df0;
+}
+
+.friends-container button:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.friend-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 15px;
+  padding: 15px;
+  margin-bottom: 10px;
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 12px;
+}
+
+.friend-info {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  min-width: 0;
+}
+
+.friend-info strong,
+.friend-info span {
+  display: block;
+  overflow-wrap: anywhere;
+}
+
+.friend-info span {
+  margin-top: 4px;
+  color: #aaa;
+  font-size: 13px;
+}
+
+.friend-avatar {
+  width: 44px;
+  height: 44px;
+  flex-shrink: 0;
+  object-fit: cover;
+  border-radius: 50%;
+}
+
+.friend-actions {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+#friendSearchResult {
+  margin-top: 15px;
+}
+
+@media (max-width: 600px) {
+  .friends-container {
+    padding: 20px 15px;
+  }
+
+  .friend-search-row {
+    flex-direction: column;
+  }
+
+  .friend-item {
+    align-items: flex-start;
+    flex-direction: column;
+  }
+
+  .friend-actions {
+    width: 100%;
+  }
+}
+
+.friend-profile-link {
+  color: inherit;
+  text-decoration: none;
+  cursor: pointer;
+  flex: 1;
+  min-width: 0;
+  transition: opacity 0.2s ease;
+}
+
+.friend-profile-link:hover {
+  opacity: 0.75;
+}
+
+.friend-profile-link strong,
+.friend-profile-link span {
+  display: block;
+}
+
+.friend-profile-link strong {
+  margin-bottom: 4px;
+}
+
+.friend-profile-link .friend-avatar {
+  flex-shrink: 0;
+  object-fit: cover;
+}

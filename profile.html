@@ -1,0 +1,182 @@
+
+<!DOCTYPE html>
+<html lang="ru">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>Мой профиль | TTFBB COMPANY</title>
+
+  <link rel="stylesheet" href="styles/style.css">
+  <link rel="stylesheet" href="styles/profile.css">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+  <link
+    href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap"
+    rel="stylesheet"
+  >
+</head>
+
+<body>
+
+  <!-- =================================
+       ВЕРХНЯЯ ПАНЕЛЬ
+  ================================== -->
+
+  <header class="profile-topbar">
+
+    <!-- Кнопка назад -->
+    <button
+      type="button"
+      class="profile-back-button"
+      id="profileBackButton"
+    >
+      ← Назад
+    </button>
+
+    <!-- Уведомления и мини-аватар -->
+    <div id="authArea" class="auth-area"></div>
+
+  </header>
+
+
+  <!-- =================================
+       ОСНОВНОЙ ПРОФИЛЬ
+  ================================== -->
+
+  <main class="profile-page">
+
+    <!-- Шапка профиля -->
+    <section class="profile-header">
+
+      <!-- Обложка -->
+      <div class="profile-cover-container">
+        <img
+          id="profileCover"
+          src=""
+          alt="Обложка профиля"
+          hidden
+        >
+      </div>
+
+      <!-- Аватар -->
+      <div class="profile-avatar-container">
+        <img
+          id="profileAvatar"
+          src=""
+          alt="Аватар профиля"
+        >
+      </div>
+
+      <!-- Информация -->
+      <div class="profile-info">
+
+        <h1 id="profileDisplayName">
+          Загрузка...
+        </h1>
+
+        <p id="profileUsername"></p>
+
+        <p id="profileDescription"></p>
+
+        <p id="profileBio"></p>
+
+        <!-- Редактирование -->
+        <button
+          type="button"
+          id="editProfileBtn"
+          hidden
+        >
+          Редактировать профиль
+        </button>
+
+      </div>
+
+    </section>
+
+
+    <!-- =================================
+         РЕДАКТИРОВАНИЕ ПРОФИЛЯ
+    ================================== -->
+
+    <section id="profileEditArea"></section>
+
+
+    <!-- =================================
+         СТАТИСТИКА
+    ================================== -->
+
+    <section class="profile-statistics">
+
+      <h2>Статистика</h2>
+
+      <div class="profile-stat-card">
+        <span>Уровень</span>
+        <strong>1</strong>
+      </div>
+
+      <div class="profile-stat-card">
+        <span>Опыт</span>
+        <strong>0 XP</strong>
+      </div>
+
+    </section>
+
+  </main>
+
+
+  <!-- =================================
+       КНОПКА НАЗАД
+  ================================== -->
+
+  <script>
+    const backButton = document.querySelector("#profileBackButton");
+
+    backButton.addEventListener("click", () => {
+
+      if (
+        document.referrer &&
+        new URL(document.referrer).origin === window.location.origin &&
+        window.history.length > 1
+      ) {
+        window.history.back();
+      } else {
+        window.location.href = "character.html";
+      }
+
+    });
+  </script>
+
+
+  <!-- =================================
+       АВТОРИЗАЦИЯ И УВЕДОМЛЕНИЯ
+  ================================== -->
+
+  <script type="module">
+
+    import {
+      renderAuthArea,
+      watchAuthChanges
+    } from "./js/auth.js";
+
+    renderAuthArea().catch((error) => {
+      console.error("Ошибка загрузки шапки:", error);
+    });
+
+    watchAuthChanges();
+
+  </script>
+
+
+  <!-- =================================
+       ЗАГРУЗКА ПРОФИЛЯ И РЕДАКТИРОВАНИЕ
+  ================================== -->
+
+  <script type="module" src="js/profile-page.js"></script>
+
+
+</body>
+</html>

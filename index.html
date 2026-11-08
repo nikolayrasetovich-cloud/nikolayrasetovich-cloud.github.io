@@ -6,6 +6,7 @@
     <title>TTFBB COMPANY</title>
     <link rel="icon" href="images/logo.png" type="image/png">
     <link rel="stylesheet" href="/styles/style.css">
+    <link rel="stylesheet" href="/styles/supabase-ui.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,300..900;1,14..32,300..900&display=swap" rel="stylesheet">
@@ -26,9 +27,11 @@
                     <li><a href="videos.html">ВИДЕОРОЛИКИ</a></li>
                     <li><a href="music.html">МУЗЫКА</a></li>
                     <li><a href="schedule.html">РАСПИСАНИЕ</a></li>
-                    <li><a href="character.html">ПРОФИЛЬ</a></li>
                 </ul>
             </nav>
+            <div id="authArea" class="auth-area">
+                <a class="auth-link" href="character.html">Войти</a>
+            </div>
             <button class="burger" aria-label="Меню">
                 <span></span>
                 <span></span>
@@ -60,9 +63,6 @@
                     <a href="newswire.html" class="btn btn-secondary">
                         <span>Читать новости</span>
                     </a>
-                    <a href="character.html" class="btn btn-secondary2">
-                        <span>Открыть профиль</span>
-                    </a>
                 </div>
             </div>
         </div>
@@ -83,48 +83,16 @@
             <!-- ===== НОВОСТНОЙ БЛОК ===== -->
     <section class="news-spotlight" id="news">
         <div class="container">
-            <a href="music.html" class="news-main-card">
-                <div class="news-main-img" style="background-image: url('/images/TTFBB-MUSIC.png'); background-size: cover; background-position: center;"></div>
+            <a href="newswire.html" class="news-main-card" id="newsMain">
+                <div class="news-main-img" style="background-size: cover; background-position: center;"></div>
                 <div class="news-main-content">
-                    <span class="news-category">TTFBB Company</span>
-                    <h2>РАЗРАБОТКА МУЗЫКАЛЬНОЙ БИБЛИОТЕКИ</h2>
-                    <span class="news-date">05 ноября 2026г.</span>
+                    <span class="news-category">TTFBB COMPANY</span>
+                    <h2>Загрузка новостей…</h2>
+                    <span class="news-date"></span>
                 </div>
             </a>
-
-            <div class="news-sidebar">
-                <a href="https://youtube.com/live/4ZD4d7c7ZYA" class="news-mini-item">
-                    <div class="news-mini-img" style="background-image: url('/images/mq1.jpg');"></div>
-                    <div class="news-mini-info">
-                        <span class="news-category">ТРАНСЛЯЦИЯ</span>
-                        <h3>🏡 ДОМАШНЯЯ СУЕТАЛОГИЯ</h3>
-                        <span class="news-date">28 июля 2026г.</span>
-                    </div>
-                </a>
-                <a href="/newswire/music/brightflash.html" class="news-mini-item">
-                    <div class="news-mini-img" style="background-image: url('/images/Bright%20flash%20-%20BitemLoco%20Records1_1.png');"></div>
-                    <div class="news-mini-info">
-                        <span class="news-category">МУЗЫКА</span>
-                        <h3>BRIGHT FLASH</h3>
-                        <span class="news-date">20 июля 2026г.</span>
-                    </div>
-                </a>
-                <a href="newswire/summerupdate120720261644.html" class="news-mini-item">
-                    <div class="news-mini-img" style="background-image: url('/images/ОБНОВА%20ЛЕТНЯЯ%20САЙТА%20кв.png');"></div>
-                    <div class="news-mini-info">
-                        <span class="news-category">TTFBB COMPANY</span>
-                        <h3>ЛЕТНЕЕ ОБНОВЛЕНИЕ САЙТА</h3>
-                        <span class="news-date">12 июля 2026г.</span>
-                    </div>
-                </a>
-                <a href="http://youtu.be/BJIwEr1MoVI" class="news-mini-item">
-                    <div class="news-mini-img" style="background-image: url('/images/GTAкв.png');"></div>
-                    <div class="news-mini-info">
-                        <span class="news-category">ТРАНСЛЯЦИЯ</span>
-                        <h3>☠️ БЕЗ СМЕРТЕЙ и ПРОВАЛОВ GTA 3 + ДРУГИЕ ИГРЫ</h3>
-                        <span class="news-date">08 июля 2026г.</span>
-                    </div>
-                </a>
+            <div class="news-sidebar" id="newsSidebar">
+                <p class="db-empty">Загружаем новости…</p>
             </div>
         </div>
     </section>
@@ -196,94 +164,7 @@
         </div>
     </footer>
 
-    <script>
-        const videos = [
-            {
-                title: '🏡 ДОМАШНЯЯ СУЕТАЛОГИЯ',
-                description: 'Старые добрые посиделки',
-                thumbnail: '/images/mq1-full.jpg',
-                videoId: '2eWAaH099-k',
-                date: '28 июля 2026'
-            },
-            {
-                title: '☠️ БЕЗ СМЕРТЕЙ и ПРОВАЛОВ GTA 3 + ДРУГИЕ ИГРЫ',
-                description: 'Проходняк GTA 3 и BRAWL STARS',
-                thumbnail: 'https://img.youtube.com/vi/BJIwEr1MoVI/sddefault.jpg',
-                videoId: 'BJIwEr1MoVI',
-                date: '08 июля 2026'
-            },
-            {
-                title: '😎 ВОЗВРАЩЕНИЕ 2026! ПРЕКРАСНЫЕ ВЫХОДНЫЕ ☀️ СТАРЫЕ и ЛЕТНИЕ ДЕЛА 🏝️',
-                description: 'Встреча спустя долгое время',
-                thumbnail: '/images/ВОЗВРАЩЕНИЕ.jpg',
-                videoId: 'E6WyHm6E74Q',
-                date: '26 июня 2026'
-            }
-        ];
+    <script type="module" src="/js/app.js"></script>
 
-        function renderVideos() {
-            const container = document.getElementById('videoGrid');
-            container.innerHTML = videos.map(v => `
-                <div class="video-card">
-                    <div class="video-wrapper">
-                        <img class="video-thumbnail" src="${v.thumbnail}" alt="${v.title}" loading="lazy">
-                        <div class="video-overlay">
-                            <button class="video-play-btn" data-video-id="${v.videoId}">
-                                <i class="fas fa-play"></i>
-                            </button>
-                        </div>
-                        <div class="video-date-badge">
-                            <i class="fas fa-calendar-alt"></i> ${v.date}
-                        </div>
-                    </div>
-                    <div class="video-card-content">
-                        <h3>${v.title}</h3>
-                        <p>${v.description}</p>
-                        <a href="https://www.youtube.com/watch?v=${v.videoId}" target="_blank" class="watch-btn">
-                            <i class="fab fa-youtube"></i> Смотреть на YouTube
-                        </a>
-                    </div>
-                </div>
-            `).join('');
-
-            document.querySelectorAll('.video-play-btn').forEach(btn => {
-                btn.addEventListener('click', function(e) {
-                    e.stopPropagation();
-                    window.open(`https://www.youtube.com/watch?v=${this.dataset.videoId}`, '_blank');
-                });
-            });
-        }
-
-        // Navbar scroll
-        let lastScroll = 0;
-        const navbar = document.querySelector(".navbar");
-        window.addEventListener("scroll", () => {
-            const currentScroll = window.pageYOffset;
-            if (currentScroll <= 0) { navbar.classList.remove("hide"); return; }
-            if (currentScroll > lastScroll) { navbar.classList.add("hide"); }
-            else { navbar.classList.remove("hide"); }
-            lastScroll = currentScroll;
-        });
-        window.addEventListener("scroll", () => {
-            if (window.scrollY > 20) navbar.classList.add("scrolled");
-            else navbar.classList.remove("scrolled");
-        });
-
-        // Burger
-        const burger = document.querySelector(".burger");
-        const menu = document.querySelector(".nav-menu");
-        burger.addEventListener("click", () => {
-            burger.classList.toggle("active");
-            menu.classList.toggle("active");
-        });
-        document.querySelectorAll(".nav-menu a").forEach(link => {
-            link.addEventListener("click", () => {
-                burger.classList.remove("active");
-                menu.classList.remove("active");
-            });
-        });
-
-        renderVideos();
-    </script>
 </body>
 </html>

@@ -11,6 +11,19 @@
     <link href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,300..900;1,14..32,300..900&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
 
+    <style>
+      .news-detail-card { max-width: 1050px; margin: 0 auto; background:#0d0d0d; border:1px solid rgba(255,255,255,.1); border-radius:24px; overflow:hidden; }
+      .news-detail-cover { width:100%; max-height:560px; object-fit:cover; display:block; background:#161616; }
+      .news-detail-content { padding:clamp(22px,4vw,48px); }
+      .news-detail-content h1 { color:#fff; font-size:clamp(1.8rem,4vw,3rem); line-height:1.15; margin:14px 0; }
+      .news-detail-meta { color:#999; display:flex; gap:16px; flex-wrap:wrap; font-size:.9rem; }
+      .news-detail-body { color:#ddd; white-space:pre-wrap; line-height:1.85; margin-top:24px; overflow-wrap:anywhere; }
+      .news-back-link { display:inline-flex; margin-bottom:22px; color:#4cc9f0; text-decoration:none; }
+      .news-state { grid-column:1/-1; text-align:center; padding:70px 20px; color:#aaa; }
+      .news-filter-section { padding:38px 0 10px; }
+      .news-filter-title { color:#fff; text-align:center; font-size:clamp(1.8rem,4vw,3rem); margin-bottom:24px; }
+      @media(max-width:768px) { .news-detail-content { padding:22px; } }
+    </style>
 </head>
 <body>
 
@@ -45,8 +58,23 @@
         </div>
     </header>
 
+    <!-- ===== ФИЛЬТРЫ НОВОСТЕЙ ===== -->
+    <section class="news-filter-section">
+        <div class="container">
+            <h1 class="news-filter-title">НОВОСТНАЯ ЛЕНТА</h1>
+            <div class="news-filter" id="newsFilters">
+                <button class="news-filter-btn active" type="button" data-filter="all">Все новости</button>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== ДЕТАЛЬНАЯ НОВОСТЬ ===== -->
+    <section class="updates" id="newsDetailSection" hidden>
+        <div class="container" id="newsDetail"></div>
+    </section>
+
     <!-- ===== НОВОСТИ ===== -->
-    <section class="updates">
+    <section class="updates" id="newsListSection">
         <div class="container">
             <div id="news-container" class="news-grid"></div>
             <div id="news-pagination" class="news-pagination"></div>
@@ -101,217 +129,7 @@
         </div>
     </footer>
 
-    <script>
-        const newsData = [
-            {
-                id: 5,
-                title: "РАЗРАБОТКА МУЗЫКАЛЬНОЙ БИБЛИОТЕКИ",
-                excerpt: "С 05 ноября 2026 была начата разработка МУЗЫКАЛЬНОЙ БИБЛИОТЕКИ.",
-                date: "05.11.2026",
-                category: "Разработка",
-                type: "working",
-                image: "/images/TTFBB-MUSIC.png",
-                author: "TTFBB COMPANY",
-                url: "music.html"
-            },
-            {
-                id: 4,
-                title: "Новый трек: BRIGHT FLASH",
-                excerpt: "Новый релиз трека уже 20 июля.",
-                date: "20.07.2026",
-                category: "Музыка",
-                type: "music",
-                image: "/images/Bright flash - BitemLoco Records1_1.png",
-                author: "BitemLoco Records",
-                url: "newswire/music/brightflash.html"
-            },
-            {
-                id: 3,
-                title: "Летнее обновление сайта",
-                excerpt: "Был полностью изменен интерфейс сайта.",
-                date: "12.07.2026",
-                category: "Обновление сайта",
-                type: "update",
-                image: "/images/ОБНОВА ЛЕТНЯЯ САЙТА.png",
-                author: "TTFBB COMPANY",
-                url: "newswire/summerupdate120720261644.html"
-            },
-            {
-                id: 2,
-                title: "😎 ВОЗВРАЩЕНИЕ 2026! ПРЕКРАСНЫЕ ВЫХОДНЫЕ ☀️",
-                excerpt: "Новое видео на канале.",
-                date: "26.06.2026",
-                category: "Событие",
-                type: "event",
-                image: "/images/ВОЗВРАЩЕНИЕ.jpg",
-                author: "Никита",
-                url: "https://www.youtube.com/watch?v=E6WyHm6E74Q"
-            },
-            {
-                id: 1,
-                title: "Новогоднее обновление сайта",
-                excerpt: "Был полностью изменен интерфейс сайта на новогоднюю тематику.",
-                date: "26.11.2025",
-                category: "Обновление сайта",
-                type: "update",
-                image: "/images/НОВОГОДНЕЕ ОБНОВЛЕНИЕ.png",
-                author: "TTFBB COMPANY",
-                url: "newswire/christmas-update.html"
-            }
-        ];
+    <script type="module" src="/js/newswire.js"></script>
 
-        const PER_PAGE = 6;
-        let currentPage = 1;
-        let currentFilter = 'all';
-
-        function getBadge(type) {
-            const map = {
-                'update': { label: 'Обновление', cls: 'update' },
-                'live': { label: 'Прямой эфир', cls: 'live' },
-                'event': { label: 'Событие', cls: 'event' },
-                'working': { label: 'Разработка', cls: 'working' },
-                'music': { label: 'Музыка', cls: 'music' }
-            };
-            return map[type] || { label: 'Новость', cls: 'update' };
-        }
-
-        function filterNews() {
-            if (currentFilter === 'all') return newsData;
-            return newsData.filter(item => item.type === currentFilter);
-        }
-
-        function renderNews() {
-            const container = document.getElementById('news-container');
-            const filtered = filterNews();
-            const start = (currentPage - 1) * PER_PAGE;
-            const pageItems = filtered.slice(start, start + PER_PAGE);
-
-            if (!pageItems.length) {
-                container.innerHTML = `
-                    <div class="news-empty">
-                        <i class="fas fa-newspaper"></i>
-                        <h3>Новостей не найдено</h3>
-                        <p>Попробуйте изменить параметры фильтра</p>
-                    </div>
-                `;
-                renderPagination(filtered.length);
-                return;
-            }
-
-            container.innerHTML = pageItems.map(item => {
-                const badge = getBadge(item.type);
-                return `
-                    <a href="${item.url}" class="news-card" data-type="${item.type}">
-                        <div class="news-card-image">
-                            <img src="${item.image}" alt="${item.title}" loading="lazy" />
-                            <span class="news-card-badge ${badge.cls}">${badge.label}</span>
-                        </div>
-                        <div class="news-card-content">
-                            <div class="news-card-meta">
-                                <span class="news-card-date"><i class="far fa-calendar"></i> ${item.date}</span>
-                                <span class="news-card-category">${item.category}</span>
-                            </div>
-                            <h3 class="news-card-title">${item.title}</h3>
-                            <p class="news-card-excerpt">${item.excerpt}</p>
-                            <div class="news-card-footer">
-                                <span class="news-card-author"><i class="fas fa-user"></i> ${item.author}</span>
-                                <span class="news-read-more">Читать <i class="fas fa-arrow-right"></i></span>
-                            </div>
-                        </div>
-                    </a>
-                `;
-            }).join('');
-
-            renderPagination(filtered.length);
-        }
-
-        function renderPagination(total) {
-            const container = document.getElementById('news-pagination');
-            const totalPages = Math.ceil(total / PER_PAGE);
-            if (totalPages <= 1) { container.innerHTML = ''; return; }
-
-            let html = '';
-            html += `<button class="news-pagination-btn ${currentPage === 1 ? 'disabled' : ''}" data-page="${currentPage - 1}"><i class="fas fa-chevron-left"></i></button>`;
-            
-            for (let i = 1; i <= totalPages; i++) {
-                html += `<button class="news-pagination-btn ${i === currentPage ? 'active' : ''}" data-page="${i}">${i}</button>`;
-            }
-            
-            html += `<button class="news-pagination-btn ${currentPage === totalPages ? 'disabled' : ''}" data-page="${currentPage + 1}"><i class="fas fa-chevron-right"></i></button>`;
-            container.innerHTML = html;
-
-            container.querySelectorAll('.news-pagination-btn:not(.disabled)').forEach(btn => {
-                btn.addEventListener('click', () => {
-                    const page = parseInt(btn.dataset.page);
-                    if (page && page !== currentPage) {
-                        currentPage = page;
-                        renderNews();
-                        window.scrollTo({ top: 200, behavior: 'smooth' });
-                    }
-                });
-            });
-        }
-
-        document.querySelectorAll('.news-filter-btn').forEach(btn => {
-            btn.addEventListener('click', function() {
-                document.querySelectorAll('.news-filter-btn').forEach(b => b.classList.remove('active'));
-                this.classList.add('active');
-                currentFilter = this.dataset.filter;
-                currentPage = 1;
-                renderNews();
-            });
-        });
-
-        const searchBtn = document.getElementById('searchBtn');
-        const searchInput = document.getElementById('searchInput');
-        searchBtn.addEventListener('click', function(e) {
-            e.preventDefault();
-            searchInput.classList.toggle('active');
-            if (searchInput.classList.contains('active')) searchInput.focus();
-        });
-        document.addEventListener('click', function(e) {
-            if (!searchInput.contains(e.target) && e.target !== searchBtn && !searchBtn.contains(e.target)) {
-                if (!searchInput.value) searchInput.classList.remove('active');
-            }
-        });
-        searchInput.addEventListener('keypress', function(e) {
-            if (e.key === 'Enter' && this.value.trim()) {
-                const query = this.value.trim().toLowerCase();
-                const found = newsData.find(item => item.title.toLowerCase().includes(query) || item.excerpt.toLowerCase().includes(query));
-                if (found) window.location.href = found.url;
-                else alert('Ничего не найдено: ' + this.value);
-            }
-        });
-
-        let lastScroll = 0;
-        const navbar = document.querySelector(".navbar");
-        window.addEventListener("scroll", () => {
-            const currentScroll = window.pageYOffset;
-            if (currentScroll <= 0) { navbar.classList.remove("hide"); return; }
-            if (currentScroll > lastScroll) navbar.classList.add("hide");
-            else navbar.classList.remove("hide");
-            lastScroll = currentScroll;
-        });
-        window.addEventListener("scroll", () => {
-            if (window.scrollY > 20) navbar.classList.add("scrolled");
-            else navbar.classList.remove("scrolled");
-        });
-
-        const burger = document.querySelector(".burger");
-        const menu = document.querySelector(".nav-menu");
-        burger.addEventListener("click", () => {
-            burger.classList.toggle("active");
-            menu.classList.toggle("active");
-            searchInput.classList.remove('active');
-        });
-        document.querySelectorAll(".nav-menu a").forEach(link => {
-            link.addEventListener("click", () => {
-                burger.classList.remove("active");
-                menu.classList.remove("active");
-            });
-        });
-
-        renderNews();
-    </script>
 </body>
 </html>
