@@ -122,7 +122,9 @@ async function init() {
   await initAuth();
 
   // Проверка авторизации и особой роли
+  console.log("TTFBB: дошли до проверки доступа");
   const hasAccess = await protectPage();
+  console.log("TTFBB: результат проверки доступа:", hasAccess);
 
   // Если доступа нет, прекращаем загрузку
   if (!hasAccess) {
