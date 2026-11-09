@@ -34,7 +34,6 @@ export async function initFriendsUI() {
             id="friendUsername"
             name="username"
             type="text"
-            placeholder="Например, nesoqiton"
             minlength="3"
             maxlength="32"
             pattern="[a-zA-Z0-9_]+"

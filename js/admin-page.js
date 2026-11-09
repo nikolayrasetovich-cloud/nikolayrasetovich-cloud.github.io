@@ -30,31 +30,24 @@ import {
   escapeHTML
 } from "./utils.js";
 
-
 // =====================================================
 // ЭЛЕМЕНТЫ СТРАНИЦЫ
 // =====================================================
 
 const statusNode = document.querySelector("#adminStatus");
 const rowsNode = document.querySelector("#contentRows");
-
 const newsForm = document.querySelector("#newsForm");
 const videoForm = document.querySelector("#videoForm");
-
 const editPanel = document.querySelector("#editNewsPanel");
 const editForm = document.querySelector("#editNewsForm");
-
 const newCoverPreview = document.querySelector("#newCoverPreview");
 const editCoverPreview = document.querySelector("#editCoverPreview");
-
 const refreshButton = document.querySelector("#refreshContent");
 
 let newCoverObjectUrl = null;
 let editCoverObjectUrl = null;
-
 let allItems = [];
 let allCategories = [];
-
 
 // =====================================================
 // ВСПОМОГАТЕЛЬНЫЕ ФУНКЦИИ
@@ -88,7 +81,6 @@ function getUniqueNewsCategories() {
 
   return [...names].sort((a, b) => a.localeCompare(b));
 }
-
 
 // =====================================================
 // ПРОВЕРКА ПРАВ ДОСТУПА
@@ -128,7 +120,6 @@ async function requireAdminAccess() {
   statusNode.textContent = `Доступ разрешён: ${user.email}`;
 }
 
-
 // =====================================================
 // ПОЛУЧЕНИЕ URL ОБЛОЖКИ
 // =====================================================
@@ -161,14 +152,12 @@ async function getCoverUrl(path) {
   return publicData?.publicUrl || "";
 }
 
-
 // =====================================================
 // ПРЕДПРОСМОТР ИЗОБРАЖЕНИЙ
 // =====================================================
 
 function showFilePreview(input, preview, mode) {
   const file = input.files?.[0];
-
   if (!file) return;
 
   if (!file.type.startsWith("image/")) {
@@ -205,7 +194,6 @@ newsForm.elements.coverFile?.addEventListener("change", () => {
   );
 });
 
-
 // =====================================================
 // СТАТИСТИКА ГЛАВНОЙ ПАНЕЛИ
 // =====================================================
@@ -234,7 +222,6 @@ function updateDashboard() {
   setText("statTotalMaterials", allItems.length);
 }
 
-
 // =====================================================
 // ЗАПОЛНЕНИЕ ВЫБОРА КАТЕГОРИЙ
 // =====================================================
@@ -260,7 +247,6 @@ function updateCategoryInputs() {
   populateCategorySelect(newsForm.elements.category);
   populateCategorySelect(editForm.elements.category);
 }
-
 
 // =====================================================
 // ФИЛЬТРЫ СПИСКА МАТЕРИАЛОВ
@@ -314,7 +300,6 @@ function getFilteredItems() {
   });
 }
 
-
 // =====================================================
 // ОТОБРАЖЕНИЕ СПИСКА МАТЕРИАЛОВ
 // =====================================================
@@ -366,22 +351,17 @@ function renderContentList() {
     return `
       <tr>
         <td>${escapeHTML(item.type)}</td>
-
         <td>${escapeHTML(item.title)}</td>
-
         <td>${escapeHTML(category)}</td>
-
         <td>
           <span class="admin-status admin-status-${escapeHTML(item.status)}">
             ${escapeHTML(item.status)}
           </span>
         </td>
-
         <td class="admin-actions">
           ${editButton}
           ${publishButton}
           ${archiveButton}
-
           <button
             type="button"
             data-action="delete"
@@ -404,19 +384,16 @@ function renderContentList() {
   setText("filteredCount", items.length);
 }
 
-
 // =====================================================
 // ОБНОВЛЕНИЕ КАТЕГОРИЙ
 // =====================================================
 
 async function refreshCategories() {
   allCategories = await listNewsCategories();
-
   updateCategoryInputs();
   setupFilters();
   renderCategoryManager();
 }
-
 
 // =====================================================
 // УПРАВЛЕНИЕ КАТЕГОРИЯМИ
@@ -424,7 +401,6 @@ async function refreshCategories() {
 
 function renderCategoryManager() {
   const container = getElement("categoryRows");
-
   if (!container) return;
 
   const names = getUniqueNewsCategories();
@@ -451,7 +427,6 @@ function renderCategoryManager() {
       <div class="category-row">
         <span>${escapeHTML(name)}</span>
         <span>${count} новостей</span>
-
         <button
           type="button"
           data-category-action="rename"
@@ -459,7 +434,6 @@ function renderCategoryManager() {
         >
           Переименовать
         </button>
-
         <button
           type="button"
           class="danger"
@@ -472,7 +446,6 @@ function renderCategoryManager() {
     `;
   }).join("") || "<p>Категорий пока нет.</p>";
 }
-
 
 // =====================================================
 // ДОБАВЛЕНИЕ КАТЕГОРИИ
@@ -499,13 +472,11 @@ addCategoryForm?.addEventListener("submit", async (event) => {
     await refreshCategories();
 
     showMessage("Категория добавлена.", "success");
-
   } catch (error) {
     console.error(error);
     showMessage(error.message, "error");
   }
 });
-
 
 // =====================================================
 // ПЕРЕИМЕНОВАНИЕ И УДАЛЕНИЕ КАТЕГОРИЙ
@@ -515,13 +486,11 @@ const categoryRows = getElement("categoryRows");
 
 categoryRows?.addEventListener("click", async (event) => {
   const button = event.target.closest("button[data-category-action]");
-
   if (!button) return;
 
   const { categoryAction, id } = button.dataset;
 
   const category = allCategories.find((item) => item.id === id);
-
   if (!category) return;
 
   try {
@@ -536,7 +505,6 @@ categoryRows?.addEventListener("click", async (event) => {
       if (newName === null) return;
 
       await renameNewsCategory(id, newName);
-
       showMessage("Категория переименована.", "success");
     }
 
@@ -548,21 +516,18 @@ categoryRows?.addEventListener("click", async (event) => {
       if (!confirmed) return;
 
       await deleteNewsCategory(id);
-
       showMessage("Категория удалена.", "success");
     }
 
     await refreshList();
-
+    await refreshCategories();
   } catch (error) {
     console.error(error);
     showMessage(error.message, "error");
-
   } finally {
     button.disabled = false;
   }
 });
-
 
 // =====================================================
 // ПОИСК И ФИЛЬТРЫ
@@ -592,7 +557,6 @@ getElement("resetFilters")?.addEventListener("click", () => {
   renderContentList();
 });
 
-
 // =====================================================
 // ОБНОВЛЕНИЕ СПИСКА И СТАТИСТИКИ
 // =====================================================
@@ -618,13 +582,11 @@ refreshButton?.addEventListener("click", async () => {
     await refreshCategories();
 
     showMessage("Список обновлён.", "success");
-
   } catch (error) {
     console.error(error);
     showMessage(error.message, "error");
   }
 });
-
 
 // =====================================================
 // СОЗДАНИЕ НОВОСТИ
@@ -647,6 +609,7 @@ newsForm.addEventListener("submit", async (event) => {
   try {
     await createNews({
       ...values,
+      pageUrl: values.pageUrl,
       coverFile: form.elements.coverFile.files[0] || null,
       publish: form.elements.publish.checked
     });
@@ -665,17 +628,14 @@ newsForm.addEventListener("submit", async (event) => {
 
     await refreshList();
     await refreshCategories();
-
   } catch (error) {
     console.error(error);
     showMessage(error.message, "error");
-
   } finally {
     submitButton.disabled = false;
     submitButton.textContent = "Создать новость";
   }
 });
-
 
 // =====================================================
 // СОЗДАНИЕ ВИДЕО
@@ -706,17 +666,14 @@ videoForm.addEventListener("submit", async (event) => {
     showMessage("Видео добавлено.", "success");
 
     await refreshList();
-
   } catch (error) {
     console.error(error);
     showMessage(error.message, "error");
-
   } finally {
     submitButton.disabled = false;
     submitButton.textContent = "Добавить видео";
   }
 });
-
 
 // =====================================================
 // ОТКРЫТИЕ ФОРМЫ РЕДАКТИРОВАНИЯ
@@ -748,6 +705,11 @@ async function openEditForm(contentId) {
     editForm.elements.excerpt.value = news.excerpt || "";
     editForm.elements.body.value = news.body || "";
 
+    // Загружаем сохранённый URL отдельной страницы новости.
+    if (editForm.elements.pageUrl) {
+      editForm.elements.pageUrl.value = news.page_url || "";
+    }
+
     populateCategorySelect(
       editForm.elements.category,
       news.category || ""
@@ -764,7 +726,6 @@ async function openEditForm(contentId) {
     }
 
     titleNode.textContent = "Редактировать новость";
-
   } catch (error) {
     console.error(error);
 
@@ -777,7 +738,6 @@ async function openEditForm(contentId) {
   }
 }
 
-
 // =====================================================
 // ПРЕДПРОСМОТР ОБЛОЖКИ ПРИ РЕДАКТИРОВАНИИ
 // =====================================================
@@ -789,7 +749,6 @@ editForm.elements.coverFile.addEventListener("change", () => {
     "edit"
   );
 });
-
 
 // =====================================================
 // СОХРАНЕНИЕ НОВОСТИ
@@ -818,6 +777,7 @@ editForm.addEventListener("submit", async (event) => {
       description: values.description,
       excerpt: values.excerpt,
       body: values.body,
+      pageUrl: values.pageUrl,
       coverFile: form.elements.coverFile.files[0] || null
     });
 
@@ -827,7 +787,6 @@ editForm.addEventListener("submit", async (event) => {
 
     await refreshList();
     await refreshCategories();
-
   } catch (error) {
     console.error(error);
 
@@ -835,13 +794,11 @@ editForm.addEventListener("submit", async (event) => {
       `Не удалось сохранить изменения: ${error.message}`,
       "error"
     );
-
   } finally {
     submitButton.disabled = false;
     submitButton.textContent = "Сохранить изменения";
   }
 });
-
 
 // =====================================================
 // ЗАКРЫТИЕ ФОРМЫ РЕДАКТИРОВАНИЯ
@@ -864,14 +821,12 @@ function closeEditForm() {
 
 getElement("cancelEditNews")?.addEventListener("click", closeEditForm);
 
-
 // =====================================================
 // ДЕЙСТВИЯ В СПИСКЕ МАТЕРИАЛОВ
 // =====================================================
 
 rowsNode.addEventListener("click", async (event) => {
   const button = event.target.closest("button[data-action]");
-
   if (!button) return;
 
   const { action, id } = button.dataset;
@@ -906,16 +861,13 @@ rowsNode.addEventListener("click", async (event) => {
     await refreshList();
 
     showMessage("Изменения сохранены.", "success");
-
   } catch (error) {
     console.error(error);
     showMessage(error.message, "error");
-
   } finally {
     button.disabled = false;
   }
 });
-
 
 // =====================================================
 // ЗАПУСК АДМИН-ПАНЕЛИ
@@ -923,14 +875,12 @@ rowsNode.addEventListener("click", async (event) => {
 
 try {
   await renderAuthArea();
-
   watchAuthChanges();
 
   await requireAdminAccess();
 
   await refreshList();
   await refreshCategories();
-
 } catch (error) {
   console.error(error);
   statusNode.textContent = error.message;

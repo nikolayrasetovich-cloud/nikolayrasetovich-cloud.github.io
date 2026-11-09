@@ -1,7 +1,11 @@
 
 import { supabase } from "./supabase.js";
 import { renderVideos, renderNewsSpotlight } from "./content.js";
-import { renderAuthArea, watchAuthChanges } from "./auth.js";
+import {
+  renderAuthArea,
+  watchAuthChanges,
+  protectPage
+} from "./auth.js";
 import { showMessage } from "./utils.js";
 
 // ===============================
@@ -102,30 +106,42 @@ async function initContent() {
 // ===============================
 
 async function init() {
+  // Инициализация навигации
   initNavigation();
 
+  // Проверка подключения Supabase
   if (!supabase) {
     showMessage(
       "Supabase пока не настроен: заполни js/config.js",
       "error"
     );
-
-    await initContent();
     return;
   }
 
-  await Promise.all([
-    initAuth(),
-    initContent()
-  ]);
+  // Инициализация авторизации
+  await initAuth();
+
+  // Проверка авторизации и особой роли
+  const hasAccess = await protectPage();
+
+  // Если доступа нет, прекращаем загрузку
+  if (!hasAccess) {
+    return;
+  }
+
+  // Загружаем контент только при наличии доступа
+  await initContent();
 }
 
+// ===============================
+// ОБРАБОТКА ОШИБОК
+// ===============================
+
 init().catch((error) => {
-  console.error(error);
+  console.error("Ошибка запуска сайта:", error);
 
   showMessage(
     error.message || "Ошибка инициализации сайта",
     "error"
   );
 });
-

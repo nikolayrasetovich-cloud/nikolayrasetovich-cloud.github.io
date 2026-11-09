@@ -1,162 +1,266 @@
 
 <!DOCTYPE html>
 <html lang="ru">
-
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>TTFBB COMPANY</title>
 
-  <title>Мой профиль | TTFBB COMPANY</title>
-
+  <link rel="icon" href="images/logo.png" type="image/png">
   <link rel="stylesheet" href="styles/style.css">
   <link rel="stylesheet" href="styles/profile.css">
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-
-  <link
-    href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap"
-    rel="stylesheet"
-  >
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 </head>
 
 <body>
 
-  <!-- =================================
-       ВЕРХНЯЯ ПАНЕЛЬ
-  ================================== -->
-
+  <!-- Верхняя панель -->
   <header class="profile-topbar">
-
-    <!-- Кнопка назад -->
-    <button
-      type="button"
-      class="profile-back-button"
-      id="profileBackButton"
-    >
-      ← Назад
+    <button type="button" class="profile-back-button" id="profileBackButton">
+      ← На главную
     </button>
-
-    <!-- Уведомления и мини-аватар -->
     <div id="authArea" class="auth-area"></div>
-
   </header>
 
-
-  <!-- =================================
-       ОСНОВНОЙ ПРОФИЛЬ
-  ================================== -->
-
+  <!-- Основной профиль -->
   <main class="profile-page">
 
-    <!-- Шапка профиля -->
     <section class="profile-header">
 
-      <!-- Обложка -->
       <div class="profile-cover-container">
-        <img
-          id="profileCover"
-          src=""
-          alt="Обложка профиля"
-          hidden
-        >
+        <img id="profileCover" src="" alt="Обложка профиля" hidden>
       </div>
 
-      <!-- Аватар -->
       <div class="profile-avatar-container">
-        <img
-          id="profileAvatar"
-          src=""
-          alt="Аватар профиля"
-        >
+        <img id="profileAvatar" src="" alt="Аватар профиля">
       </div>
 
-      <!-- Информация -->
       <div class="profile-info">
-
-        <h1 id="profileDisplayName">
-          Загрузка...
-        </h1>
-
+        <h1 id="profileDisplayName">Загрузка...</h1>
         <p id="profileUsername"></p>
-
         <p id="profileDescription"></p>
-
         <p id="profileBio"></p>
 
-        <!-- Редактирование -->
-        <button
-          type="button"
-          id="editProfileBtn"
-          hidden
-        >
+        <button type="button" id="editProfileBtn" hidden>
           Редактировать профиль
         </button>
-
       </div>
 
     </section>
 
-
-    <!-- =================================
-         РЕДАКТИРОВАНИЕ ПРОФИЛЯ
-    ================================== -->
-
+    <!-- Редактирование профиля -->
     <section id="profileEditArea"></section>
 
-
-    <!-- =================================
-         СТАТИСТИКА
-    ================================== -->
-
+    <!-- Статистика -->
     <section class="profile-statistics">
-
       <h2>Статистика</h2>
 
       <div class="profile-stat-card">
         <span>Уровень</span>
-        <strong>1</strong>
+        <strong>144</strong>
       </div>
 
       <div class="profile-stat-card">
         <span>Опыт</span>
-        <strong>0 XP</strong>
+        <strong>7 200 XP</strong>
       </div>
+    </section>
+
+    <!-- Прогресс и роли -->
+    <section class="profile-legacy-content">
+
+      <div class="level-progress">
+        <div class="progress-header">
+          <h3>Прогресс уровня</h3>
+        </div>
+
+        <div class="progress-bar">
+          <div class="progress-fill" style="width: 50%"></div>
+        </div>
+
+        <div class="progress-stats">
+          <span>7 200/14 400 XP</span>
+          <span>Осталось: 7 200 XP</span>
+        </div>
+      </div>
+
+    
 
     </section>
 
   </main>
 
+  <!-- Главы и задания -->
+  <section class="taskjob-main-section">
+    <div class="taskjob-story-main" id="chaptersContainer"></div>
+  </section>
 
-  <!-- =================================
-       КНОПКА НАЗАД
-  ================================== -->
+  <!-- Друзья -->
+  <section class="friends-section" id="friendsSection"></section>
 
+  <!-- Кнопка возврата на главную -->
   <script>
-    const backButton = document.querySelector("#profileBackButton");
-
-    backButton.addEventListener("click", () => {
-
-      if (
-        document.referrer &&
-        new URL(document.referrer).origin === window.location.origin &&
-        window.history.length > 1
-      ) {
-        window.history.back();
-      } else {
-        window.location.href = "character.html";
-      }
-
+    document.querySelector("#profileBackButton").addEventListener("click", () => {
+      window.location.href = "index.html";
     });
   </script>
 
+  <!-- Генерация глав -->
+  <script>
+    const chapters = [
+      {
+        title: "Глава 1",
+        progress: "6 из 6",
+        missions: [
+          "Автобус в будущее",
+          "Приходит с мыслями о прошлом",
+          "Кофе не для нас",
+          "Кто, черт возьми, этот Никита Козловский?",
+          "Назад пути нет - Часть 1",
+          "Начало Исхода"
+        ]
+      },
+      {
+        title: "Глава 2",
+        progress: "11 из 11",
+        missions: [
+          "Отдых по-нашему",
+          "Кто придумал эту школу?",
+          "Назад пути нет - Часть 2",
+          "Холод это сила",
+          "Странная дружба",
+          "Блаженны ли кроткие?",
+          "Весенние приключения - Часть 1",
+          "Стадионная битва - 1",
+          "Стадионная битва - 2",
+          "Тихо посидели",
+          "Весенние приключения - Часть 2"
+        ]
+      },
+      {
+        title: "Глава 3",
+        progress: "10 из 10",
+        missions: [
+          "Встреча - Часть 1",
+          "Встреча - Часть 2",
+          "Встреча - Часть 3",
+          "Гомельские хребты",
+          "Американские горки?",
+          "Начало осени?",
+          "Трио, воссоединение",
+          "Печаль осени",
+          "Душа всё-таки есть",
+          "Тракторист?"
+        ]
+      },
+      {
+        title: "Глава 4",
+        progress: "13 из 16",
+        missions: [
+          "Старые знакомые",
+          "Домашние приключения - 1",
+          "Ольга?",
+          "Мы готовили не для вас",
+          "Домашние приключения - 2",
+          "Ночные приключения",
+          "Визит вежливости",
+          "Кто без греха",
+          "Золотая клетка",
+          "Часы посещения",
+          "Новые друзья?",
+          "Аромат отличного табака",
+          "Зимняя сказка - Часть 1",
+          null, null, null
+        ]
+      },
+      {
+        title: "Глава 5",
+        progress: "0 из 9",
+        missions: [null, null, null, null, null, null, null, null, null]
+      },
+      {
+        title: "Глава 6",
+        progress: "0 из 19",
+        missions: [
+          null, null, null, null, null, null, null, null, null,
+          null, null, null, null, null, null, null, null, null, null
+        ]
+      }
+    ];
 
-  <!-- =================================
-       АВТОРИЗАЦИЯ И УВЕДОМЛЕНИЯ
-  ================================== -->
+    const chaptersContainer = document.querySelector("#chaptersContainer");
 
+    chapters.forEach((chapter, chapterIndex) => {
+      const sector = document.createElement("div");
+      sector.className = "taskjob-sector";
+
+      const title = document.createElement("div");
+      title.className = "taskjob-title";
+      title.innerHTML = `
+        <h2 class="taskjob-title-left">${chapter.title}</h2>
+        <h3 class="taskjob-title-right">${chapter.progress}</h3>
+      `;
+
+      const missions = document.createElement("div");
+      missions.className = "taskjob-missions";
+
+      chapter.missions.forEach((mission, missionIndex) => {
+        const missionNumber = chapters
+          .slice(0, chapterIndex)
+          .reduce((sum, item) => sum + item.missions.length, 0)
+          + missionIndex + 1;
+
+        const card = document.createElement("div");
+        card.className = "taskjob-mission-g1";
+
+        const wrapper = document.createElement("div");
+        wrapper.className = "mission-wrapper";
+
+        if (mission) {
+          const overlay = document.createElement("div");
+          overlay.className = "mission-title-overlay";
+          overlay.textContent = mission;
+          wrapper.appendChild(overlay);
+        }
+
+        const imageContainer = document.createElement("div");
+        imageContainer.className = "image-container";
+
+        const image = document.createElement("img");
+        image.className = "taskjob-missions-1-1";
+        image.src = `images/missions/${mission ? missionNumber : 0}.jpg`;
+        image.alt = mission || "Будущее задание";
+        image.loading = "lazy";
+
+        imageContainer.appendChild(image);
+        wrapper.appendChild(imageContainer);
+        card.appendChild(wrapper);
+        missions.appendChild(card);
+      });
+
+      sector.appendChild(title);
+      sector.appendChild(missions);
+      chaptersContainer.appendChild(sector);
+
+      if (chapterIndex < chapters.length - 1) {
+        const divider = document.createElement("div");
+        divider.className = "chapter-divider";
+
+        const dividerImage = document.createElement("img");
+        dividerImage.src = "images/header_border.png";
+        dividerImage.alt = "Разделитель глав";
+
+        divider.appendChild(dividerImage);
+        chaptersContainer.appendChild(divider);
+      }
+    });
+  </script>
+
+  <!-- Авторизация и уведомления -->
   <script type="module">
-
     import {
       renderAuthArea,
       watchAuthChanges
@@ -167,16 +271,14 @@
     });
 
     watchAuthChanges();
-
   </script>
 
+  <!-- Система друзей -->
+  <script type="module" src="js/friends-page.js"></script>
 
-  <!-- =================================
-       ЗАГРУЗКА ПРОФИЛЯ И РЕДАКТИРОВАНИЕ
-  ================================== -->
-
+  <!-- Загрузка профиля Supabase -->
   <script type="module" src="js/profile-page.js"></script>
-
 
 </body>
 </html>
+  

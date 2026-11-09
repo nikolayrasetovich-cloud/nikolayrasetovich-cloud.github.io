@@ -467,15 +467,12 @@
       <div id="authArea"></div>
     </header>
 
-
     <!-- DASHBOARD -->
 
     <section class="admin-dashboard">
-
       <h2>Главная панель</h2>
 
       <div class="dashboard-grid">
-
         <article class="dashboard-card">
           <span>Всего материалов</span>
           <strong id="statTotalMaterials">0</strong>
@@ -505,19 +502,15 @@
           <span>Видео</span>
           <strong id="statVideos">0</strong>
         </article>
-
       </div>
     </section>
-
 
     <!-- CATEGORY MANAGEMENT -->
 
     <section class="admin-categories">
-
       <h2>Категории новостей</h2>
 
       <form id="addCategoryForm">
-
         <div class="category-input">
           <label for="newCategoryName">
             Название новой категории
@@ -535,29 +528,23 @@
         <button type="submit">
           Добавить категорию
         </button>
-
       </form>
 
       <div id="categoryRows">
         <p>Загрузка категорий…</p>
       </div>
-
     </section>
-
 
     <!-- CREATE NEWS -->
 
     <section>
-
       <h2>Создать новость</h2>
 
       <form id="newsForm">
-
         <div class="form-grid">
 
           <div class="form-field">
             <label for="newsTitle">Название новости</label>
-
             <input
               id="newsTitle"
               name="title"
@@ -569,7 +556,6 @@
 
           <div class="form-field">
             <label for="newsSlug">Slug</label>
-
             <input
               id="newsSlug"
               name="slug"
@@ -581,20 +567,13 @@
 
           <div class="form-field">
             <label for="newsCategory">Категория</label>
-
-            <select
-              id="newsCategory"
-              name="category"
-            >
+            <select id="newsCategory" name="category">
               <option value="">Без категории</option>
             </select>
           </div>
 
           <div class="form-field">
-            <label for="newsDescription">
-              Краткое описание
-            </label>
-
+            <label for="newsDescription">Краткое описание</label>
             <input
               id="newsDescription"
               name="description"
@@ -604,10 +583,25 @@
           </div>
 
           <div class="form-field full-width">
-            <label for="newsExcerpt">
-              Краткий текст (Excerpt)
+            <label for="newsPageUrl">
+              URL отдельной HTML-страницы новости
             </label>
 
+            <input
+              id="newsPageUrl"
+              name="pageUrl"
+              type="text"
+              placeholder="/news/my-news.html"
+            >
+
+            <p class="help-text">
+              Укажи путь к готовой странице новости, например:
+              /news/my-news.html
+            </p>
+          </div>
+
+          <div class="form-field full-width">
+            <label for="newsExcerpt">Краткий текст (Excerpt)</label>
             <textarea
               id="newsExcerpt"
               name="excerpt"
@@ -616,9 +610,7 @@
           </div>
 
           <div class="form-field full-width">
-            <label for="newsCoverFile">
-              Обложка новости
-            </label>
+            <label for="newsCoverFile">Обложка новости</label>
 
             <input
               id="newsCoverFile"
@@ -640,10 +632,7 @@
           </div>
 
           <div class="form-field full-width">
-            <label for="newsBody">
-              Полный текст новости
-            </label>
-
+            <label for="newsBody">Полный текст новости</label>
             <textarea
               id="newsBody"
               name="body"
@@ -656,7 +645,6 @@
         </div>
 
         <div class="form-actions">
-
           <div class="publish-option">
             <input
               id="newsPublish"
@@ -673,31 +661,22 @@
           <button type="submit">
             Создать новость
           </button>
-
         </div>
-
       </form>
     </section>
-
 
     <!-- EDIT NEWS -->
 
     <section id="editNewsPanel" hidden>
-
       <h2>Редактировать новость</h2>
 
       <form id="editNewsForm">
-
-        <input
-          type="hidden"
-          name="contentId"
-        >
+        <input type="hidden" name="contentId">
 
         <div class="form-grid">
 
           <div class="form-field">
             <label for="editTitle">Название новости</label>
-
             <input
               id="editTitle"
               name="title"
@@ -708,7 +687,6 @@
 
           <div class="form-field">
             <label for="editSlug">Slug</label>
-
             <input
               id="editSlug"
               name="slug"
@@ -719,20 +697,13 @@
 
           <div class="form-field">
             <label for="editCategory">Категория</label>
-
-            <select
-              id="editCategory"
-              name="category"
-            >
+            <select id="editCategory" name="category">
               <option value="">Без категории</option>
             </select>
           </div>
 
           <div class="form-field">
-            <label for="editDescription">
-              Краткое описание
-            </label>
-
+            <label for="editDescription">Краткое описание</label>
             <input
               id="editDescription"
               name="description"
@@ -741,10 +712,24 @@
           </div>
 
           <div class="form-field full-width">
-            <label for="editExcerpt">
-              Краткий текст (Excerpt)
+            <label for="editPageUrl">
+              URL отдельной HTML-страницы новости
             </label>
 
+            <input
+              id="editPageUrl"
+              name="pageUrl"
+              type="text"
+              placeholder="/news/my-news.html"
+            >
+
+            <p class="help-text">
+              Путь к готовой HTML-странице этой новости.
+            </p>
+          </div>
+
+          <div class="form-field full-width">
+            <label for="editExcerpt">Краткий текст (Excerpt)</label>
             <textarea
               id="editExcerpt"
               name="excerpt"
@@ -752,10 +737,7 @@
           </div>
 
           <div class="form-field full-width">
-            <label for="editBody">
-              Полный текст новости
-            </label>
-
+            <label for="editBody">Полный текст новости</label>
             <textarea
               id="editBody"
               name="body"
@@ -765,9 +747,7 @@
           </div>
 
           <div class="form-field full-width">
-            <label for="editCoverFile">
-              Заменить обложку
-            </label>
+            <label for="editCoverFile">Заменить обложку</label>
 
             <input
               id="editCoverFile"
@@ -791,7 +771,6 @@
         </div>
 
         <div class="form-actions">
-
           <button type="submit">
             Сохранить изменения
           </button>
@@ -803,26 +782,20 @@
           >
             Отмена
           </button>
-
         </div>
-
       </form>
     </section>
-
 
     <!-- CREATE VIDEO -->
 
     <section>
-
       <h2>Добавить YouTube-видео</h2>
 
       <form id="videoForm">
-
         <div class="form-grid">
 
           <div class="form-field">
             <label for="videoTitle">Название видео</label>
-
             <input
               id="videoTitle"
               name="title"
@@ -834,7 +807,6 @@
 
           <div class="form-field">
             <label for="videoSlug">Slug</label>
-
             <input
               id="videoSlug"
               name="slug"
@@ -846,7 +818,6 @@
 
           <div class="form-field">
             <label for="youtubeId">YouTube Video ID</label>
-
             <input
               id="youtubeId"
               name="youtubeId"
@@ -857,10 +828,7 @@
           </div>
 
           <div class="form-field">
-            <label for="videoCoverPath">
-              Путь или URL обложки
-            </label>
-
+            <label for="videoCoverPath">Путь или URL обложки</label>
             <input
               id="videoCoverPath"
               name="coverPath"
@@ -870,10 +838,7 @@
           </div>
 
           <div class="form-field full-width">
-            <label for="videoDescription">
-              Описание видео
-            </label>
-
+            <label for="videoDescription">Описание видео</label>
             <textarea
               id="videoDescription"
               name="description"
@@ -884,7 +849,6 @@
         </div>
 
         <div class="form-actions">
-
           <div class="publish-option">
             <input
               id="videoPublish"
@@ -901,19 +865,14 @@
           <button type="submit">
             Добавить видео
           </button>
-
         </div>
-
       </form>
     </section>
-
 
     <!-- CONTENT LIST -->
 
     <section>
-
       <div class="section-heading">
-
         <h2>Все материалы</h2>
 
         <button
@@ -923,13 +882,9 @@
         >
           Обновить список
         </button>
-
       </div>
 
-      <!-- SEARCH AND FILTERS -->
-
       <div class="admin-filters">
-
         <input
           id="contentSearch"
           type="search"
@@ -954,11 +909,9 @@
         <select id="filterCategory">
           <option value="">Все категории</option>
         </select>
-
       </div>
 
       <div class="filter-actions">
-
         <button
           type="button"
           id="resetFilters"
@@ -971,15 +924,10 @@
           Найдено материалов:
           <strong id="filteredCount">0</strong>
         </span>
-
       </div>
 
-      <!-- TABLE -->
-
       <div class="table-wrapper">
-
         <table>
-
           <thead>
             <tr>
               <th>Тип</th>
@@ -997,15 +945,11 @@
               </td>
             </tr>
           </tbody>
-
         </table>
-
       </div>
-
     </section>
 
   </main>
-
 
   <!-- ADMIN JAVASCRIPT -->
 

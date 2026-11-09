@@ -14,7 +14,6 @@ const ALLOWED_IMAGE_TYPES = {
   "image/webp": "webp"
 };
 
-
 // =====================================================
 // ПРОВЕРКА ПРАВ ПОЛЬЗОВАТЕЛЯ
 // =====================================================
@@ -28,10 +27,7 @@ async function assertEditor() {
   } = await client.auth.getUser();
 
   if (userError) throw userError;
-
-  if (!user) {
-    throw new Error("Необходимо войти.");
-  }
+  if (!user) throw new Error("Необходимо войти.");
 
   const { data, error } = await client
     .from("user_roles")
@@ -51,7 +47,6 @@ async function assertEditor() {
   return { client, user };
 }
 
-
 // =====================================================
 // ПРОВЕРКА ИЗОБРАЖЕНИЯ
 // =====================================================
@@ -67,7 +62,6 @@ function validateImage(file) {
     throw new Error("Размер изображения не должен превышать 5 МБ.");
   }
 }
-
 
 // =====================================================
 // ЗАГРУЗКА ОБЛОЖКИ
@@ -94,7 +88,6 @@ async function uploadNewsCover(client, file) {
   return filePath;
 }
 
-
 // =====================================================
 // УДАЛЕНИЕ ФАЙЛА ИЗ STORAGE
 // =====================================================
@@ -119,12 +112,10 @@ async function removeStorageFile(client, path) {
   }
 }
 
-
 // =====================================================
 // КАТЕГОРИИ НОВОСТЕЙ
 // =====================================================
 
-// Получить все категории.
 export async function listNewsCategories() {
   const { client } = await assertEditor();
 
@@ -138,8 +129,6 @@ export async function listNewsCategories() {
   return data || [];
 }
 
-
-// Добавить категорию.
 export async function createNewsCategory(name) {
   const { client } = await assertEditor();
 
@@ -163,15 +152,12 @@ export async function createNewsCategory(name) {
     if (error.code === "23505") {
       throw new Error("Такая категория уже существует.");
     }
-
     throw error;
   }
 
   return data;
 }
 
-
-// Переименовать категорию и связанные новости.
 export async function renameNewsCategory(categoryId, newName) {
   const { client } = await assertEditor();
 
@@ -201,7 +187,6 @@ export async function renameNewsCategory(categoryId, newName) {
     return oldCategory;
   }
 
-  // Сначала обновляем категории у новостей.
   const { error: newsError } = await client
     .from("content_items")
     .update({ category: normalizedName })
@@ -210,7 +195,6 @@ export async function renameNewsCategory(categoryId, newName) {
 
   if (newsError) throw newsError;
 
-  // Затем переименовываем саму категорию.
   const { data, error } = await client
     .from(CATEGORIES_TABLE)
     .update({ name: normalizedName })
@@ -219,7 +203,6 @@ export async function renameNewsCategory(categoryId, newName) {
     .single();
 
   if (error) {
-    // Пытаемся вернуть прежнее значение новостям.
     const { error: rollbackError } = await client
       .from("content_items")
       .update({ category: oldCategory.name })
@@ -240,9 +223,6 @@ export async function renameNewsCategory(categoryId, newName) {
   return data;
 }
 
-
-// Удалить категорию.
-// Новости сохраняются, их категория становится "Без категории".
 export async function deleteNewsCategory(categoryId) {
   const { client } = await assertEditor();
 
@@ -258,7 +238,6 @@ export async function deleteNewsCategory(categoryId) {
 
   if (readError) throw readError;
 
-  // Переносим новости в значение без категории.
   const { error: newsError } = await client
     .from("content_items")
     .update({ category: null })
@@ -273,7 +252,6 @@ export async function deleteNewsCategory(categoryId) {
     .eq("id", categoryId);
 
   if (error) {
-    // Если удалить категорию не удалось, возвращаем новости.
     const { error: rollbackError } = await client
       .from("content_items")
       .update({ category: category.name })
@@ -290,7 +268,6 @@ export async function deleteNewsCategory(categoryId) {
   return true;
 }
 
-
 // =====================================================
 // СОЗДАНИЕ НОВОСТИ
 // =====================================================
@@ -302,6 +279,7 @@ export async function createNews({
   category,
   excerpt,
   body,
+  pageUrl,
   coverPath,
   coverFile,
   publish = false
@@ -340,7 +318,8 @@ export async function createNews({
       .insert({
         content_id: item.id,
         excerpt: excerpt || null,
-        body
+        body,
+        page_url: pageUrl?.trim() || null
       });
 
     if (childError) {
@@ -358,7 +337,6 @@ export async function createNews({
     throw error;
   }
 }
-
 
 // =====================================================
 // ПОЛУЧЕНИЕ НОВОСТИ ДЛЯ РЕДАКТИРОВАНИЯ
@@ -388,7 +366,7 @@ export async function getNewsForEdit(contentId) {
 
   const { data: article, error: articleError } = await client
     .from("news_articles")
-    .select("excerpt, body")
+    .select("excerpt, body, page_url")
     .eq("content_id", contentId)
     .single();
 
@@ -399,7 +377,6 @@ export async function getNewsForEdit(contentId) {
     ...article
   };
 }
-
 
 // =====================================================
 // ОБНОВЛЕНИЕ НОВОСТИ
@@ -412,6 +389,7 @@ export async function updateNews(contentId, {
   category,
   excerpt,
   body,
+  pageUrl,
   coverFile
 }) {
   const { client } = await assertEditor();
@@ -454,7 +432,8 @@ export async function updateNews(contentId, {
       .from("news_articles")
       .update({
         excerpt: excerpt || null,
-        body
+        body,
+        page_url: pageUrl?.trim() || null
       })
       .eq("content_id", contentId)
       .select("content_id")
@@ -474,7 +453,10 @@ export async function updateNews(contentId, {
         .eq("type", "news");
 
       if (rollbackError) {
-        console.error("Не удалось восстановить прежние данные новости:", rollbackError);
+        console.error(
+          "Не удалось восстановить прежние данные новости:",
+          rollbackError
+        );
       } else {
         itemUpdateSucceeded = false;
       }
@@ -498,7 +480,6 @@ export async function updateNews(contentId, {
     throw error;
   }
 }
-
 
 // =====================================================
 // СОЗДАНИЕ ВИДЕО
@@ -547,7 +528,6 @@ export async function createVideo({
   return item;
 }
 
-
 // =====================================================
 // ПУБЛИКАЦИЯ МАТЕРИАЛА
 // =====================================================
@@ -570,7 +550,6 @@ export async function publishContent(contentId) {
   return data;
 }
 
-
 // =====================================================
 // АРХИВИРОВАНИЕ МАТЕРИАЛА
 // =====================================================
@@ -589,7 +568,6 @@ export async function archiveContent(contentId) {
 
   return data;
 }
-
 
 // =====================================================
 // УДАЛЕНИЕ МАТЕРИАЛА
@@ -615,7 +593,6 @@ export async function deleteContent(contentId) {
 
   await removeStorageFile(client, item.cover_path);
 }
-
 
 // =====================================================
 // СПИСОК МАТЕРИАЛОВ
@@ -654,7 +631,6 @@ export async function listContent({
 
   return data || [];
 }
-
 
 // =====================================================
 // СОЗДАНИЕ СОБЫТИЯ
@@ -703,7 +679,6 @@ export async function createEvent({
 
   return item;
 }
-
 
 // =====================================================
 // СОЗДАНИЕ МУЗЫКАЛЬНОГО ТРЕКА

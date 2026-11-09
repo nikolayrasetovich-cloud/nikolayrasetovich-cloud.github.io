@@ -17,6 +17,90 @@ export async function getCurrentUser() {
   return data.user;
 }
 
+// ==========================================
+// ПРОВЕРКА ДОСТУПА ПО РОЛИ
+// ==========================================
+
+export async function hasSiteAccess() {
+  const client = requireSupabase();
+
+  const {
+    data: { user },
+    error: authError
+  } = await client.auth.getUser();
+
+  if (authError) throw authError;
+
+  // Неавторизованный пользователь не имеет доступа
+  if (!user) return false;
+
+  const { data, error } = await client.rpc("has_site_access");
+
+  if (error) throw error;
+
+  return data === true;
+}
+
+
+// Блокировка страницы для пользователей без доступа
+export async function protectPage() {
+  let allowed = false;
+
+  try {
+    allowed = await hasSiteAccess();
+  } catch (error) {
+    console.error("Ошибка проверки доступа:", error);
+  }
+
+  if (allowed) return true;
+
+  // Создаём экран ограничения доступа
+  const overlay = document.createElement("div");
+  overlay.className = "site-access-overlay";
+
+  const {
+    data: { user }
+  } = await supabase.auth.getUser();
+
+  overlay.innerHTML = `
+    <div class="site-access-card">
+      <div class="site-access-icon">🔒</div>
+      <h1>Доступ ограничен</h1>
+      <p>
+        ${
+          user
+            ? "У твоего аккаунта пока нет необходимой роли для доступа к сайту."
+            : "Чтобы пользоваться сайтом, необходимо войти в аккаунт."
+        }
+      </p>
+      ${
+        user
+          ? `<button type="button" id="accessLogout">Выйти из аккаунта</button>`
+          : `<button type="button" id="accessLogin">Войти или зарегистрироваться</button>`
+      }
+    </div>
+  `;
+
+  document.body.appendChild(overlay);
+
+  if (user) {
+    overlay.querySelector("#accessLogout").addEventListener("click", async () => {
+      try {
+        await signOut();
+        window.location.reload();
+      } catch (error) {
+        console.error("Ошибка выхода:", error);
+      }
+    });
+  } else {
+    overlay.querySelector("#accessLogin").addEventListener("click", () => {
+      authDialog().showModal();
+    });
+  }
+
+  return false;
+}
+
 // Регистрация
 export async function signUp({
   email,

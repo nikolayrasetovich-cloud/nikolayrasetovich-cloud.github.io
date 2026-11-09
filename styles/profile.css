@@ -1,6 +1,7 @@
 
 /* =================================
    TTFBB COMPANY — PROFILE PAGE
+   Современный стиль профиля
 ================================= */
 
 .profile-page {
@@ -15,6 +16,7 @@
 
 .profile-header {
   display: flex;
+  flex-wrap: wrap;
   align-items: center;
   gap: 35px;
   padding: 40px;
@@ -22,6 +24,27 @@
   border: 1px solid rgba(213, 173, 98, 0.2);
   border-radius: 22px;
   box-shadow: 0 15px 45px rgba(0, 0, 0, 0.25);
+}
+
+.profile-cover-container {
+  flex: 0 0 100%;
+  width: 100%;
+  height: 240px;
+  overflow: hidden;
+  border-radius: 18px;
+  background: linear-gradient(135deg, #24243e, #302b63, #0f0c29);
+  margin-bottom: 0;
+}
+
+.profile-cover-container img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.profile-cover-container img[hidden] {
+  display: none;
 }
 
 .profile-avatar-container {
@@ -184,7 +207,565 @@
   cursor: pointer;
 }
 
-/* Адаптация для телефона */
+/* Окно редактирования профиля */
+
+.profile-edit-modal {
+  position: fixed;
+  inset: 0;
+  z-index: 10000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+  background: rgba(0, 0, 0, 0.78);
+  backdrop-filter: blur(10px);
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity .2s ease, visibility .2s ease;
+}
+
+.profile-edit-modal.is-open {
+  opacity: 1;
+  visibility: visible;
+}
+
+.profile-edit-content {
+  position: relative;
+  width: min(100%, 480px);
+  max-height: 90vh;
+  overflow-y: auto;
+  padding: 32px;
+  box-sizing: border-box;
+  background: #19191d;
+  border: 1px solid rgba(213, 173, 98, .3);
+  border-radius: 20px;
+  box-shadow: 0 25px 80px rgba(0, 0, 0, .5);
+  transform: translateY(15px) scale(.97);
+  transition: transform .2s ease;
+}
+
+.profile-edit-modal.is-open .profile-edit-content {
+  transform: translateY(0) scale(1);
+}
+
+.profile-edit-close {
+  position: absolute;
+  top: 15px;
+  right: 18px;
+  width: 35px;
+  height: 35px;
+  border: none;
+  border-radius: 50%;
+  background: #29292e;
+  color: white;
+  font-size: 24px;
+  cursor: pointer;
+}
+
+.profile-edit-heading span {
+  color: #d5ad62;
+  font-size: 11px;
+  letter-spacing: 3px;
+  font-weight: 700;
+}
+
+.profile-edit-heading h2 {
+  margin: 12px 0 7px;
+  color: white;
+  font-size: 23px;
+}
+
+.profile-edit-heading p {
+  margin: 0 0 25px;
+  color: #999;
+  font-size: 13px;
+}
+
+.profile-edit-content form {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.profile-edit-content form > label {
+  color: #ddd;
+  font-size: 13px;
+  font-weight: 600;
+}
+
+.profile-edit-content input:not([type="file"]),
+.profile-edit-content textarea {
+  width: 100%;
+  box-sizing: border-box;
+  padding: 13px;
+  border: 1px solid #38383e;
+  border-radius: 9px;
+  outline: none;
+  background: #101013;
+  color: white;
+  font: inherit;
+}
+
+.profile-edit-content input:focus,
+.profile-edit-content textarea:focus {
+  border-color: #d5ad62;
+}
+
+.profile-edit-avatar {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 15px;
+}
+
+.profile-edit-avatar img {
+  width: 105px;
+  height: 105px;
+  object-fit: cover;
+  border-radius: 50%;
+  border: 3px solid #d5ad62;
+  background: #29292d;
+}
+
+.avatar-upload-label {
+  color: #d5ad62;
+  font-size: 13px;
+  cursor: pointer;
+}
+
+.avatar-upload-label:hover {
+  color: #f0d18b;
+}
+
+.profile-save-button {
+  margin-top: 12px;
+  padding: 14px;
+  border: none;
+  border-radius: 9px;
+  background: #d5ad62;
+  color: #171717;
+  font-weight: 800;
+  cursor: pointer;
+  transition: .2s ease;
+}
+
+.profile-save-button:hover {
+  background: #edcc8b;
+}
+
+.profile-save-button:disabled {
+  opacity: .6;
+  cursor: wait;
+}
+
+/* Редактор обложки */
+
+.profile-edit-cover {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  margin: 24px 0;
+}
+
+.profile-cover-upload-label {
+  font-weight: 600;
+  color: #fff;
+}
+
+#coverPreview {
+  width: 100%;
+  max-height: 160px;
+  object-fit: cover;
+  border-radius: 12px;
+}
+
+#coverPreview[hidden] {
+  display: none;
+}
+
+/* Верхняя панель профиля */
+
+.profile-topbar {
+  width: min(1100px, calc(100% - 40px));
+  min-height: 60px;
+  margin: 20px auto 0;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 15px;
+  box-sizing: border-box;
+}
+
+.profile-back-button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 11px 18px;
+  border: 1px solid rgba(213, 173, 98, 0.4);
+  border-radius: 10px;
+  background: #1a1a1e;
+  color: #d5ad62;
+  font-family: 'Inter', sans-serif;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: 0.2s ease;
+  white-space: nowrap;
+}
+
+.profile-back-button:hover {
+  background: #d5ad62;
+  color: #171717;
+  transform: translateY(-2px);
+}
+
+.profile-topbar .auth-area {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  margin-left: auto;
+  min-width: 0;
+}
+
+.profile-topbar .auth-actions {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 14px;
+}
+
+.profile-topbar .notification-bell-button,
+.profile-topbar .auth-avatar-button {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  width: 44px;
+  height: 44px;
+  padding: 0;
+  border-radius: 50%;
+  box-sizing: border-box;
+}
+
+.profile-topbar .auth-avatar-button {
+  overflow: hidden;
+  border: 2px solid #d5ad62;
+  background: #242429;
+  cursor: pointer;
+}
+
+.profile-topbar .auth-avatar-image {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 50%;
+}
+
+.profile-topbar .auth-avatar-initial {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 100%;
+  color: #d5ad62;
+  font-weight: 800;
+}
+
+/* =========================================
+   СТАРОЕ ОФОРМЛЕНИЕ ГЛАВ И МИССИЙ
+   Профиль выше остаётся в новом стиле
+========================================= */
+
+/* Шрифт Red Dead Redemption */
+
+@font-face {
+  font-family: 'RDR-Line';
+  src: url('../fonts/RDR2-fonts.woff2') format('woff2');
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+
+/* Общий фон глав */
+
+.taskjob-main-section {
+  width: 100%;
+  margin-top: 55px;
+  padding: 55px 20px;
+  box-sizing: border-box;
+  color: #fff;
+  font-family: 'RDR-Line', Georgia, serif;
+  background:
+    linear-gradient(rgba(10, 10, 12, 0.55), rgba(10, 10, 12, 0.72)),
+    url("https://s.rsg.sc/sc/images/games/RDR2/bg.jpg") center / cover fixed;
+}
+
+.taskjob-story-main {
+  width: min(1420px, 100%);
+  margin: 0 auto;
+}
+
+.taskjob-sector {
+  margin: 0 auto 35px;
+}
+
+/* Заголовки глав */
+
+.taskjob-title {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 15px;
+  margin-bottom: 25px;
+  padding: 18px 22px;
+  border: none;
+  border-bottom: 2px solid rgba(220, 190, 145, 0.75);
+  background: rgba(20, 16, 13, 0.72);
+  box-shadow: 0 5px 20px rgba(0, 0, 0, 0.3);
+}
+
+.taskjob-title-left {
+  margin: 0;
+  color: #e5d1b0;
+  font-family: 'RDR-Line', Georgia, serif;
+  font-size: clamp(21px, 3vw, 30px);
+  font-weight: normal;
+  text-shadow: 2px 2px 4px #000;
+}
+
+.taskjob-title-right {
+  margin: 0;
+  color: #d1c1a9;
+  font-family: 'RDR-Line', Georgia, serif;
+  font-size: 15px;
+  white-space: nowrap;
+  text-shadow: 1px 1px 3px #000;
+}
+
+/* Карточки миссий */
+
+.taskjob-missions {
+  display: grid;
+  grid-template-columns: repeat(6, minmax(0, 1fr));
+  gap: 18px;
+}
+
+.taskjob-mission-g1 {
+  min-width: 0;
+  overflow: hidden;
+  border: 1px solid rgba(205, 180, 145, 0.4);
+  border-radius: 3px;
+  background: rgba(20, 17, 15, 0.9);
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.45);
+  transition: transform 0.25s ease, border-color 0.25s ease;
+}
+
+.taskjob-mission-g1:hover {
+  transform: translateY(-5px);
+  border-color: #e5d1b0;
+}
+
+.mission-wrapper {
+  position: relative;
+  height: 100%;
+}
+
+.image-container {
+  width: 100%;
+  aspect-ratio: 16 / 10;
+  overflow: hidden;
+  background: #25201b;
+}
+
+.taskjob-missions-1-1 {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.35s ease;
+}
+
+.taskjob-mission-g1:hover .taskjob-missions-1-1 {
+  transform: scale(1.06);
+}
+
+/* Названия миссий */
+
+.mission-title-overlay {
+  position: absolute;
+  z-index: 2;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  padding: 30px 10px 12px;
+  color: #f1e4d0;
+  font-family: 'RDR-Line', Georgia, serif;
+  font-size: 14px;
+  font-weight: normal;
+  line-height: 1.4;
+  text-shadow: 1px 2px 3px #000;
+  background: linear-gradient(
+    transparent,
+    rgba(0, 0, 0, 0.96)
+  );
+}
+
+/* Разделители между главами */
+
+.chapter-divider {
+  width: 100%;
+  margin: 45px auto;
+  text-align: center;
+}
+
+.chapter-divider img {
+  display: block;
+  width: min(700px, 90%);
+  height: auto;
+  margin: 0 auto;
+  opacity: 0.9;
+  filter: drop-shadow(0 4px 8px rgba(0, 0, 0, 0.7));
+}
+
+/* =========================================
+   ПРОГРЕСС И РОЛИ
+   Сохраняем современное оформление
+========================================= */
+
+.profile-legacy-content {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 30px;
+  margin-top: 35px;
+}
+
+.level-progress,
+.user-roles {
+  padding: 25px;
+  border: 1px solid rgba(213, 173, 98, 0.2);
+  border-radius: 16px;
+  background: #1a1a1e;
+}
+
+.progress-header h3,
+.roles-header h3 {
+  margin: 0;
+  color: #d5ad62;
+  font-size: 20px;
+}
+
+.progress-bar {
+  width: 100%;
+  height: 13px;
+  margin: 20px 0 12px;
+  overflow: hidden;
+  border-radius: 20px;
+  background: #333338;
+}
+
+.progress-fill {
+  height: 100%;
+  border-radius: inherit;
+  background: linear-gradient(90deg, #a77a36, #f0d18b);
+}
+
+.progress-stats {
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 10px;
+  color: #aaa;
+  font-size: 13px;
+}
+
+.roles-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 15px;
+  margin-bottom: 20px;
+}
+
+.roles-count {
+  color: #aaa;
+  font-size: 13px;
+}
+
+.roles-grid {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 15px;
+}
+
+.role-card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+  min-width: 0;
+  padding: 20px 12px;
+  text-align: center;
+  border: 1px solid #37373d;
+  border-radius: 12px;
+  background: #111114;
+  color: #888;
+}
+
+.role-card.unlocked {
+  border-color: rgba(213, 173, 98, 0.45);
+  color: #eee;
+}
+
+.role-card > i {
+  font-size: 25px;
+  color: #777;
+}
+
+.role-card.unlocked > i {
+  color: #d5ad62;
+}
+
+.role-name {
+  font-size: 14px;
+  font-weight: 700;
+}
+
+.role-status {
+  font-size: 11px;
+}
+
+.role-status.unlocked {
+  color: #8fca91;
+}
+
+.role-status.locked {
+  color: #888;
+}
+
+.role-progress {
+  width: 100%;
+  height: 5px;
+  border-radius: 10px;
+  background: #333338;
+}
+
+/* =========================================
+   АДАПТАЦИЯ
+========================================= */
+
+@media (max-width: 1000px) {
+  .taskjob-missions {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+  }
+
+  .roles-grid {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+}
 
 @media (max-width: 650px) {
   .profile-page {
@@ -214,342 +795,12 @@
     box-sizing: border-box;
     margin-right: 0;
   }
-}
 
-/* Окно редактирования профиля */
-
-.profile-edit-modal {
-    position: fixed;
-    inset: 0;
-    z-index: 10000;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    padding: 20px;
-    background: rgba(0, 0, 0, 0.78);
-    backdrop-filter: blur(10px);
-    opacity: 0;
-    visibility: hidden;
-    transition: opacity .2s ease, visibility .2s ease;
-}
-
-.profile-edit-modal.is-open {
-    opacity: 1;
-    visibility: visible;
-}
-
-.profile-edit-content {
-    position: relative;
-    width: min(100%, 480px);
-    max-height: 90vh;
-    overflow-y: auto;
-    padding: 32px;
-    box-sizing: border-box;
-    background: #19191d;
-    border: 1px solid rgba(213, 173, 98, .3);
-    border-radius: 20px;
-    box-shadow: 0 25px 80px rgba(0, 0, 0, .5);
-    transform: translateY(15px) scale(.97);
-    transition: transform .2s ease;
-}
-
-.profile-edit-modal.is-open .profile-edit-content {
-    transform: translateY(0) scale(1);
-}
-
-.profile-edit-close {
-    position: absolute;
-    top: 15px;
-    right: 18px;
-    width: 35px;
-    height: 35px;
-    border: none;
-    border-radius: 50%;
-    background: #29292e;
-    color: white;
-    font-size: 24px;
-    cursor: pointer;
-}
-
-.profile-edit-heading span {
-    color: #d5ad62;
-    font-size: 11px;
-    letter-spacing: 3px;
-    font-weight: 700;
-}
-
-.profile-edit-heading h2 {
-    margin: 12px 0 7px;
-    color: white;
-    font-size: 23px;
-}
-
-.profile-edit-heading p {
-    margin: 0 0 25px;
-    color: #999;
-    font-size: 13px;
-}
-
-.profile-edit-content form {
-    display: flex;
-    flex-direction: column;
-    gap: 12px;
-}
-
-.profile-edit-content form > label {
-    color: #ddd;
-    font-size: 13px;
-    font-weight: 600;
-}
-
-.profile-edit-content input:not([type="file"]),
-.profile-edit-content textarea {
-    width: 100%;
-    box-sizing: border-box;
-    padding: 13px;
-    border: 1px solid #38383e;
-    border-radius: 9px;
-    outline: none;
-    background: #101013;
-    color: white;
-    font: inherit;
-}
-
-.profile-edit-content input:focus,
-.profile-edit-content textarea:focus {
-    border-color: #d5ad62;
-}
-
-.profile-edit-avatar {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 12px;
-    margin-bottom: 15px;
-}
-
-.profile-edit-avatar img {
-    width: 105px;
-    height: 105px;
-    object-fit: cover;
-    border-radius: 50%;
-    border: 3px solid #d5ad62;
-    background: #29292d;
-}
-
-.avatar-upload-label {
-    color: #d5ad62;
-    font-size: 13px;
-    cursor: pointer;
-}
-
-.avatar-upload-label:hover {
-    color: #f0d18b;
-}
-
-.profile-save-button {
-    margin-top: 12px;
-    padding: 14px;
-    border: none;
-    border-radius: 9px;
-    background: #d5ad62;
-    color: #171717;
-    font-weight: 800;
-    cursor: pointer;
-    transition: .2s ease;
-}
-
-.profile-save-button:hover {
-    background: #edcc8b;
-}
-
-.profile-save-button:disabled {
-    opacity: .6;
-    cursor: wait;
-}
-
-@media (max-width: 500px) {
-    .profile-edit-content {
-        padding: 25px 20px;
-    }
-}
-
-@media (prefers-reduced-motion: reduce) {
-    .profile-edit-modal,
-    .profile-edit-content {
-        transition: none;
-    }
-}
-
-/* Обложка профиля */
-.profile-cover-container {
-  width: 100%;
-  height: 240px;
-  overflow: hidden;
-  border-radius: 18px;
-  background: linear-gradient(135deg, #24243e, #302b63, #0f0c29);
-  margin-bottom: 0;
-}
-
-.profile-cover-container img {
-  width: 100%;
-  height: 100%;
-  display: block;
-  object-fit: cover;
-}
-
-.profile-cover-container img[hidden] {
-  display: none;
-}
-
-@media (max-width: 600px) {
   .profile-cover-container {
     height: 150px;
     border-radius: 14px;
   }
-}
 
-/* Редактор обложки */
-.profile-edit-cover {
-    display: flex;
-    flex-direction: column;
-    gap: 12px;
-    margin: 24px 0;
-}
-
-.profile-cover-upload-label {
-    font-weight: 600;
-    color: #fff;
-}
-
-#coverPreview {
-    width: 100%;
-    max-height: 160px;
-    object-fit: cover;
-    border-radius: 12px;
-}
-
-#coverPreview[hidden] {
-    display: none;
-}
-
-/* Расположение обложки на странице профиля */
-.profile-header {
-    display: flex;
-    flex-wrap: wrap;
-}
-
-.profile-cover-container {
-    flex: 0 0 100%;
-    width: 100%;
-}
-
-/* =================================
-   ВЕРХНЯЯ ПАНЕЛЬ ПРОФИЛЯ
-================================= */
-
-.profile-topbar {
-  width: min(1100px, calc(100% - 40px));
-  min-height: 60px;
-  margin: 20px auto 0;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 15px;
-  box-sizing: border-box;
-}
-
-/* Кнопка назад */
-
-.profile-back-button {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  gap: 8px;
-  padding: 11px 18px;
-  border: 1px solid rgba(213, 173, 98, 0.4);
-  border-radius: 10px;
-  background: #1a1a1e;
-  color: #d5ad62;
-  font-family: 'Inter', sans-serif;
-  font-size: 14px;
-  font-weight: 600;
-  cursor: pointer;
-  transition: 0.2s ease;
-  white-space: nowrap;
-}
-
-.profile-back-button:hover {
-  background: #d5ad62;
-  color: #171717;
-  transform: translateY(-2px);
-}
-
-/* Контейнер авторизации справа */
-
-.profile-topbar .auth-area {
-  display: flex;
-  align-items: center;
-  justify-content: flex-end;
-  margin-left: auto;
-  min-width: 0;
-}
-
-/* Колокольчик и мини-аватар */
-
-.profile-topbar .auth-actions {
-  display: flex;
-  align-items: center;
-  justify-content: flex-end;
-  gap: 14px;
-}
-
-/* Кнопка уведомлений */
-
-.profile-topbar .notification-bell-button,
-.profile-topbar .auth-avatar-button {
-  position: relative;
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  flex-shrink: 0;
-  width: 44px;
-  height: 44px;
-  padding: 0;
-  border-radius: 50%;
-  box-sizing: border-box;
-}
-
-/* Мини-аватар */
-
-.profile-topbar .auth-avatar-button {
-  overflow: hidden;
-  border: 2px solid #d5ad62;
-  background: #242429;
-  cursor: pointer;
-}
-
-.profile-topbar .auth-avatar-image {
-  display: block;
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  border-radius: 50%;
-}
-
-.profile-topbar .auth-avatar-initial {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  width: 100%;
-  height: 100%;
-  color: #d5ad62;
-  font-weight: 800;
-}
-
-/* Адаптация для телефона */
-
-@media (max-width: 650px) {
   .profile-topbar {
     width: calc(100% - 24px);
     margin-top: 12px;
@@ -574,4 +825,674 @@
   .profile-page {
     margin-top: 25px;
   }
+
+  .profile-edit-content {
+    padding: 25px 20px;
+  }
+
+  /* Главы на телефоне */
+
+  .taskjob-main-section {
+    margin-top: 35px;
+    padding: 30px 12px;
+    background-attachment: scroll;
+  }
+
+  .taskjob-missions {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 10px;
+  }
+
+  .taskjob-title {
+    padding: 12px;
+  }
+
+  .mission-title-overlay {
+    padding: 25px 7px 8px;
+    font-size: 12px;
+  }
+
+  .chapter-divider {
+    margin: 30px auto;
+  }
+
+  .roles-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .level-progress,
+  .user-roles {
+    padding: 18px;
+  }
+
+  .progress-stats {
+    flex-direction: column;
+  }
+}
+
+@media (max-width: 500px) {
+  .profile-edit-content {
+    padding: 25px 20px;
+  }
+}
+
+@media (max-width: 360px) {
+  .taskjob-missions {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .profile-edit-modal,
+  .profile-edit-content {
+    transition: none;
+  }
+}
+
+/* =========================================
+   ДРУЗЬЯ — TTFBB COMPANY
+   Тёмно-золотой стиль профиля
+========================================= */
+
+.friends-section {
+  width: min(1100px, calc(100% - 40px));
+  margin: 55px auto;
+  color: #f5f5f5;
+  font-family: 'Inter', sans-serif;
+}
+
+.friends-container {
+  padding: 30px;
+  border: 1px solid rgba(213, 173, 98, 0.2);
+  border-radius: 18px;
+  background: linear-gradient(135deg, #1d1d20, #111113);
+  box-shadow: 0 10px 35px rgba(0, 0, 0, 0.3);
+}
+
+.friends-container h2 {
+  margin: 0 0 25px;
+  color: #fff;
+  font-size: 26px;
+  font-weight: 800;
+}
+
+.friends-container h3 {
+  margin: 30px 0 15px;
+  color: #d5ad62;
+  font-size: 19px;
+  font-weight: 700;
+}
+
+/* Поиск друзей */
+
+.friend-search label {
+  display: block;
+  margin-bottom: 10px;
+  color: #aaa;
+  font-size: 14px;
+}
+
+.friend-search-row {
+  display: flex;
+  gap: 10px;
+}
+
+.friend-search-row input {
+  flex: 1;
+  min-width: 0;
+  padding: 13px 16px;
+  color: #fff;
+  background: #111114;
+  border: 1px solid #37373d;
+  border-radius: 10px;
+  outline: none;
+  font: inherit;
+  transition: border-color 0.2s ease;
+}
+
+.friend-search-row input:focus {
+  border-color: #d5ad62;
+}
+
+.friend-search-row input::placeholder {
+  color: #777;
+}
+
+/* Кнопки */
+
+.friends-container button {
+  padding: 11px 17px;
+  color: #171717;
+  background: #d5ad62;
+  border: 1px solid #d5ad62;
+  border-radius: 9px;
+  font-family: 'Inter', sans-serif;
+  font-size: 13px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: 0.2s ease;
+}
+
+.friends-container button:hover {
+  background: #edcc8b;
+  border-color: #edcc8b;
+  transform: translateY(-2px);
+}
+
+.friends-container button:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+  transform: none;
+}
+
+/* Результат поиска */
+
+#friendSearchResult {
+  margin-top: 15px;
+  color: #ccc;
+  font-size: 14px;
+}
+
+/* Карточка друга или заявки */
+
+.friend-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 15px;
+  padding: 15px;
+  margin-bottom: 10px;
+  background: rgba(255, 255, 255, 0.035);
+  border: 1px solid rgba(213, 173, 98, 0.13);
+  border-radius: 12px;
+  transition: border-color 0.2s ease, background 0.2s ease;
+}
+
+.friend-item:hover {
+  background: rgba(213, 173, 98, 0.045);
+  border-color: rgba(213, 173, 98, 0.4);
+}
+
+/* Информация о друге */
+
+.friend-info {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  min-width: 0;
+}
+
+.friend-info strong,
+.friend-info span {
+  display: block;
+  overflow-wrap: anywhere;
+}
+
+.friend-info strong {
+  color: #f5f5f5;
+  font-size: 14px;
+}
+
+.friend-info span {
+  margin-top: 4px;
+  color: #aaa;
+  font-size: 13px;
+}
+
+/* Аватар */
+
+.friend-avatar {
+  width: 44px;
+  height: 44px;
+  flex-shrink: 0;
+  object-fit: cover;
+  border-radius: 50%;
+  border: 2px solid rgba(213, 173, 98, 0.6);
+  background: #29292d;
+}
+
+/* Ссылки на профили */
+
+.friend-profile-link {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  flex: 1;
+  min-width: 0;
+  color: inherit;
+  text-decoration: none;
+  cursor: pointer;
+  transition: opacity 0.2s ease;
+}
+
+.friend-profile-link:hover {
+  opacity: 0.75;
+}
+
+.friend-profile-link strong,
+.friend-profile-link span {
+  display: block;
+}
+
+.friend-profile-link strong {
+  margin-bottom: 4px;
+}
+
+/* Кнопки действий */
+
+.friend-actions {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+  flex-shrink: 0;
+}
+
+/* Адаптация для телефона */
+
+@media (max-width: 600px) {
+  .friends-section {
+    width: calc(100% - 24px);
+    margin: 35px auto;
+  }
+
+  .friends-container {
+    padding: 20px 15px;
+  }
+
+  .friends-container h2 {
+    font-size: 22px;
+  }
+
+  .friend-search-row {
+    flex-direction: column;
+  }
+
+  .friend-item {
+    align-items: flex-start;
+    flex-direction: column;
+  }
+
+  .friend-actions {
+    width: 100%;
+  }
+}
+/* =================================
+   ОБЩИЙ ФОН СТРАНИЦЫ ПРОФИЛЯ
+================================= */
+
+html {
+  min-height: 100%;
+  background: #0d0d0d;
+}
+
+body {
+  min-height: 100vh;
+  background:
+    linear-gradient(
+      rgba(8, 8, 8, 0.72),
+      rgba(8, 8, 8, 0.82)
+    ),
+    url("https://s.rsg.sc/sc/images/games/RDR2/bg.jpg")
+    center center / cover fixed no-repeat;
+
+  background-color: #0d0d0d;
+}
+
+/* Фон глав теперь прозрачный */
+.taskjob-main-section {
+  background: transparent !important;
+}
+
+/* ===== КНОПКА ВХОДА В ШАПКЕ ===== */
+
+.profile-topbar .auth-link {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 110px;
+  padding: 12px 24px;
+  box-sizing: border-box;
+
+  color: #171717;
+  background: linear-gradient(135deg, #e5c47e, #bd9147);
+
+  border: 1px solid #d5ad62;
+  border-radius: 10px;
+
+  font-family: 'Inter', sans-serif;
+  font-size: 14px;
+  font-weight: 800;
+  text-decoration: none;
+
+  cursor: pointer;
+  transition: all .25s ease;
+}
+
+.profile-topbar .auth-link:hover {
+  color: #111;
+  background: linear-gradient(135deg, #f0d18b, #d5ad62);
+  box-shadow: 0 5px 20px rgba(213, 173, 98, .25);
+  transform: translateY(-2px);
+}
+
+.profile-topbar .auth-link:active {
+  transform: translateY(0);
+}
+
+/* =========================================
+   TTFBB COMPANY — АВТОРИЗАЦИЯ И РЕГИСТРАЦИЯ
+========================================= */
+
+.ttfbb-auth-dialog {
+  width: min(430px, calc(100% - 30px));
+  max-width: 430px;
+  max-height: 90vh;
+  overflow-y: auto;
+  padding: 0;
+  box-sizing: border-box;
+
+  color: #f5f1e8;
+  background:
+    linear-gradient(rgba(15, 15, 16, .94), rgba(12, 12, 13, .97)),
+    url("https://s.rsg.sc/sc/images/games/RDR2/bg.jpg") center / cover;
+
+  border: 1px solid rgba(213, 173, 98, .5);
+  border-radius: 16px;
+  box-shadow: 0 25px 80px rgba(0, 0, 0, .8);
+
+  font-family: 'Inter', sans-serif;
+}
+
+.ttfbb-auth-dialog::backdrop {
+  background: rgba(0, 0, 0, .8);
+  backdrop-filter: blur(7px);
+}
+
+/* Верхняя часть */
+
+.ttfbb-auth-dialog .auth-dialog-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin: 0;
+  padding: 22px 25px;
+
+  border-bottom: 1px solid rgba(213, 173, 98, .2);
+}
+
+.ttfbb-auth-dialog .auth-dialog-head strong {
+  color: #d5ad62;
+  font-size: 19px;
+  font-weight: 800;
+  letter-spacing: 2px;
+}
+
+.ttfbb-auth-dialog .auth-close {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 35px;
+  height: 35px;
+  padding: 0;
+
+  color: #aaa;
+  background: transparent;
+  border: none;
+  border-radius: 50%;
+
+  font-size: 27px;
+  cursor: pointer;
+  transition: .2s;
+}
+
+.ttfbb-auth-dialog .auth-close:hover {
+  color: #d5ad62;
+  background: rgba(213, 173, 98, .1);
+}
+
+/* Переключение входа и регистрации */
+
+.ttfbb-auth-dialog .auth-tabs {
+  display: flex;
+  gap: 10px;
+  padding: 22px 25px 5px;
+}
+
+.ttfbb-auth-dialog .auth-tabs button {
+  flex: 1;
+  padding: 12px 8px;
+
+  color: #aaa;
+  background: rgba(255, 255, 255, .04);
+  border: 1px solid rgba(255, 255, 255, .1);
+  border-radius: 9px;
+
+  font-family: 'Inter', sans-serif;
+  font-size: 13px;
+  font-weight: 700;
+
+  cursor: pointer;
+  transition: .2s;
+}
+
+.ttfbb-auth-dialog .auth-tabs button:hover {
+  color: #d5ad62;
+  border-color: #d5ad62;
+}
+
+.ttfbb-auth-dialog .auth-tabs button.is-active {
+  color: #171717;
+  background: linear-gradient(135deg, #e5c47e, #bd9147);
+  border-color: #d5ad62;
+}
+
+/* Форма */
+
+.ttfbb-auth-dialog .auth-form {
+  display: flex;
+  flex-direction: column;
+  gap: 17px;
+  margin: 0;
+  padding: 22px 25px 25px;
+}
+
+.ttfbb-auth-dialog .auth-form label {
+  display: flex;
+  flex-direction: column;
+  gap: 9px;
+
+  color: #d8d1c5;
+  font-size: 13px;
+  font-weight: 600;
+}
+
+.ttfbb-auth-dialog .auth-form label[hidden] {
+  display: none;
+}
+
+/* Поля ввода */
+
+.ttfbb-auth-dialog .auth-form input {
+  width: 100%;
+  min-height: 45px;
+  padding: 12px 14px;
+  box-sizing: border-box;
+
+  color: #fff;
+  background: rgba(0, 0, 0, .5);
+  border: 1px solid #45413a;
+  border-radius: 9px;
+  outline: none;
+
+  font-family: 'Inter', sans-serif;
+  font-size: 14px;
+
+  transition: border-color .2s, box-shadow .2s;
+}
+
+.ttfbb-auth-dialog .auth-form input:focus {
+  border-color: #d5ad62;
+  box-shadow: 0 0 0 3px rgba(213, 173, 98, .12);
+}
+
+.ttfbb-auth-dialog .auth-form input::placeholder {
+  color: #777;
+}
+
+/* Основная кнопка */
+
+.ttfbb-auth-dialog .auth-submit {
+  width: 100%;
+  min-height: 48px;
+  margin-top: 5px;
+  padding: 13px 18px;
+
+  color: #171717;
+  background: linear-gradient(135deg, #e5c47e, #bd9147);
+  border: 1px solid #d5ad62;
+  border-radius: 9px;
+
+  font-family: 'Inter', sans-serif;
+  font-size: 14px;
+  font-weight: 800;
+  letter-spacing: .5px;
+
+  cursor: pointer;
+  transition: .25s ease;
+}
+
+.ttfbb-auth-dialog .auth-submit:hover {
+  background: linear-gradient(135deg, #f0d18b, #d5ad62);
+  box-shadow: 0 5px 20px rgba(213, 173, 98, .2);
+  transform: translateY(-2px);
+}
+
+.ttfbb-auth-dialog .auth-submit:disabled {
+  opacity: .55;
+  cursor: wait;
+  transform: none;
+}
+
+/* Сообщения */
+
+.ttfbb-auth-dialog .auth-feedback {
+  min-height: 18px;
+  margin: 0;
+
+  color: #d5ad62;
+  font-size: 13px;
+  line-height: 1.5;
+  text-align: center;
+}
+
+/* Анимация */
+
+.ttfbb-auth-dialog[open] {
+  animation: authDialogShow .25s ease;
+}
+
+@keyframes authDialogShow {
+  from {
+    opacity: 0;
+    transform: translateY(15px) scale(.97);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+/* Телефоны */
+
+@media (max-width: 480px) {
+  .ttfbb-auth-dialog {
+    width: calc(100% - 24px);
+    border-radius: 13px;
+  }
+
+  .ttfbb-auth-dialog .auth-dialog-head {
+    padding: 18px 20px;
+  }
+
+  .ttfbb-auth-dialog .auth-tabs {
+    padding: 18px 20px 5px;
+  }
+
+  .ttfbb-auth-dialog .auth-form {
+    padding: 20px;
+  }
+}
+
+/* ===== ОГРАНИЧЕНИЕ ДОСТУПА ===== */
+
+.site-access-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 99999;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+  box-sizing: border-box;
+
+  background:
+    linear-gradient(rgba(5, 5, 5, .88), rgba(5, 5, 5, .94)),
+    url("https://s.rsg.sc/sc/images/games/RDR2/bg.jpg")
+    center / cover fixed;
+  backdrop-filter: blur(8px);
+}
+
+.site-access-card {
+  width: min(440px, 100%);
+  padding: 40px 30px;
+  box-sizing: border-box;
+  text-align: center;
+
+  color: #f5f1e8;
+  background: #171719;
+  border: 1px solid rgba(213, 173, 98, .5);
+  border-radius: 17px;
+  box-shadow: 0 20px 70px rgba(0, 0, 0, .7);
+
+  font-family: 'Inter', sans-serif;
+}
+
+.site-access-icon {
+  margin-bottom: 18px;
+  font-size: 42px;
+}
+
+.site-access-card h1 {
+  margin: 0 0 15px;
+  color: #d5ad62;
+  font-size: 25px;
+  font-weight: 800;
+}
+
+.site-access-card p {
+  margin: 0 0 25px;
+  color: #aaa;
+  font-size: 14px;
+  line-height: 1.7;
+}
+
+.site-access-card button {
+  width: 100%;
+  padding: 14px 20px;
+
+  color: #171717;
+  background: linear-gradient(135deg, #e5c47e, #bd9147);
+  border: 1px solid #d5ad62;
+  border-radius: 9px;
+
+  font-family: 'Inter', sans-serif;
+  font-size: 14px;
+  font-weight: 800;
+  cursor: pointer;
+  transition: .2s ease;
+}
+
+.site-access-card button:hover {
+  background: linear-gradient(135deg, #f0d18b, #d5ad62);
+  transform: translateY(-2px);
 }
