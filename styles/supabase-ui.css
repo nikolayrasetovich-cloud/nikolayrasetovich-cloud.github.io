@@ -53,3 +53,54 @@
 .admin-status-draft { color:#e7c47b; background:#3a2f18; }
 .admin-status-archived { color:#aaa; }
 @media(max-width:700px) { .admin-form { grid-template-columns:1fr; } .admin-panel { padding:17px; } .admin-wide { grid-column:auto; } }
+/* Экран ограничения доступа */
+.site-access-overlay {
+    position: fixed !important;
+    inset: 0 !important;
+    z-index: 999999 !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    padding: 20px !important;
+    background: rgba(0, 0, 0, 0.92) !important;
+    backdrop-filter: blur(12px);
+}
+
+.site-access-card {
+    width: 100%;
+    max-width: 420px;
+    padding: 35px 25px;
+    border: 1px solid rgba(255,255,255,.15);
+    border-radius: 20px;
+    background: #151515;
+    color: white;
+    text-align: center;
+    box-shadow: 0 20px 70px rgba(0,0,0,.6);
+}
+
+.site-access-icon {
+    font-size: 48px;
+    margin-bottom: 15px;
+}
+
+.site-access-card h1 {
+    font-size: 25px;
+    margin-bottom: 12px;
+}
+
+.site-access-card p {
+    color: #bbb;
+    line-height: 1.6;
+}
+
+.site-access-card button {
+    width: 100%;
+    margin-top: 20px;
+    padding: 13px;
+    border: 0;
+    border-radius: 10px;
+    background: white;
+    color: #111;
+    font-weight: 800;
+    cursor: pointer;
+}
