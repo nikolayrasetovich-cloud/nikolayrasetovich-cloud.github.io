@@ -282,8 +282,35 @@
             transform: scale(1.04);
         }
 
-        .coin-button:active {
+        .coin-button:active,
+        .coin-button.is-pressed {
             transform: scale(.90);
+        }
+
+        /* На телефонах анимация нажатия срабатывает через Pointer Events */
+        .coin-button {
+            -webkit-tap-highlight-color: transparent;
+            user-select: none;
+            -webkit-user-select: none;
+        }
+
+        /* Картинки нельзя выделить или перетащить как текст */
+        img {
+            user-select: none;
+            -webkit-user-select: none;
+            -webkit-user-drag: none;
+            -webkit-touch-callout: none;
+        }
+
+        .coin-button img {
+            pointer-events: none;
+        }
+
+        @media (hover: none) and (pointer: coarse) {
+            .coin-button:active,
+            .coin-button.is-pressed {
+                transform: scale(.90);
+            }
         }
 
         .coin-button:disabled {
@@ -971,6 +998,23 @@
     </main>
 
     <script type="module" src="js/ttfboom.js"></script>
+    <script>
+        // Надёжная анимация нажатия мышью и пальцем на сенсорных экранах
+        (() => {
+            const coinButton = document.getElementById('coinButton');
+            if (!coinButton) return;
+
+            const releasePress = () => coinButton.classList.remove('is-pressed');
+
+            coinButton.addEventListener('pointerdown', () => {
+                coinButton.classList.add('is-pressed');
+            });
+            ['pointerup', 'pointercancel', 'pointerleave'].forEach(eventName => {
+                coinButton.addEventListener(eventName, releasePress);
+            });
+            window.addEventListener('blur', releasePress);
+        })();
+    </script>
 
 </body>
 </html>
