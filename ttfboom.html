@@ -4,1017 +4,1518 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
     <title>TTFBB CLICKER</title>
-
     <meta name="description" content="TTFBB CLICKER — развивай свой игровой баланс, улучшай навыки и соревнуйся с другими игроками.">
-
     <link rel="icon" href="/images/TTF.png">
-
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
 
-    <link rel="stylesheet" href="css/game.css">
-
     <style>
-        :root {
-            --bg: #08090d;
-            --panel: rgba(255,255,255,.045);
-            --panel-border: rgba(255,255,255,.09);
-            --text: #f5f5f7;
-            --muted: #92939e;
-            --accent: #a78bfa;
-            --accent-2: #6d5dfc;
-            --green: #65e6a5;
-        }
-
-        * {
-            box-sizing: border-box;
-            margin: 0;
-            padding: 0;
-        }
-
-        html {
-            scroll-behavior: smooth;
-        }
-
-        body {
-            min-height: 100vh;
-            background: var(--bg);
-            color: var(--text);
-            font-family: "Inter", sans-serif;
-            overflow-x: hidden;
-        }
-
-        button, a {
-            font: inherit;
-        }
-
-        button {
-            color: inherit;
-        }
-
-        a {
-            color: inherit;
-            text-decoration: none;
-        }
-
-        .background {
-            position: fixed;
-            inset: 0;
-            z-index: -1;
-            pointer-events: none;
-            background:
-                radial-gradient(ellipse at 50% 15%, rgba(109,93,252,.13), transparent 45%),
-                radial-gradient(ellipse at 10% 80%, rgba(90,70,180,.07), transparent 40%),
-                #08090d;
-        }
-
-        /* НАВИГАЦИЯ */
-
-        .game-navbar {
-            width: min(1160px, calc(100% - 40px));
-            height: 76px;
-            margin: 20px auto 0;
-            padding: 0 24px;
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            border: 1px solid var(--panel-border);
-            border-radius: 20px;
-            background: rgba(18,18,25,.72);
-            backdrop-filter: blur(20px);
-        }
-
-        .game-logo {
-            display: flex;
-            align-items: center;
-            gap: 11px;
-            font-size: 17px;
-            font-weight: 800;
-        }
-
-        .game-logo img {
-            width: 36px;
-            height: 36px;
-            object-fit: contain;
-        }
-
-        .game-logo b {
-            color: var(--accent);
-        }
-
-        .back-button {
-            padding: 10px 16px;
-            border: 1px solid var(--panel-border);
-            border-radius: 12px;
-            color: #d0d0d8;
-            font-size: 13px;
-            transition: .2s;
-        }
-
-        .back-button:hover {
-            background: rgba(255,255,255,.08);
-            border-color: rgba(167,139,250,.4);
-        }
-
-        /* ОСНОВНОЙ КОНТЕЙНЕР */
-
-        .game-container {
-            width: min(1000px, calc(100% - 40px));
-            margin: 0 auto;
-        }
-
-        .game-heading {
-            text-align: center;
-            padding: 65px 0 35px;
-        }
-
-        .game-label {
-            display: inline-block;
-            margin-bottom: 16px;
-            color: var(--accent);
-            font-size: 10px;
-            font-weight: 800;
-            letter-spacing: 2.5px;
-        }
-
-        .game-heading h1 {
-            font-size: clamp(34px, 6vw, 58px);
-            font-weight: 900;
-            letter-spacing: -2.5px;
-        }
-
-        .game-heading p {
-            margin-top: 12px;
-            color: var(--muted);
-            font-size: 14px;
-        }
-
-        /* СТАТИСТИКА */
-
-        .game-stats {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 14px;
-        }
-
-        .stat-card {
-            min-height: 112px;
-            padding: 22px;
-            display: flex;
-            align-items: center;
-            gap: 16px;
-            border: 1px solid var(--panel-border);
-            border-radius: 18px;
-            background: var(--panel);
-            backdrop-filter: blur(15px);
-        }
-
-        .stat-icon {
-            width: 44px;
-            height: 44px;
-            display: grid;
-            place-items: center;
-            border-radius: 14px;
-            background: rgba(167,139,250,.1);
-            font-size: 22px;
-        }
-
-        .stat-label {
-            display: block;
-            margin-bottom: 7px;
-            color: var(--muted);
-            font-size: 9px;
-            font-weight: 800;
-            letter-spacing: 1.2px;
-        }
-
-        .stat-card strong {
-            font-size: 23px;
-            font-weight: 800;
-        }
-
-        .stat-card small {
-            display: block;
-            margin-top: 3px;
-            color: var(--muted);
-            font-size: 10px;
-        }
-
-        .stat-divider {
-            color: var(--muted);
-            font-size: 15px;
-        }
-
-        .energy-progress,
-        .experience-progress {
-            height: 5px;
-            margin-top: 9px;
-            overflow: hidden;
-            border-radius: 10px;
-            background: rgba(255,255,255,.09);
-        }
-
-        .energy-progress {
-            width: 120px;
-        }
-
-        .energy-progress div,
-        .experience-progress div {
-            width: 100%;
-            height: 100%;
-            border-radius: inherit;
-            background: linear-gradient(90deg, var(--accent-2), #c4a7ff);
-            transition: width .3s ease;
-        }
-
-        /* КЛИКЕР */
-
-        .clicker-section {
-            min-height: 420px;
-            margin-top: 22px;
-            padding: 30px 20px;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            border: 1px solid var(--panel-border);
-            border-radius: 24px;
-            background:
-                radial-gradient(circle at center, rgba(109,93,252,.09), transparent 55%),
-                rgba(255,255,255,.025);
-        }
-
-        .clicker-top-info {
-            width: min(320px, 100%);
-            display: flex;
-            justify-content: space-between;
-            color: var(--muted);
-            font-size: 10px;
-            font-weight: 800;
-            letter-spacing: 1px;
-        }
-
-        #clickPower {
-            color: var(--green);
-            letter-spacing: 0;
-        }
-
-        .coin-button {
-            position: relative;
-            width: 220px;
-            height: 220px;
-            margin: 24px 0 20px;
-            display: grid;
-            place-items: center;
-            border: none;
-            border-radius: 50%;
-            background: transparent;
-            cursor: pointer;
-            touch-action: manipulation;
-            transition: transform .08s ease-out;
-        }
-
-        .coin-button:hover {
-            transform: scale(1.04);
-        }
-
-        .coin-button:active,
-        .coin-button.is-pressed {
-            transform: scale(.90);
-        }
-
-        /* На телефонах анимация нажатия срабатывает через Pointer Events */
-        .coin-button {
-            -webkit-tap-highlight-color: transparent;
-            user-select: none;
-            -webkit-user-select: none;
-        }
-
-        /* Картинки нельзя выделить или перетащить как текст */
-        img {
-            user-select: none;
-            -webkit-user-select: none;
-            -webkit-user-drag: none;
-            -webkit-touch-callout: none;
-        }
-
-        .coin-button img {
-            pointer-events: none;
-        }
-
-        @media (hover: none) and (pointer: coarse) {
-            .coin-button:active,
-            .coin-button.is-pressed {
-                transform: scale(.90);
-            }
-        }
-
-        .coin-button:disabled {
-            cursor: not-allowed;
-            opacity: 1;
-        }
-
-        .coin-button img {
-            position: relative;
-            z-index: 1;
-            width: 100%;
-            height: 100%;
-            object-fit: contain;
-            user-select: none;
-            -webkit-user-drag: none;
-            filter: drop-shadow(0 12px 28px rgba(130,100,255,.25));
-        }
-
-        .coin-glow {
-            position: absolute;
-            inset: 10%;
-            border-radius: 50%;
-            background: rgba(139,112,255,.24);
-            filter: blur(35px);
-        }
-
-        .clicker-hint {
-            color: var(--muted);
-            font-size: 10px;
-            font-weight: 700;
-            letter-spacing: 1.5px;
-            text-align: center;
-        }
-
-        .game-message {
-            min-height: 20px;
-            margin-top: 13px;
-            color: var(--accent);
-            font-size: 12px;
-            text-align: center;
-        }
-
-        /* ОПЫТ */
-
-        .experience-section {
-            margin-top: 18px;
-            padding: 22px;
-            border: 1px solid var(--panel-border);
-            border-radius: 18px;
-            background: var(--panel);
-        }
-
-        .experience-heading {
-            display: flex;
-            justify-content: space-between;
-            color: var(--muted);
-            font-size: 10px;
-            font-weight: 800;
-            letter-spacing: 1px;
-        }
-
-        .experience-heading strong {
-            color: var(--accent);
-        }
-
-        .experience-progress {
-            height: 7px;
-        }
-
-        /* МЕНЮ */
-
-        .game-menu {
-            margin-top: 22px;
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 14px;
-        }
-
-        .game-menu-card {
-            min-height: 140px;
-            padding: 22px;
-            display: flex;
-            flex-direction: column;
-            align-items: flex-start;
-            justify-content: center;
-            gap: 9px;
-            border: 1px solid var(--panel-border);
-            border-radius: 18px;
-            background: var(--panel);
-            text-align: left;
-            cursor: pointer;
-            transition: .2s ease;
-        }
-
-        .game-menu-card:hover {
-            transform: translateY(-3px);
-            border-color: rgba(167,139,250,.45);
-            background: rgba(167,139,250,.07);
-        }
-
-        .game-menu-card span {
-            font-size: 25px;
-        }
-
-        .game-menu-card strong {
-            font-size: 14px;
-        }
-
-        .game-menu-card small {
-            color: var(--muted);
-            font-size: 11px;
-        }
-
-        /* ПАНЕЛЬ РАЗДЕЛОВ */
-
-        .game-content {
-            margin-top: 22px;
-            padding: 25px;
-            border: 1px solid var(--panel-border);
-            border-radius: 20px;
-            background: rgba(20,19,30,.88);
-            backdrop-filter: blur(18px);
-        }
-
-        .game-content[hidden] {
-            display: none;
-        }
-
-        .game-content-header {
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            margin-bottom: 20px;
-        }
-
-        .game-content-header h2 {
-            font-size: 20px;
-        }
-
-        #closeGameContent {
-            width: 36px;
-            height: 36px;
-            border: 1px solid var(--panel-border);
-            border-radius: 11px;
-            background: transparent;
-            color: var(--muted);
-            font-size: 23px;
-            cursor: pointer;
-            transition: .2s;
-        }
-
-        #closeGameContent:hover {
-            color: white;
-            border-color: var(--accent);
-            background: rgba(167,139,250,.1);
-        }
-
-        /* МАГАЗИН УЛУЧШЕНИЙ */
-
-        .upgrades-grid {
-            display: grid;
-            grid-template-columns: repeat(2, minmax(0, 1fr));
-            gap: 20px;
-            width: 100%;
-            margin: 20px 0;
-            align-items: stretch;
-        }
-
-        .upgrade-card {
-            position: relative;
-            display: flex;
-            flex-direction: column;
-            align-items: stretch;
-            min-width: 0;
-            width: 100%;
-            padding: 24px;
-            overflow: hidden;
-
-            color: white;
-            text-align: left;
-
-            background: linear-gradient(
-                145deg,
-                rgba(139,92,246,.13),
-                rgba(24,24,39,.96) 55%,
-                rgba(15,15,25,.98)
-            );
-
-            border: 1px solid rgba(167,139,250,.22);
-            border-radius: 20px;
-
-            box-shadow:
-                0 10px 35px rgba(0,0,0,.22),
-                inset 0 1px 0 rgba(255,255,255,.04);
-
-            transition: transform .25s, border-color .25s, box-shadow .25s;
-        }
-
-        .upgrade-card::before {
-            content: "";
-            position: absolute;
-            top: 0;
-            left: 18px;
-            right: 18px;
-            height: 2px;
-            background: linear-gradient(
-                90deg,
-                transparent,
-                #8b5cf6,
-                #c4b5fd,
-                transparent
-            );
-        }
-
-        .upgrade-card:hover {
-            transform: translateY(-4px);
-            border-color: rgba(167,139,250,.55);
-            box-shadow:
-                0 16px 40px rgba(0,0,0,.3),
-                0 0 25px rgba(139,92,246,.1);
-        }
-
-        .upgrade-icon {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            width: 58px;
-            height: 58px;
-            margin-bottom: 18px;
-            font-size: 27px;
-            background: rgba(139,92,246,.15);
-            border: 1px solid rgba(167,139,250,.25);
-            border-radius: 17px;
-        }
-
-        .upgrade-card h3 {
-            margin: 0 0 10px;
-            color: #fff;
-            font-size: 20px;
-            font-weight: 800;
-            line-height: 1.3;
-        }
-
-        .upgrade-card > p {
-            margin: 0 0 20px;
-            color: #a5a5b8;
-            font-size: 14px;
-            line-height: 1.6;
-        }
-
-        .upgrade-info {
-            display: flex;
-            flex-direction: column;
-            gap: 0;
-            padding: 5px 14px;
-            margin-bottom: 18px;
-            background: rgba(255,255,255,.035);
-            border: 1px solid rgba(255,255,255,.06);
-            border-radius: 13px;
-        }
-
-        .upgrade-info > div {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            gap: 12px;
-            padding: 11px 0;
-            border-bottom: 1px solid rgba(255,255,255,.055);
-        }
-
-        .upgrade-info > div:last-child {
-            border-bottom: none;
-        }
-
-        .upgrade-info span {
-            color: #9696aa;
-            font-size: 13px;
-        }
-
-        .upgrade-info strong {
-            color: #e9e3ff;
-            font-size: 14px;
-            font-weight: 700;
-            text-align: right;
-        }
-
-        .upgrade-price {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            gap: 10px;
-            padding: 14px 15px;
-            margin-bottom: 14px;
-            color: #b8b5c9;
-            font-size: 14px;
-            background: rgba(139,92,246,.09);
-            border: 1px solid rgba(139,92,246,.16);
-            border-radius: 12px;
-        }
-
-        .upgrade-price strong {
-            color: #c4b5fd;
-            font-size: 16px;
-            font-weight: 800;
-        }
-
-        .game-upgrade-button {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            width: 100%;
-            min-height: 49px;
-            padding: 13px 18px;
-
-            color: white;
-            font-family: inherit;
-            font-size: 14px;
-            font-weight: 800;
-
-            background: linear-gradient(110deg,#7045dc,#9565f5,#7045dc);
-            background-size: 200% 100%;
-
-            border: 1px solid rgba(196,181,253,.3);
-            border-radius: 13px;
-
-            cursor: pointer;
-
-            box-shadow:
-                0 5px 18px rgba(124,75,230,.25),
-                inset 0 1px 0 rgba(255,255,255,.15);
-
-            transition: transform .2s, box-shadow .2s, background-position .3s;
-        }
-
-        .game-upgrade-button:hover:not(:disabled) {
-            transform: translateY(-2px);
-            background-position: 100% 0;
-            box-shadow: 0 8px 25px rgba(139,92,246,.4);
-        }
-
-        .game-upgrade-button:active:not(:disabled) {
-            transform: scale(.98);
-        }
-
-        .game-upgrade-button:disabled {
-            color: #858397;
-            background: rgba(255,255,255,.07);
-            border-color: rgba(255,255,255,.06);
-            box-shadow: none;
-            cursor: not-allowed;
-            opacity: .65;
-        }
-
-        .upgrade-hint {
-            min-height: 18px;
-            margin: 12px 0 0 !important;
-            color: #858397 !important;
-            font-size: 12px !important;
-            line-height: 1.5 !important;
-            text-align: center;
-        }
-
-        /* ПОДВАЛ */
-
-        .game-footer {
-            min-height: 90px;
-            margin-top: 40px;
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            border-top: 1px solid var(--panel-border);
-            color: var(--muted);
-            font-size: 10px;
-            font-weight: 700;
-            letter-spacing: 1px;
-        }
-
-        /* ПЛАНШЕТЫ И ТЕЛЕФОНЫ */
-
-        @media (max-width: 700px) {
-            .game-navbar {
-                width: calc(100% - 24px);
-                height: 64px;
-                margin-top: 12px;
-                padding: 0 14px;
-            }
-
-            .game-logo {
-                font-size: 14px;
-            }
-
-            .game-logo img {
-                width: 30px;
-                height: 30px;
-            }
-
-            .back-button {
-                padding: 9px 11px;
-                font-size: 11px;
-            }
-
-            .game-container {
-                width: calc(100% - 24px);
-            }
-
-            .game-heading {
-                padding: 48px 0 27px;
-            }
-
-            .game-stats {
-                grid-template-columns: 1fr;
-                gap: 10px;
-            }
-
-            .stat-card {
-                min-height: 88px;
-                padding: 17px;
-            }
-
-            .clicker-section {
-                min-height: 350px;
-                padding: 25px 14px;
-            }
-
-            .coin-button {
-                width: 190px;
-                height: 190px;
-            }
-
-            .game-menu {
-                grid-template-columns: repeat(2, 1fr);
-                gap: 10px;
-            }
-
-            .game-menu-card {
-                min-height: 125px;
-                padding: 16px;
-            }
-
-            .upgrades-grid {
-                grid-template-columns: 1fr;
-                gap: 15px;
-            }
-
-            .upgrade-card {
-                padding: 20px;
-                border-radius: 17px;
-            }
-
-            .upgrade-card h3 {
-                font-size: 18px;
-            }
-
-            .game-footer {
-                font-size: 8px;
-                gap: 10px;
-            }
-        }
-
-        @media (max-width: 380px) {
-            .game-menu-card {
-                padding: 12px;
-            }
-
-            .game-menu-card strong {
-                font-size: 12px;
-            }
-
-            .coin-button {
-                width: 165px;
-                height: 165px;
-            }
-
-            .upgrade-card {
-                padding: 16px;
-            }
-
-            .upgrade-info {
-                padding-left: 10px;
-                padding-right: 10px;
-            }
-        }
+
+:root {
+    --bg: #08090d;
+    --panel: rgba(255,255,255,.045);
+    --panel-border: rgba(255,255,255,.09);
+    --text: #f5f5f7;
+    --muted: #92939e;
+    --accent: #a78bfa;
+    --accent-2: #6d5dfc;
+    --green: #65e6a5;
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+html { scroll-behavior: smooth; }
+
+body {
+    min-height: 100vh;
+    background: var(--bg);
+    color: var(--text);
+    font-family: "Inter", sans-serif;
+    overflow-x: hidden;
+}
+
+button, a { font: inherit; }
+button { color: inherit; }
+a { color: inherit; text-decoration: none; }
+
+img {
+    user-select: none;
+    -webkit-user-select: none;
+    -webkit-user-drag: none;
+    -webkit-touch-callout: none;
+}
+
+.background {
+    position: fixed;
+    inset: 0;
+    z-index: -1;
+    pointer-events: none;
+    background:
+        radial-gradient(ellipse at 50% 15%, rgba(109,93,252,.13), transparent 45%),
+        radial-gradient(ellipse at 10% 80%, rgba(90,70,180,.07), transparent 40%),
+        #08090d;
+}
+
+/* ================= НАВИГАЦИЯ ================= */
+
+.game-navbar {
+    width: min(1160px, calc(100% - 40px));
+    min-height: 76px;
+    margin: 20px auto 0;
+    padding: 0 24px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 20px;
+    border: 1px solid var(--panel-border);
+    border-radius: 20px;
+    background: rgba(18,18,25,.72);
+    backdrop-filter: blur(20px);
+}
+
+.game-logo {
+    display: flex;
+    align-items: center;
+    gap: 11px;
+    font-size: 17px;
+    font-weight: 800;
+    flex-shrink: 0;
+}
+
+.game-logo img {
+    width: 36px;
+    height: 36px;
+    object-fit: contain;
+}
+
+.game-logo b { color: var(--accent); }
+
+.game-nav {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 22px;
+}
+
+.game-nav a {
+    color: #d0d0d8;
+    font-size: 10px;
+    font-weight: 800;
+    letter-spacing: .7px;
+    transition: color .2s;
+    white-space: nowrap;
+}
+
+.game-nav a:hover { color: var(--accent); }
+
+.back-button {
+    padding: 10px 16px;
+    border: 1px solid var(--panel-border);
+    border-radius: 12px;
+    color: #d0d0d8;
+    font-size: 13px;
+    transition: .2s;
+    white-space: nowrap;
+    flex-shrink: 0;
+}
+
+.back-button:hover {
+    background: rgba(255,255,255,.08);
+    border-color: rgba(167,139,250,.4);
+}
+
+/* ================= ОСНОВНОЙ КОНТЕЙНЕР ================= */
+
+.game-container {
+    width: min(1000px, calc(100% - 40px));
+    margin: 0 auto;
+}
+
+.game-heading {
+    text-align: center;
+    padding: 65px 0 35px;
+}
+
+.game-label {
+    display: inline-block;
+    margin-bottom: 16px;
+    color: var(--accent);
+    font-size: 10px;
+    font-weight: 800;
+    letter-spacing: 2.5px;
+}
+
+.game-heading h1 {
+    font-size: clamp(34px,6vw,58px);
+    font-weight: 900;
+    letter-spacing: -2.5px;
+}
+
+.game-heading p {
+    margin-top: 12px;
+    color: var(--muted);
+    font-size: 14px;
+}
+
+/* ================= СТАТИСТИКА ================= */
+
+.game-stats {
+    display: grid;
+    grid-template-columns: repeat(3,1fr);
+    gap: 14px;
+}
+
+.stat-card {
+    min-height: 112px;
+    padding: 22px;
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    border: 1px solid var(--panel-border);
+    border-radius: 18px;
+    background: var(--panel);
+    backdrop-filter: blur(15px);
+}
+
+.stat-icon {
+    width: 44px;
+    height: 44px;
+    display: grid;
+    place-items: center;
+    border-radius: 14px;
+    background: rgba(167,139,250,.1);
+    font-size: 22px;
+}
+
+.stat-label {
+    display: block;
+    margin-bottom: 7px;
+    color: var(--muted);
+    font-size: 9px;
+    font-weight: 800;
+    letter-spacing: 1.2px;
+}
+
+.stat-card strong {
+    font-size: 23px;
+    font-weight: 800;
+}
+
+.stat-card small {
+    display: block;
+    margin-top: 3px;
+    color: var(--muted);
+    font-size: 10px;
+}
+
+.stat-divider {
+    color: var(--muted);
+    font-size: 15px;
+}
+
+.energy-progress, .experience-progress {
+    height: 5px;
+    margin-top: 9px;
+    overflow: hidden;
+    border-radius: 10px;
+    background: rgba(255,255,255,.09);
+}
+
+.energy-progress { width: 120px; }
+
+.energy-progress div, .experience-progress div {
+    width: 100%;
+    height: 100%;
+    border-radius: inherit;
+    background: linear-gradient(90deg,var(--accent-2),#c4a7ff);
+    transition: width .3s ease;
+}
+
+/* ================= КЛИКЕР ================= */
+
+.clicker-section {
+    min-height: 420px;
+    margin-top: 22px;
+    padding: 30px 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    border: 1px solid var(--panel-border);
+    border-radius: 24px;
+    background:
+        radial-gradient(circle at center,rgba(109,93,252,.09),transparent 55%),
+        rgba(255,255,255,.025);
+}
+
+.clicker-top-info {
+    width: min(320px,100%);
+    display: flex;
+    justify-content: space-between;
+    color: var(--muted);
+    font-size: 10px;
+    font-weight: 800;
+    letter-spacing: 1px;
+}
+
+#clickPower {
+    color: var(--green);
+    letter-spacing: 0;
+}
+
+.coin-button {
+    position: relative;
+    width: 220px;
+    height: 220px;
+    margin: 24px 0 20px;
+    display: grid;
+    place-items: center;
+    border: none;
+    border-radius: 50%;
+    background: transparent;
+    cursor: pointer;
+    touch-action: manipulation;
+    transition: transform .08s ease-out;
+    -webkit-tap-highlight-color: transparent;
+    user-select: none;
+    -webkit-user-select: none;
+}
+
+.coin-button:hover { transform: scale(1.04); }
+
+.coin-button:active,
+.coin-button.is-pressed { transform: scale(.90); }
+
+.coin-button:disabled {
+    cursor: not-allowed;
+    opacity: 1;
+}
+
+.coin-button img {
+    position: relative;
+    z-index: 1;
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    pointer-events: none;
+    filter: drop-shadow(0 12px 28px rgba(130,100,255,.25));
+}
+
+.coin-glow {
+    position: absolute;
+    inset: 10%;
+    border-radius: 50%;
+    background: rgba(139,112,255,.24);
+    filter: blur(35px);
+}
+
+.clicker-hint {
+    color: var(--muted);
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 1.5px;
+    text-align: center;
+}
+
+.game-message {
+    min-height: 20px;
+    margin-top: 13px;
+    color: var(--accent);
+    font-size: 12px;
+    text-align: center;
+}
+
+/* ================= ОПЫТ ================= */
+
+.experience-section {
+    margin-top: 18px;
+    padding: 22px;
+    border: 1px solid var(--panel-border);
+    border-radius: 18px;
+    background: var(--panel);
+}
+
+.experience-heading {
+    display: flex;
+    justify-content: space-between;
+    color: var(--muted);
+    font-size: 10px;
+    font-weight: 800;
+    letter-spacing: 1px;
+}
+
+.experience-heading strong { color: var(--accent); }
+
+.experience-progress { height: 7px; }
+
+/* ================= МЕНЮ ================= */
+
+.game-menu {
+    margin-top: 22px;
+    display: grid;
+    grid-template-columns: repeat(3,1fr);
+    gap: 14px;
+}
+
+.game-menu-card {
+    min-height: 140px;
+    padding: 22px;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: center;
+    gap: 9px;
+    border: 1px solid var(--panel-border);
+    border-radius: 18px;
+    background: var(--panel);
+    text-align: left;
+    cursor: pointer;
+    transition: .2s ease;
+}
+
+.game-menu-card:hover {
+    transform: translateY(-3px);
+    border-color: rgba(167,139,250,.45);
+    background: rgba(167,139,250,.07);
+}
+
+.game-menu-card span { font-size: 25px; }
+.game-menu-card strong { font-size: 14px; }
+.game-menu-card small { color: var(--muted); font-size: 11px; }
+
+/* ================= ПАНЕЛЬ РАЗДЕЛОВ ================= */
+
+.game-content {
+    margin-top: 22px;
+    padding: 25px;
+    border: 1px solid var(--panel-border);
+    border-radius: 20px;
+    background: rgba(20,19,30,.88);
+    backdrop-filter: blur(18px);
+}
+
+.game-content[hidden] { display: none; }
+
+.game-content-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 20px;
+}
+
+.game-content-header h2 { font-size: 20px; }
+
+#closeGameContent {
+    width: 36px;
+    height: 36px;
+    border: 1px solid var(--panel-border);
+    border-radius: 11px;
+    background: transparent;
+    color: var(--muted);
+    font-size: 23px;
+    cursor: pointer;
+    transition: .2s;
+}
+
+#closeGameContent:hover {
+    color: white;
+    border-color: var(--accent);
+    background: rgba(167,139,250,.1);
+}
+
+/* ================= УЛУЧШЕНИЯ ================= */
+
+.upgrades-grid {
+    display: grid;
+    grid-template-columns: repeat(2,minmax(0,1fr));
+    gap: 20px;
+    width: 100%;
+    margin: 20px 0;
+    align-items: stretch;
+}
+
+.upgrade-card {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+    min-width: 0;
+    width: 100%;
+    padding: 24px;
+    overflow: hidden;
+    color: white;
+    text-align: left;
+    background: linear-gradient(145deg,rgba(139,92,246,.13),rgba(24,24,39,.96) 55%,rgba(15,15,25,.98));
+    border: 1px solid rgba(167,139,250,.22);
+    border-radius: 20px;
+    box-shadow: 0 10px 35px rgba(0,0,0,.22),inset 0 1px 0 rgba(255,255,255,.04);
+    transition: transform .25s,border-color .25s,box-shadow .25s;
+}
+
+.upgrade-card::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 18px;
+    right: 18px;
+    height: 2px;
+    background: linear-gradient(90deg,transparent,#8b5cf6,#c4b5fd,transparent);
+}
+
+.upgrade-card:hover {
+    transform: translateY(-4px);
+    border-color: rgba(167,139,250,.55);
+    box-shadow: 0 16px 40px rgba(0,0,0,.3),0 0 25px rgba(139,92,246,.1);
+}
+
+.upgrade-icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 58px;
+    height: 58px;
+    margin-bottom: 18px;
+    font-size: 27px;
+    background: rgba(139,92,246,.15);
+    border: 1px solid rgba(167,139,250,.25);
+    border-radius: 17px;
+}
+
+.upgrade-card h3 {
+    margin: 0 0 10px;
+    color: #fff;
+    font-size: 20px;
+    font-weight: 800;
+    line-height: 1.3;
+}
+
+.upgrade-card>p {
+    margin: 0 0 20px;
+    color: #a5a5b8;
+    font-size: 14px;
+    line-height: 1.6;
+}
+
+.upgrade-info {
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+    padding: 5px 14px;
+    margin-bottom: 18px;
+    background: rgba(255,255,255,.035);
+    border: 1px solid rgba(255,255,255,.06);
+    border-radius: 13px;
+}
+
+.upgrade-info>div {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 12px;
+    padding: 11px 0;
+    border-bottom: 1px solid rgba(255,255,255,.055);
+}
+
+.upgrade-info>div:last-child { border-bottom: none; }
+.upgrade-info span { color: #9696aa; font-size: 13px; }
+
+.upgrade-info strong {
+    color: #e9e3ff;
+    font-size: 14px;
+    font-weight: 700;
+    text-align: right;
+}
+
+.upgrade-price {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 10px;
+    padding: 14px 15px;
+    margin-bottom: 14px;
+    color: #b8b5c9;
+    font-size: 14px;
+    background: rgba(139,92,246,.09);
+    border: 1px solid rgba(139,92,246,.16);
+    border-radius: 12px;
+}
+
+.upgrade-price strong {
+    color: #c4b5fd;
+    font-size: 16px;
+    font-weight: 800;
+}
+
+.game-upgrade-button {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    min-height: 49px;
+    padding: 13px 18px;
+    color: white;
+    font-family: inherit;
+    font-size: 14px;
+    font-weight: 800;
+    background: linear-gradient(110deg,#7045dc,#9565f5,#7045dc);
+    background-size: 200% 100%;
+    border: 1px solid rgba(196,181,253,.3);
+    border-radius: 13px;
+    cursor: pointer;
+    box-shadow: 0 5px 18px rgba(124,75,230,.25),inset 0 1px 0 rgba(255,255,255,.15);
+    transition: transform .2s,box-shadow .2s,background-position .3s;
+}
+
+.game-upgrade-button:hover:not(:disabled) {
+    transform: translateY(-2px);
+    background-position: 100% 0;
+    box-shadow: 0 8px 25px rgba(139,92,246,.4);
+}
+
+.game-upgrade-button:active:not(:disabled) { transform: scale(.98); }
+
+.game-upgrade-button:disabled {
+    color: #858397;
+    background: rgba(255,255,255,.07);
+    border-color: rgba(255,255,255,.06);
+    box-shadow: none;
+    cursor: not-allowed;
+    opacity: .65;
+}
+
+.upgrade-hint {
+    min-height: 18px;
+    margin: 12px 0 0 !important;
+    color: #858397 !important;
+    font-size: 12px !important;
+    line-height: 1.5 !important;
+    text-align: center;
+}
+
+/* ================= РЕЙТИНГ ================= */
+
+.leaderboard-section { width: 100%; padding: 5px 0 10px; }
+
+.leaderboard-heading { margin-bottom: 28px; text-align: center; }
+
+.leaderboard-eyebrow {
+    display: inline-block;
+    margin-bottom: 10px;
+    color: #b69aff;
+    font-size: 10px;
+    font-weight: 900;
+    letter-spacing: 2.5px;
+}
+
+.leaderboard-heading h2 {
+    color: #fff;
+    font-size: clamp(25px,5vw,36px);
+    font-weight: 900;
+    letter-spacing: -1px;
+}
+
+.leaderboard-heading p {
+    margin-top: 9px;
+    color: var(--muted);
+    font-size: 13px;
+    line-height: 1.6;
+}
+
+/* ================= ПЬЕДЕСТАЛ ================= */
+
+.leaderboard-podium {
+    display: grid;
+    grid-template-columns: repeat(3,minmax(0,1fr));
+    align-items: end;
+    gap: 14px;
+    margin: 0 auto 35px;
+}
+
+.podium-card {
+    position: relative;
+    min-width: 0;
+    min-height: 250px;
+    padding: 25px 14px 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+    overflow: hidden;
+    text-align: center;
+    border: 1px solid rgba(255,255,255,.1);
+    border-radius: 20px;
+    background: linear-gradient(160deg,rgba(42,39,58,.96),rgba(20,19,30,.98));
+    box-shadow: 0 12px 35px rgba(0,0,0,.2);
+}
+
+.podium-card::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 12%;
+    right: 12%;
+    height: 3px;
+    border-radius: 0 0 10px 10px;
+    background: var(--podium-color);
+}
+
+.podium-place-1 {
+    --podium-color: #ffc95c;
+    order: 2;
+    min-height: 285px;
+    background: radial-gradient(ellipse at 50% 0%,rgba(255,190,70,.19),transparent 65%),linear-gradient(160deg,rgba(65,48,29,.98),rgba(25,21,31,.99));
+    border-color: rgba(255,201,92,.48);
+    box-shadow: 0 15px 40px rgba(0,0,0,.28),0 0 30px rgba(255,190,70,.08);
+}
+
+.podium-place-2 {
+    --podium-color: #c7d1e3;
+    order: 1;
+    background: radial-gradient(ellipse at 50% 0%,rgba(190,205,230,.13),transparent 65%),linear-gradient(160deg,rgba(39,44,57,.98),rgba(22,22,32,.99));
+    border-color: rgba(190,205,230,.3);
+}
+
+.podium-place-3 {
+    --podium-color: #d79569;
+    order: 3;
+    background: radial-gradient(ellipse at 50% 0%,rgba(205,130,85,.13),transparent 65%),linear-gradient(160deg,rgba(55,38,33,.98),rgba(24,20,29,.99));
+    border-color: rgba(205,130,85,.3);
+}
+
+.podium-medal { position: absolute; top: 13px; right: 14px; font-size: 24px; }
+
+.podium-rank {
+    margin-bottom: 13px;
+    color: var(--podium-color);
+    font-size: 10px;
+    font-weight: 900;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+}
+
+.podium-avatar {
+    width: 64px;
+    height: 64px;
+    margin-bottom: 13px;
+    display: grid;
+    place-items: center;
+    border: 1px solid color-mix(in srgb,var(--podium-color) 45%,transparent);
+    border-radius: 50%;
+    background: color-mix(in srgb,var(--podium-color) 13%,transparent);
+    font-size: 30px;
+    box-shadow: 0 0 25px color-mix(in srgb,var(--podium-color) 12%,transparent);
+}
+
+.podium-place-1 .podium-avatar {
+    width: 76px;
+    height: 76px;
+    font-size: 36px;
+}
+
+.podium-name {
+    width: 100%;
+    overflow: hidden;
+    color: #fff;
+    font-size: 15px;
+    font-weight: 900;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.podium-level { margin-top: 7px; color: #aaa7b9; font-size: 11px; }
+
+.podium-stats {
+    width: 100%;
+    margin-top: auto;
+    padding-top: 17px;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 8px;
+}
+
+.podium-stats>div {
+    min-width: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+}
+
+.podium-stats strong {
+    overflow: hidden;
+    color: var(--podium-color);
+    font-size: 14px;
+    font-weight: 900;
+    text-overflow: ellipsis;
+}
+
+.podium-stats small {
+    color: #9693a5;
+    font-size: 9px;
+    font-weight: 800;
+    letter-spacing: .7px;
+}
+
+/* ================= ОСТАЛЬНЫЕ ИГРОКИ ================= */
+
+.leaderboard-rest { margin-top: 30px; }
+
+.leaderboard-rest-title,
+.leaderboard-rest h3 {
+    margin-bottom: 14px;
+    color: #fff;
+    font-size: 17px;
+    font-weight: 800;
+}
+
+.leaderboard-list {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    width: 100%;
+}
+
+.leaderboard-row {
+    position: relative;
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    min-width: 0;
+    padding: 15px 17px;
+    overflow: hidden;
+    background: linear-gradient(135deg,rgba(35,32,52,.95),rgba(22,21,34,.98));
+    border: 1px solid rgba(255,255,255,.09);
+    border-radius: 16px;
+    transition: transform .2s ease,border-color .2s ease;
+}
+
+.leaderboard-row:hover {
+    transform: translateY(-2px);
+    border-color: rgba(167,139,250,.5);
+}
+
+.leaderboard-rank {
+    width: 43px;
+    height: 43px;
+    flex-shrink: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 13px;
+    background: rgba(255,255,255,.07);
+    color: #c4b5fd;
+    font-size: 15px;
+    font-weight: 900;
+}
+
+.leaderboard-player {
+    display: flex;
+    flex: 1;
+    flex-direction: column;
+    gap: 6px;
+    min-width: 0;
+}
+
+.leaderboard-player strong {
+    overflow: hidden;
+    color: #fff;
+    font-size: 14px;
+    font-weight: 800;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.leaderboard-player small { color: #a5a1b5; font-size: 11px; }
+
+.leaderboard-stats {
+    display: flex;
+    flex-shrink: 0;
+    flex-direction: column;
+    align-items: flex-end;
+    gap: 6px;
+}
+
+.leaderboard-stats strong {
+    color: #c4a7ff;
+    font-size: 13px;
+    font-weight: 800;
+    white-space: nowrap;
+}
+
+.leaderboard-stats small {
+    color: #a5a1b5;
+    font-size: 10px;
+    white-space: nowrap;
+}
+
+/* ================= АВАТАРКИ ================= */
+
+.leaderboard-avatar {
+    position: relative;
+    width: 48px;
+    height: 48px;
+    flex: 0 0 48px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+    border-radius: 50%;
+    background: linear-gradient(135deg,#7c3aed,#2563eb);
+    border: 2px solid rgba(167,139,250,.6);
+    color: #fff;
+    font-size: 19px;
+    font-weight: 800;
+}
+
+.leaderboard-avatar img {
+    display: block;
+    width: 100%;
+    height: 100%;
+    max-width: 100%;
+    max-height: 100%;
+    object-fit: cover;
+    border-radius: 50%;
+}
+
+.leaderboard-avatar span {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    height: 100%;
+}
+
+.leaderboard-avatar.podium-avatar {
+    width: 64px;
+    height: 64px;
+    flex: 0 0 64px;
+    margin: 0 auto 13px;
+}
+
+.podium-place-1 .leaderboard-avatar.podium-avatar {
+    width: 76px;
+    height: 76px;
+    flex-basis: 76px;
+}
+
+/* ================= ЗАГРУЗКА И ПУСТОЙ РЕЙТИНГ ================= */
+
+.leaderboard-loading,
+.leaderboard-empty {
+    min-height: 190px;
+    padding: 35px 15px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    border: 1px solid var(--panel-border);
+    border-radius: 18px;
+    background: rgba(255,255,255,.025);
+}
+
+.leaderboard-loading span,
+.leaderboard-empty span {
+    margin-bottom: 14px;
+    font-size: 38px;
+}
+
+.leaderboard-loading p,
+.leaderboard-empty p {
+    color: var(--muted);
+    font-size: 13px;
+    line-height: 1.6;
+}
+
+.leaderboard-empty h3 {
+    margin-bottom: 8px;
+    color: #fff;
+    font-size: 18px;
+}
+
+/* ================= ПОДВАЛ ================= */
+
+.game-footer {
+    min-height: auto;
+    margin-top: 55px;
+    padding: 30px 0 20px;
+    display: block;
+    border-top: 1px solid var(--panel-border);
+    color: var(--muted);
+    font-size: 12px;
+    font-weight: 500;
+    letter-spacing: 0;
+}
+
+.game-footer-top {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 20px;
+    padding-bottom: 25px;
+}
+
+.game-footer-brand h2 {
+    color: var(--text);
+    font-size: 19px;
+    font-weight: 900;
+}
+
+.game-footer-brand p {
+    margin-top: 8px;
+    color: var(--muted);
+    font-size: 12px;
+}
+
+.game-footer-social {
+    display: flex;
+    gap: 15px;
+}
+
+.game-footer-social a {
+    color: var(--muted);
+    font-size: 21px;
+    transition: color .2s, transform .2s;
+}
+
+.game-footer-social a:hover {
+    color: var(--accent);
+    transform: translateY(-2px);
+}
+
+.game-footer-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 25px;
+    padding: 25px 0;
+    border-top: 1px solid var(--panel-border);
+    border-bottom: 1px solid var(--panel-border);
+}
+
+.game-footer-grid h4 {
+    margin-bottom: 15px;
+    color: var(--text);
+    font-size: 12px;
+    font-weight: 800;
+}
+
+.game-footer-grid ul {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    list-style: none;
+}
+
+.game-footer-grid li {
+    color: var(--muted);
+    font-size: 11px;
+    line-height: 1.7;
+}
+
+.game-footer-grid a,
+.game-footer-bottom a {
+    color: var(--muted);
+    transition: color .2s;
+}
+
+.game-footer-grid a:hover,
+.game-footer-bottom a:hover { color: var(--accent); }
+
+.game-footer-bottom {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 15px;
+    padding-top: 20px;
+    color: var(--muted);
+    font-size: 10px;
+}
+
+.game-footer-bottom div {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 18px;
+}
+
+/* ================= ПЛАНШЕТЫ И ТЕЛЕФОНЫ ================= */
+
+@media (max-width: 700px) {
+    .game-navbar {
+        width: calc(100% - 24px);
+        min-height: 64px;
+        margin-top: 12px;
+        padding: 12px 14px;
+        flex-wrap: wrap;
+        gap: 12px;
+    }
+
+    .game-logo { font-size: 14px; }
+
+    .game-logo img {
+        width: 30px;
+        height: 30px;
+    }
+
+    .back-button {
+        padding: 9px 11px;
+        font-size: 11px;
+    }
+
+    .game-nav {
+        order: 3;
+        width: 100%;
+        justify-content: center;
+        flex-wrap: wrap;
+        gap: 12px 18px;
+        padding-top: 10px;
+        border-top: 1px solid var(--panel-border);
+    }
+
+    .game-nav a { font-size: 9px; }
+
+    .game-container { width: calc(100% - 24px); }
+
+    .game-heading { padding: 48px 0 27px; }
+
+    .game-stats {
+        grid-template-columns: 1fr;
+        gap: 10px;
+    }
+
+    .stat-card {
+        min-height: 88px;
+        padding: 17px;
+    }
+
+    .clicker-section {
+        min-height: 350px;
+        padding: 25px 14px;
+    }
+
+    .coin-button {
+        width: 190px;
+        height: 190px;
+    }
+
+    .game-menu {
+        grid-template-columns: repeat(2,1fr);
+        gap: 10px;
+    }
+
+    .game-menu-card {
+        min-height: 125px;
+        padding: 16px;
+    }
+
+    .upgrades-grid {
+        grid-template-columns: 1fr;
+        gap: 15px;
+    }
+
+    .upgrade-card {
+        padding: 20px;
+        border-radius: 17px;
+    }
+
+    .upgrade-card h3 { font-size: 18px; }
+
+    .game-content { padding: 18px; }
+
+    .leaderboard-podium { gap: 9px; }
+
+    .podium-card {
+        min-height: 225px;
+        padding: 23px 8px 15px;
+    }
+
+    .podium-place-1 { min-height: 250px; }
+
+    .podium-avatar {
+        width: 52px;
+        height: 52px;
+        font-size: 25px;
+    }
+
+    .podium-place-1 .podium-avatar {
+        width: 62px;
+        height: 62px;
+        font-size: 30px;
+    }
+
+    .podium-name { font-size: 12px; }
+    .podium-stats { gap: 4px; }
+    .podium-stats strong { font-size: 11px; }
+    .podium-stats small { font-size: 8px; }
+
+    .leaderboard-avatar.podium-avatar {
+        width: 52px;
+        height: 52px;
+        flex-basis: 52px;
+    }
+
+    .podium-place-1 .leaderboard-avatar.podium-avatar {
+        width: 62px;
+        height: 62px;
+        flex-basis: 62px;
+    }
+
+    /* ПОДВАЛ НА ТЕЛЕФОНАХ */
+
+    .game-footer-top { align-items: flex-start; }
+
+    .game-footer-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 25px 15px;
+    }
+
+    .game-footer-bottom {
+        align-items: flex-start;
+        flex-direction: column;
+    }
+}
+
+@media (max-width: 430px) {
+    .leaderboard-podium {
+        grid-template-columns: 1fr;
+        align-items: stretch;
+        gap: 12px;
+    }
+
+    .podium-card,
+    .podium-place-1 {
+        min-height: auto;
+        padding: 20px 18px;
+    }
+
+    .podium-place-1 { order: 1; }
+    .podium-place-2 { order: 2; }
+    .podium-place-3 { order: 3; }
+
+    .podium-card {
+        display: grid;
+        grid-template-columns: 55px minmax(0,1fr) auto;
+        grid-template-rows: auto auto;
+        align-items: center;
+        column-gap: 12px;
+        text-align: left;
+    }
+
+    .podium-medal {
+        top: 10px;
+        right: 12px;
+        font-size: 19px;
+    }
+
+    .podium-rank {
+        grid-column: 2;
+        grid-row: 1;
+        margin: 0 0 5px;
+        font-size: 9px;
+    }
+
+    .podium-avatar,
+    .podium-place-1 .podium-avatar {
+        grid-column: 1;
+        grid-row: 1 / 3;
+        width: 52px;
+        height: 52px;
+        margin: 0;
+        font-size: 25px;
+    }
+
+    .leaderboard-avatar.podium-avatar,
+    .podium-place-1 .leaderboard-avatar.podium-avatar {
+        grid-column: 1;
+        grid-row: 1 / 3;
+        width: 52px;
+        height: 52px;
+        flex-basis: 52px;
+        margin: 0;
+    }
+
+    .podium-name {
+        grid-column: 2;
+        grid-row: 2;
+        align-self: start;
+        font-size: 13px;
+    }
+
+    .podium-level { display: none; }
+
+    .podium-stats {
+        grid-column: 3;
+        grid-row: 1 / 3;
+        width: auto;
+        margin: 0;
+        padding: 0 22px 0 0;
+        gap: 12px;
+    }
+
+    .podium-stats strong { font-size: 11px; }
+    .podium-stats small { font-size: 7px; }
+
+    /* ПОДВАЛ */
+
+    .game-footer-grid {
+        grid-template-columns: 1fr 1fr;
+    }
+
+    .game-footer-brand h2 { font-size: 16px; }
+
+    .game-footer-social { gap: 10px; }
+
+    .game-footer-bottom div {
+        flex-direction: column;
+        gap: 10px;
+    }
+}
+
+@media (max-width: 380px) {
+    .game-menu-card { padding: 12px; }
+    .game-menu-card strong { font-size: 12px; }
+    .coin-button {
+        width: 165px;
+        height: 165px;
+    }
+
+    .upgrade-card { padding: 16px; }
+
+    .upgrade-info {
+        padding-left: 10px;
+        padding-right: 10px;
+    }
+
+    .leaderboard-row {
+        padding: 12px;
+        gap: 9px;
+    }
+
+    .leaderboard-rank {
+        width: 37px;
+        height: 37px;
+        font-size: 13px;
+    }
+
+    .leaderboard-player strong { font-size: 12px; }
+    .leaderboard-stats strong { font-size: 11px; }
+}
+
+@media (max-width: 600px) {
+    .leaderboard-row { gap: 9px; }
+
+    .leaderboard-avatar:not(.podium-avatar) {
+        width: 40px;
+        height: 40px;
+        flex-basis: 40px;
+    }
+}
+
+@media (hover: none) and (pointer: coarse) {
+    .coin-button:active,
+    .coin-button.is-pressed {
+        transform: scale(.90);
+    }
+}
+
     </style>
 </head>
 
 <body>
-
     <div class="background"></div>
 
-    <!-- НАВИГАЦИЯ -->
     <header class="game-navbar">
+    <a href="index.html" class="game-logo">
+        <img src="/images/TTF.png" alt="TTFBB">
+        <span>TTFBB <b>CLICKER</b></span>
+    </a>
 
-        <a href="/" class="game-logo">
-            <img src="/images/TTF.png" alt="TTFBB">
-            <span>TTFBB <b>CLICKER</b></span>
-        </a>
+    <nav class="game-nav">
+        <a href="newswire.html">НОВОСТНАЯ ЛЕНТА</a>
+        <a href="videos.html">ВИДЕО</a>
+        <a href="music.html">МУЗЫКА</a>
+        <a href="schedule.html">РАСПИСАНИЕ</a>
+    </nav>
 
-        <a href="/" class="back-button">
-            ← На главную
-        </a>
 
-    </header>
+</header>
 
     <main class="game-container">
-
-        <!-- ЗАГОЛОВОК -->
         <section class="game-heading">
-
-            <span class="game-label">
-                TTFBB COMPANY ORIGINAL GAME
-            </span>
-
+            <span class="game-label">TTFBB COMPANY • ОФИЦИАЛЬНАЯ ИГРА</span>
             <h1>TTFBB CLICKER</h1>
-
             <p>Кликай, зарабатывай и развивайся.</p>
-
         </section>
 
-        <!-- ИГРОВАЯ СТАТИСТИКА -->
         <section class="game-stats">
-
             <div class="stat-card">
-
                 <span class="stat-icon">🪙</span>
-
                 <div>
                     <span class="stat-label">ТВОЙ БАЛАНС</span>
                     <strong id="coinBalance">0</strong>
                     <small>монет</small>
                 </div>
-
             </div>
 
             <div class="stat-card">
-
                 <span class="stat-icon">⚡</span>
-
                 <div>
                     <span class="stat-label">ЭНЕРГИЯ</span>
-
                     <strong>
                         <span id="energyValue">100</span>
                         <span class="stat-divider">/</span>
                         <span id="maxEnergyValue">100</span>
                     </strong>
-
-                    <div class="energy-progress">
-                        <div id="energyProgress"></div>
-                    </div>
-
+                    <div class="energy-progress"><div id="energyProgress"></div></div>
                 </div>
-
             </div>
 
             <div class="stat-card">
-
                 <span class="stat-icon">⭐</span>
-
                 <div>
                     <span class="stat-label">УРОВЕНЬ</span>
                     <strong id="playerLevel">1</strong>
                     <small>уровень игрока</small>
                 </div>
-
             </div>
-
         </section>
 
-        <!-- КЛИКЕР -->
         <section class="clicker-section">
-
             <div class="clicker-top-info">
                 <span>ТВОЯ МОНЕТА</span>
                 <span id="clickPower">+1 за клик</span>
             </div>
 
-            <button
-                type="button"
-                class="coin-button"
-                id="coinButton"
-                aria-label="Нажать на монету TTFBB"
-            >
+            <button type="button" class="coin-button" id="coinButton" aria-label="Нажать на монету TTFBB">
                 <span class="coin-glow"></span>
-
-                <img
-                    id="gameCoinImage"
-                    src="/images/ttfbb-coin.png"
-                    alt="Монета TTFBB"
-                    draggable="false"
-                >
+                <img id="gameCoinImage" src="/images/ttfbb-coin.png" alt="Монета TTFBB" draggable="false">
             </button>
 
-            <p class="clicker-hint">
-                НАЖИМАЙ НА МОНЕТУ, ЧТОБЫ ЗАРАБАТЫВАТЬ
-            </p>
-
-            <p id="gameMessage" class="game-message" aria-live="polite">
-                Загружаем игру...
-            </p>
-
+            <p class="clicker-hint">НАЖИМАЙ НА МОНЕТУ, ЧТОБЫ ЗАРАБАТЫВАТЬ</p>
+            <p id="gameMessage" class="game-message" aria-live="polite">Загружаем игру...</p>
         </section>
 
-        <!-- ОПЫТ -->
         <section class="experience-section">
-
             <div class="experience-heading">
                 <span>ОПЫТ ИГРОКА</span>
                 <strong id="experienceValue">0 XP</strong>
             </div>
-
-            <div class="experience-progress">
-                <div id="experienceProgress"></div>
-            </div>
-
+            <div class="experience-progress"><div id="experienceProgress"></div></div>
         </section>
 
-        <!-- МЕНЮ ИГРЫ -->
         <section class="game-menu">
-
             <button class="game-menu-card" type="button" data-section="upgrades">
-                <span>⚙️</span>
-                <strong>Улучшения</strong>
-                <small>Увеличивай доход</small>
+                <span>⚙️</span><strong>Улучшения</strong><small>Увеличивай доход</small>
             </button>
-
             <button class="game-menu-card" type="button" data-section="skills">
-                <span>✨</span>
-                <strong>Навыки</strong>
-                <small>Развивай способности</small>
+                <span>✨</span><strong>Навыки</strong><small>Развивай способности</small>
             </button>
-
             <button class="game-menu-card" type="button" data-section="tasks">
-                <span>📋</span>
-                <strong>Задания</strong>
-                <small>Получай награды</small>
+                <span>📋</span><strong>Задания</strong><small>Получай награды</small>
             </button>
-
             <button class="game-menu-card" type="button" data-section="shop">
-                <span>🛒</span>
-                <strong>Магазин</strong>
-                <small>Игровые предметы</small>
+                <span>🛒</span><strong>Магазин</strong><small>Игровые предметы</small>
             </button>
-
             <button class="game-menu-card" type="button" data-section="achievements">
-                <span>🏆</span>
-                <strong>Достижения</strong>
-                <small>Собирай награды</small>
+                <span>🏆</span><strong>Достижения</strong><small>Собирай награды</small>
             </button>
-
             <button class="game-menu-card" type="button" data-section="rating">
-                <span>🥇</span>
-                <strong>Рейтинг</strong>
-                <small>Соревнуйся с игроками</small>
+                <span>🥇</span><strong>Рейтинг</strong><small>Соревнуйся с игроками</small>
             </button>
-
         </section>
 
-        <!-- ПАНЕЛЬ РАЗДЕЛОВ -->
         <section class="game-content" id="gameContent" hidden>
-
             <div class="game-content-header">
-
                 <h2 id="gameContentTitle">Раздел игры</h2>
-
-                <button
-                    type="button"
-                    id="closeGameContent"
-                    aria-label="Закрыть"
-                >
-                    ×
-                </button>
-
+                <button type="button" id="closeGameContent" aria-label="Закрыть">×</button>
             </div>
-
             <div id="gameContentBody">
                 <p>Раздел будет доступен после подключения игровых функций.</p>
             </div>
-
         </section>
 
         <footer class="game-footer">
-            <span>TTFBB COMPANY © 2025-2026</span>
-        </footer>
+    <div class="game-footer-top">
+        <div class="game-footer-brand">
+            <h2>TTFBB COMPANY</h2>
+            <p>Два брата в увлекательных приключениях.</p>
+        </div>
 
+        <div class="game-footer-social">
+            <a href="https://www.youtube.com/@n1kolayrl" target="_blank" rel="noopener noreferrer" aria-label="YouTube">
+                <i class="fa-brands fa-youtube"></i>
+            </a>
+            <a href="https://t.me/nesoqiton" target="_blank" rel="noopener noreferrer" aria-label="Telegram">
+                <i class="fa-brands fa-telegram"></i>
+            </a>
+            <a href="#" aria-label="Instagram">
+                <i class="fa-brands fa-instagram"></i>
+            </a>
+        </div>
+    </div>
+
+    <div class="game-footer-grid">
+        <div>
+            <h4>Навигация</h4>
+            <ul>
+                <li><a href="index.html">Главная</a></li>
+                <li><a href="newswire.html">Новостная лента</a></li>
+                <li><a href="videos.html">Видео</a></li>
+                <li><a href="music.html">Музыка</a></li>
+                <li><a href="schedule.html">Расписание</a></li>
+                <li><a href="profile.html">Профиль</a></li>
+            </ul>
+        </div>
+
+        <div>
+            <h4>Контакты</h4>
+            <ul>
+                <li>Никита<br>+375 (29) 959-00-97</li>
+                <li>Евгений<br>+375 (25) 791-40-26</li>
+            </ul>
+        </div>
+
+        <div>
+            <h4>Telegram</h4>
+            <ul>
+                <li><a href="https://t.me/nesoqiton" target="_blank" rel="noopener noreferrer">@nesoqiton</a></li>
+                <li><a href="https://t.me/" target="_blank" rel="noopener noreferrer">Nickname not found</a></li>
+            </ul>
+        </div>
+    </div>
+
+    <div class="game-footer-bottom">
+        <span>© 2025–2026 TTFBB COMPANY</span>
+
+        <div>
+            <a href="privacy.html">Политика конфиденциальности</a>
+            <a href="#">Условия использования</a>
+        </div>
+    </div>
+</footer>
     </main>
 
     <script type="module" src="js/ttfboom.js"></script>
+
     <script>
-        // Надёжная анимация нажатия мышью и пальцем на сенсорных экранах
         (() => {
-            const coinButton = document.getElementById('coinButton');
+            const coinButton = document.getElementById("coinButton");
             if (!coinButton) return;
 
-            const releasePress = () => coinButton.classList.remove('is-pressed');
+            const releasePress = () => coinButton.classList.remove("is-pressed");
 
-            coinButton.addEventListener('pointerdown', () => {
-                coinButton.classList.add('is-pressed');
+            coinButton.addEventListener("pointerdown", () => {
+                coinButton.classList.add("is-pressed");
             });
-            ['pointerup', 'pointercancel', 'pointerleave'].forEach(eventName => {
+
+            ["pointerup", "pointercancel", "pointerleave"].forEach(eventName => {
                 coinButton.addEventListener(eventName, releasePress);
             });
-            window.addEventListener('blur', releasePress);
+
+            window.addEventListener("blur", releasePress);
         })();
     </script>
-
 </body>
 </html>
