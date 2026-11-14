@@ -68,19 +68,13 @@ function getCurrentEnergy() {
 
     if (!Number.isFinite(lastUpdate)) return energy;
 
-    const elapsed = Math.max(
-        0,
-        Date.now() - lastUpdate
-    );
+    const elapsed = Math.max(0, Date.now() - lastUpdate);
 
     const regenerated = Math.floor(
         elapsed / (regenSeconds * 1000)
     );
 
-    return Math.min(
-        maxEnergy,
-        energy + regenerated
-    );
+    return Math.min(maxEnergy, energy + regenerated);
 }
 
 // --------------------------------------------------
@@ -105,8 +99,7 @@ function renderPlayer() {
     elements.maxEnergy.textContent = maxEnergy;
     elements.level.textContent = level;
 
-    elements.clickPower.textContent =
-        `+${power} за клик`;
+    elements.clickPower.textContent = `+${power} за клик`;
 
     elements.experience.textContent =
         `${experience.toLocaleString("ru-RU")} XP`;
@@ -115,8 +108,7 @@ function renderPlayer() {
         ? Math.min(100, (energy / maxEnergy) * 100)
         : 0;
 
-    elements.energyProgress.style.width =
-        `${energyPercent}%`;
+    elements.energyProgress.style.width = `${energyPercent}%`;
 
     const experiencePercent = experience % 100;
 
@@ -149,7 +141,7 @@ async function loadPlayer() {
 }
 
 // --------------------------------------------------
-// ЗАГРУЗКА УЛУЧШЕНИЯ СИЛЫ КЛИКА
+// ЗАГРУЗКА УЛУЧШЕНИЙ
 // --------------------------------------------------
 
 async function loadClickPowerUpgrade() {
@@ -166,10 +158,6 @@ async function loadClickPowerUpgrade() {
         Number(data?.upgrade_level) || 0;
 }
 
-// --------------------------------------------------
-// ЗАГРУЗКА УЛУЧШЕНИЯ МАКСИМАЛЬНОЙ ЭНЕРГИИ
-// --------------------------------------------------
-
 async function loadMaxEnergyUpgrade() {
     const { data, error } = await supabase
         .from("game_player_upgrades")
@@ -183,10 +171,6 @@ async function loadMaxEnergyUpgrade() {
     maxEnergyUpgradeLevel =
         Number(data?.upgrade_level) || 0;
 }
-
-// --------------------------------------------------
-// ЗАГРУЗКА СКОРОСТИ ВОССТАНОВЛЕНИЯ
-// --------------------------------------------------
 
 async function loadEnergyRegenUpgrade() {
     const { data, error } = await supabase
@@ -208,9 +192,7 @@ async function loadEnergyRegenUpgrade() {
 
 function animateCoin() {
     elements.coinButton.classList.remove("coin-clicked");
-
     void elements.coinButton.offsetWidth;
-
     elements.coinButton.classList.add("coin-clicked");
 }
 
@@ -224,10 +206,7 @@ async function handleCoinClick() {
     const energy = getCurrentEnergy();
 
     if (energy < 1 && pendingClicks === 0) {
-        showMessage(
-            "Недостаточно энергии. Подожди восстановления."
-        );
-
+        showMessage("Недостаточно энергии. Подожди восстановления.");
         renderPlayer();
         return;
     }
@@ -247,9 +226,7 @@ async function handleCoinClick() {
         while (pendingClicks > 0) {
             pendingClicks--;
 
-            const { data, error } = await supabase.rpc(
-                "game_click"
-            );
+            const { data, error } = await supabase.rpc("game_click");
 
             if (error) throw error;
 
@@ -264,26 +241,17 @@ async function handleCoinClick() {
         await loadPlayer();
 
         if (successfulClicks > 0) {
-            showMessage(
-                `Успешных кликов: ${successfulClicks}!`
-            );
+            showMessage(`Успешных кликов: ${successfulClicks}!`);
         }
 
         if (getCurrentEnergy() < 1) {
-            showMessage(
-                "Энергия закончилась. Жди восстановления."
-            );
+            showMessage("Энергия закончилась. Жди восстановления.");
         }
 
     } catch (error) {
         console.error("Ошибка клика:", error);
-
         pendingClicks = 0;
-
-        showMessage(
-            "Не удалось обработать клики. Попробуй ещё раз.",
-            true
-        );
+        showMessage("Не удалось обработать клики. Попробуй ещё раз.", true);
 
     } finally {
         processingClicks = false;
@@ -296,9 +264,7 @@ async function handleCoinClick() {
 // --------------------------------------------------
 
 function startEnergyTimer() {
-    if (energyTimer) {
-        clearInterval(energyTimer);
-    }
+    if (energyTimer) clearInterval(energyTimer);
 
     energyTimer = setInterval(() => {
         if (player) renderPlayer();
@@ -321,212 +287,106 @@ function renderUpgrades() {
         Number(player.energy_regen_seconds) || 2
     );
 
-    const clickCost =
-        250 * (clickPowerUpgradeLevel + 1);
-
-    const energyCost =
-        500 * (maxEnergyUpgradeLevel + 1);
-
-    const regenCost =
-        750 * (energyRegenUpgradeLevel + 1);
-
-    const clickButtonDisabled =
-        coins < clickCost || buyingUpgrade;
-
-    const energyButtonDisabled =
-        coins < energyCost || buyingUpgrade;
-
-    const regenButtonDisabled =
-        coins < regenCost ||
-        buyingUpgrade ||
-        regenSeconds <= 0.5;
+    const clickCost = 250 * (clickPowerUpgradeLevel + 1);
+    const energyCost = 500 * (maxEnergyUpgradeLevel + 1);
+    const regenCost = 750 * (energyRegenUpgradeLevel + 1);
 
     elements.contentBody.innerHTML = `
         <div class="upgrades-grid">
 
             <div class="upgrade-card">
                 <div class="upgrade-icon">🪙</div>
-
                 <h3>Сила клика</h3>
-
-                <p>
-                    Получай больше монет за каждое нажатие.
-                </p>
+                <p>Получай больше монет за каждое нажатие.</p>
 
                 <div class="upgrade-info">
-                    <div>
-                        <span>Уровень</span>
-                        <strong>${clickPowerUpgradeLevel}</strong>
-                    </div>
-
-                    <div>
-                        <span>Сейчас</span>
-                        <strong>+${power}</strong>
-                    </div>
-
-                    <div>
-                        <span>После покупки</span>
-                        <strong>+${power + 1}</strong>
-                    </div>
+                    <div><span>Уровень</span><strong>${clickPowerUpgradeLevel}</strong></div>
+                    <div><span>Сейчас</span><strong>+${power}</strong></div>
+                    <div><span>После покупки</span><strong>+${power + 1}</strong></div>
                 </div>
 
                 <div class="upgrade-price">
-                    Цена:
-                    <strong>
-                        ${clickCost.toLocaleString("ru-RU")} 🪙
-                    </strong>
+                    Цена: <strong>${clickCost.toLocaleString("ru-RU")} 🪙</strong>
                 </div>
 
-                <button
-                    type="button"
-                    id="buyClickPowerButton"
+                <button type="button" id="buyClickPowerButton"
                     class="game-upgrade-button"
-                    ${clickButtonDisabled ? "disabled" : ""}
-                >
+                    ${coins < clickCost || buyingUpgrade ? "disabled" : ""}>
                     ${buyingUpgrade ? "Покупка..." : "Улучшить"}
                 </button>
 
                 <p class="upgrade-hint">
-                    ${
-                        coins < clickCost
-                            ? "Недостаточно монет."
-                            : "Улучшение навсегда."
-                    }
+                    ${coins < clickCost ? "Недостаточно монет." : "Улучшение навсегда."}
                 </p>
             </div>
 
             <div class="upgrade-card">
                 <div class="upgrade-icon">⚡</div>
-
                 <h3>Максимальная энергия</h3>
-
-                <p>
-                    Увеличивай запас энергии для большего
-                    количества кликов.
-                </p>
+                <p>Увеличивай запас энергии для большего количества кликов.</p>
 
                 <div class="upgrade-info">
-                    <div>
-                        <span>Уровень</span>
-                        <strong>${maxEnergyUpgradeLevel}</strong>
-                    </div>
-
-                    <div>
-                        <span>Сейчас</span>
-                        <strong>${maxEnergy}</strong>
-                    </div>
-
-                    <div>
-                        <span>После покупки</span>
-                        <strong>${maxEnergy + 25}</strong>
-                    </div>
+                    <div><span>Уровень</span><strong>${maxEnergyUpgradeLevel}</strong></div>
+                    <div><span>Сейчас</span><strong>${maxEnergy}</strong></div>
+                    <div><span>После покупки</span><strong>${maxEnergy + 25}</strong></div>
                 </div>
 
                 <div class="upgrade-price">
-                    Цена:
-                    <strong>
-                        ${energyCost.toLocaleString("ru-RU")} 🪙
-                    </strong>
+                    Цена: <strong>${energyCost.toLocaleString("ru-RU")} 🪙</strong>
                 </div>
 
-                <button
-                    type="button"
-                    id="buyMaxEnergyButton"
+                <button type="button" id="buyMaxEnergyButton"
                     class="game-upgrade-button"
-                    ${energyButtonDisabled ? "disabled" : ""}
-                >
+                    ${coins < energyCost || buyingUpgrade ? "disabled" : ""}>
                     ${buyingUpgrade ? "Покупка..." : "Улучшить"}
                 </button>
 
                 <p class="upgrade-hint">
-                    ${
-                        coins < energyCost
-                            ? "Недостаточно монет."
-                            : "Максимум энергии +25."
-                    }
+                    ${coins < energyCost ? "Недостаточно монет." : "Максимум энергии +25."}
                 </p>
             </div>
 
             <div class="upgrade-card">
                 <div class="upgrade-icon">⏱️</div>
-
                 <h3>Скорость восстановления</h3>
-
-                <p>
-                    Восстанавливай энергию быстрее и
-                    кликай чаще.
-                </p>
+                <p>Восстанавливай энергию быстрее и кликай чаще.</p>
 
                 <div class="upgrade-info">
-                    <div>
-                        <span>Уровень</span>
-                        <strong>${energyRegenUpgradeLevel}</strong>
-                    </div>
-
-                    <div>
-                        <span>Сейчас</span>
-                        <strong>${regenSeconds.toFixed(1)} сек.</strong>
-                    </div>
-
-                    <div>
-                        <span>После покупки</span>
-                        <strong>
-                            ${Math.max(0.5, regenSeconds - 0.2).toFixed(1)} сек.
-                        </strong>
-                    </div>
+                    <div><span>Уровень</span><strong>${energyRegenUpgradeLevel}</strong></div>
+                    <div><span>Сейчас</span><strong>${regenSeconds.toFixed(1)} сек.</strong></div>
+                    <div><span>После покупки</span><strong>${Math.max(0.5, regenSeconds - 0.2).toFixed(1)} сек.</strong></div>
                 </div>
 
                 <div class="upgrade-price">
-                    Цена:
-                    <strong>
-                        ${regenCost.toLocaleString("ru-RU")} 🪙
-                    </strong>
+                    Цена: <strong>${regenCost.toLocaleString("ru-RU")} 🪙</strong>
                 </div>
 
-                <button
-                    type="button"
-                    id="buyEnergyRegenButton"
+                <button type="button" id="buyEnergyRegenButton"
                     class="game-upgrade-button"
-                    ${regenButtonDisabled ? "disabled" : ""}
-                >
-                    ${
-                        regenSeconds <= 0.5
-                            ? "Максимальный уровень"
-                            : buyingUpgrade
-                                ? "Покупка..."
-                                : "Улучшить"
-                    }
+                    ${coins < regenCost || buyingUpgrade || regenSeconds <= 0.5 ? "disabled" : ""}>
+                    ${regenSeconds <= 0.5 ? "Максимальный уровень" : buyingUpgrade ? "Покупка..." : "Улучшить"}
                 </button>
 
                 <p class="upgrade-hint">
-                    ${
-                        regenSeconds <= 0.5
-                            ? "Скорость уже максимальная."
-                            : coins < regenCost
-                                ? "Недостаточно монет."
-                                : "Ускорение восстановления энергии."
-                    }
+                    ${regenSeconds <= 0.5 ? "Скорость уже максимальная." : coins < regenCost ? "Недостаточно монет." : "Ускорение восстановления энергии."}
                 </p>
             </div>
 
         </div>
     `;
 
-    document
-        .getElementById("buyClickPowerButton")
+    document.getElementById("buyClickPowerButton")
         .addEventListener("click", buyClickPower);
 
-    document
-        .getElementById("buyMaxEnergyButton")
+    document.getElementById("buyMaxEnergyButton")
         .addEventListener("click", buyMaxEnergy);
 
-    document
-        .getElementById("buyEnergyRegenButton")
+    document.getElementById("buyEnergyRegenButton")
         .addEventListener("click", buyEnergyRegen);
 }
 
 // --------------------------------------------------
-// ПОКУПКА СИЛЫ КЛИКА
+// ПОКУПКА УЛУЧШЕНИЙ
 // --------------------------------------------------
 
 async function buyClickPower() {
@@ -536,46 +396,28 @@ async function buyClickPower() {
     renderUpgrades();
 
     try {
-        const { data, error } = await supabase.rpc(
-            "buy_click_power"
-        );
-
+        const { data, error } = await supabase.rpc("buy_click_power");
         if (error) throw error;
 
         if (!data || data.success !== true) {
-            showMessage(
-                data?.message || "Недостаточно монет.",
-                true
-            );
+            showMessage(data?.message || "Недостаточно монет.", true);
             return;
         }
 
         await loadPlayer();
         await loadClickPowerUpgrade();
 
-        renderUpgrades();
-
-        showMessage(
-            `Сила клика улучшена! Теперь +${data.click_power} монет за клик.`
-        );
+        showMessage(`Сила клика улучшена! Теперь +${data.click_power} монет за клик.`);
 
     } catch (error) {
         console.error("Ошибка покупки силы клика:", error);
-
-        showMessage(
-            "Не удалось купить улучшение силы клика.",
-            true
-        );
+        showMessage("Не удалось купить улучшение силы клика.", true);
 
     } finally {
         buyingUpgrade = false;
         renderUpgrades();
     }
 }
-
-// --------------------------------------------------
-// ПОКУПКА МАКСИМАЛЬНОЙ ЭНЕРГИИ
-// --------------------------------------------------
 
 async function buyMaxEnergy() {
     if (buyingUpgrade || !player) return;
@@ -584,46 +426,28 @@ async function buyMaxEnergy() {
     renderUpgrades();
 
     try {
-        const { data, error } = await supabase.rpc(
-            "buy_max_energy"
-        );
-
+        const { data, error } = await supabase.rpc("buy_max_energy");
         if (error) throw error;
 
         if (!data || data.success !== true) {
-            showMessage(
-                data?.message || "Недостаточно монет.",
-                true
-            );
+            showMessage(data?.message || "Недостаточно монет.", true);
             return;
         }
 
         await loadPlayer();
         await loadMaxEnergyUpgrade();
 
-        renderUpgrades();
-
-        showMessage(
-            `Максимальная энергия увеличена до ${data.max_energy}!`
-        );
+        showMessage(`Максимальная энергия увеличена до ${data.max_energy}!`);
 
     } catch (error) {
         console.error("Ошибка покупки энергии:", error);
-
-        showMessage(
-            "Не удалось купить улучшение энергии.",
-            true
-        );
+        showMessage("Не удалось купить улучшение энергии.", true);
 
     } finally {
         buyingUpgrade = false;
         renderUpgrades();
     }
 }
-
-// --------------------------------------------------
-// ПОКУПКА СКОРОСТИ ВОССТАНОВЛЕНИЯ
-// --------------------------------------------------
 
 async function buyEnergyRegen() {
     if (buyingUpgrade || !player) return;
@@ -632,47 +456,590 @@ async function buyEnergyRegen() {
     renderUpgrades();
 
     try {
-        const { data, error } = await supabase.rpc(
-            "buy_energy_regen"
-        );
-
+        const { data, error } = await supabase.rpc("buy_energy_regen");
         if (error) throw error;
 
         if (!data || data.success !== true) {
-            showMessage(
-                data?.message ||
-                    "Не удалось купить улучшение.",
-                true
-            );
+            showMessage(data?.message || "Не удалось купить улучшение.", true);
             return;
         }
 
         await loadPlayer();
         await loadEnergyRegenUpgrade();
 
-        renderUpgrades();
-
         showMessage(
-            `Энергия теперь восстанавливается за ${Number(
-                data.energy_regen_seconds
-            ).toFixed(1)} секунды!`
+            `Энергия теперь восстанавливается за ${Number(data.energy_regen_seconds).toFixed(1)} секунды!`
         );
 
     } catch (error) {
-        console.error(
-            "Ошибка покупки скорости восстановления:",
-            error
-        );
-
-        showMessage(
-            "Не удалось купить улучшение восстановления.",
-            true
-        );
+        console.error("Ошибка покупки скорости восстановления:", error);
+        showMessage("Не удалось купить улучшение восстановления.", true);
 
     } finally {
         buyingUpgrade = false;
         renderUpgrades();
     }
+}
+
+// --------------------------------------------------
+// ДОСТИЖЕНИЯ
+// --------------------------------------------------
+
+async function renderAchievements() {
+    elements.contentBody.innerHTML = `
+        <div class="leaderboard-loading">
+            <p>Загружаем достижения...</p>
+        </div>
+    `;
+
+    const { data: achievements, error: achievementsError } =
+        await supabase
+            .from("game_achievements")
+            .select("*")
+            .eq("is_active", true)
+            .order("requirement_value", { ascending: true });
+
+    if (achievementsError) throw achievementsError;
+
+    const { data: completed, error: completedError } =
+        await supabase
+            .from("game_player_achievements")
+            .select("achievement_id")
+            .eq("user_id", currentUser.id);
+
+    if (completedError) throw completedError;
+
+    const completedIds = new Set(
+        (completed || []).map(item => item.achievement_id)
+    );
+
+    const total = achievements.length;
+    const completedCount = completedIds.size;
+
+    const cards = achievements.map(item => {
+        const isCompleted = completedIds.has(item.id);
+
+        return `
+            <article class="upgrade-card">
+                <div class="upgrade-icon">
+                    ${escapeHTML(item.icon || "🏆")}
+                </div>
+
+                <h3>
+                    ${escapeHTML(item.title)}
+                    ${isCompleted ? "✅" : ""}
+                </h3>
+
+                <p>${escapeHTML(item.description)}</p>
+
+                <div class="upgrade-info">
+                    <div>
+                        <span>Награда</span>
+                        <strong>
+                            ${formatNumber(item.reward_coins)} 🪙
+                        </strong>
+                    </div>
+
+                    <div>
+                        <span>Опыт</span>
+                        <strong>
+                            ${formatNumber(item.reward_experience)} XP
+                        </strong>
+                    </div>
+                </div>
+
+                <p class="upgrade-hint">
+                    ${isCompleted ? "Достижение выполнено!" : "Пока не выполнено"}
+                </p>
+            </article>
+        `;
+    }).join("");
+
+    elements.contentBody.innerHTML = `
+        <section class="upgrades-grid">
+
+            <div class="upgrade-card">
+                <div class="upgrade-icon">🏆</div>
+                <h3>Мои достижения</h3>
+                <p>
+                    Выполнено:
+                    <strong>${completedCount} / ${total}</strong>
+                </p>
+                <div class="experience-progress">
+                    <div style="
+                        width: ${total ? completedCount / total * 100 : 0}%;
+                    "></div>
+                </div>
+            </div>
+
+            ${cards}
+
+        </section>
+    `;
+}
+
+// --------------------------------------------------
+// ЗАДАНИЯ
+// --------------------------------------------------
+
+async function renderTasks(activeTab = "daily") {
+    elements.contentBody.innerHTML = `
+        <div class="leaderboard-loading">
+            <p>Загружаем задания...</p>
+        </div>
+    `;
+
+    const tabs = [
+        { id: "daily", title: "Ежедневные" },
+        { id: "weekly", title: "Еженедельные" },
+        { id: "permanent", title: "Постоянные" }
+    ];
+
+    // Загружаем каталог заданий.
+    // Прогресс обновляется только через game_click() на сервере.
+
+    const { data: tasks, error: tasksError } = await supabase
+        .from("game_tasks")
+        .select("*")
+        .eq("is_active", true)
+        .eq("task_type", activeTab)
+        .order("id", { ascending: true });
+
+    if (tasksError) throw tasksError;
+
+    // Загружаем прогресс игрока.
+
+    const { data: progress, error: progressError } = await supabase
+        .from("game_player_tasks")
+        .select("*")
+        .eq("user_id", currentUser.id);
+
+    if (progressError) throw progressError;
+
+    const now = new Date();
+
+    const dailyKey = [
+        now.getUTCFullYear(),
+        String(now.getUTCMonth() + 1).padStart(2, "0"),
+        String(now.getUTCDate()).padStart(2, "0")
+    ].join("-");
+
+    // Получаем номер недели в формате ISO: YYYY-WW.
+
+    const weeklyKey = (() => {
+        const date = new Date(Date.UTC(
+            now.getUTCFullYear(),
+            now.getUTCMonth(),
+            now.getUTCDate()
+        ));
+
+        const day = date.getUTCDay() || 7;
+        date.setUTCDate(date.getUTCDate() + 4 - day);
+
+        const yearStart = new Date(Date.UTC(
+            date.getUTCFullYear(), 0, 1
+        ));
+
+        const week = Math.ceil(
+            (((date - yearStart) / 86400000) + 1) / 7
+        );
+
+        return `${date.getUTCFullYear()}-${String(week).padStart(2, "0")}`;
+    })();
+
+    const periodKey = activeTab === "daily"
+        ? dailyKey
+        : activeTab === "weekly"
+            ? weeklyKey
+            : "permanent";
+
+    const progressMap = new Map(
+        (progress || [])
+            .filter(item => item.period_key === periodKey)
+            .map(item => [item.task_id, item])
+    );
+
+    const completedCount = tasks.filter(task => {
+        const item = progressMap.get(task.id);
+        return item?.claimed_at;
+    }).length;
+
+    const cards = tasks.map(task => {
+        const item = progressMap.get(task.id);
+
+        const current = Number(item?.progress) || 0;
+        const target = Number(task.target_value) || 1;
+
+        const percent = Math.min(
+            100,
+            current / target * 100
+        );
+
+        const completed = Boolean(item?.completed_at);
+        const claimed = Boolean(item?.claimed_at);
+
+        let buttonHTML = "";
+
+        if (claimed) {
+            buttonHTML = `
+                <button class="game-upgrade-button" disabled>
+                    Награда получена ✅
+                </button>
+            `;
+        } else if (completed) {
+            buttonHTML = `
+                <button
+                    type="button"
+                    class="game-upgrade-button claim-task-button"
+                    data-task-id="${task.id}">
+                    Забрать награду
+                </button>
+            `;
+        } else {
+            buttonHTML = `
+                <button class="game-upgrade-button" disabled>
+                    Выполняется...
+                </button>
+            `;
+        }
+
+        return `
+            <article class="upgrade-card">
+                <div class="upgrade-icon">🎯</div>
+
+                <h3>${escapeHTML(task.title)}</h3>
+
+                <p>${escapeHTML(task.description || "")}</p>
+
+                <div class="upgrade-info">
+                    <div>
+                        <span>Прогресс</span>
+                        <strong>
+                            ${formatNumber(current)} /
+                            ${formatNumber(target)}
+                        </strong>
+                    </div>
+
+                    <div>
+                        <span>Монеты</span>
+                        <strong>
+                            ${formatNumber(task.reward_coins)} 🪙
+                        </strong>
+                    </div>
+
+                    <div>
+                        <span>Опыт</span>
+                        <strong>
+                            ${formatNumber(task.reward_experience)} XP
+                        </strong>
+                    </div>
+                </div>
+
+                <div class="experience-progress">
+                    <div style="width: ${percent}%"></div>
+                </div>
+
+                ${buttonHTML}
+            </article>
+        `;
+    }).join("");
+
+    elements.contentBody.innerHTML = `
+        <section>
+            <div class="upgrades-grid">
+                <div class="upgrade-card">
+                    <div class="upgrade-icon">🎯</div>
+                    <h3>Мои задания</h3>
+                    <p>
+                        Получено наград:
+                        <strong>${completedCount} / ${tasks.length}</strong>
+                    </p>
+                </div>
+            </div>
+
+            <div class="task-tabs">
+                ${tabs.map(tab => `
+                    <button
+                        type="button"
+                        class="game-upgrade-button"
+                        data-task-tab="${tab.id}"
+                        ${activeTab === tab.id ? "disabled" : ""}>
+                        ${tab.title}
+                    </button>
+                `).join("")}
+            </div>
+
+            <section class="upgrades-grid">
+                ${cards || `
+                    <div class="upgrade-card">
+                        <p>Пока нет заданий в этой категории.</p>
+                    </div>
+                `}
+            </section>
+        </section>
+    `;
+
+    // Переключение категорий заданий.
+
+    elements.contentBody
+        .querySelectorAll("[data-task-tab]")
+        .forEach(button => {
+            button.addEventListener("click", () => {
+                renderTasks(button.dataset.taskTab)
+                    .catch(error => {
+                        console.error(error);
+                        showMessage("Не удалось загрузить задания.", true);
+                    });
+            });
+        });
+
+    // Получение награды.
+
+    elements.contentBody
+        .querySelectorAll(".claim-task-button")
+        .forEach(button => {
+            button.addEventListener("click", async () => {
+                button.disabled = true;
+                button.textContent = "Получаем награду...";
+
+                try {
+                    const { data, error } = await supabase.rpc(
+                        "claim_game_task",
+                        { p_task_id: Number(button.dataset.taskId) }
+                    );
+
+                    if (error) throw error;
+
+                    if (!data?.success) {
+                        throw new Error(
+                            data?.message || "Не удалось получить награду."
+                        );
+                    }
+
+                    await loadPlayer();
+
+                    showMessage(
+                        `Получено: ${formatNumber(data.reward_coins)} монет и ${formatNumber(data.reward_experience)} XP!`
+                    );
+
+                    await renderTasks(activeTab);
+
+                } catch (error) {
+                    console.error("Ошибка получения награды:", error);
+
+                    showMessage(
+                        error.message || "Не удалось получить награду.",
+                        true
+                    );
+
+                    await renderTasks(activeTab);
+                }
+            });
+        });
+}
+
+// --------------------------------------------------
+// ВСПОМОГАТЕЛЬНЫЕ ФУНКЦИИ РЕЙТИНГА
+// --------------------------------------------------
+
+function escapeHTML(value) {
+    return String(value ?? "").replace(/[&<>"']/g, (char) => ({
+        "&": "&amp;",
+        "<": "&lt;",
+        ">": "&gt;",
+        '"': "&quot;",
+        "'": "&#039;"
+    })[char]);
+}
+
+function formatNumber(value) {
+    return (Number(value) || 0).toLocaleString("ru-RU");
+}
+
+// --------------------------------------------------
+// АВАТАРКА ИГРОКА
+// --------------------------------------------------
+
+function renderLeaderboardAvatar(item, className = "") {
+    const name = item.player_name || item.username || "Игрок";
+    const initial = escapeHTML(
+        name.trim().charAt(0).toUpperCase() || "?"
+    );
+
+    const avatarUrl = item.avatar_url;
+
+    if (!avatarUrl) {
+        return `
+            <div class="leaderboard-avatar ${className}">
+                <span>${initial}</span>
+            </div>
+        `;
+    }
+
+    return `
+        <div class="leaderboard-avatar ${className}">
+            <img
+                src="${escapeHTML(avatarUrl)}"
+                alt="Аватар ${initial}"
+                loading="lazy"
+                onerror="
+                    this.style.display='none';
+                    this.nextElementSibling.style.display='flex';
+                "
+            >
+            <span style="display:none">${initial}</span>
+        </div>
+    `;
+}
+
+// --------------------------------------------------
+// РЕЙТИНГ И ПЬЕДЕСТАЛ
+// --------------------------------------------------
+
+async function renderLeaderboard() {
+    elements.contentBody.innerHTML = `
+        <div class="leaderboard-loading">
+            <p>Загружаем рейтинг игроков...</p>
+        </div>
+    `;
+
+    const { data, error } = await supabase.rpc(
+        "get_game_leaderboard"
+    );
+
+    if (error) {
+        console.error("Ошибка загрузки рейтинга:", error);
+        throw error;
+    }
+
+    if (!data || data.length === 0) {
+        elements.contentBody.innerHTML = `
+            <div class="leaderboard-empty">
+                <h3>Рейтинг пока пуст</h3>
+                <p>Сделай первые клики и стань первым игроком!</p>
+            </div>
+        `;
+        return;
+    }
+
+    const players = [...data].sort((a, b) =>
+        Number(b.experience || 0) - Number(a.experience || 0) ||
+        Number(b.level || 0) - Number(a.level || 0) ||
+        Number(b.coins || 0) - Number(a.coins || 0)
+    );
+
+    const topPlayers = players.slice(0, 3);
+    const otherPlayers = players.slice(3);
+
+    const podiumCards = topPlayers.map((item, index) => {
+        const rank = index + 1;
+
+        const name = escapeHTML(
+            item.player_name || item.username || "Игрок"
+        );
+
+        return `
+            <article class="podium-card podium-place-${rank}">
+
+                <span class="podium-rank">
+                    ${rank} место
+                </span>
+
+                ${renderLeaderboardAvatar(item, "podium-avatar")}
+
+                <h3 class="podium-name">${name}</h3>
+
+                <span class="podium-level">
+                    Уровень ${formatNumber(item.level)}
+                </span>
+
+                <div class="podium-stats">
+                    <div>
+                        <strong>${formatNumber(item.experience)}</strong>
+                        <small>ОПЫТ XP</small>
+                    </div>
+
+                    <div>
+                        <strong>${formatNumber(item.achievements_count)}</strong>
+                        <small>ДОСТИЖЕНИЙ</small>
+                    </div>
+                </div>
+
+            </article>
+        `;
+    }).join("");
+
+    const otherRows = otherPlayers.map((item, index) => {
+        const rank = index + 4;
+
+        const name = escapeHTML(
+            item.player_name || item.username || "Игрок"
+        );
+
+        return `
+            <article class="leaderboard-row">
+
+                <div class="leaderboard-rank">
+                    #${rank}
+                </div>
+
+                ${renderLeaderboardAvatar(item)}
+
+                <div class="leaderboard-player">
+                    <strong>${name}</strong>
+                    <small>
+                        Уровень ${formatNumber(item.level)}
+                    </small>
+                </div>
+
+                <div class="leaderboard-stats">
+                    <strong>
+                        ${formatNumber(item.experience)} XP
+                    </strong>
+                    <small>
+                        🏆 ${formatNumber(item.achievements_count)} достижений
+                    </small>
+                </div>
+
+            </article>
+        `;
+    }).join("");
+
+    elements.contentBody.innerHTML = `
+        <section class="leaderboard-section">
+
+            <div class="leaderboard-heading">
+                <span class="leaderboard-eyebrow">
+                    TTFBB COMPANY
+                </span>
+
+                <h2>Лига лидеров</h2>
+
+                <p>
+                    Стань лучшим игроком и займи первое место!
+                </p>
+            </div>
+
+            <div class="leaderboard-podium">
+                ${podiumCards}
+            </div>
+
+            ${
+                otherPlayers.length
+                    ? `
+                        <div class="leaderboard-rest">
+                            <h3>Остальные игроки</h3>
+
+                            <div class="leaderboard-list">
+                                ${otherRows}
+                            </div>
+                        </div>
+                    `
+                    : ""
+            }
+
+        </section>
+    `;
 }
 
 // --------------------------------------------------
@@ -684,40 +1051,28 @@ async function openGameSection(section) {
         upgrades: {
             title: "Улучшения"
         },
-
         skills: {
             title: "Навыки",
-            description:
-                "Здесь появится система навыков и развития игрока."
+            description: "Здесь появится система навыков и развития игрока."
         },
-
         tasks: {
             title: "Задания",
-            description:
-                "Здесь появятся ежедневные, еженедельные и ежемесячные задания."
+            description: "Выполняй ежедневные, еженедельные и постоянные задания, чтобы получать награды."
         },
-
         shop: {
             title: "Магазин",
-            description:
-                "Здесь появится магазин игровых предметов."
+            description: "Здесь появится магазин игровых предметов."
         },
-
         achievements: {
             title: "Достижения",
-            description:
-                "Здесь появятся достижения и награды."
+            description: "Здесь появятся достижения и награды."
         },
-
         rating: {
-            title: "Рейтинг игроков",
-            description:
-                "Здесь появится таблица лидеров TTFBB CLICKER."
+            title: "Рейтинг игроков"
         }
     };
 
     const selected = sections[section];
-
     if (!selected) return;
 
     elements.contentTitle.textContent = selected.title;
@@ -735,24 +1090,54 @@ async function openGameSection(section) {
             await loadClickPowerUpgrade();
             await loadMaxEnergyUpgrade();
             await loadEnergyRegenUpgrade();
-
             renderUpgrades();
 
         } catch (error) {
-            console.error(
-                "Ошибка загрузки улучшений:",
-                error
-            );
-
-            elements.contentBody.textContent =
-                "Не удалось загрузить улучшения.";
+            console.error("Ошибка загрузки улучшений:", error);
+            elements.contentBody.textContent = "Не удалось загрузить улучшения.";
         }
 
         return;
     }
 
-    elements.contentBody.textContent =
-        selected.description || "";
+    if (section === "rating") {
+        try {
+            await renderLeaderboard();
+        } catch (error) {
+            console.error("Ошибка отображения рейтинга:", error);
+            elements.contentBody.textContent = "Не удалось загрузить рейтинг игроков.";
+        }
+
+        return;
+    }
+
+    if (section === "achievements") {
+        try {
+            await renderAchievements();
+        } catch (error) {
+            console.error("Ошибка загрузки достижений:", error);
+            elements.contentBody.textContent =
+                "Не удалось загрузить достижения.";
+        }
+
+        return;
+    }
+
+    // Открытие заданий.
+
+    if (section === "tasks") {
+        try {
+            await renderTasks();
+        } catch (error) {
+            console.error("Ошибка загрузки заданий:", error);
+            elements.contentBody.textContent =
+                "Не удалось загрузить задания.";
+        }
+
+        return;
+    }
+
+    elements.contentBody.textContent = selected.description || "";
 }
 
 // --------------------------------------------------
@@ -775,9 +1160,7 @@ async function initGame() {
         currentUser = await getCurrentUser();
 
         if (!currentUser) {
-            throw new Error(
-                "Пользователь не авторизован."
-            );
+            throw new Error("Пользователь не авторизован.");
         }
 
         showMessage("Загружаем игровой профиль...");
@@ -789,9 +1172,7 @@ async function initGame() {
 
         startEnergyTimer();
 
-        showMessage(
-            "Игра готова! Нажимай на монету."
-        );
+        showMessage("Игра готова! Нажимай на монету.");
 
     } catch (error) {
         console.error("Ошибка запуска игры:", error);
@@ -809,18 +1190,13 @@ async function initGame() {
 // СОБЫТИЯ
 // --------------------------------------------------
 
-elements.coinButton.addEventListener(
-    "click",
-    handleCoinClick
-);
+elements.coinButton.addEventListener("click", handleCoinClick);
 
-document.querySelectorAll(".game-menu-card").forEach(
-    (button) => {
-        button.addEventListener("click", () => {
-            openGameSection(button.dataset.section);
-        });
-    }
-);
+document.querySelectorAll(".game-menu-card").forEach((button) => {
+    button.addEventListener("click", () => {
+        openGameSection(button.dataset.section);
+    });
+});
 
 elements.closeContent.addEventListener("click", () => {
     elements.content.hidden = true;
